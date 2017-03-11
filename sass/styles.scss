@@ -1,4 +1,16 @@
-html, body {
+
+$gif: 'http://i.giphy.com/3o6EhPlC7ReIyBeJDW.gif';
+
+html,
+body {
+    height: 100%;
     margin: 0;
     padding: 0;
+    width: 100%;
+}
+
+.shooting-stars {
+    background-image: url($gif);
+    background-position: center center;
+    background-size: cover;
 }
