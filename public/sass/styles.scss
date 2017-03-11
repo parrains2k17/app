@@ -6,11 +6,11 @@ body {
     height: 100%;
     margin: 0;
     padding: 0;
+    position: relative;
     width: 100%;
 }
 
-.shooting-stars {
-    background-image: url($gif);
-    background-position: center center;
-    background-size: cover;
+.canvas-container {
+    height: 100%;
+    width: 100%;
 }
