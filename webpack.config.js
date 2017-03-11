@@ -33,13 +33,13 @@ module.exports = {
                 exclude: /node_modules\/(?!materialize-css)/,
                 loaders: ExtractTextPlugin.extract({
                     fallback: 'style-loader', // The backup style loader
-                    use:   'css-loader?sourceMap!sass-loader?sourceMap',
+                    use:      'css-loader?sourceMap!sass-loader?sourceMap',
                 }),
             },
             {
                 test:    /\.(eot|svg|ttf|woff|woff2)$/,
                 exclude: /node_modules/,
-                use:  'file-loader?name=dist/fonts/[name].[ext]',
+                use:     'file-loader?name=dist/fonts/[name].[ext]',
             },
         ],
     },
@@ -52,7 +52,7 @@ module.exports = {
     },
     plugins: [
         new webpack.DefinePlugin({
-            VERSION:    JSON.stringify(pkg.version),
+            VERSION: JSON.stringify(pkg.version),
         }),
         new ExtractTextPlugin('styles.css'),
     ],
