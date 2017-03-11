@@ -1,17 +1,34 @@
 
-import * as PIXI from 'pixi.js';
+import { range } from 'underscore';
+
+import Stage from './components/Stage';
+import Circle from './components/Circle';
 
 require('../sass/styles.scss');
 
 console.log(`🤖 Parrains2017 v${VERSION}`);// eslint-disable-line no-undef
 
-const renderer = PIXI.autoDetectRenderer(256, 256);
-const canvas = document.querySelector('.js-canvas-container');
+const
+    width  = window.innerWidth,
+    height = window.innerHeight,
+    canvas = document.querySelector('.js-canvas-container');
 
-console.log(canvas);
+const stage = new Stage(canvas, width, height);
 
-canvas.appendChild(renderer.view);
+// a bloc of 10 circle
+const bloc = (x, y) => range(10)
+    .map((i) => new Circle(
+        x,
+        y + 20,
+        2,
+        i / 10,
+        i / 3
+    ));
 
-const stage = new PIXI.Container();
+range(500)
+    .map((i) => bloc(Math.floor(i / 10) * 30, (i % 20) * 60))
+    .reduce((list, circles) => list.concat(circles), [])
+    .map((c) => stage.add(c));
 
-renderer.render(stage);
+stage.start();
+
