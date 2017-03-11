@@ -36,9 +36,17 @@ node index.js
 
 # Informations complémentaires
 
-Variables d'environnement (`cp .env.default .env` si besoin)
+## Variables d'environnement 🌍
+(`cp .env.default .env` si besoin)
 
 - `PORT` (`8080` par défaut)
+
+## Environnement de développement 💻
+
+```
+gulp # lint js et SASS
+npm run dev # build webpack js et SASS sur changements
+```
 
 ---
 

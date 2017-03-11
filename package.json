@@ -32,5 +32,8 @@
     "style-loader": "^0.13.2",
     "webpack": "^2.2.1"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "dev": "webpack --watch"
+  }
 }
