@@ -11,7 +11,7 @@ const inputPaths = {
         'gulpfile.js',
         'public/js/**/*.js',
     ],
-    sass: ['./sass/**/*.scss', './sass/**/**/*.scss'],
+    sass: ['public/sass/**/*.scss', 'public/sass/**/**/*.scss'],
 };
 
 gulp.task('js:lint', () => {
