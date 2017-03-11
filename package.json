@@ -1,11 +1,16 @@
 {
-  "name": "auran",
-  "version": "1.0.0",
-  "description": "Projet hyblab DDJ 2017",
-  "main": "server.js",
-  "repository": "",
-  "author": "",
+  "name": "parrains2017",
+  "version": "0.0.0",
+  "description": "Projet Hyblab Présidentielles 2017 - Ouest France",
+  "main": "index.js",
+  "repository": "https://github.com/parrains2k17/website",
+  "author": "@Parrains2k17",
+  "engines": {
+    "node": "7.7.2"
+  },
   "dependencies": {
-    "express": "^4.13.3"
-  }
+    "dotenv": "^4.0.0",
+    "express": "^4.15.2"
+  },
+  "license": "MIT"
 }

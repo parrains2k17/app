@@ -36,4 +36,10 @@ node index.js
 
 # Informations complémentaires
 
+Variables d'environnement (`cp .env.default .env` si besoin)
+
+- `PORT` (`8080` par défaut)
+
+---
+
 [🌌](https://www.youtube.com/watch?v=feA64wXhbjo)
