@@ -1,4 +1,4 @@
-⬇️ Les parrainages des candidats aux présidentielles 2017 ⬇️
+⬇️ Les parrainages des candidats aux présidentielles 2017 ⬇️  [![Build Status](https://travis-ci.org/parrains2k17/website.svg?branch=master)](https://travis-ci.org/parrains2k17/website)
 ======================================================
 
 # Descriptif du projet
@@ -31,7 +31,7 @@ Standalone :
 ```
 npm install -g yarn
 yarn install
-node index.js
+npm start
 ```
 
 # Informations complémentaires
