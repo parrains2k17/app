@@ -11,11 +11,11 @@
 
 Patricipants :
 
-- 🎨 EDNA :
+- 🎨 EDNA
     - Antoine Floch
     - [Nolwen Le Ternuec](http://twitter.com/LeTernuecNolwen)
     - Benoit Carduner
-- 🤖 Polytech :
+- 🤖 Polytech
     - [Thomas Coquereau](http://twitter.com/TCoquereau)
     - [Arnaud Langelier](http://twitter.com/Arnaud_Lange)
     - [Jimmy Leblanc](http://twitter.com/jimmyleblanc_)
