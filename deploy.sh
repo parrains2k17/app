@@ -10,7 +10,5 @@ ssh-add
 
 ssh-keyscan -H $DOKKU_HOST >> ~/.ssh/known_hosts
 
-cat ~/.ssh/config
-
 echo git push dokku@$DOKKU_HOST:$PROJECT_NAME master
-git push dokku@$DOKKU_HOST:$PROJECT_NAME master
+git push --force dokku@$DOKKU_HOST:$PROJECT_NAME master
