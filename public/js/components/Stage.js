@@ -1,5 +1,9 @@
 
-import { Application } from 'pixi.js';
+import { Application, Container } from 'pixi.js';
+import { select, zoom, event } from 'd3';
+
+const SCALE_MIN_VALUE = 0.5;
+const SCALE_MAX_VALUE = 3;
 
 const devicePixelRatio = window.devicePixelRatio;
 
@@ -14,13 +18,43 @@ class Stage extends Application {
                 resolution: devicePixelRatio,
             },
         );
-        canvas.appendChild(this.view);
+
+        this.width = width;
+        this.height = height;
+        this.canvas = canvas;
+        this.canvas.appendChild(this.view);
+
+        this.createContainer();
 
         this.ticker.add(this.update.bind(this));
     }
 
+    createContainer() {
+        this.container = new Container();
+
+        const zoomHandler = zoom()
+            .scaleExtent([SCALE_MIN_VALUE, SCALE_MAX_VALUE])
+            .on('zoom', () => {
+                const
+                    scale = event.transform.k,
+                    x = event.transform.x,
+                    y = event.transform.y;
+
+                this.container.scale.set(scale, scale);
+
+                this.container.position.set(
+                    ((1 - scale) * (this.width / 2)) + x,
+                    ((1 - scale) * (this.height / 2)) + y
+                );
+            });
+
+        select(this.canvas).call(zoomHandler);
+
+        this.stage.addChild(this.container);
+    }
+
     update() {
-        this.stage.children.forEach((child) => {
+        this.container.children.forEach((child) => {
             if (child.update) {
                 child.update();
             }
@@ -28,8 +62,9 @@ class Stage extends Application {
     }
 
     add(object) {
-        this.stage.addChild(object);
+        this.container.addChild(object);
     }
+
 }
 
 export default Stage;
