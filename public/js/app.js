@@ -27,7 +27,20 @@ const candidateGroup = new CandidateGroup(
     supporters
 );
 
+
+const candidate2 = new Candidate();
+const supporters2 = range(25);
+const candidateGroup2 = new CandidateGroup(
+    {
+        position: { x: width / 3, y: height / 2 },
+    },
+    candidate2,
+    supporters2
+);
+
+
 stage.add(candidateGroup);
+stage.add(candidateGroup2);
 
 stage.start();
 

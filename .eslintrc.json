@@ -34,6 +34,7 @@
         "arrow-parens": ["error", "always"],
         "no-param-reassign": ["error", {
             "props": false
-        }]
+        }],
+        "linebreak-style": 0
     }
 }

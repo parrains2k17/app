@@ -3,6 +3,13 @@ import { TweenMax, Power0 } from 'gsap';
 
 import Circle from './Circle';
 
+/*
+ *return a random number [not integer] between min and max
+ */
+function getRndNumber(min, max) {
+    return (Math.random() * (max - min)) + min;
+}
+
 class MovingCircle extends Circle {
     constructor(config = {}) {
         super(config);
@@ -11,20 +18,20 @@ class MovingCircle extends Circle {
     }
 
     killAnimation() {
-        if (this.anination) {
+        if (this.animation) {
             this.animation.kill();
         }
     }
 
     rotate({ delay = 0, duration = 1 }) {
         this.killAnimation();
-        this.anination = TweenMax.fromTo(
+        this.animation = TweenMax.fromTo(
             this,
             duration,
             { rotation: this.rotation },
             {
                 delay,
-                rotation: this.rotation + (Math.PI * 2),
+                rotation: this.rotation + (Math.PI * getRndNumber(1.5, 2.5)),
                 repeat:   -1,
                 ease:     Power0.easeNone,
             }
@@ -34,7 +41,7 @@ class MovingCircle extends Circle {
     wait({ delay = 0, duration = 1 }) { // TODO better waiting state
         const { x, y } = this.startPosition;
         this.killAnimation();
-        this.anination = TweenMax.to(
+        this.animation = TweenMax.to(
             this,
             duration,
             {
