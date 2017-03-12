@@ -4,7 +4,6 @@ import { select, zoom, event } from 'd3';
 
 const SCALE_MIN_VALUE = 0.5;
 const SCALE_MAX_VALUE = 3;
-const DRAG_SPEED = 0.003;
 
 const devicePixelRatio = window.devicePixelRatio;
 
@@ -44,8 +43,8 @@ class Stage extends Application {
                 this.container.scale.set(scale, scale);
 
                 this.container.position.set(
-                    ((1 - scale) + (DRAG_SPEED * x)) * (this.width / 2),
-                    ((1 - scale) + (DRAG_SPEED * y)) * (this.height / 2)
+                    ((1 - scale) * (this.width / 2)) + x,
+                    ((1 - scale) * (this.height / 2)) + y
                 );
             });
 
