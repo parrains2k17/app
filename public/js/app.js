@@ -2,7 +2,8 @@
 import { range } from 'underscore';
 
 import Stage from './components/Stage';
-import Circle from './components/Circle';
+import Candidate from './components/Candidate';
+import CandidateGroup from './containers/Candidate';
 
 require('../sass/styles.scss');
 
@@ -15,20 +16,18 @@ const
 
 const stage = new Stage(canvas, width, height);
 
-// a bloc of 10 circle
-const bloc = (x, y) => range(10)
-    .map((i) => new Circle(
-        x,
-        y + 20,
-        2,
-        i / 10,
-        i / 3
-    ));
+const candidate = new Candidate();
+const supporters = range(100);
 
-range(500)
-    .map((i) => bloc(Math.floor(i / 10) * 30, (i % 20) * 60))
-    .reduce((list, circles) => list.concat(circles), [])
-    .map((c) => stage.add(c));
+const candidateGroup = new CandidateGroup(
+    {
+        position: { x: width / 2, y: height / 2 },
+    },
+    candidate,
+    supporters
+);
+
+stage.add(candidateGroup);
 
 stage.start();
 
