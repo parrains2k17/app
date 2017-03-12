@@ -6,7 +6,6 @@ import { WHITE } from '../style/color';
 class Circle extends Graphics {
     constructor({
         position = { x: 0, y: 0 },
-        offset = { x: 0, y: 0 },
         rotation = 0,
         alpha = 1,
         radius = 1,
@@ -15,7 +14,7 @@ class Circle extends Graphics {
     }) {
         super();
         this.beginFill(color);
-        this.drawCircle(offset.x, offset.y, radius);
+        this.drawCircle(0, 0, radius);
         this.endFill();
 
         this.alpha = alpha;
@@ -25,7 +24,6 @@ class Circle extends Graphics {
 
         // non-pixi attributes
         this.startPosition = position;
-        this.offset = offset;
     }
 }
 

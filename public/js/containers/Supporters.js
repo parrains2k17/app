@@ -32,9 +32,9 @@ class Supporters extends Container {
                         * (0.5 + random()) // randomize to fill more natural
                         * PI * 2
                     ),
-                    offset: {
+                    pivot: {
                         x: 30 + (10 * row),   // offset according to row
-                        y: 0,
+                        y: -8,
                     },
                 }))
                 .forEach((c) => this.addChild(c));
