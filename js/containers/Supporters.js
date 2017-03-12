@@ -3,6 +3,7 @@ import { groupBy } from 'underscore';
 import { Container } from 'pixi.js';
 
 import Supporter from '../components/Supporter';
+import randomColor from '../utils/randomColor';
 
 const { PI, floor, random } = Math;
 
@@ -26,12 +27,13 @@ class Supporters extends Container {
         Object.keys(rows).forEach((row) => {
             rows[row]
                 .map((_, i) => new Supporter({
+                    color:    randomColor(),
                     rotation: (
                         (i / l)               // index in row
                         + (100 / (l * row))   // tiny offseet for each row
                     ) * PI * 2,
                     offset: {
-                        x: 30 + (10 * row),  // offset according to row
+                        x: 30 + (10 * row),   // offset according to row
                         y: 0,
                     },
                 }))
