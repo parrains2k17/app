@@ -4,7 +4,7 @@ import { Container } from 'pixi.js';
 
 import Supporter from '../components/Supporter';
 
-const { PI, floor } = Math;
+const { PI, floor, random } = Math;
 
 const MAX_ROW_SIZE = 20;
 
@@ -42,7 +42,7 @@ class Supporters extends Container {
     rotate() {
         const duration = 15;
         this.children.forEach((c) => c.rotate({
-            duration,
+            duration: duration + (random() * 2), // random to smooth transition
         }));
     }
 }
