@@ -20,18 +20,18 @@ class Supporters extends Container {
     }
 
     addSupporters(supporters) {
-        const
-            rows = getChunks(supporters, MAX_ROW_SIZE),
-            l    = rows[0].length;
+        const rows = getChunks(supporters, MAX_ROW_SIZE);
 
         Object.keys(rows).forEach((row) => {
+            const l = rows[row].length;
             rows[row]
                 .map((_, i) => new Supporter({
                     color:    randomColor(),
                     rotation: (
-                        (i / l)               // index in row
-                        + (100 / (l * row))   // tiny offseet for each row
-                    ) * PI * 2,
+                        (i / l)            // index in row
+                        * (0.5 + random()) // randomize to fill more natural
+                        * PI * 2
+                    ),
                     offset: {
                         x: 30 + (10 * row),   // offset according to row
                         y: 0,
