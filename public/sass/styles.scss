@@ -1,16 +1,24 @@
 
+@import 'colors';
+
 $gif: 'http://i.giphy.com/3o6EhPlC7ReIyBeJDW.gif';
 
 html,
 body {
+    background: $black;
     height: 100%;
     margin: 0;
     padding: 0;
+    position: relative;
     width: 100%;
 }
 
-.shooting-stars {
-    background-image: url($gif);
-    background-position: center center;
-    background-size: cover;
+.canvas-container {
+    height: 100%;
+    width: 100%;
 }
+
+    .canvas-container > canvas {
+        height: 100%;
+        width: 100%;
+    }

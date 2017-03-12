@@ -1,4 +1,3 @@
-
 const
     path              = require('path'),
     webpack           = require('webpack'),
@@ -7,6 +6,8 @@ const
     ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 dotenv.config();
+
+const DEBUG = process.env.DEBUG;
 
 module.exports = {
     entry:  './public/js/app.js',
@@ -56,13 +57,6 @@ module.exports = {
         }),
         new ExtractTextPlugin('styles.css'),
     ],
-    target:    'web',
-    devServer: {
-        contentBase:        path.join(__dirname),
-        compress:           true,
-        port:               8888,
-        historyApiFallback: true,
-        watchContentBase:   true,
-        publicPath:         '/dist/',
-    },
+    target:  'web',
+    devtool: DEBUG ? 'inline-source-map' : false,
 };
