@@ -1,3 +1,4 @@
+// sass-lint:disable no-duplicate-properties no-vendor-prefixes
 
 @import 'colors';
 
@@ -16,6 +17,19 @@ body {
 .canvas-container {
     height: 100%;
     width: 100%;
+}
+
+.canvas-container:hover {
+    cursor: move; // fallback if grab cursor is unsupported
+    cursor: grab;
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
+}
+
+.canvas-container:active {
+    cursor: grabbing;
+    cursor: -moz-grabbing;
+    cursor: -webkit-grabbing;
 }
 
     .canvas-container > canvas {

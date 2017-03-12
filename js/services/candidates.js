@@ -3,7 +3,7 @@ import { range, random, times, uniqueId } from 'underscore';
 import randomColor from '../utils/randomColor';
 
 const NB_CANDIDATES = 3;
-const MAX_SUPPORTERS = 3000;
+const MAX_SUPPORTERS = 30;
 
 // TODO fetch API
 
