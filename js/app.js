@@ -1,6 +1,5 @@
 
-import { range } from 'underscore';
-
+import getCandidates from './services/candidates';
 import Stage from './components/Stage';
 import Candidate from './components/Candidate';
 import CandidateGroup from './containers/Candidate';
@@ -8,7 +7,6 @@ import CandidateGroup from './containers/Candidate';
 require('../sass/styles.scss');
 
 console.log(`🤖 Parrains2017 v${VERSION}`);// eslint-disable-line no-undef
-
 const
     width  = window.innerWidth,
     height = window.innerHeight,
@@ -16,31 +14,25 @@ const
 
 const stage = new Stage(canvas, width, height);
 
-const candidate = new Candidate();
-const supporters = range(100);
+const
+    candidates = getCandidates(),
+    n = candidates.length;
 
-const candidateGroup = new CandidateGroup(
-    {
-        position: { x: width / 2, y: height / 2 },
-    },
-    candidate,
-    supporters
-);
+candidates
+    .forEach((candidate, i) => {
+        const candidateGroup = new CandidateGroup(
+            {
+                position: {
+                    x: (width / (n + 1)) * (i + (1 / 2)),
+                    y: height / 2,
+                },
+            },
+            new Candidate(), // TODO pass data
+            candidate.supporters
+        );
 
-
-const candidate2 = new Candidate();
-const supporters2 = range(25);
-const candidateGroup2 = new CandidateGroup(
-    {
-        position: { x: width / 3, y: height / 2 },
-    },
-    candidate2,
-    supporters2
-);
-
-
-stage.add(candidateGroup);
-stage.add(candidateGroup2);
+        stage.add(candidateGroup);
+    });
 
 stage.start();
 
