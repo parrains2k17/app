@@ -13,7 +13,6 @@ class CirclesGroup extends Container {
     ) {
         super();
 
-        console.log(position);
         this.position = position;
 
         this.candidate = candidate;
