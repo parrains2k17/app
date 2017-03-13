@@ -32,6 +32,10 @@ body {
     cursor: -webkit-grabbing;
 }
 
+.canvas-container.mod-clic {
+    cursor: pointer;
+}
+
     .canvas-container > canvas {
         height: 100%;
         width: 100%;
