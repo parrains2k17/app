@@ -5,7 +5,7 @@ import { Container } from 'pixi.js';
 import Supporter from '../components/Supporter';
 import randomColor from '../utils/randomColor';
 
-const { PI, floor, random } = Math;
+const { PI, floor, random, log } = Math;
 
 const MAX_ROW_SIZE = 20;
 
@@ -33,7 +33,7 @@ class Supporters extends Container {
                         * PI * 2
                     ),
                     pivot: {
-                        x: 30 + (10 * row),   // offset according to row
+                        x: 20 + (20 * log(row)), // offset according to row
                         y: -8,
                     },
                 }))
