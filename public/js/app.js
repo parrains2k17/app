@@ -14,17 +14,15 @@ const
 
 const stage = new Stage(canvas, width, height);
 
-const
-    candidates = getCandidates(),
-    n = candidates.length;
+const candidates = getCandidates();
 
 candidates
-    .forEach((candidate, i) => {
+    .forEach((candidate) => {
         const candidateGroup = new CandidateGroup(
             {
                 position: {
-                    x: (width / (n + 1)) * (i + (1 / 2)),
-                    y: height / 2,
+                    x: candidate.x(width, height),
+                    y: candidate.y(width, height),
                 },
             },
             new Candidate(), // TODO pass data
