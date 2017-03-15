@@ -1,0 +1,35 @@
+.candidate {
+    align-items: center;
+    background: $red;
+    bottom: -40%;
+    color: $white;
+    display: flex;
+    height: 7em;
+    justify-content: space-between;
+    left: 0;
+    padding: 1em;
+    position: fixed;
+    transition: left .3s ease;
+    width: 50vw;
+}
+
+.candidate.mod-open {
+    bottom: 0;
+}
+
+    .candidate-element {
+        flex: 0;
+    }
+
+    .close-candidate {
+        color: $grey-light;
+        cursor: pointer;
+    }
+
+    .close-candidate:hover {
+        color: $white;
+    }
+
+        .close-candidate > .material-icons {
+            font-size: 3em;
+        }
