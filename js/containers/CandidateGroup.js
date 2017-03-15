@@ -64,6 +64,8 @@ class CandidateGroup extends Container {
                 },
             }
         );
+
+        this.supporters.center();
     }
 
     hide() {
