@@ -7,7 +7,10 @@ import randomColor from '../utils/randomColor';
 
 const { PI, floor, random, log } = Math;
 
-const MAX_ROW_SIZE = 20;
+const
+    CENTER_DURATION   = 0.3,
+    ROTATION_DURATION = 15,
+    MAX_ROW_SIZE      = 20;
 
 const getChunks = (arr, maxChunkSize) =>
     groupBy(arr, (_, i) => floor(i / maxChunkSize));
@@ -42,9 +45,15 @@ class Supporters extends Container {
     }
 
     rotate() {
-        const duration = 15;
         this.children.forEach((c) => c.rotate({
-            duration: duration + (random() * 2), // random to smooth transition
+            // random to smooth transition
+            duration: ROTATION_DURATION + (random() * 2),
+        }));
+    }
+
+    center() {
+        this.children.forEach((c) => c.center({
+            duration: CENTER_DURATION,
         }));
     }
 }
