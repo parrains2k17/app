@@ -2,7 +2,6 @@
 import getCandidates from './services/candidates';
 
 import Stage from './components/Stage';
-import Candidate from './components/Candidate';
 import CandidateGroup from './containers/CandidateGroup';
 
 const
@@ -21,29 +20,46 @@ class AppController {
         const candidatesData = getCandidates();
 
         this.candidates = candidatesData
-            .forEach((candidate) => {
-                const candidateGroup = new CandidateGroup(
-                    {
-                        screen: {
-                            width,
-                            height,
-                        },
-                        position: {
-                            x: candidate.x(width, height),
-                            y: candidate.y(width, height),
-                        },
+            .map((candidate) => new CandidateGroup(
+                {
+                    screen: {
+                        width,
+                        height,
                     },
-                    new Candidate(), // TODO pass data
-                    candidate.supporters,
-                    this
-                );
+                    position: {
+                        x: candidate.x(width, height),
+                        y: candidate.y(width, height),
+                    },
+                },
+                candidate.supporters,
+                this
+                // TODO pass candidate data toto
+            ));
 
-                this.stage.add(candidateGroup);
-            });
+        this.candidates.forEach((candidate) => this.stage.add(candidate));
     }
 
     start() {
         this.stage.start();
+    }
+
+    candidateOpen(selected) {
+        this.candidates.forEach((candidate) => {
+            if (candidate !== selected) {
+                candidate.hide(-width / 2);
+            } else {
+                candidate.activate(
+                    width / 2,
+                    height / 2
+                );
+            }
+        });
+
+        this.stage.center();
+    }
+
+    candidateClose() {
+        this.candidates.forEach((candidate) => candidate.reset());
     }
 }
 

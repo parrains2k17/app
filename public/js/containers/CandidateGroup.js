@@ -4,6 +4,7 @@ import { TweenMax, Power0 } from 'gsap';
 
 import { cursorClic, cursorDefault } from '../utils/cursor';
 import Supporters from './SupportersGroup';
+import Candidate from '../components/Candidate';
 
 const
     HIT_AREA_RADIUS         = 100,
@@ -13,16 +14,16 @@ class CandidateGroup extends Container {
     constructor(
         {
             position = { x: 0, y: 0 },
-            screen,
         },
-        candidate,
-        supporters
+        supporters,
+        controller
     ) {
         super();
 
         this.position = position;
 
-        this.candidate = candidate;
+        this.candidate = new Candidate(); // TODO pass data
+
         this.supporters = new Supporters(supporters);
         this.supporters.rotate(); // TODO maybe not here
 
@@ -33,6 +34,7 @@ class CandidateGroup extends Container {
         this.addChild(this.supporters);
 
         this.screen = screen;
+        this.controller = controller;
     }
 
     mouseover() {
@@ -46,14 +48,35 @@ class CandidateGroup extends Container {
     }
 
     mousedown() {
-        const { width, height } = this.screen;
+        this.controller.candidateOpen(this);
+    }
+
+    activate(x, y) {
         TweenMax.to(
             this,
             MOVE_TO_CENTER_DURATION,
             {
-                x:    width / 2,
-                y:    height / 2,
-                ease: Power0.easeNone,
+                x,
+                y,
+                ease:       Power0.easeNone,
+                onComplete: () => {
+                    this.candidate.hide();
+                },
+            }
+        );
+    }
+
+    hide() {
+        TweenMax.to(
+            this,
+            MOVE_TO_CENTER_DURATION,
+            {
+                alpha:      0,
+                ease:       Power0.easeNone,
+                onComplete: () => {
+                    // for perf : if not visible, not drawn
+                    this.visible = false;
+                },
             }
         );
     }
