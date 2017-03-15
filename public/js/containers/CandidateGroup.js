@@ -1,15 +1,19 @@
 
 import { Container, Circle } from 'pixi.js';
+import { TweenMax, Power0 } from 'gsap';
 
 import { cursorClic, cursorDefault } from '../utils/cursor';
-import Supporters from './Supporters';
+import Supporters from './SupportersGroup';
 
-const HIT_AREA_RADIUS = 100;
+const
+    HIT_AREA_RADIUS         = 100,
+    MOVE_TO_CENTER_DURATION = 0.3;
 
-class CirclesGroup extends Container {
+class CandidateGroup extends Container {
     constructor(
         {
             position = { x: 0, y: 0 },
+            screen,
         },
         candidate,
         supporters
@@ -27,6 +31,8 @@ class CirclesGroup extends Container {
 
         this.addChild(this.candidate);
         this.addChild(this.supporters);
+
+        this.screen = screen;
     }
 
     mouseover() {
@@ -39,9 +45,18 @@ class CirclesGroup extends Container {
         cursorDefault();
     }
 
-    // mousedown() {
-    //     console.log('clic');
-    // }
+    mousedown() {
+        const { width, height } = this.screen;
+        TweenMax.to(
+            this,
+            MOVE_TO_CENTER_DURATION,
+            {
+                x:    width / 2,
+                y:    height / 2,
+                ease: Power0.easeNone,
+            }
+        );
+    }
 }
 
-export default CirclesGroup;
+export default CandidateGroup;
