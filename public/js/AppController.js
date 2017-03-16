@@ -23,26 +23,31 @@ class AppController {
     }
 
     buildCandidates() {
-        const candidatesData = getCandidates();
+        return getCandidates()
+            .then((results) => {
+                console.log(results);
 
-        this.candidates = candidatesData
-            .map((candidate) => new CandidateGroup(
-                {
-                    screen: {
-                        width,
-                        height,
-                    },
-                    position: {
-                        x: candidate.x(width, height),
-                        y: candidate.y(width, height),
-                    },
-                },
-                candidate.supporters,
-                this
-                // TODO pass candidate data toto
-            ));
+                this.candidates = results
+                    .map((candidate) => new CandidateGroup(
+                        {
+                            screen: {
+                                width,
+                                height,
+                            },
+                            position: {
+                                x: candidate.x(width, height),
+                                y: candidate.y(width, height),
+                            },
+                        },
+                        candidate.supporters,
+                        this
+                        // TODO pass candidate data toto
+                    ));
 
-        this.candidates.forEach((candidate) => this.stage.add(candidate));
+                this.candidates.forEach(
+                    (candidate) => this.stage.add(candidate)
+                );
+            });
     }
 
     start() {
