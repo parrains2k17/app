@@ -27,22 +27,25 @@ class AppController {
             .then((results) => {
                 console.log(results);
 
-                this.candidates = results
-                    .map((candidate) => new CandidateGroup(
-                        {
-                            screen: {
-                                width,
-                                height,
+                this.candidates = Object.keys(results)
+                    .map((key) => {
+                        const candidate = results[key];
+                        return new CandidateGroup(
+                            {
+                                screen: {
+                                    width,
+                                    height,
+                                },
+                                position: {
+                                    x: candidate.x,
+                                    y: candidate.y,
+                                },
                             },
-                            position: {
-                                x: candidate.x(width, height),
-                                y: candidate.y(width, height),
-                            },
-                        },
-                        candidate.supporters,
-                        this
-                        // TODO pass candidate data toto
-                    ));
+                            candidate.supporters,
+                            this
+                            // TODO pass candidate data toto
+                        );
+                    });
 
                 this.candidates.forEach(
                     (candidate) => this.stage.add(candidate)
