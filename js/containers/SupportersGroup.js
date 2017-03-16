@@ -36,7 +36,7 @@ class Supporters extends Container {
                 pivot:    {
                     // Change 20 if the planet is bigger
                     x: randomNumber(
-                        20,
+                        48,
                         sqrt(supporters.length * (100 / PI)),
                         sqrt(supporters.length * (100 / PI))
                     ),
