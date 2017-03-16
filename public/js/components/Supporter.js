@@ -2,8 +2,13 @@
 import MovingCircle from './MovingCircle';
 
 class Supporter extends MovingCircle {
-    constructor(config = {}) {
+    constructor({
+        data = [],
+        ...config
+    }) {
         super({ radius: 2, ...config });
+
+        this.data = data;
     }
 }
 

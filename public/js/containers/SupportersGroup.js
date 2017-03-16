@@ -29,10 +29,8 @@ class Supporters extends Container {
     }
 
     addSupporters(supporters) {
-        console.log(sqrt(supporters.length * (100 / PI)));
-
         supporters
-            .map(() => new Supporter({
+            .map((supporter) => new Supporter({
                 color:    randomColor(),
                 rotation: 2 * random() * PI,
                 pivot:    {
@@ -45,6 +43,7 @@ class Supporters extends Container {
                     y: -8,
                 },
                 alpha: randomAlpha(0, 1, 1),
+                data:  supporter,
             }))
             .forEach((c) => this.addChild(c));
     }
