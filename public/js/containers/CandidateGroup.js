@@ -92,6 +92,10 @@ class CandidateGroup extends Container {
         this.supporters.rotate();
         this.candidate.resetPosition({ MOVE_TO_CENTER_DURATION });
     }
+
+    dataviz(selector, totalDataviz) {
+        this.supporters.dataviz(selector, totalDataviz);
+    }
 }
 
 export default CandidateGroup;
