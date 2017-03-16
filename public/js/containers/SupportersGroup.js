@@ -38,7 +38,7 @@ class Supporters extends Container {
                     x: randomNumber(
                         48,
                         sqrt(supporters.length * (100 / PI)),
-                        sqrt(supporters.length * (100 / PI))
+                        (sqrt(supporters.length * (100 / PI))) / 1.5
                     ),
                     y: -8,
                 },
