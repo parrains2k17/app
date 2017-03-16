@@ -15,10 +15,10 @@ class Candidate extends CircleSprite {
             ...config,
         });
 
-        this.scale.set(0.05, 0.05);
+        this.scale.set(0.15, 0.15);
 
-        this.x = -16;
-        this.y = -16;
+        this.x = -48;
+        this.y = -48;
         this.initialPosition = { ...this.position };
     }
 
