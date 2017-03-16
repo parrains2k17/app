@@ -1,12 +1,17 @@
 // sass-lint:disable no-duplicate-properties no-vendor-prefixes
 
 @import 'colors';
+@import 'candidate';
 
-$gif: 'http://i.giphy.com/3o6EhPlC7ReIyBeJDW.gif';
+* {
+    box-sizing: border-box;
+    font-family: 'Arial', 'sans-serif';
+}
 
 html,
 body {
     background: $black;
+    font-size: 12px;
     height: 100%;
     margin: 0;
     padding: 0;
@@ -32,7 +37,17 @@ body {
     cursor: -webkit-grabbing;
 }
 
+.canvas-container.mod-clic {
+    cursor: pointer;
+}
+
     .canvas-container > canvas {
         height: 100%;
         width: 100%;
     }
+
+.btn-transparent {
+    background: 0;
+    border: 0;
+}
+

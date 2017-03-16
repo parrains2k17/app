@@ -15,6 +15,11 @@ class MovingCircle extends Circle {
         super(config);
 
         this.animation = null;
+
+        // copy intial values
+        this.initialRotation = { ...this.rotation };
+        this.initialPivot = { ...this.pivot };
+        this.initialPosition = { ...this.position };
     }
 
     killAnimation() {
@@ -37,6 +42,48 @@ class MovingCircle extends Circle {
         );
 
         this.animation = animate();
+    }
+
+    center({ duration }) {
+        this.killAnimation();
+
+        TweenMax.to(
+            this.pivot,
+            duration,
+            {
+                x:    0,
+                y:    0,
+                ease: Power0.easeNone,
+            }
+        );
+    }
+
+    resetPivot({ duration }) {
+        this.killAnimation();
+
+        TweenMax.to(
+            this.pivot,
+            duration,
+            {
+                x:    this.initialPivot._x,
+                y:    this.initialPivot._y,
+                ease: Power0.easeNone,
+            }
+        );
+    }
+
+    resetPosition({ duration }) {
+        this.killAnimation();
+
+        TweenMax.to(
+            this.position,
+            duration,
+            {
+                x:    this.initialPosition._x,
+                y:    this.initialPosition._y,
+                ease: Power0.easeNone,
+            }
+        );
     }
 
     wait({ delay = 0, duration = 1 }) { // TODO better waiting state

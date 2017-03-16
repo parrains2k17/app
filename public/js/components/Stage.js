@@ -1,6 +1,9 @@
 
 import { Application, Container } from 'pixi.js';
 import { select, zoom, event } from 'd3';
+import { TweenMax, Power0 } from 'gsap';
+
+const RESET_DURATION = 0.3;
 
 const SCALE_MIN_VALUE = 0.5;
 const SCALE_MAX_VALUE = 3;
@@ -27,6 +30,8 @@ class Stage extends Application {
         this.createContainer();
 
         this.ticker.add(this.update.bind(this));
+
+        this.zoomable = true;
     }
 
     createContainer() {
@@ -35,6 +40,10 @@ class Stage extends Application {
         const zoomHandler = zoom()
             .scaleExtent([SCALE_MIN_VALUE, SCALE_MAX_VALUE])
             .on('zoom', () => {
+                if (!this.zoomable) {
+                    return;
+                }
+
                 const
                     scale = event.transform.k,
                     x = event.transform.x,
@@ -63,6 +72,58 @@ class Stage extends Application {
 
     add(object) {
         this.container.addChild(object);
+    }
+
+    center() {
+        this.zoomable = false;
+
+        // copy
+        this.oldContainerPosition = { ...this.container.position };
+        this.oldContainerScale = { ...this.container.scale };
+
+        TweenMax.to(
+            this.container.position,
+            RESET_DURATION,
+            {
+                x:    0,
+                y:    0,
+                ease: Power0.easeNone,
+            }
+        );
+
+        TweenMax.to(
+            this.container.scale,
+            RESET_DURATION,
+            {
+                x:    1,
+                y:    1,
+                ease: Power0.easeNone,
+            }
+        );
+    }
+
+    active() {
+        this.zoomable = true;
+
+        TweenMax.to(
+            this.container.position,
+            RESET_DURATION,
+            {
+                x:    this.oldContainerPosition._x,
+                y:    this.oldContainerPosition._y,
+                ease: Power0.easeNone,
+            }
+        );
+
+        TweenMax.to(
+            this.container.scale,
+            RESET_DURATION,
+            {
+                x:    this.oldContainerScale._x,
+                y:    this.oldContainerScale._y,
+                ease: Power0.easeNone,
+            }
+        );
     }
 
 }
