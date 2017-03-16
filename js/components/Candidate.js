@@ -1,23 +1,25 @@
 
+import { Texture } from 'pixi.js';
 import { TweenMax, Power0 } from 'gsap';
 
-import MovingCircle from './MovingCircle';
-
-import { PURPLE } from '../style/color';
+import CircleSprite from './CircleSprite';
 
 const HIDE_DURATION = 0.3;
 
-class Candidate extends MovingCircle {
+class Candidate extends CircleSprite {
     constructor(config = {}) {
-        super({ radius: 10, color: PURPLE, ...config });
-    }
+        super({
+            // TODO scale mode and resolution
+            // TODO load in cache ?
+            texture: Texture.fromImage('images/planete.png'),
+            ...config,
+        });
 
-    overState(active = false) {
-        if (active) {
-            this.scale.set(1.2, 1.2);
-        } else {
-            this.scale.set(1, 1);
-        }
+        this.scale.set(0.05, 0.05);
+
+        this.x = -16;
+        this.y = -16;
+        this.initialPosition = { ...this.position };
     }
 
     hide(x) {
@@ -30,6 +32,27 @@ class Candidate extends MovingCircle {
             }
         );
     }
+
+    resetPosition({ duration }) {
+        this.killAnimation();
+
+        TweenMax.to(
+            this.position,
+            duration,
+            {
+                x:    this.initialPosition._x,
+                y:    this.initialPosition._y,
+                ease: Power0.easeNone,
+            }
+        );
+    }
+
+    killAnimation() {
+        if (this.animation) {
+            this.animation.kill();
+        }
+    }
 }
+
 
 export default Candidate;

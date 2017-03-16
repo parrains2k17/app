@@ -17,8 +17,9 @@ class Stage extends Application {
             width,
             height,
             {
-                antialias:  true,
-                resolution: devicePixelRatio,
+                antialias:   true,
+                resolution:  devicePixelRatio,
+                transparent: true,
             },
         );
 
