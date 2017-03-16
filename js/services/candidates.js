@@ -1,30 +1,3 @@
-// TODO fetch API
-
-/*
-const candidates = [
-                    "ALLIOT-MARIE Michèle",
-                    "ARTHAUD Nathalie",
-                    "ASSELINEAU François",
-                    "CHEMINADE Jacques",
-                    "DUPONT-AIGNAN Nicolas",
-                    "FAUDOT Bastien",
-                    "FILLON François",
-                    "GORGES Jean-Pierre",
-                    "GUAINO Henri",
-                    "HAMON Benoit",
-                    "JARDIN Alexandre",
-                    "LARROUTUROU Pierre",
-                    "LASSALLE Jean",
-                    "LE PEN Marine",
-                    "MACRON Emmanuel",
-                    "MARCHANDISE Charlotte",
-                    "MELENCHON Jean-Luc",
-                    "POUTOU Philippe",
-                    "TAUZIN Didier",
-                    "TEMARU Oscar",
-                    "YADE Rama"
-                ];
-*/
 
 const candidatesPositions = {
     'ALLIOT-MARIE Michèle': {
@@ -126,3 +99,4 @@ const all = () => fetch('/data/parrainages.json')
                 });
 
 export default all;
+
