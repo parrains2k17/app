@@ -2,7 +2,6 @@
 import getCandidates from './services/candidates';
 
 import Stage from './components/Stage';
-import CandidatePanel from './components/CandidatePanel';
 
 import CandidateGroup from './containers/CandidateGroup';
 
@@ -68,7 +67,6 @@ class AppController {
         });
 
         this.stage.center();
-        this.candidatePanel.open();
     }
 
     /**
@@ -80,7 +78,6 @@ class AppController {
         this.candidates.forEach((candidate) => candidate.reset());
 
         this.stage.active();
-        this.candidatePanel.close();
     }
 
     selectDataviz(selector) {
