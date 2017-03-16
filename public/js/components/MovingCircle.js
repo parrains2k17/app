@@ -3,13 +3,6 @@ import { TweenMax, Power0 } from 'gsap';
 
 import Circle from './Circle';
 
-/*
- *return a random number [not integer] between min and max
- */
-function getRndNumber(min, max) {
-    return (Math.random() * (max - min)) + min;
-}
-
 class MovingCircle extends Circle {
     constructor(config = {}) {
         super(config);
