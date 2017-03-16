@@ -27,8 +27,6 @@ class Supporters extends Container {
     }
 
     addSupporters(supporters) {
-        console.log(sqrt(supporters.length * (100 / PI)));
-
         supporters
             .map(() => new Supporter({
                 color:    randomColor(),
