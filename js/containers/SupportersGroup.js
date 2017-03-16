@@ -1,19 +1,23 @@
 
-import { groupBy } from 'underscore';
 import { Container } from 'pixi.js';
 
 import Supporter from '../components/Supporter';
 import randomColor from '../utils/randomColor';
+import randomNumber from '../utils/randomNumber';
 
-const { PI, floor, random, log } = Math;
+const { PI, random, sqrt } = Math;
 
 const
     CENTER_DURATION   = 0.3,
-    ROTATION_DURATION = 15,
-    MAX_ROW_SIZE      = 20;
+    ROTATION_DURATION = 15;
 
-const getChunks = (arr, maxChunkSize) =>
-    groupBy(arr, (_, i) => floor(i / maxChunkSize));
+const randomAlpha = () => {
+    const res = randomNumber(0, 1, 1);
+    if (res > 0.7) {
+        return 1;
+    }
+    return res;
+};
 
 class Supporters extends Container {
     constructor(supporters) {
@@ -23,31 +27,30 @@ class Supporters extends Container {
     }
 
     addSupporters(supporters) {
-        const rows = getChunks(supporters, MAX_ROW_SIZE);
+        console.log(sqrt(supporters.length * (100 / PI)));
 
-        Object.keys(rows).forEach((row) => {
-            const l = rows[row].length;
-            rows[row]
-                .map((_, i) => new Supporter({
-                    color:    randomColor(),
-                    rotation: (
-                        (i / l)            // index in row
-                        * (0.5 + random()) // randomize to fill more natural
-                        * PI * 2
+        supporters
+            .map(() => new Supporter({
+                color:    randomColor(),
+                rotation: 2 * random() * PI,
+                pivot:    {
+                    // Change 20 if the planet is bigger
+                    x: randomNumber(
+                        20,
+                        sqrt(supporters.length * (100 / PI)),
+                        sqrt(supporters.length * (100 / PI))
                     ),
-                    pivot: {
-                        x: 20 + (20 * log(row)), // offset according to row
-                        y: -8,
-                    },
-                }))
-                .forEach((c) => this.addChild(c));
-        });
+                    y: -8,
+                },
+                alpha: randomAlpha(0, 1, 1),
+            }))
+            .forEach((c) => this.addChild(c));
     }
 
     rotate() {
         this.children.forEach((c) => c.rotate({
             // random to smooth transition
-            duration: ROTATION_DURATION + (random() * 2),
+            duration: ROTATION_DURATION + (random() * 6),
         }));
     }
 

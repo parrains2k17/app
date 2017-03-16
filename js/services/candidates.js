@@ -18,8 +18,8 @@ const fakeCandidate1 = {
     name:       'Toto Titi',
     color:      randomColor(),
     supporters: range(800),
-    x:          (width) => 0,
-    y:          (width, height) => 0,
+    x:          () => 0,
+    y:          () => 0,
 };
 
 const fakeCandidate2 = {
