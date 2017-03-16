@@ -41,7 +41,7 @@ class AppController {
                                     y: candidate.y,
                                 },
                             },
-                            candidate.supporters,
+                            candidate.parrainages,
                             this
                             // TODO pass candidate data toto
                         );
