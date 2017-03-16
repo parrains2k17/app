@@ -56,6 +56,12 @@ class Supporters extends Container {
             duration: CENTER_DURATION,
         }));
     }
+
+    resetPosition() {
+        this.children.forEach((c) => c.resetPivot({
+            duration: CENTER_DURATION,
+        }));
+    }
 }
 
 export default Supporters;

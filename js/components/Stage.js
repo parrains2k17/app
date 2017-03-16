@@ -77,6 +77,10 @@ class Stage extends Application {
     center() {
         this.zoomable = false;
 
+        // copy
+        this.oldContainerPosition = { ...this.container.position };
+        this.oldContainerScale = { ...this.container.scale };
+
         TweenMax.to(
             this.container.position,
             RESET_DURATION,
@@ -93,6 +97,30 @@ class Stage extends Application {
             {
                 x:    1,
                 y:    1,
+                ease: Power0.easeNone,
+            }
+        );
+    }
+
+    active() {
+        this.zoomable = true;
+
+        TweenMax.to(
+            this.container.position,
+            RESET_DURATION,
+            {
+                x:    this.oldContainerPosition._x,
+                y:    this.oldContainerPosition._y,
+                ease: Power0.easeNone,
+            }
+        );
+
+        TweenMax.to(
+            this.container.scale,
+            RESET_DURATION,
+            {
+                x:    this.oldContainerScale._x,
+                y:    this.oldContainerScale._y,
                 ease: Power0.easeNone,
             }
         );

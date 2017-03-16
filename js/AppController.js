@@ -16,7 +16,10 @@ class AppController {
         this.stage = new Stage(canvas, width, height);
 
         this.buildCandidates();
-        this.candidatePanel = new CandidatePanel('.js-candidate-panel');
+        this.candidatePanel = new CandidatePanel(
+            '.js-candidate-panel',
+            () => this.candidateClose()
+        );
     }
 
     buildCandidates() {
@@ -65,7 +68,7 @@ class AppController {
     candidateClose() {
         this.candidates.forEach((candidate) => candidate.reset());
 
-        // this.stage.active(); // TODO
+        this.stage.active();
         this.candidatePanel.close();
     }
 }

@@ -1,8 +1,10 @@
 
 class CandidatePanel {
-    constructor(classname) {
+    constructor(classname, onClick) {
         this.panel = document.querySelector(classname);
         this.closeButton = this.panel.querySelector('.js-close-candidate');
+
+        this.closeButton.addEventListener('click', onClick);
     }
 
     open() {

@@ -8,6 +8,7 @@ import Candidate from '../components/Candidate';
 
 const
     HIT_AREA_RADIUS         = 100,
+    HIDE_DURATION           = 0.1,
     MOVE_TO_CENTER_DURATION = 0.3;
 
 class CandidateGroup extends Container {
@@ -21,6 +22,7 @@ class CandidateGroup extends Container {
         super();
 
         this.position = position;
+        this.initialPosition = { ...position }; // copy
 
         this.candidate = new Candidate(); // TODO pass data
 
@@ -71,7 +73,7 @@ class CandidateGroup extends Container {
     hide() {
         TweenMax.to(
             this,
-            MOVE_TO_CENTER_DURATION,
+            HIDE_DURATION,
             {
                 alpha:      0,
                 ease:       Power0.easeNone,
@@ -81,6 +83,25 @@ class CandidateGroup extends Container {
                 },
             }
         );
+    }
+
+    reset() {
+        this.visible = true;
+
+        TweenMax.to(
+            this,
+            MOVE_TO_CENTER_DURATION,
+            {
+                alpha: 1,
+                x:     this.initialPosition.x,
+                y:     this.initialPosition.y,
+                ease:  Power0.easeNone,
+            }
+        );
+
+        this.supporters.resetPosition();
+        this.supporters.rotate();
+        this.candidate.resetPosition({ MOVE_TO_CENTER_DURATION });
     }
 }
 
