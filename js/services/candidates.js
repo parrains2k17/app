@@ -22,6 +22,16 @@ const fakeCandidate2 = {
     y:          (width, height) => height / 2,
 };
 
-const all = () => [fakeCandidate, fakeCandidate2];
+const fakeCandidate3 = {
+    id:         uniqueId(),
+    name:       'Toto Titi',
+    color:      randomColor(),
+    supporters: range(150),
+    x:          (width) => 3 * (width / 3),
+    y:          (width, height) => height / 2,
+};
+
+
+const all = () => [fakeCandidate, fakeCandidate2, fakeCandidate3];
 
 export default all;
