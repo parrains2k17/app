@@ -5,6 +5,8 @@ import Supporter from '../components/Supporter';
 import randomColor from '../utils/randomColor';
 import randomNumber from '../utils/randomNumber';
 
+import barchart from '../dataviz/barchart';
+
 const { PI, random, sqrt } = Math;
 
 const
@@ -64,6 +66,10 @@ class Supporters extends Container {
         this.children.forEach((c) => c.resetPivot({
             duration: CENTER_DURATION,
         }));
+    }
+
+    dataviz(selector) {
+        // TODO
     }
 }
 

@@ -16,17 +16,13 @@ class AppController {
         this.stage = new Stage(canvas, width, height);
 
         this.buildCandidates();
-        this.candidatePanel = new CandidatePanel(
-            '.js-candidate-panel',
-            () => this.candidateClose()
-        );
+
+        this.selectedCandidates = [];
     }
 
     buildCandidates() {
         return getCandidates()
             .then((results) => {
-                console.log(results);
-
                 this.candidates = Object.keys(results)
                     .map((key) => {
                         const candidate = results[key];
@@ -58,6 +54,8 @@ class AppController {
     }
 
     candidateOpen(selected) {
+        this.selectedCandidates.push(selected);
+
         this.candidates.forEach((candidate) => {
             if (candidate !== selected) {
                 candidate.hide(-width / 2);
@@ -73,11 +71,25 @@ class AppController {
         this.candidatePanel.open();
     }
 
-    candidateClose() {
+    /**
+     * @param  {Number} index       0 or 1
+     */
+    candidateClose(index) {
+        this.selectedCandidates = this.selectedCandidates[1 - index];
+
         this.candidates.forEach((candidate) => candidate.reset());
 
         this.stage.active();
         this.candidatePanel.close();
+    }
+
+    selectDataviz(selector) {
+        this.selectedCandidates.forEach(
+            (candidate) => candidate.dataviz(
+                selector,
+                this.selectedCandidates.length
+            )
+        );
     }
 }
 
