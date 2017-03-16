@@ -2,7 +2,6 @@
 import { Container, Circle } from 'pixi.js';
 import { TweenMax, Power0 } from 'gsap';
 
-import { cursorClic, cursorDefault } from '../utils/cursor';
 import Supporters from './SupportersGroup';
 import Candidate from '../components/Candidate';
 
@@ -37,16 +36,6 @@ class CandidateGroup extends Container {
 
         this.screen = screen;
         this.controller = controller;
-    }
-
-    mouseover() {
-        this.candidate.overState(true);
-        cursorClic();
-    }
-
-    mouseout() {
-        this.candidate.overState(false);
-        cursorDefault();
     }
 
     mousedown() {
