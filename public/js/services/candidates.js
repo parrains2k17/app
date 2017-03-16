@@ -1,88 +1,88 @@
 
 const candidatesPositions = {
     'ALLIOT-MARIE Michèle': {
-        x: 0,
-        y: 0,
+        x: 150,
+        y: 100,
     },
     'ARTHAUD Nathalie': {
-        x: 0,
-        y: 0,
+        x: 150,
+        y: 400,
     },
     'ASSELINEAU François': {
-        x: 0,
-        y: 0,
+        x: 150,
+        y: 800,
     },
     'CHEMINADE Jacques': {
-        x: 0,
-        y: 0,
+        x: 2950,
+        y: 400,
     },
     'DUPONT-AIGNAN Nicolas': {
-        x: 0,
-        y: 0,
+        x: 550,
+        y: 100,
     },
     'FAUDOT Bastien': {
-        x: 0,
-        y: 0,
+        x: 550,
+        y: 400,
     },
     'FILLON François': {
-        x: 0,
-        y: 0,
+        x: 550,
+        y: 800,
     },
     'GORGES Jean-Pierre': {
-        x: 0,
-        y: 0,
+        x: 950,
+        y: 100,
     },
     'GUAINO Henri': {
-        x: 0,
-        y: 0,
+        x: 950,
+        y: 400,
     },
     'HAMON Benoit': {
-        x: 0,
-        y: 0,
+        x: 950,
+        y: 800,
     },
     'JARDIN Alexandre': {
-        x: 0,
-        y: 0,
+        x: 1350,
+        y: 100,
     },
     'LARROUTUROU Pierre': {
-        x: 0,
-        y: 0,
+        x: 1350,
+        y: 400,
     },
     'LASSALLE Jean': {
-        x: 0,
-        y: 0,
+        x: 1350,
+        y: 800,
     },
     'LE PEN Marine': {
-        x: 0,
-        y: 0,
+        x: 1750,
+        y: 100,
     },
     'MACRON Emmanuel': {
-        x: 0,
-        y: 0,
+        x: 1750,
+        y: 400,
     },
     'MARCHANDISE Charlotte': {
-        x: 0,
-        y: 0,
+        x: 1750,
+        y: 800,
     },
     'MELENCHON Jean-Luc': {
-        x: 0,
-        y: 0,
+        x: 2150,
+        y: 100,
     },
     'POUTOU Philippe': {
-        x: 0,
-        y: 0,
+        x: 2150,
+        y: 400,
     },
     'TAUZIN Didier': {
-        x: 0,
-        y: 0,
+        x: 2150,
+        y: 800,
     },
     'TEMARU Oscar': {
-        x: 0,
-        y: 0,
+        x: 2550,
+        y: 250,
     },
     'YADE Rama': {
-        x: 0,
-        y: 0,
+        x: 2550,
+        y: 600,
     },
 };
 
