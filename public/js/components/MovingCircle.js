@@ -28,7 +28,7 @@ class MovingCircle extends Circle {
             duration,
             {
                 delay,
-                rotation:   this.rotation + (Math.PI * getRndNumber(1.5, 2.5)),
+                rotation:   this.rotation + (Math.PI * 2),
                 ease:       Power0.easeNone,
                 onComplete: animate,
             }
