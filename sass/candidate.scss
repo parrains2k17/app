@@ -1,13 +1,12 @@
 .candidate {
     align-items: center;
-    background: $red;
     bottom: -40%;
     color: $white;
     display: flex;
     height: 7em;
     justify-content: space-between;
     left: 0;
-    padding: 1em;
+    padding: 1em 1em 1em 120px;
     position: fixed;
     transition: bottom .3s ease;
     width: 100vw;
