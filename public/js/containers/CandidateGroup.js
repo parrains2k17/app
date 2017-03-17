@@ -10,7 +10,7 @@ const { random } = Math;
 const
     HIT_AREA_RADIUS         = 100,
     HIDE_DURATION           = 0.1,
-    MOVE_TO_CENTER_DURATION = 0.3,
+    MOVE_TO_CENTER_DURATION = 3,
     MOVEMENT_DURATION       = 60;
 
 class CandidateGroup extends Container {
@@ -51,22 +51,32 @@ class CandidateGroup extends Container {
     }
 
     activate(x, y) {
+        this.killMovement();
+
         TweenMax.to(
             this,
             MOVE_TO_CENTER_DURATION,
             {
                 x,
                 y,
-                ease:       Power0.easeNone,
-                onComplete: () => {
-                    this.candidate.getToCorner();
-                },
+                ease: Power0.easeNone,
             }
         );
-        this.supporters.center();
+
+        TweenMax.to(
+            this.scale,
+            MOVE_TO_CENTER_DURATION,
+            {
+                x:    3,
+                y:    3,
+                ease: Power0.easeNone,
+            }
+        );
     }
 
     hide() {
+        this.killMovement();
+
         TweenMax.to(
             this,
             HIDE_DURATION,
@@ -83,23 +93,34 @@ class CandidateGroup extends Container {
 
     reset() {
         this.visible = true;
-
+        console.log(this, this.initialPosition);
         TweenMax.to(
             this,
             MOVE_TO_CENTER_DURATION,
             {
-                alpha: 1,
-                x:     this.initialPosition.x,
-                y:     this.initialPosition.y,
-                ease:  Power0.easeNone,
+                alpha:      1,
+                x:          this.initialPosition.x,
+                y:          this.initialPosition.y,
+                ease:       Power0.easeNone,
+                onComplete: () => {
+                    this.moveAround();
+                },
+            }
+        );
+
+        TweenMax.to(
+            this.scale,
+            MOVE_TO_CENTER_DURATION,
+            {
+                x:    1,
+                y:    1,
+                ease: Power0.easeNone,
             }
         );
 
         this.supporters.resetPosition();
         this.supporters.rotate();
         this.candidate.resetPosition({ MOVE_TO_CENTER_DURATION });
-
-        this.moveAround();
     }
 
     moveAround() { // TODO better waiting state
@@ -111,7 +132,7 @@ class CandidateGroup extends Container {
 
         const [p1, p2] = (random() > 0.5) ? [pos1, pos2] : [pos2, pos1];
 
-        TweenMax.to(
+        this.movement = TweenMax.to(
             this,
             MOVEMENT_DURATION,
             {
@@ -130,6 +151,10 @@ class CandidateGroup extends Container {
                 },
             }
         );
+    }
+
+    killMovement() {
+        this.movement.kill();
     }
 }
 
