@@ -1,86 +1,86 @@
 
 const candidatesPositions = {
-    'ALLIOT-MARIE Michèle': {
+    'Michèle Alliot-Marie': {
         x: 150,
         y: 100,
     },
-    'ARTHAUD Nathalie': {
+    'Nathalie Arthaud': {
         x: 150,
         y: 400,
     },
-    'ASSELINEAU François': {
+    'François Asselineau': {
         x: 150,
         y: 800,
     },
-    'CHEMINADE Jacques': {
+    'Jacques Cheminade': {
         x: 2950,
         y: 400,
     },
-    'DUPONT-AIGNAN Nicolas': {
+    'Nicolas Dupont-Aignan': {
         x: 550,
         y: 100,
     },
-    'FAUDOT Bastien': {
+    'Bastien Faudot': {
         x: 550,
         y: 400,
     },
-    'FILLON François': {
+    'François Fillon': {
         x: 550,
         y: 800,
     },
-    'GORGES Jean-Pierre': {
+    'Jean-Pierre Gorges': {
         x: 950,
         y: 100,
     },
-    'GUAINO Henri': {
+    'Henri Guaino': {
         x: 950,
         y: 400,
     },
-    'HAMON Benoit': {
+    'Benoit Hamon': {
         x: 950,
         y: 800,
     },
-    'JARDIN Alexandre': {
+    'Alexandre Jardin': {
         x: 1350,
         y: 100,
     },
-    'LARROUTUROU Pierre': {
+    'Pierre Larrouturou': {
         x: 1350,
         y: 400,
     },
-    'LASSALLE Jean': {
+    'Jean Lasalle': {
         x: 1350,
         y: 800,
     },
-    'LE PEN Marine': {
+    'Marine Le Pen': {
         x: 1750,
         y: 100,
     },
-    'MACRON Emmanuel': {
+    'Emmanuel Macron': {
         x: 1750,
         y: 400,
     },
-    'MARCHANDISE Charlotte': {
+    'Charlotte Marchandise': {
         x: 1750,
         y: 800,
     },
-    'MELENCHON Jean-Luc': {
+    'Jean-Luc Mélenchon': {
         x: 2150,
         y: 100,
     },
-    'POUTOU Philippe': {
+    'Philippe Poutou': {
         x: 2150,
         y: 400,
     },
-    'TAUZIN Didier': {
+    'Didier Tauzin': {
         x: 2150,
         y: 800,
     },
-    'TEMARU Oscar': {
+    'Oscar Temaru': {
         x: 2550,
         y: 250,
     },
-    'YADE Rama': {
+    'Rama Yade': {
         x: 2550,
         y: 600,
     },
