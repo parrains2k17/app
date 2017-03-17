@@ -67,6 +67,8 @@ class AppController {
         });
 
         this.stage.center();
+
+        this.selectDataviz('toto'); // TODO
     }
 
     /**
