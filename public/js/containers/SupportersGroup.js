@@ -1,6 +1,6 @@
 
 import { Container } from 'pixi.js';
-import { groupBy, zip } from 'underscore';
+import { groupBy, zip, flatten } from 'underscore';
 
 import { getWidth, getHeight } from '../utils/window';
 import { pointsPositionInRect } from '../utils/points';
@@ -12,7 +12,7 @@ import randomNumber from '../utils/randomNumber';
 // import barchart from '../dataviz/barchart';
 import barchart from '../dataviz/horizontal_barchart';
 
-const { PI, random, sqrt } = Math;
+const { PI, random, sqrt, floor } = Math;
 
 const
     CENTER_DURATION   = 0.3,
@@ -75,6 +75,34 @@ class Supporters extends Container {
     dataviz(selector, totalDataviz) {
         const
             width = getWidth() / totalDataviz / 3,
+            height = getHeight() / 3,
+            w = 10,
+            h = 10;
+
+        const groups = groupBy(
+            this.supporters,
+            (supporter) => supporter.data.csp
+        );
+
+        const
+            labels = Object.keys(groups),
+            points = flatten(Object.values(groups));
+
+        points.forEach((point, i) => {
+            const
+                r = floor(width / w),
+                x = (i % r) * w,
+                y = floor(i / r) * h;
+
+            point.position.x = (-width / 2) + x;
+            point.position.y = -(height / 2) + y;
+            point.alpha = 1;
+        });
+    }
+
+    barChart(selector, totalDataviz) {
+        const
+            width = getWidth() / totalDataviz / 3,
             height = getHeight() / 3;
 
         const groups = groupBy(
@@ -112,7 +140,6 @@ class Supporters extends Container {
 
             zip(bar.points, positions)
                 .forEach(([point, position]) => {
-                    point.color = bar.color;
                     point.position.x = (
                         (-width / 2)
                         + position.x
@@ -122,6 +149,7 @@ class Supporters extends Container {
                         (height / 2)
                         + (-position.y + bar.y)
                     );
+                    point.alpha = 1;
                 });
         });
     }
