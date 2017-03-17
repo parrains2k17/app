@@ -68,7 +68,7 @@ class AppController {
 
         this.stage.center();
 
-        this.selectDataviz('SELECTOR_CSP'); // TODO
+        this.selectDataviz('SELECTOR_GENDER'); // TODO
     }
 
     /**
@@ -83,10 +83,23 @@ class AppController {
     }
 
     selectDataviz(selector) {
+        // retrieve data for each candidates (one or two)
+        const data = this.selectedCandidates.map(
+            (candidate) => candidate.buildDatavizData(selector)
+        );
+
+        // compute max if needed
+        const max = data.reduce((reduced, current) => (
+            current.max ? Math.max(current.max, reduced) : reduced
+        ), 0);
+
+        // show dataviz
         this.selectedCandidates.forEach(
-            (candidate) => candidate.dataviz(
+            (candidate, i) => candidate.showDataviz(
                 selector,
-                this.selectedCandidates.length
+                this.selectedCandidates.length,
+                data[i].data,
+                max
             )
         );
     }
