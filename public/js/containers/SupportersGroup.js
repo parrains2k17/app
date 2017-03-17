@@ -6,8 +6,10 @@ import { getWidth, getHeight } from '../utils/window';
 import { pointsPositionInRect } from '../utils/points';
 
 import Supporter from '../components/Supporter';
-import randomColor from '../utils/randomColor';
+// import randomColor from '../utils/randomColor';
 import randomNumber from '../utils/randomNumber';
+
+import { listColor, RED, BLUE } from '../style/color';
 
 import {
     SELECTOR_GENDER,
@@ -19,10 +21,6 @@ import {
     horizontalBarChart,
 } from '../dataviz/barchart';
 
-import {
-    BLUE,
-    RED,
-} from '../style/color';
 
 const { PI, random, sqrt, floor, max } = Math;
 
@@ -133,7 +131,7 @@ class Supporters extends Container {
     addSupporters(supporters) {
         this.supporters = supporters
             .map((supporter) => new Supporter({
-                color:    randomColor(),
+                color:    listColor(supporter.liste),
                 rotation: 2 * random() * PI,
                 pivot:    {
                     // Change 20 if the planet is bigger
