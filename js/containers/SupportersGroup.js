@@ -14,11 +14,15 @@ import {
     SELECTOR_CSP,
 } from '../dataviz';
 
-
 import {
     barChart,
     horizontalBarChart,
 } from '../dataviz/barchart';
+
+import {
+    BLUE,
+    RED,
+} from '../style/color';
 
 const { PI, random, sqrt, floor, max } = Math;
 
@@ -61,6 +65,7 @@ const showBarChart = (data, width, height, maxValue) => {
                     + (-position.y + bar.y)
                 );
                 point.alpha = 1;
+                point.changeColor(bar.color);
             });
     });
 
@@ -181,13 +186,13 @@ class Supporters extends Container {
                         points: groups[0],
                         value:  groups[0].length,
                         label:  'Hommes',
-                        colors: 0x00F,
+                        color:  BLUE,
                     },
                     {
                         points: groups[1],
                         value:  groups[1].length,
                         label:  'Femmes',
-                        colors: 0xF00,
+                        color:  RED,
                     },
                 ],
                 max: max(groups[0].length, groups[1].length),
