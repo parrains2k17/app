@@ -46,9 +46,11 @@ class Supporters extends Container {
     }
 
     rotate() {
+        const direction = (random() > 0.5) ? 1 : -1;
         this.children.forEach((c) => c.rotate({
             // random to smooth transition
             duration: ROTATION_DURATION + (random() * 6),
+            direction,
         }));
     }
 
