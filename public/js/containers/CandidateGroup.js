@@ -60,6 +60,9 @@ class CandidateGroup extends Container {
                 x,
                 y,
                 ease: Power0.easeNone,
+                // onComplete: () => {
+                //     this.candidate.goTo(x, y, 1);
+                // }
             }
         );
 
@@ -92,7 +95,10 @@ class CandidateGroup extends Container {
     }
 
     reset() {
+        // TODO : reset candidate position first
         console.log(this, this.initialPosition);
+
+
         TweenMax.to(
             this,
             MOVE_TO_CENTER_DURATION,
