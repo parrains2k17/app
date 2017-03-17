@@ -21,14 +21,14 @@ class MovingCircle extends Circle {
         }
     }
 
-    rotate({ delay = 0, duration = 1 }) {
+    rotate({ delay = 0, duration = 1, direction = 1 }) {
         this.killAnimation();
         const animate = () => TweenMax.to(
             this,
             duration,
             {
                 delay,
-                rotation:   this.rotation + (Math.PI * 2),
+                rotation:   this.rotation + (direction * Math.PI * 2),
                 ease:       Power0.easeNone,
                 onComplete: animate,
             }
