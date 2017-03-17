@@ -1,11 +1,16 @@
 
 import { Container } from 'pixi.js';
+import { groupBy, zip } from 'underscore';
+
+import { getWidth, getHeight } from '../utils/window';
+import { pointsPositionInRect } from '../utils/points';
 
 import Supporter from '../components/Supporter';
 import randomColor from '../utils/randomColor';
 import randomNumber from '../utils/randomNumber';
 
-import barchart from '../dataviz/barchart';
+// import barchart from '../dataviz/barchart';
+import barchart from '../dataviz/horizontal_barchart';
 
 const { PI, random, sqrt } = Math;
 
@@ -24,12 +29,11 @@ const randomAlpha = () => {
 class Supporters extends Container {
     constructor(supporters) {
         super();
-        this.supporters = supporters;
         this.addSupporters(supporters);
     }
 
     addSupporters(supporters) {
-        supporters
+        this.supporters = supporters
             .map((supporter) => new Supporter({
                 color:    randomColor(),
                 rotation: 2 * random() * PI,
@@ -44,8 +48,9 @@ class Supporters extends Container {
                 },
                 alpha: randomAlpha(0, 1, 1),
                 data:  supporter,
-            }))
-            .forEach((c) => this.addChild(c));
+            }));
+
+        this.supporters.forEach((c) => this.addChild(c));
     }
 
     rotate() {
@@ -67,9 +72,60 @@ class Supporters extends Container {
         }));
     }
 
-    dataviz(selector) {
-        // TODO
+    dataviz(selector, totalDataviz) {
+        const
+            width = getWidth() / totalDataviz / 3,
+            height = getHeight() / 3;
+
+        const groups = groupBy(
+            this.supporters,
+            (supporter) => supporter.data.sexe
+        );
+
+        const data = [
+            {
+                points: groups[0],
+                value:  groups[0].length,
+                label:  'Hommes',
+                colors: 0x00F,
+            },
+            {
+                points: groups[1],
+                value:  groups[1].length,
+                label:  'Femmes',
+                colors: 0xF00,
+            },
+        ];
+
+        const bars = barchart({
+            data,
+            width,
+            height,
+        });
+
+        bars.forEach((bar) => {
+            const positions = pointsPositionInRect(
+                bar.value,
+                bar.width,
+                bar.height
+            );
+
+            zip(bar.points, positions)
+                .forEach(([point, position]) => {
+                    point.color = bar.color;
+                    point.position.x = (
+                        (-width / 2)
+                        + position.x
+                        + bar.x
+                    );
+                    point.position.y = (
+                        (height / 2)
+                        + (-position.y + bar.y)
+                    );
+                });
+        });
     }
 }
 
 export default Supporters;
+
