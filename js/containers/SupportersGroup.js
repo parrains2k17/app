@@ -9,8 +9,16 @@ import Supporter from '../components/Supporter';
 import randomColor from '../utils/randomColor';
 import randomNumber from '../utils/randomNumber';
 
-// import barchart from '../dataviz/barchart';
-import barchart from '../dataviz/horizontal_barchart';
+import {
+    SELECTOR_GENDER,
+    SELECTOR_CSP,
+} from '../dataviz';
+
+
+import {
+    barChart,
+    horizontalBarChart,
+} from '../dataviz/barchart';
 
 const { PI, random, sqrt, floor } = Math;
 
@@ -24,6 +32,89 @@ const randomAlpha = () => {
         return 1;
     }
     return res;
+};
+
+const showBarChart = (data, width, height) => {
+    const bars = barChart({
+        data,
+        width,
+        height,
+    });
+
+    bars.forEach((bar) => {
+        const positions = pointsPositionInRect(
+            bar.value,
+            bar.width,
+            bar.height
+        );
+
+        zip(bar.points, positions)
+            .forEach(([point, position]) => {
+                point.position.x = (
+                    (-width / 2)
+                    + position.x
+                    + bar.x
+                );
+                point.position.y = (
+                    (height / 2)
+                    + (-position.y + bar.y)
+                );
+                point.alpha = 1;
+            });
+    });
+
+    // TODO legend
+};
+
+const showHorizontalBarChart = (data, width, height) => { // eslint-disable-line
+    const bars = horizontalBarChart({
+        data,
+        width,
+        height,
+    });
+
+    bars.forEach((bar) => {
+        const positions = pointsPositionInRect(
+            bar.value,
+            bar.width,
+            bar.height
+        );
+
+        zip(bar.points, positions)
+            .forEach(([point, position]) => {
+                point.position.x = (
+                    (-width / 2)
+                    + position.x
+                    + bar.x
+                );
+                point.position.y = (
+                    (height / 2)
+                    + (-position.y + bar.y)
+                );
+                point.alpha = 1;
+            });
+    });
+
+    // TODO legend
+};
+
+const showDotMatrix = (points, width, height) => {
+    const
+        w = 10,
+        h = 10;
+
+    points.forEach((point, i) => {
+        const
+            r = floor(width / w),
+            x = (i % r) * w,
+            y = floor(i / r) * h;
+
+        point.position.x = (-width / 2) + x;
+        point.position.y = -(height / 2) + y;
+        point.alpha = 1;
+    });
+
+    // TODO legend
 };
 
 class Supporters extends Container {
@@ -72,86 +163,63 @@ class Supporters extends Container {
         }));
     }
 
-    dataviz(selector, totalDataviz) {
-        const
-            width = getWidth() / totalDataviz / 3,
-            height = getHeight() / 3,
-            w = 10,
-            h = 10;
+    buildDatavizData(selector) {
+        let groups;
 
-        const groups = groupBy(
-            this.supporters,
-            (supporter) => supporter.data.csp
-        );
+        switch (selector) {
+        case SELECTOR_GENDER:
+            groups = groupBy(
+                this.supporters,
+                (supporter) => supporter.data.sexe
+            );
 
-        const
-            labels = Object.keys(groups),
-            points = flatten(Object.values(groups));
+            return [
+                {
+                    points: groups[0],
+                    value:  groups[0].length,
+                    label:  'Hommes',
+                    colors: 0x00F,
+                },
+                {
+                    points: groups[1],
+                    value:  groups[1].length,
+                    label:  'Femmes',
+                    colors: 0xF00,
+                },
+            ];
 
-        points.forEach((point, i) => {
-            const
-                r = floor(width / w),
-                x = (i % r) * w,
-                y = floor(i / r) * h;
+        case SELECTOR_CSP:
+            groups = groupBy(
+                this.supporters,
+                (supporter) => supporter.data.csp
+            );
 
-            point.position.x = (-width / 2) + x;
-            point.position.y = -(height / 2) + y;
-            point.alpha = 1;
-        });
+            // const labels = Object.keys(groups),
+            return flatten(Object.values(groups));
+
+        default:
+            return [];
+        }
     }
 
-    barChart(selector, totalDataviz) {
+    dataviz(selector, totalDataviz) {
         const
             width = getWidth() / totalDataviz / 3,
             height = getHeight() / 3;
 
-        const groups = groupBy(
-            this.supporters,
-            (supporter) => supporter.data.sexe
-        );
+        const data = this.buildDatavizData(selector);
 
-        const data = [
-            {
-                points: groups[0],
-                value:  groups[0].length,
-                label:  'Hommes',
-                colors: 0x00F,
-            },
-            {
-                points: groups[1],
-                value:  groups[1].length,
-                label:  'Femmes',
-                colors: 0xF00,
-            },
-        ];
+        switch (selector) {
+        case SELECTOR_GENDER:
+            showBarChart(data, width, height);
+            break;
+        case SELECTOR_CSP:
+            showDotMatrix(data, width, height);
+            break;
 
-        const bars = barchart({
-            data,
-            width,
-            height,
-        });
-
-        bars.forEach((bar) => {
-            const positions = pointsPositionInRect(
-                bar.value,
-                bar.width,
-                bar.height
-            );
-
-            zip(bar.points, positions)
-                .forEach(([point, position]) => {
-                    point.position.x = (
-                        (-width / 2)
-                        + position.x
-                        + bar.x
-                    );
-                    point.position.y = (
-                        (height / 2)
-                        + (-position.y + bar.y)
-                    );
-                    point.alpha = 1;
-                });
-        });
+        default:
+            break;
+        }
     }
 }
 

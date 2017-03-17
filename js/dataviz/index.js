@@ -1,0 +1,3 @@
+
+export const SELECTOR_GENDER = 'SELECTOR_GENDER';
+export const SELECTOR_CSP = 'SELECTOR_CSP';

@@ -68,7 +68,7 @@ class AppController {
 
         this.stage.center();
 
-        this.selectDataviz('toto'); // TODO
+        this.selectDataviz('SELECTOR_CSP'); // TODO
     }
 
     /**
