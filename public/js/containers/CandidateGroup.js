@@ -92,7 +92,6 @@ class CandidateGroup extends Container {
     }
 
     reset() {
-        this.visible = true;
         console.log(this, this.initialPosition);
         TweenMax.to(
             this,
@@ -104,6 +103,8 @@ class CandidateGroup extends Container {
                 ease:       Power0.easeNone,
                 onComplete: () => {
                     this.moveAround();
+                    // TODO change for a fade in (?)
+                    this.visible = true;
                 },
             }
         );
