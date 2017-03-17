@@ -6,24 +6,24 @@ export const BLUE = 0x9DB4F8;
 export const RED  = 0xFFD1D3;
 
 
-export const LISTE_DVG      = 0xFF92BE;
-export const LISTE_MODEM    = 0xEF7323;
-export const LISTE_EELV     = 0x7CA700;
-export const LISTE_UDI      = 0x96ADD9;
-export const LISTE_UC       = 0xEAEA13;
-export const LISTE_EXG      = 0x9D0404;
-export const LISTE_FG       = ;
-export const LISTE_PC       = ;
-export const LISTE_PG       = ;
-export const LISTE_UG       = ;
-export const LISTE_PS       = ;
-export const LISTE_DIV      = ;
-export const LISTE_DVD      = 0xA5D8F6;
-export const LISTE_UMP      = ;
-export const LISTE_UD       = ;
-export const LISTE_FN       = 0x00456F;
+export const LISTE_EXG      = 0x430201;
+export const LISTE_PC       = 0xE90F00;
+export const LISTE_FG       = 0xB10800;
+export const LISTE_PG       = 0xBE0A00;
+export const LISTE_PS       = 0xE80B56;
+export const LISTE_UG       = 0xE13545;
+export const LISTE_DVG      = 0xDA4968;
+export const LISTE_EELV     = 0x3F8B22;
+export const LISTE_MODEM    = 0xEB6300;
+export const LISTE_UC       = 0x9BDAF9;
+export const LISTE_UDI      = 0x82CBEC;
+export const LISTE_DVD      = 0x4E8DD8;
+export const LISTE_UD       = 0x3D6CC3;
+export const LISTE_UMP      = 0x2552A5;
+export const LISTE_FN       = 0x020B3D;
 export const LISTE_EXD      = 0x000000;
-export const LISTE_SE       = 0xD7D7D7;
+export const LISTE_DIV      = 0x666666;
+export const LISTE_SE       = 0xDDDDDD;
 
 export const listColor = (list) => {
 switch (list){
