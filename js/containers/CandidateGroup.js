@@ -56,7 +56,7 @@ class CandidateGroup extends Container {
                 y,
                 ease:       Power0.easeNone,
                 onComplete: () => {
-                    this.candidate.hide();
+                    this.candidate.getToCorner();
                 },
             }
         );
