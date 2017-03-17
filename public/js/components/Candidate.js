@@ -1,10 +1,13 @@
 
 import { Texture } from 'pixi.js';
-import { TweenMax, Power0 } from 'gsap';
+import { TweenMax, Power0, Power1 } from 'gsap';
+
+import { getWidth, getHeight } from '../utils/window';
 
 import CircleSprite from './CircleSprite';
 
 const HIDE_DURATION = 0.3;
+const TO_CORNER_DURATION = 3;
 
 class Candidate extends CircleSprite {
     constructor(config = {}) {
@@ -29,6 +32,18 @@ class Candidate extends CircleSprite {
             {
                 x,
                 ease: Power0.easeNone,
+            }
+        );
+    }
+
+    getToCorner() {
+        TweenMax.to(
+            this,
+            TO_CORNER_DURATION,
+            {
+                x:    -(getWidth() / 2),
+                y:    (getHeight() / 3) - this.y,
+                ease: Power1.easeIn,
             }
         );
     }

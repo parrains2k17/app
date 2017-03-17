@@ -27,8 +27,6 @@ class Supporters extends Container {
     }
 
     addSupporters(supporters) {
-        console.log(sqrt(supporters.length * (100 / PI)));
-
         supporters
             .map(() => new Supporter({
                 color:    randomColor(),
@@ -38,7 +36,7 @@ class Supporters extends Container {
                     x: randomNumber(
                         48,
                         sqrt(supporters.length * (100 / PI)),
-                        sqrt(supporters.length * (100 / PI))
+                        (sqrt(supporters.length * (100 / PI))) / 1.5
                     ),
                     y: -8,
                 },
@@ -48,9 +46,11 @@ class Supporters extends Container {
     }
 
     rotate() {
+        const direction = (random() > 0.5) ? 1 : -1;
         this.children.forEach((c) => c.rotate({
             // random to smooth transition
             duration: ROTATION_DURATION + (random() * 6),
+            direction,
         }));
     }
 
