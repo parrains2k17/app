@@ -42,6 +42,7 @@ class AppController {
                                 },
                             },
                             candidate.parrainages,
+                            candidate.texture,
                             this
                             // TODO pass candidate data toto
                         );

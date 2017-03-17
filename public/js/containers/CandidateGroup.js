@@ -19,14 +19,17 @@ class CandidateGroup extends Container {
             position = { x: 0, y: 0 },
         },
         supporters,
+        texture,
         controller
     ) {
         super();
 
         this.position = position;
-        this.initialPosition = { ...position }; // copy
+        this.initialPosition = { x: +position.x, y: +position.y }; // copy
 
-        this.candidate = new Candidate(); // TODO pass data
+        console.log(this, this.initialPosition);
+
+        this.candidate = new Candidate(texture); // TODO pass data
 
         this.supporters = new Supporters(supporters);
         this.supporters.rotate(); // TODO maybe not here

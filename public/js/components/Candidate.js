@@ -10,18 +10,18 @@ const HIDE_DURATION = 0.3;
 const TO_CORNER_DURATION = 3;
 
 class Candidate extends CircleSprite {
-    constructor(config = {}) {
+    constructor(texture, config = {}) {
         super({
             // TODO scale mode and resolution
             // TODO load in cache ?
-            texture: Texture.fromImage('images/planete.png'),
+            texture: Texture.fromImage(texture),
             ...config,
         });
 
         this.scale.set(0.15, 0.15);
 
-        this.x = -48;
-        this.y = -48;
+        this.x = -32;
+        this.y = -32;
         this.initialPosition = { ...this.position };
     }
 
