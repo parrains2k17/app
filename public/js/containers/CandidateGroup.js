@@ -93,8 +93,12 @@ class CandidateGroup extends Container {
         this.candidate.resetPosition({ MOVE_TO_CENTER_DURATION });
     }
 
-    dataviz(selector, totalDataviz) {
-        this.supporters.dataviz(selector, totalDataviz);
+    buildDatavizData(selector) {
+        return this.supporters.buildDatavizData(selector);
+    }
+
+    showDataviz(selector, totalDataviz, data, max) {
+        this.supporters.showDataviz(selector, totalDataviz, data, max);
     }
 }
 

@@ -20,7 +20,7 @@ import {
     horizontalBarChart,
 } from '../dataviz/barchart';
 
-const { PI, random, sqrt, floor } = Math;
+const { PI, random, sqrt, floor, max } = Math;
 
 const
     CENTER_DURATION   = 0.3,
@@ -34,11 +34,12 @@ const randomAlpha = () => {
     return res;
 };
 
-const showBarChart = (data, width, height) => {
+const showBarChart = (data, width, height, maxValue) => {
     const bars = barChart({
         data,
         width,
         height,
+        max: maxValue,
     });
 
     bars.forEach((bar) => {
@@ -66,11 +67,12 @@ const showBarChart = (data, width, height) => {
     // TODO legend
 };
 
-const showHorizontalBarChart = (data, width, height) => { // eslint-disable-line
+const showHorizontalBarChart = (data, width, height, maxValue) => { // eslint-disable-line
     const bars = horizontalBarChart({
         data,
         width,
         height,
+        max: maxValue,
     });
 
     bars.forEach((bar) => {
@@ -173,20 +175,24 @@ class Supporters extends Container {
                 (supporter) => supporter.data.sexe
             );
 
-            return [
-                {
-                    points: groups[0],
-                    value:  groups[0].length,
-                    label:  'Hommes',
-                    colors: 0x00F,
-                },
-                {
-                    points: groups[1],
-                    value:  groups[1].length,
-                    label:  'Femmes',
-                    colors: 0xF00,
-                },
-            ];
+            return {
+                data: [
+                    {
+                        points: groups[0],
+                        value:  groups[0].length,
+                        label:  'Hommes',
+                        colors: 0x00F,
+                    },
+                    {
+                        points: groups[1],
+                        value:  groups[1].length,
+                        label:  'Femmes',
+                        colors: 0xF00,
+                    },
+                ],
+                max: max(groups[0].length, groups[1].length),
+            };
+
 
         case SELECTOR_CSP:
             groups = groupBy(
@@ -195,23 +201,23 @@ class Supporters extends Container {
             );
 
             // const labels = Object.keys(groups),
-            return flatten(Object.values(groups));
+            return {
+                data: flatten(Object.values(groups)),
+            };
 
         default:
-            return [];
+            return { data: [] };
         }
     }
 
-    dataviz(selector, totalDataviz) {
+    showDataviz(selector, totalDataviz, data, maxValue) {
         const
             width = getWidth() / totalDataviz / 3,
             height = getHeight() / 3;
 
-        const data = this.buildDatavizData(selector);
-
         switch (selector) {
         case SELECTOR_GENDER:
-            showBarChart(data, width, height);
+            showBarChart(data, width, height, maxValue);
             break;
         case SELECTOR_CSP:
             showDotMatrix(data, width, height);
