@@ -1,4 +1,5 @@
 
+import { Graphics } from 'pixi.js';
 import MovingCircle from './MovingCircle';
 
 class Supporter extends MovingCircle {
@@ -6,7 +7,7 @@ class Supporter extends MovingCircle {
         data = [],
         ...config
     }) {
-        super({ radius: 2, ...config });
+        super({ radius: 2, ...config }, Graphics);
 
         this.data = data;
     }

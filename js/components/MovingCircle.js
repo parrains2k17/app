@@ -4,8 +4,8 @@ import { TweenMax, Power0 } from 'gsap';
 import Circle from './Circle';
 
 class MovingCircle extends Circle {
-    constructor(config = {}) {
-        super(config);
+    constructor(config = {}, Thing, options) {
+        super(config, Thing, options);
 
         this.animation = null;
 
