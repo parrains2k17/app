@@ -7,7 +7,7 @@ import { getWidth, getHeight } from '../utils/window';
 import CircleSprite from './CircleSprite';
 
 const HIDE_DURATION = 0.3;
-const TO_CORNER_DURATION = 1;
+const TO_CORNER_DURATION = 3;
 
 class Candidate extends CircleSprite {
     constructor(config = {}) {
@@ -42,7 +42,7 @@ class Candidate extends CircleSprite {
             TO_CORNER_DURATION,
             {
                 x:    -(getWidth() / 2),
-                y:    getHeight() / 2,
+                y:    (getHeight() / 3) - this.y,
                 ease: Power1.easeIn,
             }
         );
