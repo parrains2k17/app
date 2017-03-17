@@ -83,7 +83,7 @@ const candidatesPositions = {
     'MELENCHON Jean-Luc': {
         x:       2150,
         y:       100,
-        texture: 'images/Melenchon2.png',
+        texture: 'images/Melenchon.png',
     },
     'POUTOU Philippe': {
         x:       2150,

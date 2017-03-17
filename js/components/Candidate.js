@@ -48,6 +48,31 @@ class Candidate extends CircleSprite {
         );
     }
 
+    getDown() {
+        TweenMax.to(
+            this,
+            TO_CORNER_DURATION,
+            {
+                y:    (getHeight() / 3) - this.y,
+                ease: Power1.easeIn,
+            }
+        );
+    }
+
+    goTo(x, y, time) {
+        console.log('POS actuelle : ', this.x, this.y);
+        console.log('POS a atteindre : ', x, y);
+        TweenMax.to(
+            this,
+            time,
+            {
+                x:    this.x - x,
+                y:    this.y - y,
+                ease: Power0.easeIn,
+            }
+        );
+    }
+
     resetPosition({ duration }) {
         this.killAnimation();
 
