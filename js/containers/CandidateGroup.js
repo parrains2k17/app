@@ -29,8 +29,6 @@ class CandidateGroup extends Container {
         this.initialPosition = { ...position }; // copy
         this.infos = infos;
 
-        console.log(this, this.initialPosition);
-
         this.candidate = new Candidate(texture); // TODO pass data
 
         this.supporters = new Supporters(supporters);
@@ -96,10 +94,6 @@ class CandidateGroup extends Container {
     }
 
     reset() {
-        // TODO : reset candidate position first
-        console.log(this, this.initialPosition);
-
-
         TweenMax.to(
             this,
             MOVE_TO_CENTER_DURATION,
