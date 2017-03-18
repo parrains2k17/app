@@ -5,6 +5,8 @@ import { TweenMax, Power0 } from 'gsap';
 import Supporters from './SupportersGroup';
 import Candidate from '../components/Candidate';
 
+import { getWidth, getHeight } from '../utils/window';
+
 const { random } = Math;
 
 const
@@ -130,6 +132,7 @@ class CandidateGroup extends Container {
     }
 
     showDataviz(selector, totalDataviz, data, max) {
+        this.candidate.hide(getWidth(), getHeight() * 2);
         this.supporters.showDataviz(selector, totalDataviz, data, max);
     }
 

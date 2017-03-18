@@ -158,6 +158,10 @@ class Supporters extends Container {
         }));
     }
 
+    stopRotation() {
+        this.children.forEach((c) => c.center());
+    }
+
     center() {
         this.children.forEach((c) => c.center({
             duration: CENTER_DURATION,
@@ -165,9 +169,13 @@ class Supporters extends Container {
     }
 
     resetPosition() {
-        this.children.forEach((c) => c.resetPivot({
-            duration: CENTER_DURATION,
-        }));
+        this.scale.set(1, 1);
+        this.children.forEach((c) => {
+            c.resetPosition({
+                duration: CENTER_DURATION,
+            });
+            c.resetColor();
+        });
     }
 
     buildDatavizData(selector) {
@@ -219,6 +227,9 @@ class Supporters extends Container {
         const
             width = getWidth() / totalDataviz / 3,
             height = getHeight() / 3;
+
+        this.scale.set(0.33, 0.33);
+        this.center();
 
         switch (selector) {
         case SELECTOR_GENDER:

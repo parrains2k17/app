@@ -60,6 +60,10 @@ class Circle extends Container {
             color,
         }));
     }
+
+    resetColor() {
+        this.changeColor(this.initialColor);
+    }
 }
 
 export default Circle;
