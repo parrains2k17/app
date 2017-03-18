@@ -33,7 +33,7 @@ class ActionBar {
         this.selected = element;
         element.classList.add('mod-active');
 
-        this.onClick(element.dataset.critere);
+        this.onClick(element.dataset.id);
     }
 }
 
