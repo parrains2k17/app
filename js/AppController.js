@@ -2,6 +2,7 @@
 import getCandidates from './services/candidates';
 
 import Stage from './components/Stage';
+import CandidatePanel from './components/CandidatePanel';
 
 import CandidateGroup from './containers/CandidateGroup';
 
@@ -15,6 +16,10 @@ class AppController {
         this.stage = new Stage(canvas, width, height);
 
         this.buildCandidates();
+        this.candidatePanel = new CandidatePanel(
+           '.js-candidate-panel',
+            () => this.candidateClose(0)
+        );
 
         this.selectedCandidates = [];
     }
@@ -87,6 +92,7 @@ class AppController {
 
         this.candidates.forEach((candidate) => candidate.reset());
 
+        this.candidatePanel.close();
         this.stage.active();
     }
 
