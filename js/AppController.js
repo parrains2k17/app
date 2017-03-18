@@ -5,6 +5,7 @@ import getCandidates from './services/candidates';
 
 import Stage from './components/Stage';
 import CandidatePanel from './components/CandidatePanel';
+import CriteresBar from './components/CriteresBar';
 
 import CandidateGroup from './containers/CandidateGroup';
 
@@ -24,6 +25,11 @@ class AppController {
         );
 
         this.selectedCandidates = [];
+
+        this.criteresBarMaires = new CriteresBar(
+            '.js-criteres-maires',
+            (critere) => this.selectDataviz(critere)
+        );
     }
 
     buildCandidates() {
@@ -84,6 +90,7 @@ class AppController {
         this.candidatePanel.updateInfo(selected.infos);
 
         this.candidatePanel.open();
+        this.criteresBarMaires.open();
     }
 
     /**
@@ -98,6 +105,7 @@ class AppController {
         this.candidates.forEach((candidate) => candidate.reset());
 
         this.candidatePanel.close();
+        this.criteresBarMaires.close();
         this.stage.active();
     }
 
