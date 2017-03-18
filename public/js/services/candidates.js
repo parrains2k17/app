@@ -197,6 +197,7 @@ const candidatesPositions = {
         x:       2550,
         y:       250,
         parti:   'Tavini Huiraatira',
+        age:     72,
         color:   PARTI_TAVINI,
         texture: 'images/Temaru.png',
     },
