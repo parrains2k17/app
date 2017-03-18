@@ -8,14 +8,13 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
             rel="stylesheet">
         <link
-        href="https://fonts.googleapis.com/css?family=Roboto+Mono:400|Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Material+Icons" rel="stylesheet">
+        href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,600|Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="dist/styles.css">
     </head>
     <body class="gradient-background">
         <div class="canvas-container js-canvas-container"></div>
 
         <div class="candidate mod-shadow js-candidate-panel">
-
             <div class="candidate-element candidate-element-image">
                 <img
                     alt="Photo candidat"
@@ -46,6 +45,60 @@
                 candidate-element-close js-close-candidate">
                 <span class="material-icons">close</span>
             </button>
+        </div>
+
+        <div class="criteres mod-open">
+            <ul class="criteres-container">
+                <li
+                    class="criteres-element"
+                    data-critere="sexe"
+                    data-critere-name="Sexe"
+                >
+                    <div class="criteres-image"
+                        style="background-image:url('images/gender_symbol.svg')">
+                    </div>
+                </li>
+                <li
+                    class="criteres-element"
+                    data-critere="age"
+                    data-critere-name="Âge"
+                >
+                    <div class="criteres-image"
+                        style="background-image:url('images/Age.svg')"></div>
+                </li>
+                <li
+                    class="criteres-element"
+                    data-critere="csp"
+                    data-critere-name="CSP"
+                >
+                    <div class="criteres-image"
+                        style="background-image:url('images/CSP.svg')"></div>
+                </li>
+                <li
+                    class="criteres-element"
+                    data-critere="pop"
+                    data-critere-name="Population"
+                >
+                    <div class="criteres-image"
+                        style="background-image:url('images/population.svg')"></div>
+                </li>
+                <li
+                    class="criteres-element"
+                    data-critere="urbanite"
+                    data-critere-name="Ville ou campagne ?"
+                >
+                    <div class="criteres-image"
+                        style="background-image:url('images/urbain.svg')"></div>
+                </li>
+                <li
+                    class="criteres-element"
+                    data-critere="chomage"
+                    data-critere-name="Taux de chômage"
+                >
+                    <div class="criteres-image"
+                        style="background-image:url('images/chomage.svg')"></div>
+                </li>
+            </ul>
         </div>
     </body>
 </html>
