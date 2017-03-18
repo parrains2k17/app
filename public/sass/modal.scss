@@ -1,37 +1,33 @@
-.modal_background {
 
+.modal_background {
+	background-color: rgba(0, 0, 0, 0.3);
 	display: none;
+	height: 100%;
+	left: 0;
+	opacity: 0;
 	position: fixed;
 	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background-color: rgba(0,0,0,0.3);
-	opacity: 0;
 	transition: opacity .3s ease;
-
+	width: 100%;
 }
 
 .modal_background.mode-open {
-	display : block;
+	display: block;
 	opacity: 1;
 }
 
-
-
-
 .modal_container {
-	text-align: center;
-	display: none;
-	position: absolute;
-	top: 5%;
-	left: 25%;
-	width: 50%;
-	height:90%;
-	padding: 20px 30px 10px 30px;
 	background-color: white;	
 	/*opacity: 0.9;*/
 	border-radius: 10px;
+	display: none;
+	height: 90%;
+	left: 25%;
+	padding: 20px 30px 10px 30px;
+	position: absolute;
+	text-align: center;
+	top: 5%;
+	width: 50%;
 }
 
 .modal_container.mode-animate {	
@@ -40,37 +36,31 @@
         -ms-animation: fadein 4s; /* Internet Explorer */
          -o-animation: fadein 4s; /* Opera < 12.1 */
             animation: fadein 4s;
-
 }
-
 
 .modal_container.mode-open {
 	display: block;
 	opacity: 0.9;
 }
 
-
-
 .modal_container.mode-webGL {
+	background-color: white;	
+	border-radius: 10px;
+	height: 10%;
+	left: 27.5%;
+	padding: 10px 10px 10px 10px;
 	position: absolute;
 	opacity: 1;
 	top: 15%;
-	left: 27.5%;
 	width: 30%;
-	height:10%;
-	padding: 10px 10px 10px 10px;
-	background-color: white;	
-	border-radius: 10px;
 }
 
-
 .flex-container {
-	height: 100%;
+	align-content: stretch;
+	align-items: center;
 	display: flex;
 	flex-wrap: wrap;
-	align-items: center;
-	align-content: stretch;
-
+	height: 100%;
 }
 
 .text-container {
@@ -78,8 +68,8 @@
 }
 
 .text-part-container {
-	text-align: justify;
 	font-size: 1.2em;
+	text-align: justify;
 }
 
 .logo-col4 {
@@ -96,7 +86,6 @@
 	flex: 1;
 	flex-basis: 25%;
 }
-
 
 .logo-parrains {
 	width: 60%;
@@ -123,8 +112,8 @@
 }
 
 .titre1 {
-	text-align: center;
 	font-size: 4em;
+	text-align: center;
 }
 
 .titre2017 {
@@ -132,8 +121,8 @@
 }
 
 .logoDrag {
-	width: 5%;
 	margin: auto;
+	width: 5%;
 }
 
 .button-container {
@@ -143,14 +132,13 @@
 .go-button {
     background-color: #4CAF50; /* Green */
     border: none;
+    border-radius: 15px;
     color: white;
+    display: inline-block;
+    font-size: 24px;
     padding: 15px 32px;
     text-align: center;
-    display: inline-block;
-    border-radius: 15px;
-    font-size: 24px;
 }
-
 
 .btn-credits {
 	color: white;
@@ -158,9 +146,10 @@
 }
 
 .btn-credits:hover {
-	text-decoration: underline;
 	cursor: pointer;
+	text-decoration: underline;
 }
+
 /*.btn-close .material-icons{
 	position: absolute;
 	top: 20px;
@@ -178,31 +167,34 @@
 
 @keyframes fadein {
     from {
-        opacity:0;
+        opacity: 0;
     }
     to {
-        opacity:0.9;
+        opacity: 0.9;
     }
 }
+
 @-moz-keyframes fadein { /* Firefox */
     from {
-        opacity:0;
+        opacity: 0;
     }
     to {
-        opacity:0.9;
+        opacity: 0.9;
     }
 }
+
 @-webkit-keyframes fadein { /* Safari and Chrome */
     from {
-        opacity:0;
+        opacity: 0;
     }
     to {
-        opacity:0.9;
+        opacity: 0.9;
     }
 }
+
 @-o-keyframes fadein { /* Opera */
     from {
-        opacity:0;
+        opacity: 0;
     }
     to {
         opacity: 0.9;
