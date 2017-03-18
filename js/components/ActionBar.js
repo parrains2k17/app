@@ -1,12 +1,12 @@
 
-class CriteresBar {
+class ActionBar {
     constructor(classname, onClick) {
         this.onClick = onClick;
 
         this.bar = document.querySelector(classname);
-        this.criteres = this.bar.querySelectorAll('.js-critere');
+        this.actions = this.bar.querySelectorAll('.js-action');
 
-        this.criteres.forEach((c) => {
+        this.actions.forEach((c) => {
             c.addEventListener('click', () => this.clickHandler(c));
         });
 
@@ -33,8 +33,8 @@ class CriteresBar {
         this.selected = element;
         element.classList.add('mod-active');
 
-        this.onClick(element.dataset.critere);
+        this.onClick(element.dataset.id);
     }
 }
 
-export default CriteresBar;
+export default ActionBar;
