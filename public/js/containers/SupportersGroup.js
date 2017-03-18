@@ -28,13 +28,13 @@ const
     CENTER_DURATION   = 0.3,
     ROTATION_DURATION = 15;
 
-const randomAlpha = () => {
-    const res = randomNumber(0, 1, 1);
-    if (res > 0.7) {
-        return 1;
-    }
-    return res;
-};
+// const randomAlpha = () => {
+//     const res = randomNumber(0, 1, 1);
+//     if (res > 0.7) {
+//         return 1;
+//     }
+//     return res;
+// };
 
 const showBarChart = (data, width, height, maxValue) => {
     const bars = barChart({
@@ -142,8 +142,8 @@ class Supporters extends Container {
                     ),
                     y: -8,
                 },
-                alpha: randomAlpha(0, 1, 1),
-                data:  supporter,
+                // alpha: randomAlpha(0, 1, 1),
+                data: supporter,
             }));
 
         this.supporters.forEach((c) => this.addChild(c));
