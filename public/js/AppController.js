@@ -25,8 +25,6 @@ class AppController {
     buildCandidates() {
         return getCandidates()
             .then((results) => {
-                console.log(results);
-
                 this.candidates = Object.keys(results)
                     .map((key) => {
                         const candidate = results[key];
