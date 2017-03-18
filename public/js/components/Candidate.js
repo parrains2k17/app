@@ -10,18 +10,18 @@ const HIDE_DURATION = 0.3;
 const TO_CORNER_DURATION = 3;
 
 class Candidate extends CircleSprite {
-    constructor(config = {}) {
+    constructor(texture, config = {}) {
         super({
             // TODO scale mode and resolution
             // TODO load in cache ?
-            texture: Texture.fromImage('images/planete.png'),
+            texture: Texture.fromImage(texture),
             ...config,
         });
 
         this.scale.set(0.15, 0.15);
 
-        this.x = -48;
-        this.y = -48;
+        this.x = -32;
+        this.y = -32;
         this.initialPosition = { ...this.position };
     }
 
@@ -44,6 +44,31 @@ class Candidate extends CircleSprite {
                 x:    -(getWidth() / 2),
                 y:    (getHeight() / 3) - this.y,
                 ease: Power1.easeIn,
+            }
+        );
+    }
+
+    getDown() {
+        TweenMax.to(
+            this,
+            TO_CORNER_DURATION,
+            {
+                y:    (getHeight() / 3) - this.y,
+                ease: Power1.easeIn,
+            }
+        );
+    }
+
+    goTo(x, y, time) {
+        console.log('POS actuelle : ', this.x, this.y);
+        console.log('POS a atteindre : ', x, y);
+        TweenMax.to(
+            this,
+            time,
+            {
+                x:    this.x - x,
+                y:    this.y - y,
+                ease: Power0.easeIn,
             }
         );
     }
