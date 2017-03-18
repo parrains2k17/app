@@ -80,3 +80,26 @@
         margin-top: .2em;
     }
 
+.add-candidate {
+    left: -100%;
+    position: absolute;
+    top: 6em;
+    transition: left .4s ease;
+}
+
+.add-candidate.mod-open {
+    left: 1em;
+}
+
+    .add-candidate-button {
+        color: $white2;
+        cursor: pointer;
+        font-size: 1.3em;
+        opacity: .6;
+    }
+
+    .add-candidate-button:hover {
+        opacity: 1;
+    }
+
+
