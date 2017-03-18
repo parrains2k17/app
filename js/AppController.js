@@ -1,4 +1,6 @@
 
+import { without, find } from 'underscore';
+
 import getCandidates from './services/candidates';
 
 import Stage from './components/Stage';
@@ -88,7 +90,10 @@ class AppController {
      * @param  {Number} index       0 or 1
      */
     candidateClose(index) {
-        this.selectedCandidates = this.selectedCandidates[1 - index];
+        this.selectedCandidates = without(
+            this.selectedCandidates,
+            find(this.selectedCandidates, (_, i) => i === index)
+        );
 
         this.candidates.forEach((candidate) => candidate.reset());
 
