@@ -5,7 +5,8 @@ import getCandidates from './services/candidates';
 
 import Stage from './components/Stage';
 import CandidatePanel from './components/CandidatePanel';
-import CriteresBar from './components/CriteresBar';
+import ActionBar from './components/ActionBar';
+import CandidatesBar from './components/CandidatesBar';
 
 import CandidateGroup from './containers/CandidateGroup';
 
@@ -26,9 +27,16 @@ class AppController {
 
         this.selectedCandidates = [];
 
-        this.criteresBarMaires = new CriteresBar(
-            '.js-criteres-maires',
+        this.criteresBarMaires = new ActionBar(
+            '.js-actions-maires',
             (critere) => this.selectDataviz(critere)
+        );
+
+        this.planetsChoiceBar = new CandidatesBar(
+            '.js-actions-choix',
+            '.js-add-candidate-open',
+            '.js-add-candidate-close',
+            (toto) => console.log(toto)
         );
     }
 
@@ -91,6 +99,7 @@ class AppController {
 
         this.candidatePanel.open();
         this.criteresBarMaires.open();
+        this.planetsChoiceBar.start();
     }
 
     /**
@@ -106,6 +115,7 @@ class AppController {
 
         this.candidatePanel.close();
         this.criteresBarMaires.close();
+        this.planetsChoiceBar.stop();
         this.stage.active();
     }
 
