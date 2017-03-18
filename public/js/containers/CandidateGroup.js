@@ -18,6 +18,7 @@ class CandidateGroup extends Container {
         {
             position = { x: 0, y: 0 },
         },
+        infos,
         supporters,
         texture,
         controller
@@ -25,7 +26,8 @@ class CandidateGroup extends Container {
         super();
 
         this.position = position;
-        this.initialPosition = { x: +position.x, y: +position.y }; // copy
+        this.initialPosition = { ...position }; // copy
+        this.infos = infos;
 
         console.log(this, this.initialPosition);
 
@@ -40,7 +42,6 @@ class CandidateGroup extends Container {
         this.addChild(this.candidate);
         this.addChild(this.supporters);
 
-        this.screen = screen;
         this.controller = controller;
 
         this.moveAround();
