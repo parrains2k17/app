@@ -1,4 +1,6 @@
 
+import { without, find } from 'underscore';
+
 import getCandidates from './services/candidates';
 
 import Stage from './components/Stage';
@@ -17,9 +19,11 @@ class AppController {
 
         this.buildCandidates();
         this.candidatePanel = new CandidatePanel(
-            '.js-candidate-panel',
-            () => this.candidateClose()
+           '.js-candidate-panel',
+            () => this.candidateClose(0)
         );
+
+        this.selectedCandidates = [];
     }
 
     buildCandidates() {
@@ -62,6 +66,8 @@ class AppController {
     }
 
     candidateOpen(selected) {
+        this.selectedCandidates.push(selected);
+
         this.candidates.forEach((candidate) => {
             if (candidate !== selected) {
                 candidate.hide(-width / 2);
@@ -74,15 +80,47 @@ class AppController {
         });
 
         this.stage.center();
+
         this.candidatePanel.updateInfo(selected.infos);
+
         this.candidatePanel.open();
     }
 
-    candidateClose() {
+    /**
+     * @param  {Number} index       0 or 1
+     */
+    candidateClose(index) {
+        this.selectedCandidates = without(
+            this.selectedCandidates,
+            find(this.selectedCandidates, (_, i) => i === index)
+        );
+
         this.candidates.forEach((candidate) => candidate.reset());
 
-        this.stage.active();
         this.candidatePanel.close();
+        this.stage.active();
+    }
+
+    selectDataviz(selector) {
+        // retrieve data for each candidates (one or two)
+        const data = this.selectedCandidates.map(
+            (candidate) => candidate.buildDatavizData(selector)
+        );
+
+        // compute max if needed
+        const max = data.reduce((reduced, current) => (
+            current.max ? Math.max(current.max, reduced) : reduced
+        ), 0);
+
+        // show dataviz
+        this.selectedCandidates.forEach(
+            (candidate, i) => candidate.showDataviz(
+                selector,
+                this.selectedCandidates.length,
+                data[i].data,
+                max
+            )
+        );
     }
 }
 

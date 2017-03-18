@@ -131,6 +131,14 @@ class CandidateGroup extends Container {
         this.candidate.resetPosition({ MOVE_TO_CENTER_DURATION });
     }
 
+    buildDatavizData(selector) {
+        return this.supporters.buildDatavizData(selector);
+    }
+
+    showDataviz(selector, totalDataviz, data, max) {
+        this.supporters.showDataviz(selector, totalDataviz, data, max);
+    }
+
     moveAround() { // TODO better waiting state
         const { x, y } = this.position;
 

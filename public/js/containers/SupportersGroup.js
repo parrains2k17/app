@@ -1,11 +1,28 @@
 
 import { Container } from 'pixi.js';
+import { groupBy, zip, flatten } from 'underscore';
+
+import { getWidth, getHeight } from '../utils/window';
+import { pointsPositionInRect } from '../utils/points';
 
 import Supporter from '../components/Supporter';
-import randomColor from '../utils/randomColor';
+// import randomColor from '../utils/randomColor';
 import randomNumber from '../utils/randomNumber';
 
-const { PI, random, sqrt } = Math;
+import { listColor, RED, BLUE } from '../style/color';
+
+import {
+    SELECTOR_GENDER,
+    SELECTOR_CSP,
+} from '../dataviz';
+
+import {
+    barChart,
+    horizontalBarChart,
+} from '../dataviz/barchart';
+
+
+const { PI, random, sqrt, floor, max } = Math;
 
 const
     CENTER_DURATION   = 0.3,
@@ -19,17 +36,102 @@ const randomAlpha = () => {
     return res;
 };
 
+const showBarChart = (data, width, height, maxValue) => {
+    const bars = barChart({
+        data,
+        width,
+        height,
+        max: maxValue,
+    });
+
+    bars.forEach((bar) => {
+        const positions = pointsPositionInRect(
+            bar.value,
+            bar.width,
+            bar.height
+        );
+
+        zip(bar.points, positions)
+            .forEach(([point, position]) => {
+                point.position.x = (
+                    (-width / 2)
+                    + position.x
+                    + bar.x
+                );
+                point.position.y = (
+                    (height / 2)
+                    + (-position.y + bar.y)
+                );
+                point.alpha = 1;
+                point.changeColor(bar.color);
+            });
+    });
+
+    // TODO legend
+};
+
+const showHorizontalBarChart = (data, width, height, maxValue) => { // eslint-disable-line
+    const bars = horizontalBarChart({
+        data,
+        width,
+        height,
+        max: maxValue,
+    });
+
+    bars.forEach((bar) => {
+        const positions = pointsPositionInRect(
+            bar.value,
+            bar.width,
+            bar.height
+        );
+
+        zip(bar.points, positions)
+            .forEach(([point, position]) => {
+                point.position.x = (
+                    (-width / 2)
+                    + position.x
+                    + bar.x
+                );
+                point.position.y = (
+                    (height / 2)
+                    + (-position.y + bar.y)
+                );
+                point.alpha = 1;
+            });
+    });
+
+    // TODO legend
+};
+
+const showDotMatrix = (points, width, height) => {
+    const
+        w = 10,
+        h = 10;
+
+    points.forEach((point, i) => {
+        const
+            r = floor(width / w),
+            x = (i % r) * w,
+            y = floor(i / r) * h;
+
+        point.position.x = (-width / 2) + x;
+        point.position.y = -(height / 2) + y;
+        point.alpha = 1;
+    });
+
+    // TODO legend
+};
+
 class Supporters extends Container {
     constructor(supporters) {
         super();
-        this.supporters = supporters;
         this.addSupporters(supporters);
     }
 
     addSupporters(supporters) {
-        supporters
-            .map(() => new Supporter({
-                color:    randomColor(),
+        this.supporters = supporters
+            .map((supporter) => new Supporter({
+                color:    listColor(supporter.liste),
                 rotation: 2 * random() * PI,
                 pivot:    {
                     // Change 20 if the planet is bigger
@@ -41,8 +143,10 @@ class Supporters extends Container {
                     y: -8,
                 },
                 alpha: randomAlpha(0, 1, 1),
-            }))
-            .forEach((c) => this.addChild(c));
+                data:  supporter,
+            }));
+
+        this.supporters.forEach((c) => this.addChild(c));
     }
 
     rotate() {
@@ -65,6 +169,70 @@ class Supporters extends Container {
             duration: CENTER_DURATION,
         }));
     }
+
+    buildDatavizData(selector) {
+        let groups;
+
+        switch (selector) {
+        case SELECTOR_GENDER:
+            groups = groupBy(
+                this.supporters,
+                (supporter) => supporter.data.sexe
+            );
+
+            return {
+                data: [
+                    {
+                        points: groups[0],
+                        value:  groups[0].length,
+                        label:  'Hommes',
+                        color:  BLUE,
+                    },
+                    {
+                        points: groups[1],
+                        value:  groups[1].length,
+                        label:  'Femmes',
+                        color:  RED,
+                    },
+                ],
+                max: max(groups[0].length, groups[1].length),
+            };
+
+
+        case SELECTOR_CSP:
+            groups = groupBy(
+                this.supporters,
+                (supporter) => supporter.data.csp
+            );
+
+            // const labels = Object.keys(groups),
+            return {
+                data: flatten(Object.values(groups)),
+            };
+
+        default:
+            return { data: [] };
+        }
+    }
+
+    showDataviz(selector, totalDataviz, data, maxValue) { // eslint-disable-line
+        const
+            width = getWidth() / totalDataviz / 3,
+            height = getHeight() / 3;
+
+        switch (selector) {
+        case SELECTOR_GENDER:
+            showBarChart(data, width, height, maxValue);
+            break;
+        case SELECTOR_CSP:
+            showDotMatrix(data, width, height);
+            break;
+
+        default:
+            break;
+        }
+    }
 }
 
 export default Supporters;
+
