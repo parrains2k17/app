@@ -9,10 +9,12 @@ class Modal {
             this.modal_container = document
                 .querySelector('.js-modal_container_intro');
             this.closeButton = this.modal_container
-                .querySelector('.js-close-modal');
+                .querySelectorAll('.js-close-modal');
 
-            this.closeButton
+            this.closeButton[0]
                 .addEventListener('click', this.close.bind(this));
+            // this.closeButton[1]
+            //     .addEventListener('click', this.close.bind(this));
             this.modal_background
                 .addEventListener('click', this.close.bind(this));
 
