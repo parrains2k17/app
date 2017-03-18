@@ -8,6 +8,7 @@ class CandidatePanel {
         this.age = document.querySelector('.js-candidate-age');
         this.total = document.querySelector('.js-candidate-total');
         this.totalMaires = document.querySelector('.js-candidate-totalMaires');
+        this.image = document.querySelector('.js-candidate-image');
 
         this.closeButton = this.panel.querySelector('.js-close-candidate');
 
@@ -20,12 +21,14 @@ class CandidatePanel {
         totalMaires,
         parti,
         age,
+        image,
     }) {
         this.name.innerText = name;
         this.total.innerText = total;
         this.totalMaires.innerText = totalMaires;
         this.parti.innerText = parti;
         this.age.innerText = age;
+        this.image.src = image;
     }
 
     open() {
