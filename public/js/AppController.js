@@ -34,6 +34,8 @@ class AppController {
 
         this.planetsChoiceBar = new CandidatesBar(
             '.js-actions-choix',
+            '.js-add-candidate-open',
+            '.js-add-candidate-close',
             (toto) => console.log(toto)
         );
     }
@@ -97,7 +99,7 @@ class AppController {
 
         this.candidatePanel.open();
         this.criteresBarMaires.open();
-        this.planetsChoiceBar.open();
+        this.planetsChoiceBar.start();
     }
 
     /**
@@ -113,7 +115,7 @@ class AppController {
 
         this.candidatePanel.close();
         this.criteresBarMaires.close();
-        this.planetsChoiceBar.close();
+        this.planetsChoiceBar.stop();
         this.stage.active();
     }
 
