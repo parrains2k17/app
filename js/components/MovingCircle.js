@@ -51,7 +51,7 @@ class MovingCircle extends Circle {
         );
     }
 
-    resetPivot({ duration }) {
+    resetPosition({ duration }) {
         this.killAnimation();
 
         TweenMax.to(
@@ -63,10 +63,6 @@ class MovingCircle extends Circle {
                 ease: Power0.easeNone,
             }
         );
-    }
-
-    resetPosition({ duration }) {
-        this.killAnimation();
 
         TweenMax.to(
             this.position,
