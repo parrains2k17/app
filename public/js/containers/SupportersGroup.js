@@ -215,7 +215,7 @@ class Supporters extends Container {
         }
     }
 
-    showDataviz(selector, totalDataviz, data, maxValue) {
+    showDataviz(selector, totalDataviz, data, maxValue) { // eslint-disable-line
         const
             width = getWidth() / totalDataviz / 3,
             height = getHeight() / 3;
