@@ -30,14 +30,18 @@ class AppController {
                         const candidate = results[key];
                         return new CandidateGroup(
                             {
-                                screen: {
-                                    width,
-                                    height,
-                                },
                                 position: {
                                     x: candidate.x,
                                     y: candidate.y,
                                 },
+                            },
+                            {
+                                name:        key,
+                                parti:       candidate.parti,
+                                color:       candidate.color,
+                                age:         candidate.age,
+                                total:       1237, // TODO
+                                totalMaires: 467,
                             },
                             candidate.parrainages,
                             this
@@ -68,6 +72,14 @@ class AppController {
         });
 
         this.stage.center();
+        this.candidatePanel.updateInfo({
+            name:        selected.infos.name,
+            total:       selected.infos.total,
+            totalMaires: selected.infos.totalMaires,
+            parti:       selected.infos.parti,
+            color:       selected.infos.color,
+            age:         selected.infos.age,
+        });
         this.candidatePanel.open();
     }
 
