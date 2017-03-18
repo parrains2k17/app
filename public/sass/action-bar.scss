@@ -18,11 +18,11 @@ $sidebar-margin: 6em;
 }
 
 .action-bar-arrow {
-    width: 100%;
-    padding: 0;
     color: $white2;
-    opacity: .6;
     cursor: pointer;
+    opacity: .6;
+    padding: 0;
+    width: 100%;
 }
 
     .action-bar-arrow .material-icons {
@@ -30,7 +30,7 @@ $sidebar-margin: 6em;
         line-height: 1.5em;
     }
 
-.action-bar-arrow:hover{
+.action-bar-arrow:hover {
     opacity: 1;
 }
 
