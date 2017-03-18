@@ -36,7 +36,7 @@ class AppController {
                                 },
                             },
                             {
-                                name:        key,
+                                name:        candidate.name,
                                 parti:       candidate.parti,
                                 color:       candidate.color,
                                 age:         candidate.age,
