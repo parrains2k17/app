@@ -39,8 +39,10 @@ class AppController {
                                 age:         candidate.age,
                                 total:       1237, // TODO
                                 totalMaires: 467,
+                                image:       candidate.texture,
                             },
                             candidate.parrainages,
+                            candidate.texture,
                             this
                             // TODO pass candidate data toto
                         );
@@ -72,14 +74,7 @@ class AppController {
 
         this.stage.center();
 
-        this.candidatePanel.updateInfo({
-            name:        selected.infos.name,
-            total:       selected.infos.total,
-            totalMaires: selected.infos.totalMaires,
-            parti:       selected.infos.parti,
-            color:       selected.infos.color,
-            age:         selected.infos.age,
-        });
+        this.candidatePanel.updateInfo(selected.infos);
 
         this.candidatePanel.open();
     }

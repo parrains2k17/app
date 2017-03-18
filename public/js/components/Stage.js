@@ -3,7 +3,7 @@ import { Application, Container } from 'pixi.js';
 import { select, zoom, event } from 'd3';
 import { TweenMax, Power0 } from 'gsap';
 
-const RESET_DURATION = 0.3;
+const RESET_DURATION = 3;
 
 const SCALE_MIN_VALUE = 0.5;
 const SCALE_MAX_VALUE = 3;
@@ -104,8 +104,6 @@ class Stage extends Application {
     }
 
     active() {
-        this.zoomable = true;
-
         TweenMax.to(
             this.container.position,
             RESET_DURATION,
@@ -120,9 +118,12 @@ class Stage extends Application {
             this.container.scale,
             RESET_DURATION,
             {
-                x:    this.oldContainerScale._x,
-                y:    this.oldContainerScale._y,
-                ease: Power0.easeNone,
+                x:          this.oldContainerScale._x,
+                y:          this.oldContainerScale._y,
+                ease:       Power0.easeNone,
+                onComplete: () => {
+                    this.zoomable = true;
+                },
             }
         );
     }
