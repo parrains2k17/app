@@ -2,6 +2,7 @@
 
 @import 'colors';
 @import 'candidate';
+@import 'criteres';
 
 * {
     box-sizing: border-box;
@@ -51,10 +52,3 @@ body {
     border: 0;
 }
 
-.gradient-background {
-    // background: #010d33;
-    // background: -moz-radial-gradient(center, ellipse cover, #010d33 10%, #30087f 72%);
-    // background: -webkit-radial-gradient(center, ellipse cover, #010d33 10%,#30087f 72%);
-    // background: radial-gradient(ellipse at center, #010d33 23%,#30087f 72%);
-    // filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#010d33', endColorstr='#30087f',GradientType=1);
-}
