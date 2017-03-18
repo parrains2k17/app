@@ -18,6 +18,7 @@ class CandidateGroup extends Container {
         {
             position = { x: 0, y: 0 },
         },
+        infos,
         supporters,
         controller
     ) {
@@ -25,6 +26,7 @@ class CandidateGroup extends Container {
 
         this.position = position;
         this.initialPosition = { ...position }; // copy
+        this.infos = infos;
 
         this.candidate = new Candidate(); // TODO pass data
 
@@ -37,7 +39,6 @@ class CandidateGroup extends Container {
         this.addChild(this.candidate);
         this.addChild(this.supporters);
 
-        this.screen = screen;
         this.controller = controller;
 
         this.moveAround();
