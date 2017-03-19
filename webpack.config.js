@@ -34,7 +34,11 @@ module.exports = {
                 exclude: /node_modules\/(?!materialize-css)/,
                 loaders: ExtractTextPlugin.extract({
                     fallback: 'style-loader', // The backup style loader
-                    use:      'css-loader?sourceMap!sass-loader?sourceMap',
+                    use:      [
+                        'css-loader?sourceMap',
+                        'postcss-loader',
+                        'sass-loader?sourceMap',
+                    ],
                 }),
             },
             {
