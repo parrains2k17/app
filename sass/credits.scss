@@ -1,12 +1,5 @@
+
 .titles {
-    -moz-transform: perspective(300px) rotateX(25deg);
-    -moz-transform-origin: 50% 100%;
-    -ms-transform: perspective(300px) rotateX(25deg);
-    -ms-transform-origin: 50% 100%;
-    -o-transform: perspective(300px) rotateX(25deg);
-    -o-transform-origin: 50% 100%;
-    -webkit-transform: perspective(300px) rotateX(25deg);
-    -webkit-transform-origin: 50% 100%;
     bottom: 0;
     display: none;
     font-size: 350%;
@@ -17,8 +10,8 @@
     overflow: hidden;
     position: absolute;
     text-align: center;
-    transform-origin: 50% 100%;
     transform: perspective(300px) rotateX(25deg);
+    transform-origin: 50% 100%;
     width: 18em;
     z-index: 100;
 }
@@ -28,12 +21,7 @@
 }
 
 .titles:after {
-    background-image: linear-gradient(top, rgba(0, 0, 0, 1) 0%, transparent 100%);
-    background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 1) 0%, transparent 100%);
-    background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 1) 0%, transparent 100%);
-    background-image: -ms-linear-gradient(top, rgba(0, 0, 0, 1) 0%, transparent 100%);
-    background-image: -o-linear-gradient(top, rgba(0, 0, 0, 1) 0%, transparent 100%);
-    background-image: linear-gradient(top, rgba(0, 0, 0, 1) 0%, transparent 100%);
+    background-image: linear-gradient(to bottom, $black 0%, transparent 100%);
     bottom: 60%;
     content: ' ';
     display: none;
@@ -50,7 +38,7 @@
 
 .titlecontent {
     animation: scroll 45s linear 0s infinite;
-    color: yellow;
+    color: $yellow;
     position: absolute;
     top: 0%;
 }
@@ -65,8 +53,8 @@
 }
 
 
-.credits_background {
-    background-color: black;
+.credits-background {
+    background-color: $black;
     display: none;
     height: 100%;
     left: 0;
@@ -78,17 +66,17 @@
     z-index: 100;
 }
 
-.credits_background.mode-open {
+.credits-background.mode-open {
     display: block;
 }
 
-.photoContainer {
+.photo-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
 
-.photoElement {
+.photo-element {
     flex: 1;
     flex-basis: 50%;
     flex-shrink: 1;
@@ -96,8 +84,8 @@
 }
 
 .div-credits-link {
-    position: absolute;
     display: none;
+    position: absolute;
 }
 
 .div-credits-link.mode-open {
