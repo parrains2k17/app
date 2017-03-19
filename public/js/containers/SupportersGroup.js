@@ -26,6 +26,7 @@ import {
     SELECTOR_AGE,
     SELECTOR_POP,
     SELECTOR_URBANITE,
+    SELECTOR_CHOMAGE,
 } from '../dataviz';
 
 import {
@@ -76,6 +77,14 @@ const URBANITE_NAME_COLOR = {
     'Commune rurale':  COLOR6,
 };
 
+const CHOMAGE_NAME_COLOR = {
+    Inconnue:          GREY,
+    'Moins de 5%':     COLOR1,
+    'Entre 5 et 10%':  COLOR2,
+    'Entre 10 et 15%': COLOR5,
+    'Plus de 15%':     COLOR6,
+};
+
 const buildPopData = (groups) => Object.keys(POPULATION_NAME_COLOR)
     .map((cat) => ({
         points: groups[cat],
@@ -90,6 +99,14 @@ const buildUrbaniteData = (groups) => Object.keys(URBANITE_NAME_COLOR)
         value:  groups[cat] ? groups[cat].length : 0,
         label:  cat,
         color:  URBANITE_NAME_COLOR[cat],
+    }));
+
+const buildChomageData = (groups) => Object.keys(CHOMAGE_NAME_COLOR)
+    .map((cat) => ({
+        points: groups[cat],
+        value:  groups[cat] ? groups[cat].length : 0,
+        label:  cat,
+        color:  CHOMAGE_NAME_COLOR[cat],
     }));
 
 // const randomAlpha = () => {
@@ -369,10 +386,26 @@ class Supporters extends Container {
                 (supporter) => supporter.data.urbainite
             );
 
-            console.log(groups);
-
             return {
                 data: buildUrbaniteData(groups),
+                max:  Object.keys(groups).reduce(
+                    (maxValue, current) => (
+                        groups[current].length > maxValue
+                        ? groups[current].length
+                        : maxValue
+                    ),
+                    0
+                ),
+            };
+
+        case SELECTOR_CHOMAGE:
+            groups = groupBy(
+                this.supporters,
+                (supporter) => supporter.data.chomage
+            );
+
+            return {
+                data: buildChomageData(groups),
                 max:  Object.keys(groups).reduce(
                     (maxValue, current) => (
                         groups[current].length > maxValue
@@ -414,6 +447,10 @@ class Supporters extends Container {
             break;
 
         case SELECTOR_URBANITE:
+            showBarChart(data, width, height, maxValue);
+            break;
+
+        case SELECTOR_CHOMAGE:
             showBarChart(data, width, height, maxValue);
             break;
 
