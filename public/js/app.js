@@ -11,7 +11,7 @@ require('../sass/styles.scss');
 console.log(`🤖 Parrains2017 v${VERSION}`);// eslint-disable-line no-undef
 
 
-if (utils.isWebGLSupported()) {
+if (!utils.isWebGLSupported()) {
     const app = new AppController();
     new Modal('intro');
     new Credits();
