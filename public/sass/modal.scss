@@ -20,7 +20,7 @@ $modal-background: rgba(0, 0, 0, .3);
 
 .modal-container {
 	background-color: $white;
-	border-radius: 10px;
+	border-radius: 4px;
 	display: none;
 	height: 90%;
 	left: 25%;
@@ -60,7 +60,7 @@ $modal-background: rgba(0, 0, 0, .3);
 
 .modal-container.mode-webgl {
 	background-color: $white;
-	border-radius: 10px;
+	border-radius: 4px;
 	height: 10%;
 	left: 27.5%;
     opacity: 1;
@@ -143,7 +143,7 @@ $modal-background: rgba(0, 0, 0, .3);
 .go-button {
     background-color: $green;
     border: 0;
-    border-radius: 15px;
+    border-radius: 4px;
     color: $white;
     display: none;
     font-size: 24px;
