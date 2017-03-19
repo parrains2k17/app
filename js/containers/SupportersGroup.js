@@ -18,6 +18,7 @@ import {
     SELECTOR_POP,
     SELECTOR_URBANITE,
     SELECTOR_CHOMAGE,
+    SELECTOR_LISTE,
 } from '../dataviz';
 
 import {
@@ -32,6 +33,7 @@ import {
     buildPopData,
     buildUrbaniteData,
     buildChomageData,
+    buildListData,
 } from '../dataviz/buildData';
 
 const { PI, random, sqrt, floor } = Math;
@@ -212,6 +214,9 @@ class Supporters extends Container {
         case SELECTOR_CHOMAGE:
             return buildChomageData(this.supporters);
 
+        case SELECTOR_LISTE:
+            return buildListData(this.supporters);
+
         default:
             return { data: [] };
         }
@@ -248,6 +253,10 @@ class Supporters extends Container {
 
         case SELECTOR_CHOMAGE:
             showBarChart(data, width, height, maxValue);
+            break;
+
+        case SELECTOR_LISTE:
+            showDotMatrix(data.points, data.colors, width, height);
             break;
 
         default:
