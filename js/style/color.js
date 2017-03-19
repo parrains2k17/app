@@ -1,9 +1,15 @@
 
 export const BLACK  = 0x000000;
 export const WHITE  = 0xFFFFFF;
+export const GREY   = 0x666666;
 
-export const BLUE = 0x9DB4F8;
-export const RED  = 0xFFD1D3;
+export const COLOR1 = 0xf2b7a5;
+export const COLOR2 = 0xc686ef;
+export const COLOR3 = 0xa5ffb7;
+export const COLOR4 = 0xffe8a9;
+export const COLOR5 = 0x9bbdff;
+export const COLOR6 = 0xf7bfe3;
+export const COLOR7 = 0x4ce5d6;
 
 export const LISTE_EXG      = 0x430201;
 export const LISTE_PC       = 0xE90F00;

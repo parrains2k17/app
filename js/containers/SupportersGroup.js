@@ -1,6 +1,6 @@
 
 import { Container } from 'pixi.js';
-import { groupBy, zip, flatten } from 'underscore';
+import { zip } from 'underscore';
 
 import { getWidth, getHeight } from '../utils/window';
 import { pointsPositionInRect } from '../utils/points';
@@ -9,11 +9,15 @@ import Supporter from '../components/Supporter';
 // import randomColor from '../utils/randomColor';
 import randomNumber from '../utils/randomNumber';
 
-import { listColor, RED, BLUE } from '../style/color';
+import { listColor } from '../style/color';
 
 import {
     SELECTOR_GENDER,
     SELECTOR_CSP,
+    SELECTOR_AGE,
+    SELECTOR_POP,
+    SELECTOR_URBANITE,
+    SELECTOR_CHOMAGE,
 } from '../dataviz';
 
 import {
@@ -21,8 +25,16 @@ import {
     horizontalBarChart,
 } from '../dataviz/barchart';
 
+import {
+    buildGenderData,
+    buildCSPData,
+    buildAgeData,
+    buildPopData,
+    buildUrbaniteData,
+    buildChomageData,
+} from '../dataviz/buildData';
 
-const { PI, random, sqrt, floor, max } = Math;
+const { PI, random, sqrt, floor } = Math;
 
 const
     CENTER_DURATION   = 0.3,
@@ -70,7 +82,7 @@ const showBarChart = (data, width, height, maxValue) => {
     // TODO legend
 };
 
-const showHorizontalBarChart = (data, width, height, maxValue) => { // eslint-disable-line
+const showHorizontalBarChart = (data, width, height, maxValue) => {
     const bars = horizontalBarChart({
         data,
         width,
@@ -93,17 +105,18 @@ const showHorizontalBarChart = (data, width, height, maxValue) => { // eslint-di
                     + bar.x
                 );
                 point.position.y = (
-                    (height / 2)
+                    -(height / 2)
                     + (-position.y + bar.y)
                 );
                 point.alpha = 1;
+                point.changeColor(bar.color);
             });
     });
 
     // TODO legend
 };
 
-const showDotMatrix = (points, width, height) => {
+const showDotMatrix = (points, colors, width, height) => {
     const
         w = 10,
         h = 10;
@@ -117,6 +130,7 @@ const showDotMatrix = (points, width, height) => {
         point.position.x = (-width / 2) + x;
         point.position.y = -(height / 2) + y;
         point.alpha = 1;
+        point.changeColor(colors[i]);
     });
 
     // TODO legend
@@ -158,6 +172,10 @@ class Supporters extends Container {
         }));
     }
 
+    stopRotation() {
+        this.children.forEach((c) => c.center());
+    }
+
     center() {
         this.children.forEach((c) => c.center({
             duration: CENTER_DURATION,
@@ -165,50 +183,34 @@ class Supporters extends Container {
     }
 
     resetPosition() {
-        this.children.forEach((c) => c.resetPivot({
-            duration: CENTER_DURATION,
-        }));
+        this.scale.set(1, 1);
+        this.children.forEach((c) => {
+            c.resetPosition({
+                duration: CENTER_DURATION,
+            });
+            c.resetColor();
+        });
     }
 
     buildDatavizData(selector) {
-        let groups;
-
         switch (selector) {
         case SELECTOR_GENDER:
-            groups = groupBy(
-                this.supporters,
-                (supporter) => supporter.data.sexe
-            );
-
-            return {
-                data: [
-                    {
-                        points: groups[0],
-                        value:  groups[0].length,
-                        label:  'Hommes',
-                        color:  BLUE,
-                    },
-                    {
-                        points: groups[1],
-                        value:  groups[1].length,
-                        label:  'Femmes',
-                        color:  RED,
-                    },
-                ],
-                max: max(groups[0].length, groups[1].length),
-            };
-
+            return buildGenderData(this.supporters);
 
         case SELECTOR_CSP:
-            groups = groupBy(
-                this.supporters,
-                (supporter) => supporter.data.csp
-            );
+            return buildCSPData(this.supporters);
 
-            // const labels = Object.keys(groups),
-            return {
-                data: flatten(Object.values(groups)),
-            };
+        case SELECTOR_AGE:
+            return buildAgeData(this.supporters);
+
+        case SELECTOR_POP:
+            return buildPopData(this.supporters);
+
+        case SELECTOR_URBANITE:
+            return buildUrbaniteData(this.supporters);
+
+        case SELECTOR_CHOMAGE:
+            return buildChomageData(this.supporters);
 
         default:
             return { data: [] };
@@ -220,12 +222,32 @@ class Supporters extends Container {
             width = getWidth() / totalDataviz / 3,
             height = getHeight() / 3;
 
+        this.scale.set(0.33, 0.33);
+        this.center();
+
         switch (selector) {
         case SELECTOR_GENDER:
             showBarChart(data, width, height, maxValue);
             break;
+
+        case SELECTOR_AGE:
+            showHorizontalBarChart(data, width, height, maxValue);
+            break;
+
         case SELECTOR_CSP:
-            showDotMatrix(data, width, height);
+            showDotMatrix(data.points, data.colors, width, height);
+            break;
+
+        case SELECTOR_POP:
+            showHorizontalBarChart(data, width, height, maxValue);
+            break;
+
+        case SELECTOR_URBANITE:
+            showBarChart(data, width, height, maxValue);
+            break;
+
+        case SELECTOR_CHOMAGE:
+            showBarChart(data, width, height, maxValue);
             break;
 
         default:
