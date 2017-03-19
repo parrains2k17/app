@@ -118,19 +118,22 @@ const showHorizontalBarChart = (data, width, height, maxValue) => {
     // TODO legend
 };
 
-const showDotMatrix = (points, colors, width, height) => {
+const showDotMatrix = (points, colors, width) => {
     const
         w = 10,
         h = 10;
 
+    const
+        r = floor(width / w), // number of points per line
+        maxHeight = (points.length / r) * h;
+
     points.forEach((point, i) => {
         const
-            r = floor(width / w),
             x = (i % r) * w,
             y = floor(i / r) * h;
 
         point.position.x = (-width / 2) + x;
-        point.position.y = -(height / 2) + y;
+        point.position.y = -(maxHeight / 2) + y;
         point.alpha = 1;
         point.changeColor(colors[i]);
     });
