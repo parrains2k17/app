@@ -11,6 +11,7 @@ import randomNumber from '../utils/randomNumber';
 
 import {
     listColor,
+    GREY,
     COLOR1,
     COLOR2,
     COLOR3,
@@ -44,6 +45,18 @@ const AGES_LABELS = {
     74:   '60 à 74 ans',
     999:  '75 ans et plus',
     null: 'Âge inconnu',
+};
+
+const CSP_NAME_COLOR = {
+    'Professions agricoles':                     COLOR1,
+    'Professions industrielles et commerciales': COLOR2,
+    'Salariés du privé':                         COLOR3,
+    'Professions libérales':                     COLOR4,
+    'Professions de l\'enseignement':            COLOR5,
+    'Personnels des entreprises publiques':      COLOR6,
+    Divers:                                      COLOR1,
+    Retraités:                                   COLOR2,
+    Inconnue:                                    GREY,
 };
 
 // const randomAlpha = () => {
@@ -127,7 +140,7 @@ const showHorizontalBarChart = (data, width, height, maxValue) => {
     // TODO legend
 };
 
-const showDotMatrix = (points, width, height) => {
+const showDotMatrix = (points, colors, width, height) => {
     const
         w = 10,
         h = 10;
@@ -141,6 +154,7 @@ const showDotMatrix = (points, width, height) => {
         point.position.x = (-width / 2) + x;
         point.position.y = -(height / 2) + y;
         point.alpha = 1;
+        point.changeColor(colors[i]);
     });
 
     // TODO legend
@@ -233,14 +247,19 @@ class Supporters extends Container {
             };
 
         case SELECTOR_CSP:
-            groups = groupBy(
+            groups = flatten(Object.values(groupBy(
                 this.supporters,
-                (supporter) => supporter.data.csp
-            );
+                (supporter) => supporter.data.csp_name
+            )));
 
             // const labels = Object.keys(groups),
             return {
-                data: flatten(Object.values(groups)),
+                data: {
+                    points: groups,
+                    colors: groups.map((s) => (
+                        CSP_NAME_COLOR[s.data.csp_name]
+                    )),
+                },
             };
 
         case SELECTOR_AGE:
@@ -321,7 +340,7 @@ class Supporters extends Container {
             break;
 
         case SELECTOR_CSP:
-            showDotMatrix(data, width, height);
+            showDotMatrix(data.points, data.colors, width, height);
             break;
 
         default:
