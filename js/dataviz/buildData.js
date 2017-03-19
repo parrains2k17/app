@@ -3,12 +3,32 @@ import { groupBy, flatten } from 'underscore';
 
 import {
     GREY,
+    BLACK,
     COLOR1,
     COLOR2,
     COLOR3,
     COLOR4,
     COLOR5,
     COLOR6,
+    LISTE_EXG,
+    LISTE_PC,
+    LISTE_FG,
+    LISTE_PG,
+    LISTE_PS,
+    LISTE_UG,
+    LISTE_DVG,
+    LISTE_EELV,
+    LISTE_MODEM,
+    LISTE_UC,
+    LISTE_UDI,
+    LISTE_DVD,
+    LISTE_UD,
+    LISTE_UMP,
+    LISTE_FN,
+    LISTE_EXD,
+    LISTE_DIV,
+    LISTE_SE,
+    listColor,
 } from '../style/color';
 
 export const GENDER_LABELS = {
@@ -59,6 +79,29 @@ export const CHOMAGE_LABELS = {
     'Entre 5 et 10%':  COLOR2,
     'Entre 10 et 15%': COLOR5,
     'Plus de 15%':     COLOR6,
+};
+
+export const LISTE_LABELS = {
+    EXG:            LISTE_EXG,
+    PC:             LISTE_PC,
+    FG:             LISTE_FG,
+    PG:             LISTE_PG,
+    PS:             LISTE_PS,
+    UG:             LISTE_UG,
+    DVG:            LISTE_DVG,
+    EELV:           LISTE_EELV,
+    MODEM:          LISTE_MODEM,
+    UC:             LISTE_UC,
+    UDI:            LISTE_UDI,
+    DVD:            LISTE_DVD,
+    UD:             LISTE_UD,
+    UMP:            LISTE_UMP,
+    FN:             LISTE_FN,
+    EXD:            LISTE_EXD,
+    DIV:            LISTE_DIV,
+    SE:             LISTE_SE,
+    Inconnue:       GREY,
+    'Pas de liste': BLACK,
 };
 
 const buildRawData = (labels, groups) => Object.keys(labels)
@@ -155,6 +198,26 @@ export const buildChomageData = (supporters) => {
     return {
         data: buildRawData(CHOMAGE_LABELS, groups),
         max:  maxValueInGroups(groups),
+    };
+};
+
+export const buildListData = (supporters) => {
+    // group then flatten to sort points
+    const groups = groupBy(
+        supporters,
+        (supporter) => supporter.data.liste
+    );
+
+    console.log(groups);
+
+    const points = flatten(Object.values(groups));
+
+    return {
+        data: {
+            points,
+            labels: CSP_NAME_COLOR,
+            colors: points.map((s) => listColor(s.data.liste)),
+        },
     };
 };
 

@@ -18,6 +18,7 @@ import {
     SELECTOR_POP,
     SELECTOR_URBANITE,
     SELECTOR_CHOMAGE,
+    SELECTOR_LISTE,
 } from '../dataviz';
 
 import {
@@ -32,6 +33,7 @@ import {
     buildPopData,
     buildUrbaniteData,
     buildChomageData,
+    buildListData,
 } from '../dataviz/buildData';
 
 const { PI, random, sqrt, floor } = Math;
@@ -116,19 +118,22 @@ const showHorizontalBarChart = (data, width, height, maxValue) => {
     // TODO legend
 };
 
-const showDotMatrix = (points, colors, width, height) => {
+const showDotMatrix = (points, colors, width) => {
     const
         w = 10,
         h = 10;
 
+    const
+        r = floor(width / w), // number of points per line
+        maxHeight = (points.length / r) * h;
+
     points.forEach((point, i) => {
         const
-            r = floor(width / w),
             x = (i % r) * w,
             y = floor(i / r) * h;
 
         point.position.x = (-width / 2) + x;
-        point.position.y = -(height / 2) + y;
+        point.position.y = -(maxHeight / 2) + y;
         point.alpha = 1;
         point.changeColor(colors[i]);
     });
@@ -212,6 +217,9 @@ class Supporters extends Container {
         case SELECTOR_CHOMAGE:
             return buildChomageData(this.supporters);
 
+        case SELECTOR_LISTE:
+            return buildListData(this.supporters);
+
         default:
             return { data: [] };
         }
@@ -248,6 +256,10 @@ class Supporters extends Container {
 
         case SELECTOR_CHOMAGE:
             showBarChart(data, width, height, maxValue);
+            break;
+
+        case SELECTOR_LISTE:
+            showDotMatrix(data.points, data.colors, width, height);
             break;
 
         default:
