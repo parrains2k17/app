@@ -5,19 +5,18 @@ import AppController from './AppController';
 import Modal from './components/Modal';
 import Credits from './components/Credits';
 
-
 require('../sass/styles.scss');
 
 console.log(`🤖 Parrains2017 v${VERSION}`);// eslint-disable-line no-undef
 
-
-if (!utils.isWebGLSupported()) {
+if (utils.isWebGLSupported()) {
     const app = new AppController();
-    new Modal('intro');
-    new Credits();
+    new Modal('intro'); // show intro message
+    new Credits();      // listen for credit
 
-    app.start();
+    app.start(); // start 🚀
 } else {
+    // show no webGL error message
     new Modal('webGL');
 }
 
