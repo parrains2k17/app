@@ -127,15 +127,6 @@ class CandidateGroup extends Container {
         this.candidate.resetPosition({ MOVE_TO_CENTER_DURATION });
     }
 
-    buildDatavizData(selector) {
-        return this.supporters.buildDatavizData(selector);
-    }
-
-    showDataviz(selector, totalDataviz, data, max) {
-        this.candidate.hide(getWidth(), getHeight() * 2);
-        this.supporters.showDataviz(selector, totalDataviz, data, max);
-    }
-
     moveAround() { // TODO better waiting state
         const { x, y } = this.position;
 
@@ -168,6 +159,15 @@ class CandidateGroup extends Container {
 
     killMovement() {
         this.movement.kill();
+    }
+
+    buildDatavizData(selector) {
+        return this.supporters.buildDatavizData(selector);
+    }
+
+    showDataviz(selector, totalDataviz, data, max) {
+        this.candidate.hide(getWidth(), getHeight() * 2);
+        this.supporters.showDataviz(selector, totalDataviz, data, max);
     }
 }
 
