@@ -24,13 +24,13 @@ import {
     SELECTOR_GENDER,
     SELECTOR_CSP,
     SELECTOR_AGE,
+    SELECTOR_POP,
 } from '../dataviz';
 
 import {
     barChart,
     horizontalBarChart,
 } from '../dataviz/barchart';
-
 
 const { PI, random, sqrt, floor, max } = Math;
 
@@ -58,6 +58,24 @@ const CSP_NAME_COLOR = {
     Retraités:                                   COLOR2,
     Inconnue:                                    GREY,
 };
+
+const POPULATION_NAME_COLOR = {
+    Inconnue:                   GREY,
+    '0 à 199 habitants':        COLOR1,
+    '200 à 399 habitants':      COLOR2,
+    '400 à 999 habitants':      COLOR3,
+    '1 000 à 2 000 habitants':  COLOR4,
+    '2 000 à 10 000 habitants': COLOR5,
+    'Plus de 10 000 habitants': COLOR6,
+};
+
+const buildPopData = (groups) => Object.keys(POPULATION_NAME_COLOR)
+    .map((cat) => ({
+        points: groups[cat],
+        value:  groups[cat] ? groups[cat].length : 0,
+        label:  cat,
+        color:  POPULATION_NAME_COLOR[cat],
+    }));
 
 // const randomAlpha = () => {
 //     const res = randomNumber(0, 1, 1);
@@ -108,11 +126,6 @@ const showHorizontalBarChart = (data, width, height, maxValue) => {
         height,
         max: maxValue,
     });
-
-    console.log(bars);
-    console.log(width);
-    console.log(height);
-    console.log(maxValue);
 
     bars.forEach((bar) => {
         const positions = pointsPositionInRect(
@@ -317,6 +330,24 @@ class Supporters extends Container {
                 ),
             };
 
+        case SELECTOR_POP:
+            groups = groupBy(
+                this.supporters,
+                (supporter) => supporter.data.population
+            );
+
+            return {
+                data: buildPopData(groups),
+                max:  Object.keys(groups).reduce(
+                    (maxValue, current) => (
+                        groups[current].length > maxValue
+                        ? groups[current].length
+                        : maxValue
+                    ),
+                    0
+                ),
+            };
+
         default:
             return { data: [] };
         }
@@ -341,6 +372,10 @@ class Supporters extends Container {
 
         case SELECTOR_CSP:
             showDotMatrix(data.points, data.colors, width, height);
+            break;
+
+        case SELECTOR_POP:
+            showBarChart(data, width, height, maxValue);
             break;
 
         default:
