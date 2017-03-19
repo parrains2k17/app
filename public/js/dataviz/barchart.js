@@ -35,7 +35,7 @@ export const horizontalBarChart = ({
 }) => {
     const
         x = scaleLinear().range([0, width]),
-        y = scaleBand().range([0, height]).padding(0.1);
+        y = scaleBand().range([0, height]).padding(0.3);
 
     x.domain([0, max]);
     y.domain(data.map((d) => d.label));
