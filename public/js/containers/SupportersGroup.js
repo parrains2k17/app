@@ -1,6 +1,6 @@
 
 import { Container } from 'pixi.js';
-import { groupBy, zip, flatten } from 'underscore';
+import { zip } from 'underscore';
 
 import { getWidth, getHeight } from '../utils/window';
 import { pointsPositionInRect } from '../utils/points';
@@ -9,16 +9,7 @@ import Supporter from '../components/Supporter';
 // import randomColor from '../utils/randomColor';
 import randomNumber from '../utils/randomNumber';
 
-import {
-    listColor,
-    GREY,
-    COLOR1,
-    COLOR2,
-    COLOR3,
-    COLOR4,
-    COLOR5,
-    COLOR6,
-} from '../style/color';
+import { listColor } from '../style/color';
 
 import {
     SELECTOR_GENDER,
@@ -34,80 +25,20 @@ import {
     horizontalBarChart,
 } from '../dataviz/barchart';
 
-const { PI, random, sqrt, floor, max } = Math;
+import {
+    buildGenderData,
+    buildCSPData,
+    buildAgeData,
+    buildPopData,
+    buildUrbaniteData,
+    buildChomageData,
+} from '../dataviz/buildData';
+
+const { PI, random, sqrt, floor } = Math;
 
 const
     CENTER_DURATION   = 0.3,
     ROTATION_DURATION = 15;
-
-const AGES_LABELS = {
-    29:   'Moins de 29 ans',
-    44:   '30 à 44 ans',
-    59:   '45 à 59 ans',
-    74:   '60 à 74 ans',
-    999:  '75 ans et plus',
-    null: 'Âge inconnu',
-};
-
-const CSP_NAME_COLOR = {
-    'Professions agricoles':                     COLOR1,
-    'Professions industrielles et commerciales': COLOR2,
-    'Salariés du privé':                         COLOR3,
-    'Professions libérales':                     COLOR4,
-    'Professions de l\'enseignement':            COLOR5,
-    'Personnels des entreprises publiques':      COLOR6,
-    Divers:                                      COLOR1,
-    Retraités:                                   COLOR2,
-    Inconnue:                                    GREY,
-};
-
-const POPULATION_NAME_COLOR = {
-    Inconnue:                   GREY,
-    '0 à 199 habitants':        COLOR1,
-    '200 à 399 habitants':      COLOR2,
-    '400 à 999 habitants':      COLOR3,
-    '1 000 à 2 000 habitants':  COLOR4,
-    '2 000 à 10 000 habitants': COLOR5,
-    'Plus de 10 000 habitants': COLOR6,
-};
-
-const URBANITE_NAME_COLOR = {
-    Inconnue:          GREY,
-    'Commune urbaine': COLOR5,
-    'Commune rurale':  COLOR6,
-};
-
-const CHOMAGE_NAME_COLOR = {
-    Inconnue:          GREY,
-    'Moins de 5%':     COLOR1,
-    'Entre 5 et 10%':  COLOR2,
-    'Entre 10 et 15%': COLOR5,
-    'Plus de 15%':     COLOR6,
-};
-
-const buildPopData = (groups) => Object.keys(POPULATION_NAME_COLOR)
-    .map((cat) => ({
-        points: groups[cat],
-        value:  groups[cat] ? groups[cat].length : 0,
-        label:  cat,
-        color:  POPULATION_NAME_COLOR[cat],
-    }));
-
-const buildUrbaniteData = (groups) => Object.keys(URBANITE_NAME_COLOR)
-    .map((cat) => ({
-        points: groups[cat],
-        value:  groups[cat] ? groups[cat].length : 0,
-        label:  cat,
-        color:  URBANITE_NAME_COLOR[cat],
-    }));
-
-const buildChomageData = (groups) => Object.keys(CHOMAGE_NAME_COLOR)
-    .map((cat) => ({
-        points: groups[cat],
-        value:  groups[cat] ? groups[cat].length : 0,
-        label:  cat,
-        color:  CHOMAGE_NAME_COLOR[cat],
-    }));
 
 // const randomAlpha = () => {
 //     const res = randomNumber(0, 1, 1);
@@ -262,159 +193,24 @@ class Supporters extends Container {
     }
 
     buildDatavizData(selector) {
-        const noData = null;
-
-        let groups;
-
         switch (selector) {
         case SELECTOR_GENDER:
-            groups = groupBy(
-                this.supporters,
-                (supporter) => supporter.data.sexe
-            );
-
-            return {
-                data: [
-                    {
-                        points: groups[0],
-                        value:  groups[0].length,
-                        label:  'Hommes',
-                        color:  COLOR1,
-                    },
-                    {
-                        points: groups[1],
-                        value:  groups[1].length,
-                        label:  'Femmes',
-                        color:  COLOR2,
-                    },
-                ],
-                max: max(groups[0].length, groups[1].length),
-            };
+            return buildGenderData(this.supporters);
 
         case SELECTOR_CSP:
-            groups = flatten(Object.values(groupBy(
-                this.supporters,
-                (supporter) => supporter.data.csp_name
-            )));
-
-            // const labels = Object.keys(groups),
-            return {
-                data: {
-                    points: groups,
-                    colors: groups.map((s) => (
-                        CSP_NAME_COLOR[s.data.csp_name]
-                    )),
-                },
-            };
+            return buildCSPData(this.supporters);
 
         case SELECTOR_AGE:
-            groups = groupBy(
-                this.supporters,
-                (supporter) => supporter.data.age_category
-            );
-
-            return {
-                data: [
-                    {
-                        points: groups[29],
-                        value:  groups[29] ? groups[29].length : 0,
-                        label:  AGES_LABELS[29],
-                        color:  COLOR1,
-                    },
-                    {
-                        points: groups[44],
-                        value:  groups[44] ? groups[44].length : 0,
-                        label:  AGES_LABELS[44],
-                        color:  COLOR2,
-                    },
-                    {
-                        points: groups[59],
-                        value:  groups[59] ? groups[59].length : 0,
-                        label:  AGES_LABELS[59],
-                        color:  COLOR3,
-                    },
-                    {
-                        points: groups[74],
-                        value:  groups[74] ? groups[74].length : 0,
-                        label:  AGES_LABELS[74],
-                        color:  COLOR4,
-                    },
-                    {
-                        points: groups[999],
-                        value:  groups[999] ? groups[999].length : 0,
-                        label:  AGES_LABELS[999],
-                        color:  COLOR5,
-                    },
-                    {
-                        points: groups[noData],
-                        value:  groups[noData] ? groups[noData].length : 0,
-                        label:  AGES_LABELS[noData],
-                        color:  COLOR6,
-                    },
-                ],
-                max: Object.keys(groups).reduce(
-                    (maxValue, current) => (
-                        groups[current].length > maxValue
-                        ? groups[current].length
-                        : maxValue
-                    ),
-                    0
-                ),
-            };
+            return buildAgeData(this.supporters);
 
         case SELECTOR_POP:
-            groups = groupBy(
-                this.supporters,
-                (supporter) => supporter.data.population
-            );
-
-            return {
-                data: buildPopData(groups),
-                max:  Object.keys(groups).reduce(
-                    (maxValue, current) => (
-                        groups[current].length > maxValue
-                        ? groups[current].length
-                        : maxValue
-                    ),
-                    0
-                ),
-            };
+            return buildPopData(this.supporters);
 
         case SELECTOR_URBANITE:
-            groups = groupBy(
-                this.supporters,
-                (supporter) => supporter.data.urbainite
-            );
-
-            return {
-                data: buildUrbaniteData(groups),
-                max:  Object.keys(groups).reduce(
-                    (maxValue, current) => (
-                        groups[current].length > maxValue
-                        ? groups[current].length
-                        : maxValue
-                    ),
-                    0
-                ),
-            };
+            return buildUrbaniteData(this.supporters);
 
         case SELECTOR_CHOMAGE:
-            groups = groupBy(
-                this.supporters,
-                (supporter) => supporter.data.chomage
-            );
-
-            return {
-                data: buildChomageData(groups),
-                max:  Object.keys(groups).reduce(
-                    (maxValue, current) => (
-                        groups[current].length > maxValue
-                        ? groups[current].length
-                        : maxValue
-                    ),
-                    0
-                ),
-            };
+            return buildChomageData(this.supporters);
 
         default:
             return { data: [] };
