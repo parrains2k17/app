@@ -6,7 +6,7 @@ class Modal {
         this.text_container = document
             .querySelector('.js-text-container');
         this.modal_container = document
-            .querySelector('.js-modal_container_intro');
+            .querySelector('.js-modal-container-intro');
         this.text_container = document
             .querySelector('.js-text-container');
         this.closeButton = this.modal_container
@@ -16,7 +16,7 @@ class Modal {
             this.creditsButton = document
                 .querySelector('.js-credits-link');
             this.modal_background = document
-                .querySelector('.js-modal_background');
+                .querySelector('.js-modal-background');
             this.closeButton
                 .addEventListener('click', this.close.bind(this));
             // this.closeButton[1]
@@ -27,7 +27,7 @@ class Modal {
             this.open();
         } else if (type === 'webGL') {
             this.text_container_webGL = document
-                .querySelector('.js-text-container-webGL');
+                .querySelector('.js-text-container-webgl');
             this.open();
         }
 
