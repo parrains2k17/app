@@ -43,6 +43,23 @@
 	opacity: 0.9;
 }
 
+.text-container {
+	display: none;
+}
+.text-container.mode-open {
+	display: block;
+}
+
+.text-container-webGL {
+	display: none;
+	font-size: 1.75em;
+}
+
+.text-container-webGL.mode-open {
+	display: block;
+}
+
+
 .modal_container.mode-webGL {
 	background-color: white;	
 	border-radius: 10px;
@@ -134,10 +151,14 @@
     border: none;
     border-radius: 15px;
     color: white;
-    display: inline-block;
+    display: none;
     font-size: 24px;
     padding: 15px 32px;
     text-align: center;
+}
+
+.go-button.mode-open {
+	display: inline-block;
 }
 
 .btn-credits {

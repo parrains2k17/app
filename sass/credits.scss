@@ -97,4 +97,9 @@
 
 .div-credits-link {
     position: absolute;
+    display: none;
+}
+
+.div-credits-link.mode-open {
+    display: block;
 }
