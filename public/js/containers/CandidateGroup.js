@@ -5,6 +5,8 @@ import { TweenMax, Power0 } from 'gsap';
 import Supporters from './SupportersGroup';
 import Candidate from '../components/Candidate';
 
+import { getWidth, getHeight } from '../utils/window';
+
 const { random } = Math;
 
 const
@@ -125,14 +127,6 @@ class CandidateGroup extends Container {
         this.candidate.resetPosition({ MOVE_TO_CENTER_DURATION });
     }
 
-    buildDatavizData(selector) {
-        return this.supporters.buildDatavizData(selector);
-    }
-
-    showDataviz(selector, totalDataviz, data, max) {
-        this.supporters.showDataviz(selector, totalDataviz, data, max);
-    }
-
     moveAround() { // TODO better waiting state
         const { x, y } = this.position;
 
@@ -165,6 +159,15 @@ class CandidateGroup extends Container {
 
     killMovement() {
         this.movement.kill();
+    }
+
+    buildDatavizData(selector) {
+        return this.supporters.buildDatavizData(selector);
+    }
+
+    showDataviz(selector, totalDataviz, data, max) {
+        this.candidate.hide(getWidth(), getHeight() * 2);
+        this.supporters.showDataviz(selector, totalDataviz, data, max);
     }
 }
 

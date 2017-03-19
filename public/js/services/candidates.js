@@ -213,16 +213,16 @@ const candidatesPositions = {
 };
 
 const all = () => fetch('/data/parrainages.json')
-                .then((result) => result.json())
-                .then((candidates) => {
-                    Object.keys(candidates)
-                        .forEach((key) => {
-                            Object
-                            .assign(candidates[key], candidatesPositions[key]);
-                        });
+    .then((result) => result.json())
+    .then((candidates) => {
+        Object
+            .keys(candidates)
+            .forEach((key) => {
+                Object.assign(candidates[key], candidatesPositions[key]);
+            });
 
-                    return candidates;
-                });
+        return candidates;
+    });
 
 export default all;
 
