@@ -25,6 +25,7 @@ import {
     SELECTOR_CSP,
     SELECTOR_AGE,
     SELECTOR_POP,
+    SELECTOR_URBANITE,
 } from '../dataviz';
 
 import {
@@ -69,12 +70,26 @@ const POPULATION_NAME_COLOR = {
     'Plus de 10 000 habitants': COLOR6,
 };
 
+const URBANITE_NAME_COLOR = {
+    Inconnue:          GREY,
+    'Commune urbaine': COLOR5,
+    'Commune rurale':  COLOR6,
+};
+
 const buildPopData = (groups) => Object.keys(POPULATION_NAME_COLOR)
     .map((cat) => ({
         points: groups[cat],
         value:  groups[cat] ? groups[cat].length : 0,
         label:  cat,
         color:  POPULATION_NAME_COLOR[cat],
+    }));
+
+const buildUrbaniteData = (groups) => Object.keys(URBANITE_NAME_COLOR)
+    .map((cat) => ({
+        points: groups[cat],
+        value:  groups[cat] ? groups[cat].length : 0,
+        label:  cat,
+        color:  URBANITE_NAME_COLOR[cat],
     }));
 
 // const randomAlpha = () => {
@@ -348,6 +363,26 @@ class Supporters extends Container {
                 ),
             };
 
+        case SELECTOR_URBANITE:
+            groups = groupBy(
+                this.supporters,
+                (supporter) => supporter.data.urbainite
+            );
+
+            console.log(groups);
+
+            return {
+                data: buildUrbaniteData(groups),
+                max:  Object.keys(groups).reduce(
+                    (maxValue, current) => (
+                        groups[current].length > maxValue
+                        ? groups[current].length
+                        : maxValue
+                    ),
+                    0
+                ),
+            };
+
         default:
             return { data: [] };
         }
@@ -375,6 +410,10 @@ class Supporters extends Container {
             break;
 
         case SELECTOR_POP:
+            showHorizontalBarChart(data, width, height, maxValue);
+            break;
+
+        case SELECTOR_URBANITE:
             showBarChart(data, width, height, maxValue);
             break;
 
