@@ -4,10 +4,11 @@
 @import 'modal';
 @import 'credits';
 @import 'candidate';
+@import 'action-bar';
 
 * {
     box-sizing: border-box;
-    font-family: 'Roboto Mono', 'sans-serif';
+    font-family: 'Roboto Mono', 'Arial', 'sans-serif';
 }
 
 html,
@@ -16,6 +17,7 @@ body {
     font-size: 12px;
     height: 100%;
     margin: 0;
+    overflow: hidden;
     padding: 0;
     position: relative;
     width: 100%;
@@ -52,4 +54,10 @@ body {
     background: 0;
     border: 0;
 }
+
+    .btn-transparent > * {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
 

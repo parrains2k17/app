@@ -1,11 +1,10 @@
 .candidate {
     align-items: center;
-    background: $red;
+    background: $background-block;
     bottom: -40%;
     color: $white;
     display: flex;
-    height: 7em;
-    justify-content: space-between;
+    justify-content: flex-start;
     left: 0;
     padding: 1em;
     position: fixed;
@@ -18,18 +17,89 @@
 }
 
     .candidate-element {
-        flex: 0;
+        flex: 4;
     }
 
-    .close-candidate {
+    .candidate-element-image {
+        flex: 1;
+        padding-right: 1em;
+    }
+
+    .candidate-element-infos,
+    .candidate-element-parrainages {
+        flex: 7;
+    }
+
+    .candidate-element-parrainages {
+        margin-left: 2em;
+        margin-right: 2em;
+    }
+
+    .candidate-element-close {
         color: $grey-light;
         cursor: pointer;
+        flex: 1;
+        text-align: right;
     }
 
-    .close-candidate:hover {
+    .candidate-element-close:hover {
         color: $white;
     }
 
-        .close-candidate > .material-icons {
+        .candidate-element-close > .material-icons {
             font-size: 3em;
         }
+
+
+    .candidate-image {
+        display: inline-block;
+        width: 100%;
+    }
+
+    .candidate-name,
+    .candidate-parti,
+    .candidate-maires,
+    .candidate-total {
+        color: $white2;
+        font-weight: 400;
+        margin: 0;
+    }
+
+    .candidate-name {
+        font-size: 1.7em;
+    }
+
+    .candidate-maires {
+        font-size: 1.3em;
+    }
+
+    .candidate-parti,
+    .candidate-total {
+        color: $white3;
+        font-size: 1.3em;
+        margin-top: .2em;
+    }
+
+.add-candidate {
+    left: -100%;
+    position: absolute;
+    top: 6em;
+    transition: left .4s ease;
+}
+
+.add-candidate.mod-open {
+    left: 1em;
+}
+
+    .add-candidate-button {
+        color: $white2;
+        cursor: pointer;
+        font-size: 1.3em;
+        opacity: .6;
+    }
+
+    .add-candidate-button:hover {
+        opacity: 1;
+    }
+
+

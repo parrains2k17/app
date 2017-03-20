@@ -1,9 +1,15 @@
 
+import { Graphics } from 'pixi.js';
 import MovingCircle from './MovingCircle';
 
 class Supporter extends MovingCircle {
-    constructor(config = {}) {
-        super({ radius: 2, ...config });
+    constructor({
+        data = [],
+        ...config
+    }) {
+        super({ radius: 2, ...config }, Graphics);
+
+        this.data = data;
     }
 }
 
