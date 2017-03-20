@@ -1,4 +1,6 @@
 
+import candidates from '../../data/parrainages.json';
+
 import {
     PARTI_LR,
     PARTI_LUTTE,
@@ -212,17 +214,11 @@ const candidatesPositions = {
     },
 };
 
-const all = () => fetch('/data/parrainages.json')
-    .then((result) => result.json())
-    .then((candidates) => {
-        Object
-            .keys(candidates)
-            .forEach((key) => {
-                Object.assign(candidates[key], candidatesPositions[key]);
-            });
-
-        return candidates;
+Object
+    .keys(candidates)
+    .forEach((key) => {
+        Object.assign(candidates[key], candidatesPositions[key]);
     });
 
-export default all;
+export default candidates;
 
