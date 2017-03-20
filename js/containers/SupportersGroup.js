@@ -1,9 +1,6 @@
 
 import { Container } from 'pixi.js';
-import { zip } from 'underscore';
-
 import { getWidth, getHeight } from '../utils/window';
-import { pointsPositionInRect } from '../utils/points';
 
 import Supporter from '../components/Supporter';
 // import randomColor from '../utils/randomColor';
@@ -22,11 +19,6 @@ import {
 } from '../dataviz';
 
 import {
-    barChart,
-    horizontalBarChart,
-} from '../dataviz/barchart';
-
-import {
     buildGenderData,
     buildCSPData,
     buildAgeData,
@@ -34,9 +26,18 @@ import {
     buildUrbaniteData,
     buildChomageData,
     buildListData,
+    CSP_LABELS,
+    LISTE_LABELS,
+    LISTE_LABELS_FULL,
 } from '../dataviz/buildData';
 
-const { PI, random, sqrt, floor } = Math;
+import {
+    showBarChart,
+    showHorizontalBarChart,
+    showDotMatrix,
+} from '../dataviz/drawDataviz';
+
+const { PI, random, sqrt } = Math;
 
 const
     CENTER_DURATION   = 0.3,
@@ -50,101 +51,13 @@ const
 //     return res;
 // };
 
-const showBarChart = (data, width, height, maxValue) => {
-    const bars = barChart({
-        data,
-        width,
-        height,
-        max: maxValue,
-    });
-
-    bars.forEach((bar) => {
-        const positions = pointsPositionInRect(
-            bar.value,
-            bar.width,
-            bar.height
-        );
-
-        zip(bar.points, positions)
-            .forEach(([point, position]) => {
-                point.position.x = (
-                    (-width / 2)
-                    + position.x
-                    + bar.x
-                );
-                point.position.y = (
-                    (height / 2)
-                    + (-position.y + bar.y)
-                );
-                point.alpha = 1;
-                point.changeColor(bar.color);
-            });
-    });
-
-    // TODO legend
-};
-
-const showHorizontalBarChart = (data, width, height, maxValue) => {
-    const bars = horizontalBarChart({
-        data,
-        width,
-        height,
-        max: maxValue,
-    });
-
-    bars.forEach((bar) => {
-        const positions = pointsPositionInRect(
-            bar.value,
-            bar.width,
-            bar.height
-        );
-
-        zip(bar.points, positions)
-            .forEach(([point, position]) => {
-                point.position.x = (
-                    (-width / 2)
-                    + position.x
-                    + bar.x
-                );
-                point.position.y = (
-                    -(height / 2)
-                    + (-position.y + bar.y)
-                );
-                point.alpha = 1;
-                point.changeColor(bar.color);
-            });
-    });
-
-    // TODO legend
-};
-
-const showDotMatrix = (points, colors, width) => {
-    const
-        w = 10,
-        h = 10;
-
-    const
-        r = floor(width / w), // number of points per line
-        maxHeight = (points.length / r) * h;
-
-    points.forEach((point, i) => {
-        const
-            x = (i % r) * w,
-            y = floor(i / r) * h;
-
-        point.position.x = (-width / 2) + x;
-        point.position.y = -(maxHeight / 2) + y;
-        point.alpha = 1;
-        point.changeColor(colors[i]);
-    });
-
-    // TODO legend
-};
-
 class Supporters extends Container {
     constructor(supporters) {
         super();
         this.addSupporters(supporters);
+
+        this.legend = new Container();
+        this.addChild(this.legend);
     }
 
     addSupporters(supporters) {
@@ -170,7 +83,7 @@ class Supporters extends Container {
 
     rotate() {
         const direction = (random() > 0.5) ? 1 : -1;
-        this.children.forEach((c) => c.rotate({
+        this.supporters.forEach((c) => c.rotate({
             // random to smooth transition
             duration: ROTATION_DURATION + (random() * 6),
             direction,
@@ -178,23 +91,26 @@ class Supporters extends Container {
     }
 
     stopRotation() {
-        this.children.forEach((c) => c.center());
+        this.supporters.forEach((c) => c.center());
     }
 
     center() {
-        this.children.forEach((c) => c.center({
+        this.supporters.forEach((c) => c.center({
             duration: CENTER_DURATION,
         }));
     }
 
     resetPosition() {
         this.scale.set(1, 1);
-        this.children.forEach((c) => {
+
+        this.supporters.forEach((c) => {
             c.resetPosition({
                 duration: CENTER_DURATION,
             });
             c.resetColor();
         });
+
+        this.legend.removeChildren();
     }
 
     buildDatavizData(selector) {
@@ -235,31 +151,69 @@ class Supporters extends Container {
 
         switch (selector) {
         case SELECTOR_GENDER:
-            showBarChart(data, width, height, maxValue);
+            showBarChart(
+                data,
+                { width, height },
+                maxValue,
+                this.legend
+            );
             break;
 
         case SELECTOR_AGE:
-            showHorizontalBarChart(data, width, height, maxValue);
+            showHorizontalBarChart(
+                data,
+                { width, height },
+                maxValue,
+                this.legend
+            );
             break;
 
         case SELECTOR_CSP:
-            showDotMatrix(data.points, data.colors, width, height);
+            showDotMatrix(
+                data.points,
+                data.colors,
+                { width, height },
+                CSP_LABELS,
+                this.legend
+            );
             break;
 
         case SELECTOR_POP:
-            showHorizontalBarChart(data, width, height, maxValue);
+            showHorizontalBarChart(
+                data,
+                { width, height },
+                maxValue,
+                this.legend
+            );
             break;
 
         case SELECTOR_URBANITE:
-            showBarChart(data, width, height, maxValue);
+            showBarChart(
+                data,
+                { width, height },
+                maxValue,
+                this.legend
+            );
             break;
 
         case SELECTOR_CHOMAGE:
-            showBarChart(data, width, height, maxValue);
+            showBarChart(
+                data,
+                { width, height, rotateLegend: true },
+                maxValue,
+                this.legend
+            );
             break;
 
         case SELECTOR_LISTE:
-            showDotMatrix(data.points, data.colors, width, height);
+            showDotMatrix(
+                data.points,
+                data.colors,
+                { width, height },
+                LISTE_LABELS,
+                this.legend,
+                LISTE_LABELS_FULL
+            );
             break;
 
         default:
