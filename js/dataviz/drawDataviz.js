@@ -1,5 +1,5 @@
 
-import { Text, Graphics } from 'pixi.js';
+import { Text, Graphics, Container } from 'pixi.js';
 
 import { zip } from 'underscore';
 
@@ -13,7 +13,7 @@ import {
 
 import { RADIUS } from '../components/Supporter';
 
-const { floor, PI } = Math;
+const { floor, PI, max } = Math;
 
 const LABEL_STYLE = {
     fontFamily: 'Roboto Mono',
@@ -167,39 +167,65 @@ export const showDotMatrix = (
 
     legendContainer.removeChildren();
 
-    points.forEach((point, i) => {
-        const
-            x = (i % r) * w,
-            y = floor(i / r) * h;
+    const
+        legendWrapperLeft = new Container(),
+        legendWrapperRight = new Container();
 
-        point.position.x = (-width / 2) + x;
-        point.position.y = -(maxHeight / 2) + y;
-        point.alpha = 1;
-        point.changeColor(colors[i]);
-    });
+    const l = Object.keys(labels).length;
 
-    // const l = Object.keys(labels).length;
-
-    Object.keys(labels).forEach((key, i) => {
+    const drawLabel = (container) => (key, i) => {
         const label = new Text(
             labelsFull ? labelsFull[key] : key,
             LABEL_STYLE
         );
         const bounds = label.getLocalBounds();
 
-        label.position.x = (-width / 2) + 15;
-        label.position.y = (maxHeight / 2) + 16 + ((bounds.height + 2) * i);
+        label.position.x = 15;
+        label.position.y = 16 + ((bounds.height + 2) * i);
 
         const circle = new Graphics();
         circle.beginFill(labels[key]);
         circle.drawCircle(0, 0, RADIUS);
         circle.endFill();
 
-        circle.position.x = (-width / 2);
-        circle.position.y = (maxHeight / 2) + 22 + ((bounds.height + 2) * i);
+        circle.position.x = 0;
+        circle.position.y = 22 + ((bounds.height + 2) * i);
 
-        legendContainer.addChild(label);
-        legendContainer.addChild(circle);
+        container.addChild(label);
+        container.addChild(circle);
+    };
+
+    Object.keys(labels).slice(0, floor(l / 2)).forEach(
+        drawLabel(legendWrapperLeft)
+    );
+
+    Object.keys(labels).slice(floor(l / 2) + 1).forEach(
+        drawLabel(legendWrapperRight)
+    );
+
+    const legendHeight = max(
+        legendWrapperLeft.getLocalBounds().height,
+        legendWrapperRight.getLocalBounds().height
+    );
+
+    points.forEach((point, i) => {
+        const
+            x = (i % r) * w,
+            y = floor(i / r) * h;
+
+        point.position.x = (-width / 2) + x;
+        point.position.y = -(maxHeight / 2) + (-legendHeight / 2) + y;
+        point.alpha = 1;
+        point.changeColor(colors[i]);
     });
+
+    legendWrapperLeft.position.x = (-width / 2);
+    legendWrapperLeft.position.y = (maxHeight / 2) - (legendHeight / 2);
+
+    legendWrapperRight.position.x = 0;
+    legendWrapperRight.position.y = (maxHeight / 2) - (legendHeight / 2);
+
+    legendContainer.addChild(legendWrapperLeft);
+    legendContainer.addChild(legendWrapperRight);
 };
 
