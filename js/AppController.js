@@ -1,8 +1,12 @@
 
+import { without, find } from 'underscore';
+
 import getCandidates from './services/candidates';
 
 import Stage from './components/Stage';
 import CandidatePanel from './components/CandidatePanel';
+import ActionBar from './components/ActionBar';
+import CandidatesBar from './components/CandidatesBar';
 
 import CandidateGroup from './containers/CandidateGroup';
 
@@ -17,32 +21,58 @@ class AppController {
 
         this.buildCandidates();
         this.candidatePanel = new CandidatePanel(
-            '.js-candidate-panel',
-            () => this.candidateClose()
+           '.js-candidate-panel',
+            () => this.candidateClose(0)
+        );
+
+        this.selectedCandidates = [];
+
+        this.criteresBarMaires = new ActionBar(
+            '.js-actions-maires',
+            (critere) => this.selectDataviz(critere)
+        );
+
+        this.planetsChoiceBar = new CandidatesBar(
+            '.js-actions-choix',
+            '.js-add-candidate-open',
+            '.js-add-candidate-close',
+            (toto) => console.log(toto)
         );
     }
 
     buildCandidates() {
-        const candidatesData = getCandidates();
+        return getCandidates()
+            .then((results) => {
+                this.candidates = Object.keys(results)
+                    .map((key) => {
+                        const candidate = results[key];
+                        return new CandidateGroup(
+                            {
+                                position: {
+                                    x: candidate.x,
+                                    y: candidate.y,
+                                },
+                            },
+                            {
+                                name:        candidate.name,
+                                parti:       candidate.parti,
+                                color:       candidate.color,
+                                age:         candidate.age,
+                                total:       1237, // TODO
+                                totalMaires: 467,
+                                image:       candidate.texture,
+                            },
+                            candidate.parrainages,
+                            candidate.texture,
+                            this
+                            // TODO pass candidate data toto
+                        );
+                    });
 
-        this.candidates = candidatesData
-            .map((candidate) => new CandidateGroup(
-                {
-                    screen: {
-                        width,
-                        height,
-                    },
-                    position: {
-                        x: candidate.x(width, height),
-                        y: candidate.y(width, height),
-                    },
-                },
-                candidate.supporters,
-                this
-                // TODO pass candidate data toto
-            ));
-
-        this.candidates.forEach((candidate) => this.stage.add(candidate));
+                this.candidates.forEach(
+                    (candidate) => this.stage.add(candidate)
+                );
+            });
     }
 
     start() {
@@ -50,6 +80,8 @@ class AppController {
     }
 
     candidateOpen(selected) {
+        this.selectedCandidates.push(selected);
+
         this.candidates.forEach((candidate) => {
             if (candidate !== selected) {
                 candidate.hide(-width / 2);
@@ -62,14 +94,51 @@ class AppController {
         });
 
         this.stage.center();
+
+        this.candidatePanel.updateInfo(selected.infos);
+
         this.candidatePanel.open();
+        this.criteresBarMaires.open();
+        this.planetsChoiceBar.start();
     }
 
-    candidateClose() {
+    /**
+     * @param  {Number} index       0 or 1
+     */
+    candidateClose(index) {
+        this.selectedCandidates = without(
+            this.selectedCandidates,
+            find(this.selectedCandidates, (_, i) => i === index)
+        );
+
         this.candidates.forEach((candidate) => candidate.reset());
 
-        this.stage.active();
         this.candidatePanel.close();
+        this.criteresBarMaires.close();
+        this.planetsChoiceBar.stop();
+        this.stage.active();
+    }
+
+    selectDataviz(selector) {
+        // retrieve data for each candidates (one or two)
+        const data = this.selectedCandidates.map(
+            (candidate) => candidate.buildDatavizData(selector)
+        );
+
+        // compute max if needed
+        const max = data.reduce((reduced, current) => (
+            current.max ? Math.max(current.max, reduced) : reduced
+        ), 0);
+
+        // show dataviz
+        this.selectedCandidates.forEach(
+            (candidate, i) => candidate.showDataviz(
+                selector,
+                this.selectedCandidates.length,
+                data[i].data,
+                max
+            )
+        );
     }
 }
 
