@@ -6,6 +6,8 @@ import Supporter from '../components/Supporter';
 // import randomColor from '../utils/randomColor';
 import randomNumber from '../utils/randomNumber';
 
+import MovingSupporters from './MovingSupporters';
+
 import { listColor } from '../style/color';
 
 import {
@@ -64,12 +66,14 @@ class Supporters extends Container {
     }
 
     addSupporters(supporters) {
+        // Ne se calcule qu'au démarrage
         this.supporters = supporters
             .map((supporter) => new Supporter({
                 color:    listColor(supporter.liste),
+                // REMOVE THIS RANDOM ?
                 rotation: 2 * random() * PI,
                 pivot:    {
-                    // Change 20 if the planet is bigger
+                    // REMOVE THIS RANDOM ?
                     x: randomNumber(
                         48,
                         sqrt(supporters.length * (100 / PI)),
@@ -80,17 +84,30 @@ class Supporters extends Container {
                 // alpha: randomAlpha(0, 1, 1),
                 data: supporter,
             }));
-
-        this.supporters.forEach((c) => this.addChild(c));
+        // this.supporters.forEach((c) => this.addChild(c));
     }
 
     rotate() {
-        const direction = (random() > 0.5) ? 1 : -1;
-        this.supporters.forEach((c) => c.rotate({
-            // random to smooth transition
-            duration: ROTATION_DURATION + (random() * 6),
-            direction,
-        }));
+        console.log('test');
+        if (typeof this.group1 !== 'undefined') {
+            this.group1 = new MovingSupporters((ROTATION_DURATION + 4), 1);
+            this.group2 = new MovingSupporters((ROTATION_DURATION - 4), 1);
+            this.children.forEach((c) => (random() > 0.5) ?
+                this.group1.add(c) : this.group2.add(c)
+            );
+            this.addChild(this.group1);
+            this.addChild(this.group2);
+            console.log(this.group1);
+        } else {
+            this.group1.rotate();
+            this.group2.rotate();
+        }
+        // const direction = (random() > 0.5) ? 1 : -1;
+        // this.children.forEach((c) => c.rotate({
+        //     // random to smooth transition
+        //     duration: ROTATION_DURATION + 6,
+        //     direction,
+        // }));
     }
 
     stopRotation() {
