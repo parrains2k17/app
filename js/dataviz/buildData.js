@@ -231,8 +231,6 @@ export const buildListData = (supporters) => {
         (supporter) => supporter.data.liste
     );
 
-    console.log(groups);
-
     const points = flatten(Object.values(groups));
 
     return {
