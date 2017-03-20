@@ -150,6 +150,11 @@ class AppController {
     }
 
     addCandidate(id) {
+        if (this.selectedCandidates.length === 2) {
+            const old = this.selectedCandidates.pop();
+            old.hide(-width / 2);
+        }
+
         const candidate = this.candidates[id];
         console.log('addCandidate', id, candidate);
         this.selectedCandidates.push(candidate);
