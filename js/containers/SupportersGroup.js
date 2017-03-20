@@ -40,8 +40,11 @@ import {
 const { PI, random, sqrt } = Math;
 
 const
+    SCALE_ACTIVE      = 0.5,
     CENTER_DURATION   = 0.3,
-    ROTATION_DURATION = 15;
+    ROTATION_DURATION = 15,
+    AREA_X            = 0.6,
+    AREA_Y            = 0.5;
 
 // const randomAlpha = () => {
 //     const res = randomNumber(0, 1, 1);
@@ -143,10 +146,10 @@ class Supporters extends Container {
 
     showDataviz(selector, totalDataviz, data, maxValue) { // eslint-disable-line
         const
-            width = getWidth() / totalDataviz / 3,
-            height = getHeight() / 3;
+            width = (getWidth() / totalDataviz) * AREA_X,
+            height = getHeight() * AREA_Y;
 
-        this.scale.set(0.33, 0.33);
+        this.scale.set(SCALE_ACTIVE, SCALE_ACTIVE);
         this.center();
 
         switch (selector) {

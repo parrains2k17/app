@@ -26,6 +26,7 @@ import {
 const candidatesPositions = {
     'ALLIOT-MARIE Michèle': {
         name:    'Michèle Alliot-Marie',
+        x:       0,
         y:       100,
         parti:   'Les Républicains',
         age:     70,
