@@ -23,8 +23,12 @@ class AppController {
         this.buildCandidates(candidates);
 
         this.candidatePanel = new CandidatePanel(
-           '.js-candidate-panel',
-            () => this.candidateClose(0)
+            {
+                container: '.js-candidate-panel',
+                panel1:    '.js-candidate-1',
+                panel2:    '.js-candidate-2',
+            },
+            (index) => this.candidateClose(index)
         );
 
         this.selectedCandidates = [];
@@ -80,12 +84,17 @@ class AppController {
     activateSelectedCandidates() {
         const n = this.selectedCandidates.length;
 
+        this.candidatePanel.reset();
+
         this.selectedCandidates.forEach((candidate, i) => {
             candidate.activate(
                 ((1 + (i * 2)) * width) / (2 * n),
                 height / 2,
                 n === 1 ? 2 : 1.6
             );
+
+            this.candidatePanel.updateInfo(i, candidate.infos);
+            this.candidatePanel.openPanel(i);
         });
     }
 
@@ -102,7 +111,6 @@ class AppController {
 
         this.stage.center();
 
-        this.candidatePanel.updateInfo(selectedCandidate.infos);
 
         this.candidatePanel.open();
         this.criteresBarMaires.open();
@@ -113,18 +121,28 @@ class AppController {
      * @param  {Number} index       0 or 1
      */
     candidateClose(index) {
+        const close = this.selectedCandidates.length < 2;
+        // remove unique selected candidate
+        if (close) {
+            Object.values(this.candidates)
+                .forEach((candidate) => candidate.reset());
+            this.candidatePanel.close();
+            this.criteresBarMaires.close();
+            this.planetsChoiceBar.stop();
+            this.stage.active();
+        } else {
+            // just remove one of the two
+            this.selectedCandidates[index].hide(-width / 2);
+        }
+
         this.selectedCandidates = without(
             this.selectedCandidates,
             find(this.selectedCandidates, (_, i) => i === index)
         );
 
-        Object.values(this.candidates)
-            .forEach((candidate) => candidate.reset());
-
-        this.candidatePanel.close();
-        this.criteresBarMaires.close();
-        this.planetsChoiceBar.stop();
-        this.stage.active();
+        if (!close) {
+            this.activateSelectedCandidates();
+        }
     }
 
     selectDataviz(selector) {
@@ -166,8 +184,7 @@ class AppController {
 
         this.activateSelectedCandidates();
 
-        // this.candidatePanel.updateInfo(selectedCandidate.infos); // TODO
-        // this.candidatePanel.open(); // TODO
+        this.candidatePanel.open(); // TODO
         // this.criteresBarMaires.open(); // TODO update selecteDataviz
         // this.planetsChoiceBar.start(); // TODO selected state
     }
