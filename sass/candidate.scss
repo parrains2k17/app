@@ -1,12 +1,9 @@
 .candidate {
     align-items: center;
-    background: $background-block;
     bottom: -40%;
-    color: $white;
     display: flex;
     justify-content: flex-start;
     left: 0;
-    padding: 1em;
     position: fixed;
     transition: bottom .3s ease;
     width: 100vw;
@@ -18,8 +15,16 @@
 
     .candidate-container {
         align-items: center;
+        background: $background-block;
+        color: $white;
         display: none;
         flex: 1;
+        max-height: 6em;
+        padding: 1em;
+    }
+
+    .candidate-container + .candidate-container {
+        margin-left: 4px;
     }
 
     .candidate-container.mod-open {
@@ -27,7 +32,7 @@
     }
 
         .candidate-element {
-            flex: 4;
+            flex: 1;
         }
 
         .candidate-element-image {
@@ -35,14 +40,8 @@
             padding-right: 1em;
         }
 
-        .candidate-element-infos,
-        .candidate-element-parrainages {
-            flex: 7;
-        }
-
-        .candidate-element-parrainages {
-            margin-left: 2em;
-            margin-right: 2em;
+        .candidate-element-infos {
+            flex: 10;
         }
 
         .candidate-element-close {

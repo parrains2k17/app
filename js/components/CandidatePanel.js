@@ -6,9 +6,6 @@ class Panel {
         this.name = this.panel.querySelector('.js-candidate-name');
         this.parti = this.panel.querySelector('.js-candidate-parti');
         this.age = this.panel.querySelector('.js-candidate-age');
-        this.total = this.panel.querySelector('.js-candidate-total');
-        this.totalMaires = this.panel
-            .querySelector('.js-candidate-totalMaires');
         this.image = this.panel.querySelector('.js-candidate-image');
 
         this.closeButton = this.panel.querySelector('.js-close-candidate');
@@ -18,15 +15,11 @@ class Panel {
 
     updateInfo({
         name,
-        total,
-        totalMaires,
         parti,
         age,
         image,
     }) {
         this.name.innerText = name;
-        this.total.innerText = total;
-        this.totalMaires.innerText = totalMaires;
         this.parti.innerText = parti;
         this.age.innerText = age;
         this.image.src = image;
