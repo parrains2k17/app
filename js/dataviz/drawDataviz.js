@@ -1,5 +1,5 @@
 
-import { Text } from 'pixi.js';
+import { Text, Graphics } from 'pixi.js';
 
 import { zip } from 'underscore';
 
@@ -10,6 +10,8 @@ import {
     barChart,
     horizontalBarChart,
 } from './barchart';
+
+import { RADIUS } from '../components/Supporter';
 
 const { floor, PI } = Math;
 
@@ -151,6 +153,7 @@ export const showDotMatrix = (
     points,
     colors,
     { width },
+    labels,
     legendContainer
 ) => {
     const
@@ -174,6 +177,28 @@ export const showDotMatrix = (
         point.changeColor(colors[i]);
     });
 
-    // TODO legend
+    // const l = Object.keys(labels).length;
+
+    Object.keys(labels).forEach((text, i) => {
+        const label = new Text(
+            text,
+            LABEL_STYLE
+        );
+        const bounds = label.getLocalBounds();
+
+        label.position.x = (-width / 2) + 15;
+        label.position.y = (maxHeight / 2) + 16 + ((bounds.height + 2) * i);
+
+        const circle = new Graphics();
+        circle.beginFill(labels[text]);
+        circle.drawCircle(0, 0, RADIUS);
+        circle.endFill();
+
+        circle.position.x = (-width / 2);
+        circle.position.y = (maxHeight / 2) + 22 + ((bounds.height + 2) * i);
+
+        legendContainer.addChild(label);
+        legendContainer.addChild(circle);
+    });
 };
 

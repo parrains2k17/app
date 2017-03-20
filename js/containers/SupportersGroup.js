@@ -26,6 +26,7 @@ import {
     buildUrbaniteData,
     buildChomageData,
     buildListData,
+    CSP_NAME_COLOR,
 } from '../dataviz/buildData';
 
 import {
@@ -170,6 +171,7 @@ class Supporters extends Container {
                 data.points,
                 data.colors,
                 { width, height },
+                CSP_NAME_COLOR,
                 this.legend
             );
             break;
@@ -206,6 +208,7 @@ class Supporters extends Container {
                 data.points,
                 data.colors,
                 { width, height },
+                CSP_NAME_COLOR,
                 this.legend
             );
             break;
