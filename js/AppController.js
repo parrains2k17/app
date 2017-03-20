@@ -82,9 +82,9 @@ class AppController {
 
         this.selectedCandidates.forEach((candidate, i) => {
             candidate.activate(
-                ((1 + i) * width) / (1 + n),
+                ((1 + (i * 2)) * width) / (2 * n),
                 height / 2,
-                4 - n
+                n === 1 ? 2 : 1.6
             );
         });
     }
