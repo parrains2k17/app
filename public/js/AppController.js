@@ -19,10 +19,8 @@ class AppController {
     constructor() {
         this.stage = new Stage(canvas, width, height);
 
-        this.candidates = this.buildCandidates(candidates);
-        this.candidates.forEach(
-            (candidate) => this.stage.add(candidate)
-        );
+        this.candidates = {};
+        this.buildCandidates(candidates);
 
         this.candidatePanel = new CandidatePanel(
            '.js-candidate-panel',
@@ -45,11 +43,11 @@ class AppController {
     }
 
     buildCandidates(results) {
-        return Object
+        Object
             .keys(results)
-            .map((key) => {
+            .forEach((key) => {
                 const candidate = results[key];
-                return new CandidateGroup(
+                const group = new CandidateGroup(
                     {
                         position: {
                             x: candidate.x,
@@ -69,6 +67,9 @@ class AppController {
                     candidate.texture,
                     this
                 );
+
+                this.candidates[key] = group;
+                this.stage.add(group);
             });
     }
 
