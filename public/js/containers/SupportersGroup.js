@@ -52,6 +52,9 @@ class Supporters extends Container {
     constructor(supporters) {
         super();
         this.addSupporters(supporters);
+
+        this.legend = new Container();
+        this.addChild(this.legend);
     }
 
     addSupporters(supporters) {
@@ -77,7 +80,7 @@ class Supporters extends Container {
 
     rotate() {
         const direction = (random() > 0.5) ? 1 : -1;
-        this.children.forEach((c) => c.rotate({
+        this.supporters.forEach((c) => c.rotate({
             // random to smooth transition
             duration: ROTATION_DURATION + (random() * 6),
             direction,
@@ -85,23 +88,26 @@ class Supporters extends Container {
     }
 
     stopRotation() {
-        this.children.forEach((c) => c.center());
+        this.supporters.forEach((c) => c.center());
     }
 
     center() {
-        this.children.forEach((c) => c.center({
+        this.supporters.forEach((c) => c.center({
             duration: CENTER_DURATION,
         }));
     }
 
     resetPosition() {
         this.scale.set(1, 1);
-        this.children.forEach((c) => {
+
+        this.supporters.forEach((c) => {
             c.resetPosition({
                 duration: CENTER_DURATION,
             });
             c.resetColor();
         });
+
+        this.legend.removeChildren();
     }
 
     buildDatavizData(selector) {
@@ -142,31 +148,66 @@ class Supporters extends Container {
 
         switch (selector) {
         case SELECTOR_GENDER:
-            showBarChart(data, width, height, maxValue);
+            showBarChart(
+                data,
+                { width, height },
+                maxValue,
+                this.legend
+            );
             break;
 
         case SELECTOR_AGE:
-            showHorizontalBarChart(data, width, height, maxValue);
+            showHorizontalBarChart(
+                data,
+                { width, height },
+                maxValue,
+                this.legend
+            );
             break;
 
         case SELECTOR_CSP:
-            showDotMatrix(data.points, data.colors, width, height);
+            showDotMatrix(
+                data.points,
+                data.colors,
+                { width, height },
+                this.legend
+            );
             break;
 
         case SELECTOR_POP:
-            showHorizontalBarChart(data, width, height, maxValue);
+            showHorizontalBarChart(
+                data,
+                { width, height },
+                maxValue,
+                this.legend
+            );
             break;
 
         case SELECTOR_URBANITE:
-            showBarChart(data, width, height, maxValue);
+            showBarChart(
+                data,
+                { width, height },
+                maxValue,
+                this.legend
+            );
             break;
 
         case SELECTOR_CHOMAGE:
-            showBarChart(data, width, height, maxValue);
+            showBarChart(
+                data,
+                { width, height, rotateLegend: true },
+                maxValue,
+                this.legend
+            );
             break;
 
         case SELECTOR_LISTE:
-            showDotMatrix(data.points, data.colors, width, height);
+            showDotMatrix(
+                data.points,
+                data.colors,
+                { width, height },
+                this.legend
+            );
             break;
 
         default:
