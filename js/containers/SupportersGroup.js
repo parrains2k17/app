@@ -60,7 +60,7 @@ class Supporters extends Container {
     constructor(supporters) {
         super();
 
-        this.group1 = new MovingSupporters((ROTATION_DURATION + 4), 1);
+        this.group1 = new MovingSupporters((ROTATION_DURATION + 2), 1);
         this.group2 = new MovingSupporters((ROTATION_DURATION - 4), 1);
 
         this.addChild(this.group1);
