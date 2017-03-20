@@ -36,7 +36,7 @@ export const GENDER_LABELS = {
     Femmes: COLOR2,
 };
 
-export const CSP_NAME_COLOR = {
+export const CSP_LABELS = {
     'Professions agricoles':                     COLOR1,
     'Professions industrielles et commerciales': COLOR2,
     'Salariés du privé':                         COLOR3,
@@ -104,6 +104,29 @@ export const LISTE_LABELS = {
     'Pas de liste': BLACK,
 };
 
+export const LISTE_LABELS_FULL = { // TODO Full names
+    EXG:            'EXG',
+    PC:             'PC',
+    FG:             'FG',
+    PG:             'PG',
+    PS:             'PS',
+    UG:             'UG',
+    DVG:            'DVG',
+    EELV:           'EELV',
+    MODEM:          'MODEM',
+    UC:             'UC',
+    UDI:            'UDI',
+    DVD:            'DVD',
+    UD:             'UD',
+    UMP:            'UMP',
+    FN:             'FN',
+    EXD:            'EXD',
+    DIV:            'DIV',
+    SE:             'SE',
+    Inconnue:       'Inconnue',
+    'Pas de liste': 'Pas de liste',
+};
+
 const buildRawData = (labels, groups) => Object.keys(labels)
     .map((cat) => ({
         points: groups[cat],
@@ -145,9 +168,9 @@ export const buildCSPData = (supporters) => {
     return {
         data: {
             points,
-            labels: CSP_NAME_COLOR,
+            labels: CSP_LABELS,
             colors: points.map((s) => (
-                CSP_NAME_COLOR[s.data.csp_name]
+                CSP_LABELS[s.data.csp_name]
             )),
         },
     };
@@ -215,7 +238,7 @@ export const buildListData = (supporters) => {
     return {
         data: {
             points,
-            labels: CSP_NAME_COLOR,
+            labels: CSP_LABELS,
             colors: points.map((s) => listColor(s.data.liste)),
         },
     };
