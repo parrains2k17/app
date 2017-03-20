@@ -3,7 +3,6 @@ import { Container } from 'pixi.js';
 import { getWidth, getHeight } from '../utils/window';
 
 import Supporter from '../components/Supporter';
-// import randomColor from '../utils/randomColor';
 import randomNumber from '../utils/randomNumber';
 
 import MovingSupporters from './MovingSupporters';
@@ -48,14 +47,6 @@ const
     AREA_X            = 0.6,
     AREA_Y            = 0.5;
 
-// const randomAlpha = () => {
-//     const res = randomNumber(0, 1, 1);
-//     if (res > 0.7) {
-//         return 1;
-//     }
-//     return res;
-// };
-
 class Supporters extends Container {
     constructor(supporters) {
         super();
@@ -88,7 +79,6 @@ class Supporters extends Container {
                     ),
                     y: -8,
                 },
-                // alpha: randomAlpha(0, 1, 1),
                 data: supporter,
             }));
         // this.supporters.forEach((c) => this.addChild(c));
