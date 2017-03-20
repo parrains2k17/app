@@ -34,7 +34,7 @@ const candidatesPositions = {
     },
     'ARTHAUD Nathalie': {
         name:    'Nathalie Arthaud',
-        x:       150,
+        x:       1700,
         y:       400,
         parti:   'Lutte Ouvrière',
         age:     46,
@@ -52,7 +52,7 @@ const candidatesPositions = {
     },
     'CHEMINADE Jacques': {
         name:    'Jacques Cheminade',
-        x:       2950,
+        x:       200,
         y:       400,
         parti:   'Solidarité et Progès',
         age:     75,
@@ -71,7 +71,7 @@ const candidatesPositions = {
     'FAUDOT Bastien': {
         name:    'Bastien Faudot',
         x:       550,
-        y:       400,
+        y:       850,
         parti:   'Mouvement Républicain et Citoyen',
         age:     38,
         color:   PARTI_MOUVEMENT_REP,
@@ -80,7 +80,7 @@ const candidatesPositions = {
     'FILLON François': {
         name:    'François Fillon',
         x:       550,
-        y:       800,
+        y:       500,
         parti:   'Les Républicains',
         age:     63,
         color:   PARTI_LR,
@@ -88,7 +88,7 @@ const candidatesPositions = {
     },
     'GORGES Jean-Pierre': {
         name:    'Jean-Pierre Gorges',
-        x:       950,
+        x:       200,
         y:       100,
         parti:   'La France c\'est vous !',
         age:     63,
@@ -97,8 +97,8 @@ const candidatesPositions = {
     },
     'GUAINO Henri': {
         name:    'Henri Guaino',
-        x:       950,
-        y:       400,
+        x:       800,
+        y:       200,
         parti:   'Les Républicains',
         age:     60,
         color:   PARTI_LR,
@@ -124,8 +124,8 @@ const candidatesPositions = {
     },
     'LARROUTUROU Pierre': {
         name:    'Pierre Larrouturou',
-        x:       1350,
-        y:       400,
+        x:       1600,
+        y:       100,
         parti:   'Nouvelle Donne',
         age:     52,
         color:   PARTI_NOUVELLE_DONNE,
@@ -142,8 +142,8 @@ const candidatesPositions = {
     },
     'LE PEN Marine': {
         name:    'Marine Le Pen',
-        x:       1750,
-        y:       100,
+        x:       1100,
+        y:       150,
         parti:   'Front National',
         age:     48,
         color:   PARTI_FN,
@@ -151,7 +151,7 @@ const candidatesPositions = {
     },
     'MACRON Emmanuel': {
         name:    'Emmanuel Macron',
-        x:       1750,
+        x:       1000,
         y:       400,
         parti:   'En Marche !',
         age:     39,
@@ -169,8 +169,8 @@ const candidatesPositions = {
     },
     'MELENCHON Jean-Luc': {
         name:    'Jean-Luc Mélenchon',
-        x:       2150,
-        y:       100,
+        x:       1400,
+        y:       400,
         parti:   'La France insoumise',
         age:     65,
         color:   PARTI_FR_INSOUMISE,
