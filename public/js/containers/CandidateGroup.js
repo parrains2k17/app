@@ -70,6 +70,16 @@ class CandidateGroup extends Container {
         );
 
         TweenMax.to(
+            this.pivot,
+            ACTIVATE_DURATION,
+            {
+                x:    0,
+                y:    0,
+                ease: Power0.easeNone,
+            }
+        );
+
+        TweenMax.to(
             this,
             ACTIVATE_DURATION,
             {
@@ -112,8 +122,8 @@ class CandidateGroup extends Container {
             ACTIVATE_DURATION,
             {
                 alpha:      1,
-                x:          this.initialPosition.x,
-                y:          this.initialPosition.y,
+                x:          this.initialPosition.x || 0,
+                y:          this.initialPosition.y || 0,
                 ease:       Power0.easeNone,
                 onComplete: () => {
                     this.moveAround();
