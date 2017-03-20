@@ -38,7 +38,7 @@ class AppController {
             '.js-actions-choix',
             '.js-add-candidate-open',
             '.js-add-candidate-close',
-            (toto) => console.log(toto)
+            (candidate) => this.addCandidate(candidate)
         );
     }
 
@@ -77,23 +77,32 @@ class AppController {
         this.stage.start();
     }
 
-    candidateOpen(selected) {
-        this.selectedCandidates.push(selected);
+    activateSelectedCandidates() {
+        const n = this.selectedCandidates.length;
 
-        this.candidates.forEach((candidate) => {
-            if (candidate !== selected) {
+        this.selectedCandidates.forEach((candidate, i) => {
+            candidate.activate(
+                ((1 + i) * width) / (1 + n),
+                height / 2,
+                4 - n
+            );
+        });
+    }
+
+    candidateOpen(selectedCandidate) {
+        this.selectedCandidates.push(selectedCandidate);
+
+        Object.values(this.candidates).forEach((candidate) => {
+            if (candidate !== selectedCandidate) {
                 candidate.hide(-width / 2);
-            } else {
-                candidate.activate(
-                    width / 2,
-                    height / 2
-                );
             }
         });
 
+        this.activateSelectedCandidates();
+
         this.stage.center();
 
-        this.candidatePanel.updateInfo(selected.infos);
+        this.candidatePanel.updateInfo(selectedCandidate.infos);
 
         this.candidatePanel.open();
         this.criteresBarMaires.open();
@@ -109,7 +118,8 @@ class AppController {
             find(this.selectedCandidates, (_, i) => i === index)
         );
 
-        this.candidates.forEach((candidate) => candidate.reset());
+        Object.values(this.candidates)
+            .forEach((candidate) => candidate.reset());
 
         this.candidatePanel.close();
         this.criteresBarMaires.close();
@@ -137,6 +147,19 @@ class AppController {
                 max
             )
         );
+    }
+
+    addCandidate(id) {
+        const candidate = this.candidates[id];
+        console.log('addCandidate', id, candidate);
+        this.selectedCandidates.push(candidate);
+
+        this.activateSelectedCandidates();
+
+        // this.candidatePanel.updateInfo(selectedCandidate.infos); // TODO
+        // this.candidatePanel.open(); // TODO
+        // this.criteresBarMaires.open(); // TODO update selecteDataviz
+        // this.planetsChoiceBar.start(); // TODO selected state
     }
 }
 

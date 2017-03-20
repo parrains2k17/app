@@ -12,7 +12,7 @@ const { random } = Math;
 const
     HIT_AREA_RADIUS         = 100,
     HIDE_DURATION           = 0.1,
-    MOVE_TO_CENTER_DURATION = 3,
+    ACTIVATE_DURATION       = 1.5,
     MOVEMENT_DURATION       = 60;
 
 class CandidateGroup extends Container {
@@ -51,12 +51,14 @@ class CandidateGroup extends Container {
         this.controller.candidateOpen(this);
     }
 
-    activate(x, y) {
+    activate(x, y, scale) {
         this.killMovement();
+
+        this.visible = true;
 
         TweenMax.to(
             this,
-            MOVE_TO_CENTER_DURATION,
+            ACTIVATE_DURATION,
             {
                 x,
                 y,
@@ -68,11 +70,20 @@ class CandidateGroup extends Container {
         );
 
         TweenMax.to(
-            this.scale,
-            MOVE_TO_CENTER_DURATION,
+            this,
+            ACTIVATE_DURATION,
             {
-                x:    3,
-                y:    3,
+                alpha: 1,
+                ease:  Power0.easeNone,
+            }
+        );
+
+        TweenMax.to(
+            this.scale,
+            ACTIVATE_DURATION,
+            {
+                x:    scale,
+                y:    scale,
                 ease: Power0.easeNone,
             }
         );
@@ -98,7 +109,7 @@ class CandidateGroup extends Container {
     reset() {
         TweenMax.to(
             this,
-            MOVE_TO_CENTER_DURATION,
+            ACTIVATE_DURATION,
             {
                 alpha:      1,
                 x:          this.initialPosition.x,
@@ -114,7 +125,7 @@ class CandidateGroup extends Container {
 
         TweenMax.to(
             this.scale,
-            MOVE_TO_CENTER_DURATION,
+            ACTIVATE_DURATION,
             {
                 x:    1,
                 y:    1,
@@ -124,7 +135,7 @@ class CandidateGroup extends Container {
 
         this.supporters.resetPosition();
         this.supporters.rotate();
-        this.candidate.resetPosition({ MOVE_TO_CENTER_DURATION });
+        this.candidate.resetPosition({ ACTIVATE_DURATION });
     }
 
     moveAround() { // TODO better waiting state
