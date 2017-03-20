@@ -86,11 +86,26 @@
 .div-credits-link {
     display: none;
     position: absolute;
+    right: 1em;
+    top: .7em;
+    z-index: 110;
 }
 
 .div-credits-link.mode-open {
     display: block;
 }
+
+    .btn-credits {
+        color: $white;
+        cursor: pointer;
+        font-size: 1em;
+        opacity: .6;
+    }
+
+    .btn-credits:hover {
+        opacity: .8;
+        text-decoration: underline;
+    }
 
 .mod-alert {
     color: $red;
