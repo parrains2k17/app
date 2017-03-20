@@ -19,14 +19,16 @@ class AppController {
     constructor() {
         this.stage = new Stage(canvas, width, height);
 
-        this.candidates = this.buildCandidates(candidates);
-        this.candidates.forEach(
-            (candidate) => this.stage.add(candidate)
-        );
+        this.candidates = {};
+        this.buildCandidates(candidates);
 
         this.candidatePanel = new CandidatePanel(
-           '.js-candidate-panel',
-            () => this.candidateClose(0)
+            {
+                container: '.js-candidate-panel',
+                panel1:    '.js-candidate-1',
+                panel2:    '.js-candidate-2',
+            },
+            (index) => this.candidateClose(index)
         );
 
         this.selectedCandidates = [];
@@ -40,16 +42,16 @@ class AppController {
             '.js-actions-choix',
             '.js-add-candidate-open',
             '.js-add-candidate-close',
-            (toto) => console.log(toto)
+            (candidate) => this.addCandidate(candidate)
         );
     }
 
     buildCandidates(results) {
-        return Object
+        Object
             .keys(results)
-            .map((key) => {
+            .forEach((key) => {
                 const candidate = results[key];
-                return new CandidateGroup(
+                const group = new CandidateGroup(
                     {
                         position: {
                             x: candidate.x,
@@ -69,6 +71,9 @@ class AppController {
                     candidate.texture,
                     this
                 );
+
+                this.candidates[key] = group;
+                this.stage.add(group);
             });
     }
 
@@ -76,23 +81,36 @@ class AppController {
         this.stage.start();
     }
 
-    candidateOpen(selected) {
-        this.selectedCandidates.push(selected);
+    activateSelectedCandidates() {
+        const n = this.selectedCandidates.length;
 
-        this.candidates.forEach((candidate) => {
-            if (candidate !== selected) {
+        this.candidatePanel.reset();
+
+        this.selectedCandidates.forEach((candidate, i) => {
+            candidate.activate(
+                ((1 + (i * 2)) * width) / (2 * n),
+                height / 2,
+                n === 1 ? 2 : 1.6
+            );
+
+            this.candidatePanel.updateInfo(i, candidate.infos);
+            this.candidatePanel.openPanel(i);
+        });
+    }
+
+    candidateOpen(selectedCandidate) {
+        this.selectedCandidates.push(selectedCandidate);
+
+        Object.values(this.candidates).forEach((candidate) => {
+            if (candidate !== selectedCandidate) {
                 candidate.hide(-width / 2);
-            } else {
-                candidate.activate(
-                    width / 2,
-                    height / 2
-                );
             }
         });
 
+        this.activateSelectedCandidates();
+
         this.stage.center();
 
-        this.candidatePanel.updateInfo(selected.infos);
 
         this.candidatePanel.open();
         this.criteresBarMaires.open();
@@ -103,17 +121,28 @@ class AppController {
      * @param  {Number} index       0 or 1
      */
     candidateClose(index) {
+        const close = this.selectedCandidates.length < 2;
+        // remove unique selected candidate
+        if (close) {
+            Object.values(this.candidates)
+                .forEach((candidate) => candidate.reset());
+            this.candidatePanel.close();
+            this.criteresBarMaires.close();
+            this.planetsChoiceBar.stop();
+            this.stage.active();
+        } else {
+            // just remove one of the two
+            this.selectedCandidates[index].hide(-width / 2);
+        }
+
         this.selectedCandidates = without(
             this.selectedCandidates,
             find(this.selectedCandidates, (_, i) => i === index)
         );
 
-        this.candidates.forEach((candidate) => candidate.reset());
-
-        this.candidatePanel.close();
-        this.criteresBarMaires.close();
-        this.planetsChoiceBar.stop();
-        this.stage.active();
+        if (!close) {
+            this.activateSelectedCandidates();
+        }
     }
 
     selectDataviz(selector) {
@@ -136,6 +165,28 @@ class AppController {
                 max
             )
         );
+    }
+
+    addCandidate(id) {
+        if (this.selectedCandidates.length === 2) {
+            const old = this.selectedCandidates.pop();
+            old.hide(-width / 2);
+        }
+
+        const candidate = this.candidates[id];
+
+        // if we click on the already selected candidate
+        if (candidate === this.selectedCandidates[0]) {
+            return;
+        }
+
+        this.selectedCandidates.push(candidate);
+
+        this.activateSelectedCandidates();
+
+        this.candidatePanel.open(); // TODO
+        // this.criteresBarMaires.open(); // TODO update selecteDataviz
+        // this.planetsChoiceBar.start(); // TODO selected state
     }
 }
 
