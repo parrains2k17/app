@@ -1,7 +1,7 @@
 
 import { without, find } from 'underscore';
 
-import getCandidates from './services/candidates';
+import candidates from './services/candidates';
 
 import Stage from './components/Stage';
 import CandidatePanel from './components/CandidatePanel';
@@ -19,7 +19,11 @@ class AppController {
     constructor() {
         this.stage = new Stage(canvas, width, height);
 
-        this.buildCandidates();
+        this.candidates = this.buildCandidates(candidates);
+        this.candidates.forEach(
+            (candidate) => this.stage.add(candidate)
+        );
+
         this.candidatePanel = new CandidatePanel(
            '.js-candidate-panel',
             () => this.candidateClose(0)
@@ -40,37 +44,30 @@ class AppController {
         );
     }
 
-    buildCandidates() {
-        return getCandidates()
-            .then((results) => {
-                this.candidates = Object.keys(results)
-                    .map((key) => {
-                        const candidate = results[key];
-                        return new CandidateGroup(
-                            {
-                                position: {
-                                    x: candidate.x,
-                                    y: candidate.y,
-                                },
-                            },
-                            {
-                                name:        candidate.name,
-                                parti:       candidate.parti,
-                                color:       candidate.color,
-                                age:         candidate.age,
-                                total:       1237, // TODO
-                                totalMaires: 467,
-                                image:       candidate.texture,
-                            },
-                            candidate.parrainages,
-                            candidate.texture,
-                            this
-                            // TODO pass candidate data toto
-                        );
-                    });
-
-                this.candidates.forEach(
-                    (candidate) => this.stage.add(candidate)
+    buildCandidates(results) {
+        return Object
+            .keys(results)
+            .map((key) => {
+                const candidate = results[key];
+                return new CandidateGroup(
+                    {
+                        position: {
+                            x: candidate.x,
+                            y: candidate.y,
+                        },
+                    },
+                    {
+                        name:        candidate.name,
+                        parti:       candidate.parti,
+                        color:       candidate.color,
+                        age:         candidate.age,
+                        total:       1237, // TODO
+                        totalMaires: 467,
+                        image:       candidate.texture,
+                    },
+                    candidate.parrainages,
+                    candidate.texture,
+                    this
                 );
             });
     }
