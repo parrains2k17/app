@@ -59,6 +59,13 @@ const
 class Supporters extends Container {
     constructor(supporters) {
         super();
+
+        this.group1 = new MovingSupporters((ROTATION_DURATION + 4), 1);
+        this.group2 = new MovingSupporters((ROTATION_DURATION - 4), 1);
+
+        this.addChild(this.group1);
+        this.addChild(this.group2);
+
         this.addSupporters(supporters);
 
         this.legend = new Container();
@@ -85,23 +92,21 @@ class Supporters extends Container {
                 data: supporter,
             }));
         // this.supporters.forEach((c) => this.addChild(c));
+
+        this.supporters.forEach((c) => {
+            if (random() > 0.5) {
+                this.group1.add(c);
+            } else {
+                this.group2.add(c);
+            }
+        });
     }
 
     rotate() {
         console.log('test');
-        if (typeof this.group1 !== 'undefined') {
-            this.group1 = new MovingSupporters((ROTATION_DURATION + 4), 1);
-            this.group2 = new MovingSupporters((ROTATION_DURATION - 4), 1);
-            this.children.forEach((c) => (random() > 0.5) ?
-                this.group1.add(c) : this.group2.add(c)
-            );
-            this.addChild(this.group1);
-            this.addChild(this.group2);
-            console.log(this.group1);
-        } else {
-            this.group1.rotate();
-            this.group2.rotate();
-        }
+        this.group1.rotate();
+        this.group2.rotate();
+
         // const direction = (random() > 0.5) ? 1 : -1;
         // this.children.forEach((c) => c.rotate({
         //     // random to smooth transition
