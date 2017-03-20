@@ -1,5 +1,7 @@
 
 import { Container } from 'pixi.js';
+import { range, random as randomInt } from 'underscore';
+
 import { getWidth, getHeight } from '../utils/window';
 
 import Supporter from '../components/Supporter';
@@ -41,21 +43,29 @@ import {
 const { PI, random, sqrt } = Math;
 
 const
+<<<<<<< HEAD
     SCALE_ACTIVE      = 0.5,
     CENTER_DURATION   = 0.3,
     ROTATION_DURATION = 15,
     AREA_X            = 0.6,
     AREA_Y            = 0.5;
+=======
+    NUMBER_GROUPS     = 3,
+    CENTER_DURATION   = 0.3;
+>>>>>>> Refacto moving groups
 
 class Supporters extends Container {
     constructor(supporters) {
         super();
 
-        this.group1 = new MovingSupporters((ROTATION_DURATION + 2), 1);
-        this.group2 = new MovingSupporters((ROTATION_DURATION - 4), 1);
+        const direction = (random() > 0.5) ? 1 : -1;
 
-        this.addChild(this.group1);
-        this.addChild(this.group2);
+        this.movingGroups = range(NUMBER_GROUPS)
+            .map(() => {
+                const duration = (5 * random()) + 15;
+                return new MovingSupporters(duration, direction);
+            });
+        this.movingGroups.forEach((g) => this.addChild(g));
 
         this.addSupporters(supporters);
 
@@ -64,14 +74,11 @@ class Supporters extends Container {
     }
 
     addSupporters(supporters) {
-        // Ne se calcule qu'au démarrage
         this.supporters = supporters
             .map((supporter) => new Supporter({
                 color:    listColor(supporter.liste),
-                // REMOVE THIS RANDOM ?
                 rotation: 2 * random() * PI,
                 pivot:    {
-                    // REMOVE THIS RANDOM ?
                     x: randomNumber(
                         48,
                         sqrt(supporters.length * (100 / PI)),
@@ -81,28 +88,14 @@ class Supporters extends Container {
                 },
                 data: supporter,
             }));
-        // this.supporters.forEach((c) => this.addChild(c));
 
         this.supporters.forEach((c) => {
-            if (random() > 0.5) {
-                this.group1.add(c);
-            } else {
-                this.group2.add(c);
-            }
+            this.movingGroups[randomInt(NUMBER_GROUPS - 1)].add(c);
         });
     }
 
     rotate() {
-        console.log('test');
-        this.group1.rotate();
-        this.group2.rotate();
-
-        // const direction = (random() > 0.5) ? 1 : -1;
-        // this.children.forEach((c) => c.rotate({
-        //     // random to smooth transition
-        //     duration: ROTATION_DURATION + 6,
-        //     direction,
-        // }));
+        this.movingGroups.forEach((g) => g.rotate());
     }
 
     stopRotation() {
