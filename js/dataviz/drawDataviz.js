@@ -154,7 +154,8 @@ export const showDotMatrix = (
     colors,
     { width },
     labels,
-    legendContainer
+    legendContainer,
+    labelsFull = null
 ) => {
     const
         w = 10,
@@ -179,9 +180,9 @@ export const showDotMatrix = (
 
     // const l = Object.keys(labels).length;
 
-    Object.keys(labels).forEach((text, i) => {
+    Object.keys(labels).forEach((key, i) => {
         const label = new Text(
-            text,
+            labelsFull ? labelsFull[key] : key,
             LABEL_STYLE
         );
         const bounds = label.getLocalBounds();
@@ -190,7 +191,7 @@ export const showDotMatrix = (
         label.position.y = (maxHeight / 2) + 16 + ((bounds.height + 2) * i);
 
         const circle = new Graphics();
-        circle.beginFill(labels[text]);
+        circle.beginFill(labels[key]);
         circle.drawCircle(0, 0, RADIUS);
         circle.endFill();
 
