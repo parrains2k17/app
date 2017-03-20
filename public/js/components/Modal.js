@@ -1,4 +1,7 @@
 
+export const INTRO_MODAL = 'INTRO';
+export const WEBGL_MODAL = 'WEBGL';
+
 class Modal {
     constructor(type) {
         this.type = type;
@@ -12,7 +15,7 @@ class Modal {
         this.closeButton = this.modal_container
             .querySelector('.js-close-modal');
 
-        if (type === 'intro') {
+        if (type === INTRO_MODAL) {
             this.creditsButton = document
                 .querySelector('.js-credits-link');
             this.modal_background = document
@@ -23,29 +26,25 @@ class Modal {
             //     .addEventListener('click', this.close.bind(this));
             this.modal_background
                 .addEventListener('click', this.close.bind(this));
-
-            this.open();
-        } else if (type === 'webGL') {
+        } else if (type === WEBGL_MODAL) {
             this.text_container_webGL = document
                 .querySelector('.js-text-container-webgl');
-            this.open();
         }
 
-        console.log(this.modal_container);
+        this.open();
     }
 
     open() {
-        if (this.type === 'intro') {
+        if (this.type === INTRO_MODAL) {
             this.modal_background.classList.add('mode-open');
-            this.modal_container.classList.add('mode-open');
             this.closeButton.classList.add('mode-open');
             this.creditsButton.classList.add('mode-open');
-        } else if (this.type === 'webGL') {
-            this.modal_container.classList.add('mode-open');
-            console.log(this.modal_container);
+        } else if (this.type === WEBGL_MODAL) {
             this.text_container.classList.remove('mode-open');
             this.text_container_webGL.classList.add('mode-open');
         }
+
+        this.modal_container.classList.add('mode-open');
         this.modal_container.classList.add('mode-animate');
     }
 
