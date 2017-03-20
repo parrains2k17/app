@@ -156,7 +156,12 @@ class AppController {
         }
 
         const candidate = this.candidates[id];
-        console.log('addCandidate', id, candidate);
+
+        // if we click on the already selected candidate
+        if (candidate === this.selectedCandidates[0]) {
+            return;
+        }
+
         this.selectedCandidates.push(candidate);
 
         this.activateSelectedCandidates();
