@@ -65,9 +65,6 @@ class CandidateGroup extends Container {
                 x,
                 y,
                 ease: Power0.easeNone,
-                // onComplete: () => {
-                //     this.candidate.goTo(x, y, 1);
-                // }
             }
         );
 
