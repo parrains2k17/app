@@ -13,6 +13,8 @@ import {
 
 import { RADIUS } from '../components/Supporter';
 
+import { isMobile } from '../utils/window';
+
 const { floor, PI, max } = Math;
 
 const LABEL_STYLE = {
@@ -227,22 +229,32 @@ export const showDotMatrix = (
         legendWrapperRight.getLocalBounds().height
     );
 
+    const pointYOffset = isMobile()
+        ? -legendHeight
+        : (-legendHeight / 2);
+
     points.forEach((point, i) => {
         const
             x = (i % r) * w,
             y = floor(i / r) * h;
 
         point.position.x = (-width / 2) + x;
-        point.position.y = -(maxHeight / 2) + (-legendHeight / 2) + y;
+        point.position.y = -(maxHeight / 2) + pointYOffset + y;
         point.alpha = 1;
         point.changeColor(colors[i]);
     });
 
     legendWrapperLeft.position.x = (-width / 2);
-    legendWrapperLeft.position.y = (maxHeight / 2) - (legendHeight / 2);
+    legendWrapperLeft.position.y = (maxHeight / 2) + pointYOffset;
 
-    legendWrapperRight.position.x = 0;
-    legendWrapperRight.position.y = (maxHeight / 2) - (legendHeight / 2);
+    if (!isMobile()) {
+        legendWrapperRight.position.x = 0;
+        legendWrapperRight.position.y = (maxHeight / 2) + pointYOffset;
+    } else {
+        legendWrapperRight.position.x = (-width / 2);
+        legendWrapperRight.position.y = legendWrapperLeft.position.y
+            + legendWrapperLeft.getLocalBounds().height;
+    }
 
     legendContainer.addChild(legendWrapperLeft);
     legendContainer.addChild(legendWrapperRight);
