@@ -10,6 +10,8 @@ import {
     COLOR4,
     COLOR5,
     COLOR6,
+    COLOR7,
+    COLOR8,
     LISTE_EXG,
     LISTE_PC,
     LISTE_FG,
@@ -33,7 +35,7 @@ import {
 
 export const GENDER_LABELS = {
     Hommes: COLOR1,
-    Femmes: COLOR2,
+    Femmes: COLOR7,
 };
 
 export const CSP_LABELS = {
@@ -43,8 +45,8 @@ export const CSP_LABELS = {
     'Professions libérales':                     COLOR4,
     'Professions de l\'enseignement':            COLOR5,
     'Personnels des entreprises publiques':      COLOR6,
-    Divers:                                      COLOR1,
-    Retraités:                                   COLOR2,
+    Divers:                                      COLOR7,
+    Retraités:                                   COLOR8,
     Inconnue:                                    GREY,
 };
 
@@ -69,8 +71,8 @@ export const POPULATION_LABELS = {
 
 export const URBANITE_LABELS = {
     Inconnu: GREY,
-    urbaine: COLOR5,
-    rurale:  COLOR6,
+    urbaine: COLOR6,
+    rurale:  COLOR7,
 };
 
 export const CHOMAGE_LABELS = {
