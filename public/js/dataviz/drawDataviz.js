@@ -43,15 +43,15 @@ const createLabelCentered = (text, rotate = false) => {
     return l;
 };
 
-const labelRight = (text, x, y) => {
+const createLabelRight = (text) => {
     const l = new Text(
         text,
         LABEL_STYLE
     );
     const bounds = l.getLocalBounds();
 
-    l.position.x = x - bounds.width - 10;
-    l.position.y = y - (bounds.height / 2);
+    l.position.x -= bounds.width - 10;
+    l.position.y -= (bounds.height / 2);
 
     l.pivot.x = 0;
     l.pivot.y = 0;
@@ -69,29 +69,30 @@ export const showBarChart = (
         .map((d) => createLabelCentered(d.label, rotateLegend))
         .forEach((label) => labels.addChild(label));
 
-    const legendHeight = labels.getLocalBounds().height;
+    const
+        legendHeight = labels.getLocalBounds().height,
+        realBarHeight = height - legendHeight;
 
     const bars = barChart({
         data,
         width,
-        height,
-        max: maxValue,
+        height: realBarHeight,
+        max:    maxValue,
     });
 
     legendContainer.removeChildren();
 
     bars.forEach((bar, i) => {
-        const realBarHeight = bar.height - legendHeight;
         const positions = pointsPositionInRect(
             bar.value,
             bar.width,
-            realBarHeight
+            bar.height
         );
 
         labels.children[i].position.x
             += (-width / 2) + bar.x + (bar.width / 2);
         labels.children[i].position.y
-            += (height / 2) + bar.y + 20;
+            += ((height / 2) - legendHeight) + (bar.y + 20);
 
         zip(bar.points, positions)
             .forEach(([point, position]) => {
@@ -101,7 +102,7 @@ export const showBarChart = (
                     + bar.x
                 );
                 point.position.y = (
-                    (height / 2)
+                    ((height / 2) - legendHeight)
                     + (-position.y + bar.y)
                 );
                 point.alpha = 1;
@@ -118,32 +119,40 @@ export const showHorizontalBarChart = (
     maxValue,
     legendContainer
 ) => {
+    const labels = new Container();
+    data
+        .map((d) => createLabelRight(d.label))
+        .forEach((label) => labels.addChild(label));
+
+    const
+        legendWidth = labels.getLocalBounds().width,
+        realBarWidth = width - legendWidth;
+
     const bars = horizontalBarChart({
         data,
-        width,
         height,
-        max: maxValue,
+        width: realBarWidth,
+        max:   maxValue,
     });
 
     legendContainer.removeChildren();
 
-    bars.forEach((bar) => {
+    bars.forEach((bar, i) => {
         const positions = pointsPositionInRect(
             bar.value,
             bar.width,
             bar.height
         );
 
-        legendContainer.addChild(labelRight(
-            bar.label,
-            (-width / 2) + bar.x,
-            (-height / 2) + (bar.y - (bar.height / 2))
-        ));
+        labels.children[i].position.x
+            += ((-width / 2) + legendWidth) + (bar.x - 20);
+        labels.children[i].position.y
+            += (-height / 2) + (bar.y - (bar.height / 2));
 
         zip(bar.points, positions)
             .forEach(([point, position]) => {
                 point.position.x = (
-                    (-width / 2)
+                    ((-width / 2) + legendWidth)
                     + position.x
                     + bar.x
                 );
@@ -155,6 +164,8 @@ export const showHorizontalBarChart = (
                 point.changeColor(bar.color);
             });
     });
+
+    legendContainer.addChild(labels);
 };
 
 export const showDotMatrix = (
