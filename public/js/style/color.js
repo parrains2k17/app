@@ -27,8 +27,8 @@ export const LISTE_UDI      = 0x82CBEC;
 export const LISTE_DVD      = 0x4E8DD8;
 export const LISTE_UD       = 0x3D6CC3;
 export const LISTE_UMP      = 0x2552A5;
-export const LISTE_FN       = 0x020B3D;
-export const LISTE_EXD      = 0x000000; // TODO
+export const LISTE_FN       = 0x49008e;
+export const LISTE_EXD      = 0x39006f; // TODO
 export const LISTE_DIV      = 0xDDDDDD;
 export const LISTE_SE       = 0x666666;
 
