@@ -10,6 +10,8 @@ import CandidatesBar from './components/CandidatesBar';
 
 import CandidateGroup from './containers/CandidateGroup';
 
+import { SELECTOR_TITLES } from './dataviz/index';
+
 const
     width  = window.innerWidth,
     height = window.innerHeight,
@@ -44,6 +46,8 @@ class AppController {
             '.js-add-candidate-close',
             (candidate) => this.addCandidate(candidate)
         );
+
+        this.titleData = document.querySelector('.js-title-dataviz');
     }
 
     buildCandidates(results) {
@@ -98,6 +102,15 @@ class AppController {
         });
     }
 
+    openTitle(title) {
+        this.titleData.innerText = SELECTOR_TITLES[title];
+        this.titleData.classList.add('mod-open');
+    }
+
+    closeTitle() {
+        this.titleData.classList.remove('mod-open');
+    }
+
     candidateOpen(selectedCandidate) {
         this.selectedCandidates.push(selectedCandidate);
 
@@ -143,9 +156,11 @@ class AppController {
         if (!close) {
             this.activateSelectedCandidates();
         }
+        this.closeTitle();
     }
 
     selectDataviz(selector) {
+        this.openTitle(selector);
         // retrieve data for each candidates (one or two)
         const data = this.selectedCandidates.map(
             (candidate) => candidate.buildDatavizData(selector)
