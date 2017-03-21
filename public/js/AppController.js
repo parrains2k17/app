@@ -99,6 +99,11 @@ class AppController {
     }
 
     candidateOpen(selectedCandidate) {
+        // if already selected, don't do anything
+        if (this.selectedCandidates.indexOf(selectedCandidate) > -1) {
+            return;
+        }
+
         this.selectedCandidates.push(selectedCandidate);
 
         Object.values(this.candidates).forEach((candidate) => {
