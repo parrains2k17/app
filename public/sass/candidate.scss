@@ -121,10 +121,13 @@
     color: $white;
     left: -100%;
     position: absolute;
-    top: 6em;
+    text-align: center;
+    top: 2.2em;
     transition: left .4s ease;
+    width: 100%;
 }
 
 .title-dataviz.mod-open {
-    left: 1em;
+    left: 0;
 }
+
