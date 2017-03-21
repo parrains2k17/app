@@ -140,12 +140,12 @@ $sidebar-margin: 0;
 @media only screen and (max-width: 737px) {
     .action-bar.mod-criteres.mod-open {
         flex-direction: row;
+        right: 0;
         top: 0;
         width: 100%;
-        right: 0;
     }
 
     .action-bar-container {
-        display: flex; 
+        display: flex;
     }
 }
