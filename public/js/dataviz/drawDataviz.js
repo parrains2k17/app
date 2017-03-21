@@ -194,7 +194,7 @@ export const showDotMatrix = (
 
     const
         realLabels = labelsFull || labels,
-        l = Object.keys(labelsFull).length;
+        l = Object.keys(realLabels).length;
 
     const drawLabel = (container) => (key, i) => {
         const label = new Text(
