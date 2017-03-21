@@ -71,7 +71,7 @@ $sidebar-margin: 0;
 }
 
 .action-bar-container {
-    border-radius: 4px;
+    color: $white2;
     flex: 0;
     list-style: none;
     padding: 1em 0;
@@ -91,7 +91,8 @@ $sidebar-margin: 0;
 }
 
     .action-bar-element {
-        background: $background-block-strong;
+        background: $background-block;
+        border-radius: 9999px;
         cursor: pointer;
         padding: .3em .5em;
         position: relative;
@@ -129,14 +130,19 @@ $sidebar-margin: 0;
     }
 
     .action-bar-element.mod-criteres::before {
-        background: $background-block-strong;
+        background: $background-block;
         content: attr(data-critere-name);
         right: 110%;
         width: 270%;
     }
 
+    .action-bar-element.mod-planets {
+        background: none;
+    }
+
     .action-bar-element.mod-planets::before {
-        background: $background-block-strong;
+        background: $background-block;
+        color: $white;
         content: attr(data-planet-name);
         left: 110%;
         width: 270%;
