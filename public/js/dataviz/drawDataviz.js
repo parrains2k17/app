@@ -22,15 +22,15 @@ const LABEL_STYLE = {
     align:      'center',
 };
 
-const labelCentered = (text, x, y, rotate = false) => {
+const createLabelCentered = (text, rotate = false) => {
     const l = new Text(
         text,
         LABEL_STYLE
     );
-    const bounds = l.getLocalBounds();
 
-    l.position.x = x - (bounds.width / 2);
-    l.position.y = y + 10;
+    const bounds = l.getLocalBounds();
+    l.position.x -= (bounds.width / 2);
+    l.position.y = 0;
 
     l.pivot.x = 0;
     l.pivot.y = 0;
@@ -64,6 +64,13 @@ export const showBarChart = (
     maxValue,
     legendContainer
 ) => {
+    const labels = new Container();
+    data
+        .map((d) => createLabelCentered(d.label, rotateLegend))
+        .forEach((label) => labels.addChild(label));
+
+    const legendHeight = labels.getLocalBounds().height;
+
     const bars = barChart({
         data,
         width,
@@ -73,19 +80,18 @@ export const showBarChart = (
 
     legendContainer.removeChildren();
 
-    bars.forEach((bar) => {
+    bars.forEach((bar, i) => {
+        const realBarHeight = bar.height - legendHeight;
         const positions = pointsPositionInRect(
             bar.value,
             bar.width,
-            bar.height
+            realBarHeight
         );
 
-        legendContainer.addChild(labelCentered(
-            bar.label,
-            (-width / 2) + bar.x + (bar.width / 2), // center
-            (height / 2) + bar.y + 10,
-            rotateLegend
-        ));
+        labels.children[i].position.x
+            += (-width / 2) + bar.x + (bar.width / 2);
+        labels.children[i].position.y
+            += (height / 2) + bar.y + 20;
 
         zip(bar.points, positions)
             .forEach(([point, position]) => {
@@ -102,6 +108,8 @@ export const showBarChart = (
                 point.changeColor(bar.color);
             });
     });
+
+    legendContainer.addChild(labels);
 };
 
 export const showHorizontalBarChart = (
