@@ -1,4 +1,4 @@
-⬇️ Les parrainages des candidats aux présidentielles 2017 ⬇️  [![Build Status](https://travis-ci.org/parrains2k17/parrains2k17.github.io.svg?branch=master)](https://travis-ci.org/parrains2k17/website)
+⬇️ Les parrainages des candidats aux présidentielles 2017 ⬇️  [![Build Status](https://travis-ci.org/parrains2k17/parrains2k17.github.io.svg?branch=master)](https://travis-ci.org/parrains2k17/parrains2k17.github.io)
 ======================================================
 
 # Descriptif du projet
