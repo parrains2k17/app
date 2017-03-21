@@ -24,10 +24,10 @@ const LABEL_STYLE = {
     align:      'center',
 };
 
-const createLabelCentered = (text, rotate = false) => {
+const createLabelCentered = (text, rotate, style) => {
     const l = new Text(
         text,
-        LABEL_STYLE
+        style
     );
 
     const bounds = l.getLocalBounds();
@@ -66,9 +66,22 @@ export const showBarChart = (
     maxValue,
     legendContainer
 ) => {
-    const labels = new Container();
+    const total = data.reduce((sum, d) => sum + d.value, 0);
+
+    const
+        labels = new Container();
     data
-        .map((d) => createLabelCentered(d.label, rotateLegend))
+        .map((d) => {
+            const
+                number = d.value,
+                percentage = floor((d.value / total) * 100);
+
+            return createLabelCentered(
+                `${d.label}\n${number} (${percentage}%)`,
+                false,
+                LABEL_STYLE
+            );
+        })
         .forEach((label) => labels.addChild(label));
 
     const
