@@ -97,7 +97,9 @@
 }
 
 .add-candidate.mod-open {
-    left: 1em;
+    @media only screen and (min-width: $breakpoint + 1px) {
+        left: 1em;
+    }
 }
 
     .add-candidate-button {
