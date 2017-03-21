@@ -20,14 +20,15 @@ const { floor, PI, max } = Math;
 const LABEL_STYLE = {
     fontFamily: 'Roboto Mono',
     fontSize:   12,
+    lineHeight: 17,
     fill:       WHITE,
     align:      'center',
 };
 
-const createLabelCentered = (text, rotate = false) => {
+const createLabelCentered = (text, rotate, style) => {
     const l = new Text(
         text,
-        LABEL_STYLE
+        style
     );
 
     const bounds = l.getLocalBounds();
@@ -45,10 +46,10 @@ const createLabelCentered = (text, rotate = false) => {
     return l;
 };
 
-const createLabelRight = (text) => {
+const createLabelRight = (text, style) => {
     const l = new Text(
         text,
-        LABEL_STYLE
+        style
     );
     const bounds = l.getLocalBounds();
 
@@ -66,9 +67,22 @@ export const showBarChart = (
     maxValue,
     legendContainer
 ) => {
-    const labels = new Container();
+    const total = data.reduce((sum, d) => sum + d.value, 0);
+
+    const
+        labels = new Container();
     data
-        .map((d) => createLabelCentered(d.label, rotateLegend))
+        .map((d) => {
+            const
+                number = d.value,
+                percentage = floor((d.value / total) * 100);
+
+            return createLabelCentered(
+                `${d.label}\n${number} (${percentage}%)`,
+                false,
+                LABEL_STYLE
+            );
+        })
         .forEach((label) => labels.addChild(label));
 
     const
@@ -121,9 +135,21 @@ export const showHorizontalBarChart = (
     maxValue,
     legendContainer
 ) => {
-    const labels = new Container();
+    const total = data.reduce((sum, d) => sum + d.value, 0);
+
+    const
+        labels = new Container();
     data
-        .map((d) => createLabelRight(d.label))
+        .map((d) => {
+            const
+                number = d.value,
+                percentage = floor((d.value / total) * 100);
+
+            return createLabelRight(
+                `${d.label}\n${number} (${percentage}%)`,
+                { ...LABEL_STYLE, align: 'right' }
+            );
+        })
         .forEach((label) => labels.addChild(label));
 
     const
@@ -194,7 +220,7 @@ export const showDotMatrix = (
 
     const
         realLabels = labelsFull || labels,
-        l = Object.keys(labelsFull).length;
+        l = Object.keys(realLabels).length;
 
     const drawLabel = (container) => (key, i) => {
         const label = new Text(
