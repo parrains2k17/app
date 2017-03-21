@@ -48,6 +48,7 @@ class AppController {
         );
 
         this.titleData = document.querySelector('.js-title-dataviz');
+        this.currentSelector = null;
     }
 
     buildCandidates(results) {
@@ -148,6 +149,8 @@ class AppController {
             this.criteresBarMaires.close();
             this.planetsChoiceBar.stop();
             this.stage.active();
+
+            this.currentSelector = null;
         } else {
             // just remove one of the two
             this.selectedCandidates[index].hide(-width / 2);
@@ -185,6 +188,8 @@ class AppController {
                 max
             )
         );
+
+        this.currentSelector = selector;
     }
 
     addCandidate(id) {
@@ -207,6 +212,10 @@ class AppController {
         this.candidatePanel.open(); // TODO
         // this.criteresBarMaires.open(); // TODO update selecteDataviz
         // this.planetsChoiceBar.start(); // TODO selected state
+
+        if (this.currentSelector) {
+            this.selectDataviz(this.currentSelector);
+        }
     }
 }
 
