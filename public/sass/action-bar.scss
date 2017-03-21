@@ -40,10 +40,24 @@ $sidebar-margin: 0;
 
 .action-bar.mod-criteres {
     right: -$sidebar-margin - 100em;
+
+    @media only screen and (max-width: $breakpoint) {
+        flex-direction: row;
+        height: auto;
+        justify-content: flex-start;
+        overflow-x: scroll;
+        right: 0;
+        top: -10em;
+        width: 100%;
+    }
 }
 
 .action-bar.mod-criteres.mod-open {
     right: $sidebar-margin;
+
+    @media only screen and (max-width: $breakpoint) {
+        top: 0;
+    }
 }
 
 .action-bar.mod-planets {
@@ -61,6 +75,12 @@ $sidebar-margin: 0;
     flex: 0;
     list-style: none;
     padding: 1em 0;
+
+    @media only screen and (max-width: $breakpoint) {
+        display: flex;
+        margin: 0;
+        padding: 1em 1em 0 0;
+    }
 }
 
 .action-bar-container.mod-planets {
@@ -76,6 +96,12 @@ $sidebar-margin: 0;
         padding: .3em .5em;
         position: relative;
         width: 6em;
+
+        @media only screen and (max-width: $breakpoint) {
+            border-radius: 4px;
+            margin-left: 1em;
+            width: 4em;
+        }
     }
 
     .action-bar-element::before {
@@ -89,13 +115,17 @@ $sidebar-margin: 0;
     }
 
     .action-bar-element:first-child {
-        border-top-left-radius: 4px;
-        border-top-right-radius: 4px;
+        @media only screen and (min-width: $breakpoint + 1px) {
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+        }
     }
 
     .action-bar-element:last-child {
-        border-bottom-left-radius: 4px;
-        border-bottom-right-radius: 4px;
+        @media only screen and (min-width: $breakpoint + 1px) {
+            border-bottom-left-radius: 4px;
+            border-bottom-right-radius: 4px;
+        }
     }
 
     .action-bar-element.mod-criteres::before {
@@ -117,7 +147,9 @@ $sidebar-margin: 0;
     }
 
     .action-bar-element:hover::before {
-        display: block;
+        @media only screen and (min-width: $breakpoint + 1px) {
+            display: block;
+        }
     }
 
 .criteres-image {
@@ -126,6 +158,11 @@ $sidebar-margin: 0;
     background-size: contain;
     height: $size-critere;
     width: $size-critere;
+
+    @media only screen and (max-width: $breakpoint) {
+        height: $size-critere - 2em;
+        width: $size-critere - 2em;
+    }
 }
 
 .planets-image {
@@ -135,3 +172,5 @@ $sidebar-margin: 0;
     height: $size-critere;
     width: $size-critere;
 }
+
+

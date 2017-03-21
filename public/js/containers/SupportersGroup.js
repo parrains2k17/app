@@ -2,7 +2,7 @@
 import { Container } from 'pixi.js';
 import { range, random as randomInt } from 'underscore';
 
-import { getWidth, getHeight } from '../utils/window';
+import { getWidth, getHeight, isMobile } from '../utils/window';
 
 import Supporter from '../components/Supporter';
 import randomNumber from '../utils/randomNumber';
@@ -45,9 +45,23 @@ const { PI, random, sqrt } = Math;
 const
     SCALE_ACTIVE      = 0.5,
     CENTER_DURATION   = 0.3,
-    AREA_X            = 0.6,
-    AREA_Y            = 0.5,
     NUMBER_GROUPS     = 3;
+
+const getXArea = () => {
+    if (isMobile()) {
+        return 0.9;
+    }
+
+    return 0.6;
+};
+
+const getYArea = () => {
+    if (isMobile()) {
+        return 0.7;
+    }
+
+    return 0.5;
+};
 
 class Supporters extends Container {
     constructor(supporters) {
@@ -146,8 +160,8 @@ class Supporters extends Container {
 
     showDataviz(selector, totalDataviz, data, maxValue) { // eslint-disable-line
         const
-            width = (getWidth() / totalDataviz) * AREA_X,
-            height = getHeight() * AREA_Y;
+            width = (getWidth() / totalDataviz) * getXArea(),
+            height = getHeight() * getYArea();
 
         this.scale.set(SCALE_ACTIVE, SCALE_ACTIVE);
 

@@ -13,6 +13,8 @@ import {
 
 import { RADIUS } from '../components/Supporter';
 
+import { isMobile } from '../utils/window';
+
 const { floor, PI, max } = Math;
 
 const LABEL_STYLE = {
@@ -22,15 +24,15 @@ const LABEL_STYLE = {
     align:      'center',
 };
 
-const labelCentered = (text, x, y, rotate = false) => {
+const createLabelCentered = (text, rotate = false) => {
     const l = new Text(
         text,
         LABEL_STYLE
     );
-    const bounds = l.getLocalBounds();
 
-    l.position.x = x - (bounds.width / 2);
-    l.position.y = y + 10;
+    const bounds = l.getLocalBounds();
+    l.position.x -= (bounds.width / 2);
+    l.position.y = 0;
 
     l.pivot.x = 0;
     l.pivot.y = 0;
@@ -43,15 +45,15 @@ const labelCentered = (text, x, y, rotate = false) => {
     return l;
 };
 
-const labelRight = (text, x, y) => {
+const createLabelRight = (text) => {
     const l = new Text(
         text,
         LABEL_STYLE
     );
     const bounds = l.getLocalBounds();
 
-    l.position.x = x - bounds.width - 10;
-    l.position.y = y - (bounds.height / 2);
+    l.position.x -= bounds.width - 10;
+    l.position.y -= (bounds.height / 2);
 
     l.pivot.x = 0;
     l.pivot.y = 0;
@@ -64,28 +66,35 @@ export const showBarChart = (
     maxValue,
     legendContainer
 ) => {
+    const labels = new Container();
+    data
+        .map((d) => createLabelCentered(d.label, rotateLegend))
+        .forEach((label) => labels.addChild(label));
+
+    const
+        legendHeight = labels.getLocalBounds().height,
+        realBarHeight = height - legendHeight;
+
     const bars = barChart({
         data,
         width,
-        height,
-        max: maxValue,
+        height: realBarHeight,
+        max:    maxValue,
     });
 
     legendContainer.removeChildren();
 
-    bars.forEach((bar) => {
+    bars.forEach((bar, i) => {
         const positions = pointsPositionInRect(
             bar.value,
             bar.width,
             bar.height
         );
 
-        legendContainer.addChild(labelCentered(
-            bar.label,
-            (-width / 2) + bar.x + (bar.width / 2), // center
-            (height / 2) + bar.y + 10,
-            rotateLegend
-        ));
+        labels.children[i].position.x
+            += (-width / 2) + bar.x + (bar.width / 2);
+        labels.children[i].position.y
+            += ((height / 2) - legendHeight) + (bar.y + 20);
 
         zip(bar.points, positions)
             .forEach(([point, position]) => {
@@ -95,13 +104,15 @@ export const showBarChart = (
                     + bar.x
                 );
                 point.position.y = (
-                    (height / 2)
+                    ((height / 2) - legendHeight)
                     + (-position.y + bar.y)
                 );
                 point.alpha = 1;
                 point.changeColor(bar.color);
             });
     });
+
+    legendContainer.addChild(labels);
 };
 
 export const showHorizontalBarChart = (
@@ -110,32 +121,40 @@ export const showHorizontalBarChart = (
     maxValue,
     legendContainer
 ) => {
+    const labels = new Container();
+    data
+        .map((d) => createLabelRight(d.label))
+        .forEach((label) => labels.addChild(label));
+
+    const
+        legendWidth = labels.getLocalBounds().width,
+        realBarWidth = width - legendWidth;
+
     const bars = horizontalBarChart({
         data,
-        width,
         height,
-        max: maxValue,
+        width: realBarWidth,
+        max:   maxValue,
     });
 
     legendContainer.removeChildren();
 
-    bars.forEach((bar) => {
+    bars.forEach((bar, i) => {
         const positions = pointsPositionInRect(
             bar.value,
             bar.width,
             bar.height
         );
 
-        legendContainer.addChild(labelRight(
-            bar.label,
-            (-width / 2) + bar.x,
-            (-height / 2) + (bar.y - (bar.height / 2))
-        ));
+        labels.children[i].position.x
+            += ((-width / 2) + legendWidth) + (bar.x - 20);
+        labels.children[i].position.y
+            += (-height / 2) + (bar.y - (bar.height / 2));
 
         zip(bar.points, positions)
             .forEach(([point, position]) => {
                 point.position.x = (
-                    (-width / 2)
+                    ((-width / 2) + legendWidth)
                     + position.x
                     + bar.x
                 );
@@ -147,6 +166,8 @@ export const showHorizontalBarChart = (
                 point.changeColor(bar.color);
             });
     });
+
+    legendContainer.addChild(labels);
 };
 
 export const showDotMatrix = (
@@ -208,22 +229,32 @@ export const showDotMatrix = (
         legendWrapperRight.getLocalBounds().height
     );
 
+    const pointYOffset = isMobile()
+        ? -legendHeight
+        : (-legendHeight / 2);
+
     points.forEach((point, i) => {
         const
             x = (i % r) * w,
             y = floor(i / r) * h;
 
         point.position.x = (-width / 2) + x;
-        point.position.y = -(maxHeight / 2) + (-legendHeight / 2) + y;
+        point.position.y = -(maxHeight / 2) + pointYOffset + y;
         point.alpha = 1;
         point.changeColor(colors[i]);
     });
 
     legendWrapperLeft.position.x = (-width / 2);
-    legendWrapperLeft.position.y = (maxHeight / 2) - (legendHeight / 2);
+    legendWrapperLeft.position.y = (maxHeight / 2) + pointYOffset;
 
-    legendWrapperRight.position.x = 0;
-    legendWrapperRight.position.y = (maxHeight / 2) - (legendHeight / 2);
+    if (!isMobile()) {
+        legendWrapperRight.position.x = 0;
+        legendWrapperRight.position.y = (maxHeight / 2) + pointYOffset;
+    } else {
+        legendWrapperRight.position.x = (-width / 2);
+        legendWrapperRight.position.y = legendWrapperLeft.position.y
+            + legendWrapperLeft.getLocalBounds().height;
+    }
 
     legendContainer.addChild(legendWrapperLeft);
     legendContainer.addChild(legendWrapperRight);
