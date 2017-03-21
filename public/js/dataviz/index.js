@@ -6,3 +6,13 @@ export const SELECTOR_POP      = 'SELECTOR_POP';
 export const SELECTOR_URBANITE = 'SELECTOR_URBANITE';
 export const SELECTOR_CHOMAGE  = 'SELECTOR_CHOMAGE';
 export const SELECTOR_LISTE    = 'SELECTOR_LISTE';
+
+export const SELECTOR_TITLES   = {
+    [SELECTOR_GENDER]:   'Répartition par sexe des parrains',
+    [SELECTOR_AGE]:      'Répartition des parrains par tranche d’âge',
+    [SELECTOR_CSP]:      'Répartition des parrains par catégorie socio-professionnelle (CSP)',
+    [SELECTOR_POP]:      'Population totale des communes dirigées par les parrains',
+    [SELECTOR_URBANITE]: 'Répartition des communes des parrains selon leur degré d’urbanité/ruralité',
+    [SELECTOR_CHOMAGE]:  'Répartition des communes des parrains selon le taux de chômage de leur bassin d’emploi',
+    [SELECTOR_LISTE]:    'Répartition des couleurs politiques des parrains',
+};

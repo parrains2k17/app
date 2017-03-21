@@ -90,9 +90,9 @@
         }
 
 .add-candidate {
+    bottom: 9em;
     left: -100%;
     position: absolute;
-    top: 6em;
     transition: left .4s ease;
 }
 
@@ -111,4 +111,14 @@
         opacity: 1;
     }
 
+.title-dataviz {
+    color: $white;
+    left: -100%;
+    position: absolute;
+    top: 6em;
+    transition: left .4s ease;
+}
 
+.title-dataviz.mod-open {
+    left: 1em;
+}
