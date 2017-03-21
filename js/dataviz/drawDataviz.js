@@ -98,12 +98,12 @@ export const showBarChart = (
 
         zip(bar.points, positions)
             .forEach(([point, position]) => {
-                point.position.x = (
+                point.moveX(
                     (-width / 2)
                     + position.x
                     + bar.x
                 );
-                point.position.y = (
+                point.moveY(
                     ((height / 2) - legendHeight)
                     + (-position.y + bar.y)
                 );
@@ -153,12 +153,12 @@ export const showHorizontalBarChart = (
 
         zip(bar.points, positions)
             .forEach(([point, position]) => {
-                point.position.x = (
+                point.moveX(
                     ((-width / 2) + legendWidth)
                     + position.x
                     + bar.x
                 );
-                point.position.y = (
+                point.moveY(
                     -(height / 2)
                     + (-position.y + bar.y)
                 );
@@ -238,8 +238,8 @@ export const showDotMatrix = (
             x = (i % r) * w,
             y = floor(i / r) * h;
 
-        point.position.x = (-width / 2) + x;
-        point.position.y = -(maxHeight / 2) + pointYOffset + y;
+        point.moveX((-width / 2) + x);
+        point.moveY(-(maxHeight / 2) + pointYOffset + y);
         point.alpha = 1;
         point.changeColor(colors[i]);
     });
