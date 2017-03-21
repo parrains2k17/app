@@ -45,9 +45,11 @@ class CandidateGroup extends Container {
         this.controller = controller;
 
         this.moveAround();
+
+        this.on('pointerdown', this.handleClick.bind(this));
     }
 
-    mousedown() {
+    handleClick() {
         this.controller.candidateOpen(this);
     }
 
