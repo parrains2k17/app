@@ -192,7 +192,9 @@ export const showDotMatrix = (
         legendWrapperLeft = new Container(),
         legendWrapperRight = new Container();
 
-    const l = Object.keys(labels).length;
+    const
+        realLabels = labelsFull || labels,
+        l = Object.keys(labelsFull).length;
 
     const drawLabel = (container) => (key, i) => {
         const label = new Text(
@@ -206,7 +208,7 @@ export const showDotMatrix = (
 
         const circle = new Graphics();
         circle.beginFill(labels[key]);
-        circle.drawCircle(0, 0, RADIUS);
+        circle.drawCircle(0, 0, RADIUS * 2);
         circle.endFill();
 
         circle.position.x = 0;
@@ -216,11 +218,11 @@ export const showDotMatrix = (
         container.addChild(circle);
     };
 
-    Object.keys(labels).slice(0, floor(l / 2)).forEach(
+    Object.keys(realLabels).slice(0, floor(l / 2)).forEach(
         drawLabel(legendWrapperLeft)
     );
 
-    Object.keys(labels).slice(floor(l / 2) + 1).forEach(
+    Object.keys(realLabels).slice(floor(l / 2) + 1).forEach(
         drawLabel(legendWrapperRight)
     );
 
