@@ -3,6 +3,8 @@ import { Container } from 'pixi.js';
 
 import { TweenMax, Power0 } from 'gsap';
 
+const RESET_DURATION = 0.4;
+
 class MovingSupporters extends Container {
     constructor(duration, direction) {
         super();
@@ -27,7 +29,6 @@ class MovingSupporters extends Container {
             this,
             this.duration,
             {
-                delay:      0,
                 rotation:   this.rotation + (this.direction * Math.PI * 2),
                 ease:       Power0.easeNone,
                 onComplete: animate,
@@ -39,6 +40,14 @@ class MovingSupporters extends Container {
 
     stopRotate() {
         this.killAnimation();
+        TweenMax.to(
+            this,
+            RESET_DURATION,
+            {
+                rotation: 0,
+                ease:     Power0.easeNone,
+            }
+        );
     }
 }
 

@@ -43,16 +43,11 @@ import {
 const { PI, random, sqrt } = Math;
 
 const
-<<<<<<< HEAD
     SCALE_ACTIVE      = 0.5,
     CENTER_DURATION   = 0.3,
-    ROTATION_DURATION = 15,
     AREA_X            = 0.6,
-    AREA_Y            = 0.5;
-=======
-    NUMBER_GROUPS     = 3,
-    CENTER_DURATION   = 0.3;
->>>>>>> Refacto moving groups
+    AREA_Y            = 0.5,
+    NUMBER_GROUPS     = 3;
 
 class Supporters extends Container {
     constructor(supporters) {
@@ -99,7 +94,9 @@ class Supporters extends Container {
     }
 
     stopRotation() {
-        this.supporters.forEach((c) => c.center());
+        console.log('stop rotation');
+        console.log(this.movingGroups);
+        this.movingGroups.forEach((c) => c.stopRotate());
     }
 
     center() {
@@ -155,6 +152,8 @@ class Supporters extends Container {
             height = getHeight() * AREA_Y;
 
         this.scale.set(SCALE_ACTIVE, SCALE_ACTIVE);
+
+        this.stopRotation();
         this.center();
 
         switch (selector) {
