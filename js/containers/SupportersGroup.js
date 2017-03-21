@@ -71,7 +71,7 @@ class Supporters extends Container {
 
         this.movingGroups = range(NUMBER_GROUPS)
             .map(() => {
-                const duration = (5 * random()) + 15;
+                const duration = (15 * random()) + 20;
                 return new MovingSupporters(duration, direction);
             });
         this.movingGroups.forEach((g) => this.addChild(g));
