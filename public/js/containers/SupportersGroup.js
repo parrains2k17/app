@@ -94,8 +94,6 @@ class Supporters extends Container {
     }
 
     stopRotation() {
-        console.log('stop rotation');
-        console.log(this.movingGroups);
         this.movingGroups.forEach((c) => c.stopRotate());
     }
 
