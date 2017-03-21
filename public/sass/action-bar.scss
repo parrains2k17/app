@@ -4,8 +4,6 @@ $size-critere: 5em;
 
 $sidebar-margin: 0;
 
-$breakpoint: 737px;
-
 .action-bar {
     align-items: flex-start;
     display: flex;
@@ -46,6 +44,7 @@ $breakpoint: 737px;
     @media only screen and (max-width: $breakpoint) {
         flex-direction: row;
         height: auto;
+        justify-content: flex-start;
         overflow-x: scroll;
         right: 0;
         top: -10em;
@@ -80,7 +79,7 @@ $breakpoint: 737px;
     @media only screen and (max-width: $breakpoint) {
         display: flex;
         margin: 0;
-        padding: 0 1em;
+        padding: 1em 1em 0 0;
     }
 }
 
@@ -97,6 +96,12 @@ $breakpoint: 737px;
         padding: .3em .5em;
         position: relative;
         width: 6em;
+
+        @media only screen and (max-width: $breakpoint) {
+            border-radius: 4px;
+            margin-left: 1em;
+            width: 4em;
+        }
     }
 
     .action-bar-element::before {
@@ -153,6 +158,11 @@ $breakpoint: 737px;
     background-size: contain;
     height: $size-critere;
     width: $size-critere;
+
+    @media only screen and (max-width: $breakpoint) {
+        height: $size-critere - 2em;
+        width: $size-critere - 2em;
+    }
 }
 
 .planets-image {
