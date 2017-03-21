@@ -4,6 +4,7 @@ class ActionBar {
         this.onClick = onClick;
 
         this.bar = document.querySelector(classname);
+        this.switch = document.querySelector('.js-switch');
         this.actions = this.bar.querySelectorAll('.js-action');
 
         this.actions.forEach((c) => {
@@ -15,10 +16,12 @@ class ActionBar {
 
     open() {
         this.bar.classList.add('mod-open');
+        this.switch.classList.add('mode-open');
     }
 
     close() {
         this.bar.classList.remove('mod-open');
+        this.switch.classList.remove('mode-open');
         this.selected = null;
     }
 
