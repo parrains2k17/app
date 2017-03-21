@@ -1,10 +1,13 @@
 
 import { Container } from 'pixi.js';
+import { range, random as randomInt } from 'underscore';
+
 import { getWidth, getHeight } from '../utils/window';
 
 import Supporter from '../components/Supporter';
-// import randomColor from '../utils/randomColor';
 import randomNumber from '../utils/randomNumber';
+
+import MovingSupporters from './MovingSupporters';
 
 import { listColor } from '../style/color';
 
@@ -42,21 +45,23 @@ const { PI, random, sqrt } = Math;
 const
     SCALE_ACTIVE      = 0.5,
     CENTER_DURATION   = 0.3,
-    ROTATION_DURATION = 15,
     AREA_X            = 0.6,
-    AREA_Y            = 0.5;
-
-// const randomAlpha = () => {
-//     const res = randomNumber(0, 1, 1);
-//     if (res > 0.7) {
-//         return 1;
-//     }
-//     return res;
-// };
+    AREA_Y            = 0.5,
+    NUMBER_GROUPS     = 3;
 
 class Supporters extends Container {
     constructor(supporters) {
         super();
+
+        const direction = (random() > 0.5) ? 1 : -1;
+
+        this.movingGroups = range(NUMBER_GROUPS)
+            .map(() => {
+                const duration = (5 * random()) + 15;
+                return new MovingSupporters(duration, direction);
+            });
+        this.movingGroups.forEach((g) => this.addChild(g));
+
         this.addSupporters(supporters);
 
         this.legend = new Container();
@@ -69,7 +74,6 @@ class Supporters extends Container {
                 color:    listColor(supporter.liste),
                 rotation: 2 * random() * PI,
                 pivot:    {
-                    // Change 20 if the planet is bigger
                     x: randomNumber(
                         48,
                         sqrt(supporters.length * (100 / PI)),
@@ -77,24 +81,20 @@ class Supporters extends Container {
                     ),
                     y: -8,
                 },
-                // alpha: randomAlpha(0, 1, 1),
                 data: supporter,
             }));
 
-        this.supporters.forEach((c) => this.addChild(c));
+        this.supporters.forEach((c) => {
+            this.movingGroups[randomInt(NUMBER_GROUPS - 1)].add(c);
+        });
     }
 
     rotate() {
-        const direction = (random() > 0.5) ? 1 : -1;
-        this.supporters.forEach((c) => c.rotate({
-            // random to smooth transition
-            duration: ROTATION_DURATION + (random() * 6),
-            direction,
-        }));
+        this.movingGroups.forEach((g) => g.rotate());
     }
 
     stopRotation() {
-        this.supporters.forEach((c) => c.center());
+        this.movingGroups.forEach((c) => c.stopRotate());
     }
 
     center() {
@@ -150,6 +150,8 @@ class Supporters extends Container {
             height = getHeight() * AREA_Y;
 
         this.scale.set(SCALE_ACTIVE, SCALE_ACTIVE);
+
+        this.stopRotation();
         this.center();
 
         switch (selector) {
