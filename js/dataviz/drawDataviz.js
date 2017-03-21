@@ -20,6 +20,7 @@ const { floor, PI, max } = Math;
 const LABEL_STYLE = {
     fontFamily: 'Roboto Mono',
     fontSize:   12,
+    lineHeight: 17,
     fill:       WHITE,
     align:      'center',
 };
