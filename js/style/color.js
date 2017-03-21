@@ -3,6 +3,8 @@ export const BLACK  = 0x000000;
 export const WHITE  = 0xFFFFFF;
 export const GREY   = 0x666666;
 
+export const COLOR_MAN = 0x34A6B3;
+export const COLOR_WOMAN = 0xE45D82;
 export const COLOR1 = 0xf2b7a5;
 export const COLOR2 = 0xc686ef;
 export const COLOR3 = 0xa5ffb7;

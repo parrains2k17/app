@@ -4,6 +4,8 @@ import { groupBy, flatten } from 'underscore';
 import {
     GREY,
     BLACK,
+    COLOR_MAN,
+    COLOR_WOMAN,
     COLOR1,
     COLOR2,
     COLOR3,
@@ -32,8 +34,8 @@ import {
 } from '../style/color';
 
 export const GENDER_LABELS = {
-    Hommes: COLOR1,
-    Femmes: COLOR2,
+    Hommes: COLOR_MAN,
+    Femmes: COLOR_WOMAN,
 };
 
 export const CSP_LABELS = {
