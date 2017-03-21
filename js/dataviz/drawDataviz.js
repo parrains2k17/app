@@ -46,10 +46,10 @@ const createLabelCentered = (text, rotate, style) => {
     return l;
 };
 
-const createLabelRight = (text) => {
+const createLabelRight = (text, style) => {
     const l = new Text(
         text,
-        LABEL_STYLE
+        style
     );
     const bounds = l.getLocalBounds();
 
@@ -147,8 +147,7 @@ export const showHorizontalBarChart = (
 
             return createLabelRight(
                 `${d.label}\n${number} (${percentage}%)`,
-                false,
-                LABEL_STYLE
+                { ...LABEL_STYLE, align: 'right' }
             );
         })
         .forEach((label) => labels.addChild(label));
