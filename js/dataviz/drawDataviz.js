@@ -134,9 +134,22 @@ export const showHorizontalBarChart = (
     maxValue,
     legendContainer
 ) => {
-    const labels = new Container();
+    const total = data.reduce((sum, d) => sum + d.value, 0);
+
+    const
+        labels = new Container();
     data
-        .map((d) => createLabelRight(d.label))
+        .map((d) => {
+            const
+                number = d.value,
+                percentage = floor((d.value / total) * 100);
+
+            return createLabelRight(
+                `${d.label}\n${number} (${percentage}%)`,
+                false,
+                LABEL_STYLE
+            );
+        })
         .forEach((label) => labels.addChild(label));
 
     const
