@@ -1,22 +1,57 @@
 
-import { Container } from 'pixi.js';
+import { Graphics, Sprite } from 'pixi.js';
 
+import renderer from '../services/renderer';
 import { WHITE } from '../style/color';
 
-const buildThing = (Thing, {
-    alpha = 1,
+const cache = (() => {
+    const store = {};
+
+    return {
+        add: (name, texture) => {
+            store[name] = texture;
+        },
+        find: (name) => store[name],
+    };
+})();
+
+const buildTexture = ({
     radius = 1,
     color = WHITE,
-}, options) => {
-    const thing = new Thing(options);
-    thing.beginFill(color);
-    thing.drawCircle(0, 0, radius);
-    thing.endFill();
+}) => {
+    const circle = new Graphics();
+    circle.beginFill(color);
+    circle.drawCircle(0, 0, radius);
+    circle.endFill();
 
-    return thing;
+    return renderer.get().generateTexture(
+        circle,
+        renderer.getScaleMode(),
+        renderer.getDevicePixelRatio()
+    );
 };
 
-class Circle extends Container {
+const getTexture = ({
+    radius = 1,
+    color = WHITE,
+}) => {
+    const
+        name = `circle-${radius}-${color}`,
+        cached = cache.find(name);
+
+    if (!cached) {
+        const texture = buildTexture({
+            radius,
+            color,
+        });
+        cache.add(name, texture);
+        return texture;
+    }
+
+    return cached;
+};
+
+class Circle extends Sprite {
     constructor({
         position = { x: 0, y: 0 },
         rotation = 0,
@@ -24,12 +59,11 @@ class Circle extends Container {
         radius = 1,
         color = WHITE,
         pivot = { x: 0, y: 0 },
-    }, Thing, options) {
+    }) {
         super();
         this.position = position;
         this.pivot = pivot;
         this.rotation = rotation;
-        this.Thing = Thing;
 
         // non-pixi attributes
         this.initialPosition = position;
@@ -38,27 +72,26 @@ class Circle extends Container {
         this.initialRadius = radius;
         this.initialColor = color;
         this.initialPivot = pivot;
-        this.options = options;
 
         this.reset();
     }
 
     reset() {
         this.removeChildren();
-        this.addChild(buildThing(this.Thing, {
+        this.texture = getTexture({
             alpha:  this.initialAlpha,
             radius: this.initialRadius,
             color:  this.initialColor,
-        }, this.options));
+        });
     }
 
     changeColor(color) {
         this.removeChildren();
-        this.addChild(buildThing(this.Thing, {
+        this.texture = getTexture({
             alpha:  this.initialAlpha,
             radius: this.initialRadius,
             color,
-        }));
+        });
     }
 
     resetColor() {
