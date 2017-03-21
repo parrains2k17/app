@@ -19,6 +19,7 @@ class ActionBar {
 
     close() {
         this.bar.classList.remove('mod-open');
+        this.selected = null;
     }
 
     reset() {
