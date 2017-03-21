@@ -39,14 +39,14 @@ export const GENDER_LABELS = {
 };
 
 export const CSP_LABELS = {
-    'Professions agricoles':                     COLOR1,
+    'Professions agricoles':                     COLOR6,
     'Professions industrielles et commerciales': COLOR2,
     'Salariés du privé':                         COLOR3,
-    'Professions libérales':                     COLOR4,
+    'Professions libérales':                     COLOR8,
     'Professions de l\'enseignement':            COLOR5,
-    'Personnels des entreprises publiques':      COLOR6,
+    'Personnels des entreprises publiques':      COLOR1,
     Divers:                                      COLOR7,
-    Retraités:                                   COLOR8,
+    Retraités:                                   COLOR4,
     Inconnue:                                    GREY,
 };
 
