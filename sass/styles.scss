@@ -1,5 +1,7 @@
 // sass-lint:disable no-duplicate-properties no-vendor-prefixes
 
+$breakpoint: 737px;
+
 @import 'colors';
 @import 'candidate';
 @import 'action-bar';
