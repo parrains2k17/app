@@ -2,7 +2,6 @@
 import { without, find } from 'underscore';
 
 import candidates from './services/candidates';
-import { isMobile } from './utils/window';
 
 import Stage from './components/Stage';
 import CandidatePanel from './components/CandidatePanel';
@@ -37,13 +36,8 @@ class AppController {
 
         this.selectedCandidates = [];
 
-        this.criteresBarMaires = new ActionBar(
-            '.js-actions-maires',
-            (critere) => this.selectDataviz(critere)
-        );
-
-        this.criteresBarAll = new ActionBar(
-            '.js-actions-all',
+        this.criteresBar = new ActionBar(
+            '.js-actions-criteres',
             (critere) => this.selectDataviz(critere)
         );
 
@@ -144,11 +138,7 @@ class AppController {
         this.stage.center();
         this.candidatePanel.open();
 
-        if (isMobile()) { // TODO don't do this
-            this.criteresBarMaires.open();
-        } else {
-            this.criteresBarAll.open();
-        }
+        this.criteresBar.open();
 
         this.planetsChoiceBar.start();
         this.typeSwitch.open();
@@ -164,8 +154,7 @@ class AppController {
             Object.values(this.candidates)
                 .forEach((candidate) => candidate.reset());
             this.candidatePanel.close();
-            this.criteresBarMaires.close();
-            this.criteresBarAll.close();
+            this.criteresBar.close();
             this.planetsChoiceBar.stop();
             this.typeSwitch.close();
             this.stage.active();
@@ -235,30 +224,6 @@ class AppController {
         console.log('currentSelector', this.currentSelector);
         if (this.currentSelector) {
             this.selectDataviz(this.currentSelector);
-        }
-    }
-
-    changeType(maires) {
-        this.selectedCandidates.forEach((candidate) => {
-            candidate.resetCircle();
-        });
-        this.closeTitle();
-        this.currentSelector = null;
-
-        if (maires) {
-            this.criteresBarMaires.open();
-            this.criteresBarAll.close();
-
-            this.selectedCandidates.forEach((candidate) => {
-                candidate.showMaires(true);
-            });
-        } else {
-            this.criteresBarMaires.close();
-            this.criteresBarAll.open();
-
-            this.selectedCandidates.forEach((candidate) => {
-                candidate.showMaires(false);
-            });
         }
     }
 }
