@@ -232,6 +232,11 @@ class AppController {
     }
 
     changeType(maires) {
+        this.selectedCandidates.forEach((candidate) => {
+            candidate.resetCircle();
+        });
+        this.closeTitle();
+
         if (maires) {
             this.criteresBarMaires.open();
             this.criteresBarAll.close();
