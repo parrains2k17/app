@@ -28,12 +28,13 @@ class CandidateGroup extends Container {
         this.position = position;
         this.initialPosition = { ...position }; // copy
         this.infos = infos;
+        this.id = infos.id;
         this.maire = infos.maire;
 
-        this.candidate = new Candidate(texture); // TODO pass data
+        this.candidate = new Candidate(texture);
 
         this.supporters = new Supporters(supporters);
-        this.supporters.rotate(); // TODO maybe not here
+        this.supporters.rotate();
 
         this.interactive = true;
         this.hitArea = new Circle(0, 0, HIT_AREA_RADIUS);
@@ -121,6 +122,7 @@ class CandidateGroup extends Container {
     }
 
     reset() {
+        this.visible = true;
         TweenMax.to(
             this,
             ACTIVATE_DURATION,
@@ -131,8 +133,6 @@ class CandidateGroup extends Container {
                 ease:       Power0.easeNone,
                 onComplete: () => {
                     this.moveAround();
-                    // TODO change for a fade in (?)
-                    this.visible = true;
                 },
             }
         );

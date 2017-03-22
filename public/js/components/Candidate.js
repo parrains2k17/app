@@ -1,18 +1,34 @@
 
-import { Texture } from 'pixi.js';
+import { Texture, Sprite } from 'pixi.js';
 import { TweenMax, Power0, Power1 } from 'gsap';
-
-import CircleSprite from './CircleSprite';
 
 const
     SHOW_DURATION = 1,
     HIDE_DURATION = 0.2;
 
+class CircleSprite extends Sprite {
+    constructor({
+        position = { x: 0, y: 0 },
+        rotation = 0,
+        alpha = 1,
+        pivot = { x: 0, y: 0 },
+        texture,
+    }) {
+        super(texture);
+
+        this.alpha = alpha;
+        this.position = position;
+        this.pivot = pivot;
+        this.rotation = rotation;
+
+        // non-pixi attributes
+        this.startPosition = position;
+    }
+}
+
 class Candidate extends CircleSprite {
     constructor(texture, config = {}) {
         super({
-            // TODO scale mode and resolution
-            // TODO load in cache ?
             texture: Texture.fromImage(texture),
             ...config,
         });
@@ -47,8 +63,6 @@ class Candidate extends CircleSprite {
     }
 
     resetPosition({ duration }) {
-        this.killAnimation();
-
         TweenMax.to(
             this.position,
             duration,
@@ -59,13 +73,7 @@ class Candidate extends CircleSprite {
             }
         );
     }
-
-    killAnimation() {
-        if (this.animation) {
-            this.animation.kill();
-        }
-    }
 }
 
-
 export default Candidate;
+

@@ -182,6 +182,12 @@ class Supporters extends Container {
         this.stopRotation();
         this.center();
 
+        if (mairesOnly(selector)) {
+            this.showMaires(); // hide other supporters
+        } else {
+            this.showAll();
+        }
+
         switch (selector) {
         case SELECTOR_GENDER:
             showBarChart(
@@ -272,18 +278,18 @@ class Supporters extends Container {
         }
     }
 
-    showMaires(show) {
-        if (!show) {
-            this.supporters.forEach((s) => {
-                s.show();
+    showMaires() {
+        this.supporters
+            .filter((s) => !s.maire)
+            .forEach((s) => {
+                s.fade();
             });
-        } else {
-            this.supporters
-                .filter((s) => !s.maire)
-                .forEach((s) => {
-                    s.fade();
-                });
-        }
+    }
+
+    showAll() {
+        this.supporters.forEach((s) => {
+            s.show();
+        });
     }
 }
 

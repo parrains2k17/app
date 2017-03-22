@@ -147,44 +147,6 @@
             </div>
         </div>
 
-        <div class="onoffswitch js-switch">
-            <input type="checkbox" name="onoffswitch"
-                id="myonoffswitch"
-                class="onoffswitch-checkbox">
-            <label class="onoffswitch-labels" for="myonoffswitch">
-                <span class="onoffswitch-label">
-                    Regarder l'ensemble des parrains
-                </span>
-                <br>
-                <span class="onoffswitch-label">
-                    Regarder seulement les maires
-                </span>
-            </label>
-        </div>
-
-        <div class="action-bar mod-criteres js-actions-all">
-            <ul class="action-bar-container mod-criteres">
-                <li
-                    class="action-bar-element mod-criteres js-action"
-                    data-id="SELECTOR_TYPE"
-                    data-critere-name="Type de mandat"
-                >
-                    <div class="criteres-image"
-                        style="background-image:url('images/partis_politique.svg')">
-                    </div>
-                </li>
-                <li
-                    class="action-bar-element mod-criteres js-action"
-                    data-id="SELECTOR_GENDER_ALL"
-                    data-critere-name="Sexe"
-                >
-                    <div class="criteres-image"
-                        style="background-image:url('images/gender_symbol.svg')">
-                    </div>
-                </li>
-            </ul>
-        </div>
-
         <div class="modal-background js-modal-background js-close-modal" ></div>
         <div class="modal-container js-modal-container-intro">
 
@@ -282,8 +244,34 @@
             </p>
         </div>
  -->
-        <div class="action-bar mod-criteres js-actions-maires">
+        <div class="action-bar mod-criteres js-actions-criteres">
             <ul class="action-bar-container mod-criteres">
+                <li class="action-bar-title">
+                    L'ensemble des parrains du candidat
+                </li>
+                <li
+                    class="action-bar-element mod-criteres js-action"
+                    data-id="SELECTOR_TYPE"
+                    data-critere-name="Type de mandat"
+                >
+                    <div class="criteres-image"
+                        style="background-image:url('images/partis_politique.svg')">
+                    </div>
+                </li>
+                <li
+                    class="action-bar-element mod-criteres js-action"
+                    data-id="SELECTOR_GENDER_ALL"
+                    data-critere-name="Sexe"
+                >
+                    <div class="criteres-image"
+                        style="background-image:url('images/gender_symbol.svg')">
+                    </div>
+                </li>
+
+                <li class="action-bar-title mod-maires">
+                    Seulement les maires
+                </li>
+
                 <li
                     class="action-bar-element mod-criteres js-action"
                     data-id="SELECTOR_LISTE"
@@ -496,7 +484,7 @@
                 </li>
                 <li
                     class="action-bar-element mod-planets js-action"
-                    data-id="MeLENCHON Jean-Luc"
+                    data-id="MELENCHON Jean-Luc"
                     data-planet-name="Jean-Luc Mélenchon"
                 >
                     <div class="planets-image"
