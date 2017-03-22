@@ -1,4 +1,3 @@
-
 /* eslint-disable max-len */
 
 export const SELECTOR_GENDER   = 'SELECTOR_GENDER';
@@ -8,6 +7,13 @@ export const SELECTOR_POP      = 'SELECTOR_POP';
 export const SELECTOR_URBANITE = 'SELECTOR_URBANITE';
 export const SELECTOR_CHOMAGE  = 'SELECTOR_CHOMAGE';
 export const SELECTOR_LISTE    = 'SELECTOR_LISTE';
+
+export const SELECTOR_TYPE       = 'SELECTOR_TYPE';
+export const SELECTOR_GENDER_ALL = 'SELECTOR_GENDER_ALL';
+
+export const mairesOnly = (selector) => (
+    selector !== SELECTOR_TYPE && selector !== SELECTOR_GENDER_ALL
+);
 
 export const SELECTOR_TITLES   = {
     [SELECTOR_GENDER]:
