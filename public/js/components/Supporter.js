@@ -1,9 +1,16 @@
 
 import MovingCircle from './MovingCircle';
 
+export const RADIUS = 2;
+
 class Supporter extends MovingCircle {
-    constructor(config = {}) {
-        super({ radius: 2, ...config });
+    constructor({
+        data = [],
+        ...config
+    }) {
+        super({ radius: RADIUS, ...config });
+
+        this.data = data;
     }
 }
 
