@@ -148,6 +148,7 @@ class CandidateGroup extends Container {
         );
 
         this.candidate.resetPosition({ ACTIVATE_DURATION });
+        this.resetCircle();
     }
 
     moveAround() { // TODO better waiting state
