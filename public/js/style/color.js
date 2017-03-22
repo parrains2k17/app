@@ -1,15 +1,17 @@
 
 export const BLACK  = 0x000000;
 export const WHITE  = 0xFFFFFF;
-export const GREY   = 0x666666;
+export const GREY   = 0xC4B7D4;
 
-export const COLOR1 = 0xf2b7a5;
-export const COLOR2 = 0xc686ef;
-export const COLOR3 = 0xa5ffb7;
-export const COLOR4 = 0xffe8a9;
-export const COLOR5 = 0x9bbdff;
-export const COLOR6 = 0xf7bfe3;
-export const COLOR7 = 0x4ce5d6;
+export const COLOR1 = 0x34A6B3; // couleur homme
+export const COLOR2 = 0xF7D650;
+export const COLOR3 = 0xFA9D26;
+export const COLOR4 = 0xFA5D51;
+export const COLOR5 = 0x8066D9; // couleur urbain
+export const COLOR6 = 0x60D896; // couelur rural
+export const COLOR7 = 0xE45D82; // couleur femme
+export const COLOR8 = 0x81CFE2;
+
 
 export const LISTE_EXG      = 0x430201;
 export const LISTE_PC       = 0xE90F00;
@@ -25,8 +27,8 @@ export const LISTE_UDI      = 0x82CBEC;
 export const LISTE_DVD      = 0x4E8DD8;
 export const LISTE_UD       = 0x3D6CC3;
 export const LISTE_UMP      = 0x2552A5;
-export const LISTE_FN       = 0x020B3D;
-export const LISTE_EXD      = 0x000000; // TODO
+export const LISTE_FN       = 0x49008e;
+export const LISTE_EXD      = 0x39006f; // TODO
 export const LISTE_DIV      = 0xDDDDDD;
 export const LISTE_SE       = 0x666666;
 

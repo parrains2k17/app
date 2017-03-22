@@ -3,13 +3,14 @@ import { groupBy, flatten } from 'underscore';
 
 import {
     GREY,
-    BLACK,
     COLOR1,
     COLOR2,
     COLOR3,
     COLOR4,
     COLOR5,
     COLOR6,
+    COLOR7,
+    COLOR8,
     LISTE_EXG,
     LISTE_PC,
     LISTE_FG,
@@ -33,18 +34,18 @@ import {
 
 export const GENDER_LABELS = {
     Hommes: COLOR1,
-    Femmes: COLOR2,
+    Femmes: COLOR7,
 };
 
-export const CSP_NAME_COLOR = {
-    'Professions agricoles':                     COLOR1,
+export const CSP_LABELS = {
+    'Professions agricoles':                     COLOR6,
     'Professions industrielles et commerciales': COLOR2,
     'Salariés du privé':                         COLOR3,
-    'Professions libérales':                     COLOR4,
+    'Professions libérales':                     COLOR8,
     'Professions de l\'enseignement':            COLOR5,
-    'Personnels des entreprises publiques':      COLOR6,
-    Divers:                                      COLOR1,
-    Retraités:                                   COLOR2,
+    'Personnels des entreprises publiques':      COLOR1,
+    Divers:                                      COLOR7,
+    Retraités:                                   COLOR4,
     Inconnue:                                    GREY,
 };
 
@@ -69,8 +70,8 @@ export const POPULATION_LABELS = {
 
 export const URBANITE_LABELS = {
     Inconnu: GREY,
-    urbaine: COLOR5,
-    rurale:  COLOR6,
+    Urbaine: COLOR6,
+    Rurale:  COLOR7,
 };
 
 export const CHOMAGE_LABELS = {
@@ -100,8 +101,39 @@ export const LISTE_LABELS = {
     EXD:            LISTE_EXD,
     DIV:            LISTE_DIV,
     SE:             LISTE_SE,
-    Inconnue:       GREY,
-    'Pas de liste': BLACK,
+    Inconnue:       LISTE_SE,
+    'Pas de liste': GREY,
+};
+
+export const LISTE_LABELS_FULL = { // TODO Full names
+    EXG:   'EXG',
+    PC:    'PC',
+    FG:    'FG',
+    PG:    'PG',
+    PS:    'PS',
+    UG:    'UG',
+    DVG:   'DVG',
+    EELV:  'EELV',
+    MODEM: 'MODEM',
+    UC:    'UC',
+    UDI:   'UDI',
+    DVD:   'DVD',
+    UD:    'UD',
+    UMP:   'UMP',
+    FN:    'FN',
+    EXD:   'EXD',
+    DIV:   'DIV',
+    SE:    'Sans étiquette',
+};
+
+export const TYPE_LABELS = {
+    Autre:                            GREY,
+    Maire:                            COLOR1,
+    'Conseiller/ère départemental-e': COLOR2,
+    'Conseiller/ère régional-e':      COLOR3,
+    'Maire délégué-e':                COLOR4,
+    'Député-e':                       COLOR5,
+    'Sénateur/trice':                 COLOR6,
 };
 
 const buildRawData = (labels, groups) => Object.keys(labels)
@@ -145,9 +177,9 @@ export const buildCSPData = (supporters) => {
     return {
         data: {
             points,
-            labels: CSP_NAME_COLOR,
+            labels: CSP_LABELS,
             colors: points.map((s) => (
-                CSP_NAME_COLOR[s.data.csp_name]
+                CSP_LABELS[s.data.csp_name]
             )),
         },
     };
@@ -208,16 +240,26 @@ export const buildListData = (supporters) => {
         (supporter) => supporter.data.liste
     );
 
-    console.log(groups);
-
     const points = flatten(Object.values(groups));
 
     return {
         data: {
             points,
-            labels: CSP_NAME_COLOR,
+            labels: CSP_LABELS,
             colors: points.map((s) => listColor(s.data.liste)),
         },
+    };
+};
+
+export const buildTypeData = (supporters) => {
+    const groups = groupBy(
+        supporters,
+        (supporter) => supporter.data.mandat
+    );
+
+    return {
+        data: buildRawData(TYPE_LABELS, groups),
+        max:  maxValueInGroups(groups),
     };
 };
 

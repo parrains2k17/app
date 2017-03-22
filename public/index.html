@@ -86,11 +86,13 @@
         </div>
 
         <div class="canvas-container js-canvas-container"></div>
-
+        <h2 class="title-dataviz js-title-dataviz">
+            dataviz random lol
+        </h2>
         <div class="add-candidate js-add-candidate-open">
             <button class="btn-transparent add-candidate-button">
                 <span class="material-icons">add</span>
-                <span>Ajouter un candidat</span>
+                <span>Comparer avec un autre candidat</span>
             </button>
         </div>
         <div class="add-candidate js-add-candidate-close">
@@ -100,36 +102,91 @@
         </div>
 
         <div class="candidate mod-shadow js-candidate-panel">
-            <div class="candidate-element candidate-element-image">
-                <img
+            <div class="candidate-container js-candidate-1">
+                <div class="candidate-element candidate-element-image">
+                    <img
                     alt="Photo candidat"
                     class="candidate-image js-candidate-image"
                     />
+                </div>
+
+                <div class="candidate-element candidate-element-infos">
+                    <h1 class="candidate-name">
+                        <span class="js-candidate-name">Nom candidat</span>
+                    </h1>
+                    <h2 class="candidate-parti">
+                        <span class="js-candidate-age">20</span> ans
+                        - <span class="js-candidate-parti">Parti</span>
+                    </h2>
+                </div>
+
+                <button class="btn-transparent candidate-element
+                    candidate-element-close js-close-candidate">
+                    <span class="material-icons">close</span>
+                </button>
             </div>
 
-            <div class="candidate-element candidate-element-infos">
-                <h1 class="candidate-name">
-                    <span class="js-candidate-name">Nom candidat</span>
-                    (<span class="js-candidate-age">20</span> ans)
-                </h1>
-                <h2 class="candidate-parti js-candidate-parti">Parti</h2>
-            </div>
+            <div class="candidate-container js-candidate-2">
+                <div class="candidate-element candidate-element-image">
+                    <img
+                    alt="Photo candidat"
+                    class="candidate-image js-candidate-image"
+                    />
+                </div>
 
-            <div class="candidate-element candidate-element-parrainages">
-                <h2 class="candidate-maires">
-                    Parrainages de maires :
-                    <span class="js-candidate-totalMaires">2000</span>
-                </h2>
-                <h2 class="candidate-total">
-                    Total parrainages :
-                    <span class="js-candidate-total">2000</span>
-                </h2>
-            </div>
+                <div class="candidate-element candidate-element-infos">
+                    <h1 class="candidate-name">
+                        <span class="js-candidate-name">Nom candidat</span>
+                    </h1>
+                    <h2 class="candidate-parti">
+                        <span class="js-candidate-age">20</span> ans
+                        - <span class="js-candidate-parti">Parti</span>
+                    </h2>
+                </div>
 
-            <button class="btn-transparent candidate-element
-                candidate-element-close js-close-candidate">
-                <span class="material-icons">close</span>
-            </button>
+                <button class="btn-transparent candidate-element
+                    candidate-element-close js-close-candidate">
+                    <span class="material-icons">close</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="onoffswitch js-switch">
+            <input type="checkbox" name="onoffswitch"
+                id="myonoffswitch"
+                class="onoffswitch-checkbox">
+            <label class="onoffswitch-labels" for="myonoffswitch">
+                <span class="onoffswitch-label">
+                    Regarder l'ensemble des parrains
+                </span>
+                <br>
+                <span class="onoffswitch-label">
+                    Regarder seulement les maires
+                </span>
+            </label>
+        </div>
+
+        <div class="action-bar mod-criteres js-actions-all">
+            <ul class="action-bar-container mod-criteres">
+                <li
+                    class="action-bar-element mod-criteres js-action"
+                    data-id="SELECTOR_TYPE"
+                    data-critere-name="Type de mandat"
+                >
+                    <div class="criteres-image"
+                        style="background-image:url('images/partis_politique.svg')">
+                    </div>
+                </li>
+                <li
+                    class="action-bar-element mod-criteres js-action"
+                    data-id="SELECTOR_GENDER_ALL"
+                    data-critere-name="Sexe"
+                >
+                    <div class="criteres-image"
+                        style="background-image:url('images/gender_symbol.svg')">
+                    </div>
+                </li>
+            </ul>
         </div>
 
         <div class="modal-background js-modal-background js-close-modal" ></div>
@@ -291,6 +348,7 @@
                 </li>
             </ul>
         </div>
+
         <div class="action-bar mod-planets js-actions-choix">
             <button class="btn-transparent action-bar-arrow action-bar-arrow-up">
                 <span class="material-icons">keyboard_arrow_up</span>
@@ -406,8 +464,8 @@
                 </li>
                 <li
                     class="action-bar-element mod-planets js-action"
-                    data-id="LASALLE Jean"
-                    data-planet-name="Jean Lasalle"
+                    data-id="LASSALLE Jean"
+                    data-planet-name="Jean Lassalle"
                 >
                     <div class="planets-image"
                         style="background-image:url('images/Lassalle.png')">
@@ -415,7 +473,7 @@
                 </li>
                 <li
                     class="action-bar-element mod-planets js-action"
-                    data-id="LE PEN Marinne"
+                    data-id="LE PEN Marine"
                     data-planet-name="Marine Le Pen"
                 >
                     <div class="planets-image"
