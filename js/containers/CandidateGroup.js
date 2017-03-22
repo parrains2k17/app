@@ -28,6 +28,7 @@ class CandidateGroup extends Container {
         this.position = position;
         this.initialPosition = { ...position }; // copy
         this.infos = infos;
+        this.id = infos.id;
         this.maire = infos.maire;
 
         this.candidate = new Candidate(texture);
