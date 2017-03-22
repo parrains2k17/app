@@ -17,12 +17,22 @@ import { isMobile } from '../utils/window';
 
 const { floor, PI, max } = Math;
 
+const NEED_RECT = 150;
+
 const LABEL_STYLE = {
     fontFamily: 'Roboto Mono',
     fontSize:   12,
     lineHeight: 17,
     fill:       WHITE,
     align:      'center',
+};
+
+const createRect = (x, y, width, height, color) => {
+    const rect = new Graphics();
+    rect.lineStyle(4, color);
+    rect.drawRoundedRect(x, y, width, height, 4);
+
+    return rect;
 };
 
 const createLabelCentered = (text, rotate, style) => {
@@ -106,7 +116,7 @@ export const showBarChart = (
         );
 
         labels.children[i].position.x
-            += (-width / 2) + bar.x + (bar.width / 2);
+            += (-width / 2) + bar.x + ((bar.width * 1.2) / 2);
         labels.children[i].position.y
             += ((height / 2) - legendHeight) + (bar.y + 20);
 
@@ -124,6 +134,16 @@ export const showBarChart = (
                 point.alpha = 1;
                 point.changeColor(bar.color);
             });
+
+        if (total < NEED_RECT) {
+            legendContainer.addChild(createRect(
+                (-width / 2) + bar.x,
+                ((height / 2) - legendHeight) - bar.height,
+                bar.width * 1.2,
+                bar.height,
+                bar.color,
+            ));
+        }
     });
 
     legendContainer.addChild(labels);
@@ -191,6 +211,16 @@ export const showHorizontalBarChart = (
                 point.alpha = 1;
                 point.changeColor(bar.color);
             });
+
+        if (total < NEED_RECT && data[i].value) {
+            legendContainer.addChild(createRect(
+                ((-width / 2) + legendWidth) + bar.x,
+                -(height / 2) + (-bar.height * 1.2) + bar.y,
+                bar.width * 1.2,
+                bar.height * 1.2,
+                bar.color,
+            ));
+        }
     });
 
     legendContainer.addChild(labels);
