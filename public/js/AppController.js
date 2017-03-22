@@ -7,7 +7,6 @@ import Stage from './components/Stage';
 import CandidatePanel from './components/CandidatePanel';
 import ActionBar from './components/ActionBar';
 import CandidatesBar from './components/CandidatesBar';
-import Switch from './components/Switch';
 
 import CandidateGroup from './containers/CandidateGroup';
 
@@ -50,11 +49,6 @@ class AppController {
 
         this.titleData = document.querySelector('.js-title-dataviz');
 
-        this.typeSwitch = new Switch(
-            '.js-switch',
-            (state) => this.changeType(state)
-        );
-
         this.currentSelector = null;
     }
 
@@ -71,6 +65,7 @@ class AppController {
                         },
                     },
                     {
+                        id:          key,
                         name:        candidate.name,
                         parti:       candidate.parti,
                         color:       candidate.color,
@@ -94,10 +89,9 @@ class AppController {
     }
 
     activateSelectedCandidates() {
-        const n = this.selectedCandidates.length;
-
         this.candidatePanel.reset();
 
+        const n = this.selectedCandidates.length;
         this.selectedCandidates.forEach((candidate, i) => {
             candidate.activate(
                 ((1 + (i * 2)) * width) / (2 * n),
@@ -108,6 +102,12 @@ class AppController {
             this.candidatePanel.updateInfo(i, candidate.infos);
             this.candidatePanel.openPanel(i);
         });
+
+        if (this.currentSelector) {
+            this.selectDataviz(this.currentSelector);
+        }
+
+        this.candidatePanel.open();
     }
 
     openTitle(title) {
@@ -120,28 +120,17 @@ class AppController {
     }
 
     candidateOpen(selectedCandidate) {
-        // if already selected, don't do anything
-        if (this.selectedCandidates.indexOf(selectedCandidate) > -1) {
-            return;
-        }
-
-        this.selectedCandidates.push(selectedCandidate);
-
         Object.values(this.candidates).forEach((candidate) => {
             if (candidate !== selectedCandidate) {
                 candidate.hide();
             }
         });
 
-        this.activateSelectedCandidates();
-
         this.stage.center();
-        this.candidatePanel.open();
-
         this.criteresBar.open();
-
         this.planetsChoiceBar.start();
-        this.typeSwitch.open();
+
+        this.addCandidate(selectedCandidate.id);
     }
 
     /**
@@ -149,14 +138,15 @@ class AppController {
      */
     candidateClose(index) {
         const close = this.selectedCandidates.length < 2;
+
         // remove unique selected candidate
         if (close) {
             Object.values(this.candidates)
                 .forEach((candidate) => candidate.reset());
+
             this.candidatePanel.close();
             this.criteresBar.close();
             this.planetsChoiceBar.stop();
-            this.typeSwitch.close();
             this.stage.active();
 
             this.currentSelector = null;
@@ -173,6 +163,7 @@ class AppController {
         if (!close) {
             this.activateSelectedCandidates();
         }
+
         this.closeTitle();
     }
 
@@ -202,29 +193,19 @@ class AppController {
     }
 
     addCandidate(id) {
+        const candidate = this.candidates[id];
+        if (this.selectedCandidates.indexOf(candidate) > -1) {
+            return;
+        }
+
         // if already 2 candidates, remove the last one
         if (this.selectedCandidates.length === 2) {
             const old = this.selectedCandidates.pop();
             old.hide();
         }
 
-        const candidate = this.candidates[id];
-
-        // if we click on the already selected candidate
-        if (candidate === this.selectedCandidates[0]) {
-            return;
-        }
-
         this.selectedCandidates.push(candidate);
-
         this.activateSelectedCandidates();
-
-        this.candidatePanel.open();
-
-        console.log('currentSelector', this.currentSelector);
-        if (this.currentSelector) {
-            this.selectDataviz(this.currentSelector);
-        }
     }
 }
 
