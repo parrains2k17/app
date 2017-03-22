@@ -68,6 +68,7 @@ class AppController {
             .keys(results)
             .forEach((key) => {
                 const candidate = results[key];
+                console.log(candidate);
                 const group = new CandidateGroup(
                     {
                         position: {
@@ -76,11 +77,13 @@ class AppController {
                         },
                     },
                     {
-                        name:  candidate.name,
-                        parti: candidate.parti,
-                        color: candidate.color,
-                        age:   candidate.age,
-                        image: candidate.texture,
+                        name:        candidate.name,
+                        parti:       candidate.parti,
+                        color:       candidate.color,
+                        age:         candidate.age,
+                        image:       candidate.texture,
+                        total:       candidate.total_parrainages,
+                        totalMaires: candidate.totalMaires,
                     },
                     candidate.parrainages,
                     candidate.texture,
