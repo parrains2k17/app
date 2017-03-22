@@ -93,6 +93,10 @@
 
 .div-credits-link.mode-open {
     display: block;
+
+    @media only screen and (max-width: $breakpoint) {
+        display: none;
+    }
 }
 
     .btn-credits {
