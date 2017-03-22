@@ -32,6 +32,7 @@ import {
     buildUrbaniteData,
     buildChomageData,
     buildListData,
+    buildTypeData,
     CSP_LABELS,
     LISTE_LABELS,
     LISTE_LABELS_FULL,
@@ -160,6 +161,12 @@ class Supporters extends Container {
         case SELECTOR_LISTE:
             return buildListData(supporters);
 
+        case SELECTOR_GENDER_ALL:
+            return buildGenderData(supporters);
+
+        case SELECTOR_TYPE:
+            return buildTypeData(supporters);
+
         default:
             return { data: [] };
         }
@@ -239,6 +246,24 @@ class Supporters extends Container {
                 LISTE_LABELS,
                 this.legend,
                 LISTE_LABELS_FULL
+            );
+            break;
+
+        case SELECTOR_GENDER_ALL:
+            showBarChart(
+                data,
+                { width, height },
+                maxValue,
+                this.legend
+            );
+            break;
+
+        case SELECTOR_TYPE:
+            showHorizontalBarChart(
+                data,
+                { width, height },
+                maxValue,
+                this.legend
             );
             break;
 
