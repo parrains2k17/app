@@ -1,11 +1,14 @@
 // sass-lint:disable no-duplicate-properties no-vendor-prefixes
 
+$breakpoint: 737px;
+
 @import 'colors';
 @import 'candidate';
+@import 'action-bar';
 
 * {
     box-sizing: border-box;
-    font-family: 'Arial', 'sans-serif';
+    font-family: 'Roboto Mono', 'Arial', 'sans-serif';
 }
 
 html,
@@ -14,6 +17,7 @@ body {
     font-size: 12px;
     height: 100%;
     margin: 0;
+    overflow: hidden;
     padding: 0;
     position: relative;
     width: 100%;
@@ -46,15 +50,17 @@ body {
         width: 100%;
     }
 
+button:focus {
+    outline: 0;
+}
+
 .btn-transparent {
     background: 0;
     border: 0;
 }
 
-.gradient-background {
-    // background: #010d33;
-    // background: -moz-radial-gradient(center, ellipse cover, #010d33 10%, #30087f 72%);
-    // background: -webkit-radial-gradient(center, ellipse cover, #010d33 10%,#30087f 72%);
-    // background: radial-gradient(ellipse at center, #010d33 23%,#30087f 72%);
-    // filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#010d33', endColorstr='#30087f',GradientType=1);
-}
+    .btn-transparent > * {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
