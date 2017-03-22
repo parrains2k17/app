@@ -135,25 +135,20 @@ class AppController {
 
         Object.values(this.candidates).forEach((candidate) => {
             if (candidate !== selectedCandidate) {
-                candidate.hide(-width / 2);
+                candidate.hide();
             }
         });
 
         this.activateSelectedCandidates();
 
         this.stage.center();
-
-
         this.candidatePanel.open();
 
-        console.log(isMobile());
-
-        if (isMobile()) {
+        if (isMobile()) { // TODO don't do this
             this.criteresBarMaires.open();
         } else {
             this.criteresBarAll.open();
         }
-
 
         this.planetsChoiceBar.start();
         this.typeSwitch.open();
@@ -218,9 +213,10 @@ class AppController {
     }
 
     addCandidate(id) {
+        // if already 2 candidates, remove the last one
         if (this.selectedCandidates.length === 2) {
             const old = this.selectedCandidates.pop();
-            old.hide(-width / 2);
+            old.hide();
         }
 
         const candidate = this.candidates[id];
@@ -234,10 +230,9 @@ class AppController {
 
         this.activateSelectedCandidates();
 
-        this.candidatePanel.open(); // TODO
-        // this.criteresBarMaires.open(); // TODO update selecteDataviz
-        // this.planetsChoiceBar.start(); // TODO selected state
+        this.candidatePanel.open();
 
+        console.log('currentSelector', this.currentSelector);
         if (this.currentSelector) {
             this.selectDataviz(this.currentSelector);
         }
