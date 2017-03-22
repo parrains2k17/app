@@ -29,7 +29,9 @@ class MovingSupporters extends Container {
             {
                 rotation:   this.rotation + (this.direction * Math.PI * 2),
                 ease:       Power0.easeNone,
-                onComplete: animate,
+                onComplete: () => {
+                    this.animation = animate();
+                },
             }
         );
 
