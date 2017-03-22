@@ -30,6 +30,7 @@ class CandidateGroup extends Container {
         this.position = position;
         this.initialPosition = { ...position }; // copy
         this.infos = infos;
+        this.maire = infos.maire;
 
         this.candidate = new Candidate(texture); // TODO pass data
 
