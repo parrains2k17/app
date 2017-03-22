@@ -70,8 +70,8 @@ export const POPULATION_LABELS = {
 
 export const URBANITE_LABELS = {
     Inconnu: GREY,
-    urbaine: COLOR6,
-    rurale:  COLOR7,
+    Urbaine: COLOR6,
+    Rurale:  COLOR7,
 };
 
 export const CHOMAGE_LABELS = {
@@ -124,6 +124,16 @@ export const LISTE_LABELS_FULL = { // TODO Full names
     EXD:   'EXD',
     DIV:   'DIV',
     SE:    'Sans étiquette',
+};
+
+export const TYPE_LABELS = {
+    Autre:                            GREY,
+    Maire:                            COLOR1,
+    'Conseiller/ère départemental-e': COLOR2,
+    'Conseiller/ère régional-e':      COLOR3,
+    'Maire délégué-e':                COLOR4,
+    'Député-e':                       COLOR5,
+    'Sénateur/trice':                 COLOR6,
 };
 
 const buildRawData = (labels, groups) => Object.keys(labels)
@@ -238,6 +248,18 @@ export const buildListData = (supporters) => {
             labels: CSP_LABELS,
             colors: points.map((s) => listColor(s.data.liste)),
         },
+    };
+};
+
+export const buildTypeData = (supporters) => {
+    const groups = groupBy(
+        supporters,
+        (supporter) => supporter.data.mandat
+    );
+
+    return {
+        data: buildRawData(TYPE_LABELS, groups),
+        max:  maxValueInGroups(groups),
     };
 };
 

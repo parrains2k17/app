@@ -7,6 +7,7 @@ import Stage from './components/Stage';
 import CandidatePanel from './components/CandidatePanel';
 import ActionBar from './components/ActionBar';
 import CandidatesBar from './components/CandidatesBar';
+import Switch from './components/Switch';
 
 import CandidateGroup from './containers/CandidateGroup';
 
@@ -40,6 +41,11 @@ class AppController {
             (critere) => this.selectDataviz(critere)
         );
 
+        this.criteresBarAll = new ActionBar(
+            '.js-actions-all',
+            (critere) => this.selectDataviz(critere)
+        );
+
         this.planetsChoiceBar = new CandidatesBar(
             '.js-actions-choix',
             '.js-add-candidate-open',
@@ -48,6 +54,12 @@ class AppController {
         );
 
         this.titleData = document.querySelector('.js-title-dataviz');
+
+        this.typeSwitch = new Switch(
+            '.js-switch',
+            (state) => this.changeType(state)
+        );
+
         this.currentSelector = null;
     }
 
@@ -69,7 +81,6 @@ class AppController {
                         color: candidate.color,
                         age:   candidate.age,
                         image: candidate.texture,
-                        maire: candidate.maire,
                     },
                     candidate.parrainages,
                     candidate.texture,
@@ -131,8 +142,9 @@ class AppController {
 
 
         this.candidatePanel.open();
-        this.criteresBarMaires.open();
+        this.criteresBarAll.open();
         this.planetsChoiceBar.start();
+        this.typeSwitch.open();
     }
 
     /**
@@ -146,7 +158,9 @@ class AppController {
                 .forEach((candidate) => candidate.reset());
             this.candidatePanel.close();
             this.criteresBarMaires.close();
+            this.criteresBarAll.close();
             this.planetsChoiceBar.stop();
+            this.typeSwitch.close();
             this.stage.active();
 
             this.currentSelector = null;
@@ -214,6 +228,30 @@ class AppController {
 
         if (this.currentSelector) {
             this.selectDataviz(this.currentSelector);
+        }
+    }
+
+    changeType(maires) {
+        this.selectedCandidates.forEach((candidate) => {
+            candidate.resetCircle();
+        });
+        this.closeTitle();
+        this.currentSelector = null;
+
+        if (maires) {
+            this.criteresBarMaires.open();
+            this.criteresBarAll.close();
+
+            this.selectedCandidates.forEach((candidate) => {
+                candidate.showMaires(true);
+            });
+        } else {
+            this.criteresBarMaires.close();
+            this.criteresBarAll.open();
+
+            this.selectedCandidates.forEach((candidate) => {
+                candidate.showMaires(false);
+            });
         }
     }
 }

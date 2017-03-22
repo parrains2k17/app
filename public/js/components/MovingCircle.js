@@ -125,11 +125,30 @@ class MovingCircle extends Circle {
     }
 
     fade() {
+        if (this.alpha === 0) {
+            return;
+        }
+
         TweenMax.to(
             this,
             MOVE_DURATION,
             {
                 alpha: 0,
+                ease:  Power0.easeNone,
+            }
+        );
+    }
+
+    show() {
+        if (this.alpha === 1) {
+            return;
+        }
+
+        TweenMax.to(
+            this,
+            MOVE_DURATION,
+            {
+                alpha: 1,
                 ease:  Power0.easeNone,
             }
         );

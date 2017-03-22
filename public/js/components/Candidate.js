@@ -4,7 +4,9 @@ import { TweenMax, Power0, Power1 } from 'gsap';
 
 import CircleSprite from './CircleSprite';
 
-const HIDE_DURATION = 1;
+const
+    SHOW_DURATION = 1,
+    HIDE_DURATION = 0.2;
 
 class Candidate extends CircleSprite {
     constructor(texture, config = {}) {
@@ -22,14 +24,24 @@ class Candidate extends CircleSprite {
         this.initialPosition = { ...this.position };
     }
 
-    hide(x, y) {
+    hide() {
         TweenMax.to(
             this,
             HIDE_DURATION,
             {
-                x,
-                y,
-                ease: Power1.easeIn,
+                alpha: 0,
+                ease:  Power1.easeIn,
+            }
+        );
+    }
+
+    show() {
+        TweenMax.to(
+            this,
+            SHOW_DURATION,
+            {
+                alpha: 1,
+                ease:  Power1.easeIn,
             }
         );
     }
