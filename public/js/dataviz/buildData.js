@@ -70,8 +70,8 @@ export const POPULATION_LABELS = {
 
 export const URBANITE_LABELS = {
     Inconnu: GREY,
-    urbaine: COLOR6,
-    rurale:  COLOR7,
+    Urbaine: COLOR6,
+    Rurale:  COLOR7,
 };
 
 export const CHOMAGE_LABELS = {
