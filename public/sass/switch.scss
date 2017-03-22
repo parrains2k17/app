@@ -29,6 +29,10 @@ $label-color-active: rgba($white, .3);
             padding: 1em 5em 1em 1em;
 
             transition: margin .4s ease, background .4s ease;
+
+            @media only screen and (max-width: $breakpoint) {
+               display: none;
+            }
         }
 
             .onoffswitch-label:hover,
