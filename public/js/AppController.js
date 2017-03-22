@@ -2,6 +2,7 @@
 import { without, find } from 'underscore';
 
 import candidates from './services/candidates';
+import { isMobile } from './utils/window';
 
 import Stage from './components/Stage';
 import CandidatePanel from './components/CandidatePanel';
@@ -145,7 +146,16 @@ class AppController {
 
 
         this.candidatePanel.open();
-        this.criteresBarAll.open();
+
+        console.log(isMobile());
+
+        if (isMobile()) {
+            this.criteresBarMaires.open();
+        } else {
+            this.criteresBarAll.open();
+        }
+
+
         this.planetsChoiceBar.start();
         this.typeSwitch.open();
     }
