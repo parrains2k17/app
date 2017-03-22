@@ -236,6 +236,7 @@ class AppController {
             candidate.resetCircle();
         });
         this.closeTitle();
+        this.currentSelector = null;
 
         if (maires) {
             this.criteresBarMaires.open();
