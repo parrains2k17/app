@@ -19,6 +19,9 @@ import {
     SELECTOR_URBANITE,
     SELECTOR_CHOMAGE,
     SELECTOR_LISTE,
+    SELECTOR_TYPE,
+    SELECTOR_GENDER_ALL,
+    mairesOnly,
 } from '../dataviz';
 
 import {
@@ -131,27 +134,31 @@ class Supporters extends Container {
     }
 
     buildDatavizData(selector) {
+        const supporters = mairesOnly(selector)
+            ? this.supporters.filter((s) => s.maire)
+            : this.supporters;
+
         switch (selector) {
         case SELECTOR_GENDER:
-            return buildGenderData(this.supporters);
+            return buildGenderData(supporters);
 
         case SELECTOR_CSP:
-            return buildCSPData(this.supporters);
+            return buildCSPData(supporters);
 
         case SELECTOR_AGE:
-            return buildAgeData(this.supporters);
+            return buildAgeData(supporters);
 
         case SELECTOR_POP:
-            return buildPopData(this.supporters);
+            return buildPopData(supporters);
 
         case SELECTOR_URBANITE:
-            return buildUrbaniteData(this.supporters);
+            return buildUrbaniteData(supporters);
 
         case SELECTOR_CHOMAGE:
-            return buildChomageData(this.supporters);
+            return buildChomageData(supporters);
 
         case SELECTOR_LISTE:
-            return buildListData(this.supporters);
+            return buildListData(supporters);
 
         default:
             return { data: [] };
