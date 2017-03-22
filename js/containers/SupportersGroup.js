@@ -239,6 +239,20 @@ class Supporters extends Container {
             break;
         }
     }
+
+    showMaires(show) {
+        if (!show) {
+            this.supporters.forEach((s) => {
+                s.show();
+            });
+        } else {
+            this.supporters
+                .filter((s) => !s.maire)
+                .forEach((s) => {
+                    s.fade();
+                });
+        }
+    }
 }
 
 export default Supporters;
