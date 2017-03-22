@@ -129,7 +129,6 @@ class Stage extends Application {
             }
         );
     }
-
 }
 
 export default Stage;
