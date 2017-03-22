@@ -1,7 +1,7 @@
 
 $width-bar: 6em;
 
-$sidebar-margin: 1em;
+$sidebar-margin: 0;
 
 .action-bar {
     align-items: flex-start;
@@ -13,7 +13,7 @@ $sidebar-margin: 1em;
     position: absolute;
     top: 10%;
     transition: opacity 1s ease, right 1s ease, left 1s ease;
-    width: $width-bar;
+    // width: $width-bar;
 }
 
 .action-bar-arrow {
@@ -70,20 +70,21 @@ $sidebar-margin: 1em;
 }
 
 .action-bar-container {
+    align-items: flex-end;
     color: $white2;
-    flex: 0;
+    display: flex;
+    flex-direction: column;
     list-style: none;
-    padding: 1em 0;
+    margin: 0;
+    padding: 0;
 
     @media only screen and (max-width: $breakpoint) {
-        display: flex;
-        margin: 0;
+        flex-direction: row;
         padding: 1em 1em 0 0;
     }
 }
 
 .action-bar-container.mod-planets {
-    flex: 1;
     overflow-x: visible;
     overflow-y: hidden;
     width: 30em;
@@ -93,34 +94,36 @@ $sidebar-margin: 1em;
         background: $background-block;
         border-radius: 9999px;
         cursor: pointer;
-        height: 6em;
+        height: 4em;
         margin-bottom: .5em;
+        margin-right: .5em;
         padding: .3em .5em;
         position: relative;
-        width: 6em;
+        text-align: right;
+        width: 4em;
 
         @media only screen and (max-width: $breakpoint) {
             border-radius: 4px;
             margin-left: 1em;
-            width: 4em;
         }
     }
 
     .action-bar-element::before {
         border-radius: 4px;
         display: none;
-        font-size: 1.4em;
+        font-size: 1.2em;
         font-weight: 600;
-        padding: 1em;
+        padding: .8em;
         position: absolute;
-        top: 10px;
+        top: 4px;
     }
 
     .action-bar-element.mod-criteres::before {
         background: $background-block;
         content: attr(data-critere-name);
         right: 110%;
-        width: 270%;
+        text-align: left;
+        width: 360%;
     }
 
     .action-bar-element.mod-planets {
@@ -132,6 +135,7 @@ $sidebar-margin: 1em;
         color: $white;
         content: attr(data-planet-name);
         left: 110%;
+        text-align: right;
         width: 270%;
     }
 
@@ -143,6 +147,20 @@ $sidebar-margin: 1em;
         @media only screen and (min-width: $breakpoint + 1px) {
             display: block;
         }
+    }
+
+    .action-bar-title {
+        background: $background-block;
+        border-bottom-left-radius: 6px;
+        border-top-left-radius: 6px;
+        font-size: 1.3em;
+        margin-bottom: .5em;
+        max-width: 15em;
+        padding: .6em;
+    }
+
+    .action-bar-title.mod-maires {
+        margin-top: 2em;
     }
 
 .criteres-image {
