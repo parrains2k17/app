@@ -1,13 +1,13 @@
 
 import { Container } from 'pixi.js';
-import { zip } from 'underscore';
+import { range, random as randomInt } from 'underscore';
 
-import { getWidth, getHeight } from '../utils/window';
-import { pointsPositionInRect } from '../utils/points';
+import { getWidth, getHeight, isMobile } from '../utils/window';
 
 import Supporter from '../components/Supporter';
-// import randomColor from '../utils/randomColor';
 import randomNumber from '../utils/randomNumber';
+
+import MovingSupporters from './MovingSupporters';
 
 import { listColor } from '../style/color';
 
@@ -19,12 +19,10 @@ import {
     SELECTOR_URBANITE,
     SELECTOR_CHOMAGE,
     SELECTOR_LISTE,
+    SELECTOR_TYPE,
+    SELECTOR_GENDER_ALL,
+    mairesOnly,
 } from '../dataviz';
-
-import {
-    barChart,
-    horizontalBarChart,
-} from '../dataviz/barchart';
 
 import {
     buildGenderData,
@@ -34,117 +32,58 @@ import {
     buildUrbaniteData,
     buildChomageData,
     buildListData,
+    buildTypeData,
+    CSP_LABELS,
+    LISTE_LABELS,
+    LISTE_LABELS_FULL,
 } from '../dataviz/buildData';
 
-const { PI, random, sqrt, floor } = Math;
+import {
+    showBarChart,
+    showHorizontalBarChart,
+    showDotMatrix,
+} from '../dataviz/drawDataviz';
+
+const { PI, random, sqrt } = Math;
 
 const
+    SCALE_ACTIVE      = 0.5,
     CENTER_DURATION   = 0.3,
-    ROTATION_DURATION = 15;
+    NUMBER_GROUPS     = 3;
 
-// const randomAlpha = () => {
-//     const res = randomNumber(0, 1, 1);
-//     if (res > 0.7) {
-//         return 1;
-//     }
-//     return res;
-// };
+const getXArea = () => {
+    if (isMobile()) {
+        return 0.9;
+    }
 
-const showBarChart = (data, width, height, maxValue) => {
-    const bars = barChart({
-        data,
-        width,
-        height,
-        max: maxValue,
-    });
-
-    bars.forEach((bar) => {
-        const positions = pointsPositionInRect(
-            bar.value,
-            bar.width,
-            bar.height
-        );
-
-        zip(bar.points, positions)
-            .forEach(([point, position]) => {
-                point.position.x = (
-                    (-width / 2)
-                    + position.x
-                    + bar.x
-                );
-                point.position.y = (
-                    (height / 2)
-                    + (-position.y + bar.y)
-                );
-                point.alpha = 1;
-                point.changeColor(bar.color);
-            });
-    });
-
-    // TODO legend
+    return 0.6;
 };
 
-const showHorizontalBarChart = (data, width, height, maxValue) => {
-    const bars = horizontalBarChart({
-        data,
-        width,
-        height,
-        max: maxValue,
-    });
+const getYArea = () => {
+    if (isMobile()) {
+        return 0.7;
+    }
 
-    bars.forEach((bar) => {
-        const positions = pointsPositionInRect(
-            bar.value,
-            bar.width,
-            bar.height
-        );
-
-        zip(bar.points, positions)
-            .forEach(([point, position]) => {
-                point.position.x = (
-                    (-width / 2)
-                    + position.x
-                    + bar.x
-                );
-                point.position.y = (
-                    -(height / 2)
-                    + (-position.y + bar.y)
-                );
-                point.alpha = 1;
-                point.changeColor(bar.color);
-            });
-    });
-
-    // TODO legend
-};
-
-const showDotMatrix = (points, colors, width) => {
-    const
-        w = 10,
-        h = 10;
-
-    const
-        r = floor(width / w), // number of points per line
-        maxHeight = (points.length / r) * h;
-
-    points.forEach((point, i) => {
-        const
-            x = (i % r) * w,
-            y = floor(i / r) * h;
-
-        point.position.x = (-width / 2) + x;
-        point.position.y = -(maxHeight / 2) + y;
-        point.alpha = 1;
-        point.changeColor(colors[i]);
-    });
-
-    // TODO legend
+    return 0.5;
 };
 
 class Supporters extends Container {
     constructor(supporters) {
         super();
+
+        const direction = (random() > 0.5) ? 1 : -1;
+
+        this.movingGroups = range(NUMBER_GROUPS)
+            .map(() => {
+                const duration = (15 * random()) + 20;
+                return new MovingSupporters(duration, direction);
+            });
+        this.movingGroups.forEach((g) => this.addChild(g));
+
         this.addSupporters(supporters);
+
+        this.legend = new Container();
+        this.addChild(this.legend);
     }
 
     addSupporters(supporters) {
@@ -153,7 +92,6 @@ class Supporters extends Container {
                 color:    listColor(supporter.liste),
                 rotation: 2 * random() * PI,
                 pivot:    {
-                    // Change 20 if the planet is bigger
                     x: randomNumber(
                         48,
                         sqrt(supporters.length * (100 / PI)),
@@ -161,64 +99,73 @@ class Supporters extends Container {
                     ),
                     y: -8,
                 },
-                // alpha: randomAlpha(0, 1, 1),
                 data: supporter,
             }));
 
-        this.supporters.forEach((c) => this.addChild(c));
+        this.supporters.forEach((c) => {
+            this.movingGroups[randomInt(NUMBER_GROUPS - 1)].add(c);
+        });
     }
 
     rotate() {
-        const direction = (random() > 0.5) ? 1 : -1;
-        this.children.forEach((c) => c.rotate({
-            // random to smooth transition
-            duration: ROTATION_DURATION + (random() * 6),
-            direction,
-        }));
+        this.movingGroups.forEach((g) => g.rotate());
     }
 
     stopRotation() {
-        this.children.forEach((c) => c.center());
+        this.movingGroups.forEach((c) => c.stopRotate());
     }
 
     center() {
-        this.children.forEach((c) => c.center({
+        this.supporters.forEach((c) => c.center({
             duration: CENTER_DURATION,
         }));
     }
 
     resetPosition() {
         this.scale.set(1, 1);
-        this.children.forEach((c) => {
+
+        this.supporters.forEach((c) => {
             c.resetPosition({
                 duration: CENTER_DURATION,
             });
             c.resetColor();
         });
+
+        this.legend.removeChildren();
     }
 
     buildDatavizData(selector) {
+        const supporters = mairesOnly(selector)
+            ? this.supporters.filter((s) => s.maire)
+            : this.supporters;
+
         switch (selector) {
         case SELECTOR_GENDER:
-            return buildGenderData(this.supporters);
+            return buildGenderData(supporters);
 
         case SELECTOR_CSP:
-            return buildCSPData(this.supporters);
+            return buildCSPData(supporters);
 
         case SELECTOR_AGE:
-            return buildAgeData(this.supporters);
+            return buildAgeData(supporters);
 
         case SELECTOR_POP:
-            return buildPopData(this.supporters);
+            return buildPopData(supporters);
 
         case SELECTOR_URBANITE:
-            return buildUrbaniteData(this.supporters);
+            return buildUrbaniteData(supporters);
 
         case SELECTOR_CHOMAGE:
-            return buildChomageData(this.supporters);
+            return buildChomageData(supporters);
 
         case SELECTOR_LISTE:
-            return buildListData(this.supporters);
+            return buildListData(supporters);
+
+        case SELECTOR_GENDER_ALL:
+            return buildGenderData(supporters);
+
+        case SELECTOR_TYPE:
+            return buildTypeData(supporters);
 
         default:
             return { data: [] };
@@ -227,43 +174,115 @@ class Supporters extends Container {
 
     showDataviz(selector, totalDataviz, data, maxValue) { // eslint-disable-line
         const
-            width = getWidth() / totalDataviz / 3,
-            height = getHeight() / 3;
+            width = (getWidth() / totalDataviz) * getXArea(),
+            height = getHeight() * getYArea();
 
-        this.scale.set(0.33, 0.33);
+        this.scale.set(SCALE_ACTIVE, SCALE_ACTIVE);
+
+        this.stopRotation();
         this.center();
 
         switch (selector) {
         case SELECTOR_GENDER:
-            showBarChart(data, width, height, maxValue);
+            showBarChart(
+                data,
+                { width, height },
+                maxValue,
+                this.legend
+            );
             break;
 
         case SELECTOR_AGE:
-            showHorizontalBarChart(data, width, height, maxValue);
+            showHorizontalBarChart(
+                data,
+                { width, height },
+                maxValue,
+                this.legend
+            );
             break;
 
         case SELECTOR_CSP:
-            showDotMatrix(data.points, data.colors, width, height);
+            showDotMatrix(
+                data.points,
+                data.colors,
+                { width, height },
+                CSP_LABELS,
+                this.legend
+            );
             break;
 
         case SELECTOR_POP:
-            showHorizontalBarChart(data, width, height, maxValue);
+            showHorizontalBarChart(
+                data,
+                { width, height },
+                maxValue,
+                this.legend
+            );
             break;
 
         case SELECTOR_URBANITE:
-            showBarChart(data, width, height, maxValue);
+            showBarChart(
+                data,
+                { width, height },
+                maxValue,
+                this.legend
+            );
             break;
 
         case SELECTOR_CHOMAGE:
-            showBarChart(data, width, height, maxValue);
+            showBarChart(
+                data,
+                { width, height, rotateLegend: true },
+                maxValue,
+                this.legend
+            );
             break;
 
         case SELECTOR_LISTE:
-            showDotMatrix(data.points, data.colors, width, height);
+            showDotMatrix(
+                data.points,
+                data.colors,
+                { width, height },
+                LISTE_LABELS,
+                this.legend,
+                LISTE_LABELS_FULL
+            );
+            break;
+
+        case SELECTOR_GENDER_ALL:
+            showBarChart(
+                data,
+                { width, height },
+                maxValue,
+                this.legend
+            );
+            break;
+
+        case SELECTOR_TYPE:
+            showHorizontalBarChart(
+                data,
+                { width, height },
+                maxValue,
+                this.legend
+            );
             break;
 
         default:
             break;
+        }
+    }
+
+    showMaires(show) {
+        if (!show) {
+            this.supporters.forEach((s) => {
+                s.show();
+            });
+        } else {
+            this.supporters
+                .filter((s) => !s.maire)
+                .forEach((s) => {
+                    s.fade();
+                });
         }
     }
 }
