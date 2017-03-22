@@ -69,7 +69,6 @@ class AppController {
             .keys(results)
             .forEach((key) => {
                 const candidate = results[key];
-                console.log(candidate);
                 const group = new CandidateGroup(
                     {
                         position: {
