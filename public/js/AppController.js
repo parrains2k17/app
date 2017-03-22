@@ -71,6 +71,7 @@ class AppController {
                         total:       1237, // TODO
                         totalMaires: 467,
                         image:       candidate.texture,
+                        maire:       candidate.maire,
                     },
                     candidate.parrainages,
                     candidate.texture,
