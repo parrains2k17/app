@@ -81,7 +81,6 @@ class AppController {
                         color: candidate.color,
                         age:   candidate.age,
                         image: candidate.texture,
-                        maire: candidate.maire,
                     },
                     candidate.parrainages,
                     candidate.texture,
@@ -236,9 +235,17 @@ class AppController {
         if (maires) {
             this.criteresBarMaires.open();
             this.criteresBarAll.close();
+
+            this.selectedCandidates.forEach((candidate) => {
+                candidate.showMaires(true);
+            });
         } else {
             this.criteresBarMaires.close();
             this.criteresBarAll.open();
+
+            this.selectedCandidates.forEach((candidate) => {
+                candidate.showMaires(false);
+            });
         }
     }
 }

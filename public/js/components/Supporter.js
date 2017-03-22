@@ -11,6 +11,7 @@ class Supporter extends MovingCircle {
         super({ radius: RADIUS, ...config });
 
         this.data = data;
+        this.maire = data.maire;
     }
 }
 

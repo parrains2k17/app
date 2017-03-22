@@ -190,6 +190,10 @@ class CandidateGroup extends Container {
         this.candidate.hide(getWidth(), getHeight() * 2);
         this.supporters.showDataviz(selector, totalDataviz, data, max);
     }
+
+    showMaires(show) {
+        this.supporters.showMaires(show);
+    }
 }
 
 export default CandidateGroup;
