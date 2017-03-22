@@ -79,7 +79,7 @@ export const showBarChart = (
 
             return createLabelCentered(
                 `${d.label}\n${number} (${percentage}%)`,
-                false,
+                rotateLegend,
                 LABEL_STYLE
             );
         })
