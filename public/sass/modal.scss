@@ -1,0 +1,189 @@
+
+$modal-background: rgba(0, 0, 0, .3);
+
+.modal-background {
+	background-color: $modal-background;
+	display: none;
+	height: 100%;
+	left: 0;
+	opacity: 0;
+	position: fixed;
+	top: 0;
+	transition: opacity .3s ease;
+	width: 100%;
+}
+
+.modal-background.mode-open {
+	display: block;
+	opacity: 1;
+}
+
+.modal-container {
+	background-color: $white;
+	border-radius: 4px;
+	display: none;
+	height: 90%;
+	left: 25%;
+	padding: 20px 30px 10px;
+	position: absolute;
+	text-align: center;
+	top: 5%;
+	width: 50%;
+}
+
+.modal-container.mode-animate {
+    animation: fadein 4s;
+}
+
+.modal-container.mode-open {
+	display: block;
+	opacity: .9;
+}
+
+.text-container {
+	display: none;
+	font-size: 1.3em;
+}
+
+.text-container.mode-open {
+	display: block;
+}
+
+.text-container-webgl {
+	display: none;
+	font-size: 1.75em;
+}
+
+.text-container-webgl.mode-open {
+	display: block;
+}
+
+.modal-container.mode-webgl {
+	background-color: $white;
+	border-radius: 4px;
+	height: 10%;
+	left: 27.5%;
+    opacity: 1;
+	padding: 10px;
+	position: absolute;
+	top: 15%;
+	width: 30%;
+}
+
+.flex-container {
+	align-content: stretch;
+	align-items: center;
+	display: flex;
+	flex-wrap: wrap;
+	height: 100%;
+}
+
+.text-part-container {
+	font-size: 1em;
+	text-align: left;
+}
+
+.logo-col4 {
+	flex: 4;
+	flex-basis: 100%;
+}
+
+.logo-col2 {
+	flex: 2;
+	flex-basis: 50%;
+}
+
+.logo-col1 {
+	flex: 1;
+	flex-basis: 25%;
+}
+
+.logo-parrains {
+	width: 60%;
+}
+
+.logo-hyblab {
+	width: 60%;
+}
+
+.logo-polytech {
+	width: 60%;
+}
+
+.logo-design {
+	width: 60%;
+}
+
+.logo-of {
+	width: 60%;
+}
+
+.logo-oml {
+	width: 60%;
+}
+
+.titre1 {
+	font-size: 4em;
+    margin-bottom: .2em;
+	text-align: center;
+}
+
+.titre2017 {
+	font-size: 4em;
+    margin-top: 0;
+}
+
+.logo-drag {
+	margin: auto;
+	width: 5%;
+}
+
+.button-container {
+    margin: 1em 0;
+}
+
+
+.go-button {
+    background-color: $green;
+    border: 0;
+    border-radius: 4px;
+    color: $white;
+    cursor: pointer;
+    display: none;
+    font-size: 24px;
+    padding: 15px 32px;
+    text-align: center;
+
+    &:hover {
+        box-shadow: 2px 4px 0 darken($green, 20%);
+    }
+}
+
+.go-button.mode-open {
+	display: inline-block;
+}
+
+// .btn-close .material-icons{
+//     position: absolute;
+//     top: 20px;
+//     right: 20px;
+//     font-size: 3em;
+// }
+
+.titre-container {
+	display: inline;
+}
+
+.image-container {
+	display: inline;
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: .9;
+    }
+}
