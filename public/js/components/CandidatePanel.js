@@ -8,6 +8,8 @@ class Panel {
         this.age = this.panel.querySelector('.js-candidate-age');
         this.image = this.panel.querySelector('.js-candidate-image');
 
+        this.total = this.panel.querySelector('.js-candidate-total');
+
         this.closeButton = this.panel.querySelector('.js-close-candidate');
 
         this.closeButton.addEventListener('click', onClose);
@@ -18,11 +20,13 @@ class Panel {
         parti,
         age,
         image,
+        total,
     }) {
         this.name.innerText = name;
         this.parti.innerText = parti;
         this.age.innerText = age;
         this.image.src = image;
+        this.total.innerText = total;
     }
 
     open() {
