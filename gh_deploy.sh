@@ -12,7 +12,7 @@ sed -i "" '/public\/dist/d' ./.gitignore # remove line from .gitignore
 git add .
 git commit -m "Edit .gitignore to publish"
 
-git subtree push --prefix $1 origin gh-pages
+git push origin `git subtree split --prefix $1 master`:gh-pages --force
 
 git reset HEAD~
 git checkout .gitignore
