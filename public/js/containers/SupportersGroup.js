@@ -33,7 +33,6 @@ import {
     buildChomageData,
     buildListData,
     buildTypeData,
-    CSP_LABELS,
     LISTE_LABELS,
     LISTE_LABELS_FULL,
 } from '../dataviz/buildData';
@@ -208,11 +207,10 @@ class Supporters extends Container {
             break;
 
         case SELECTOR_CSP:
-            showDotMatrix(
-                data.points,
-                data.colors,
+            showHorizontalBarChart(
+                data,
                 { width, height },
-                CSP_LABELS,
+                maxValue,
                 this.legend
             );
             break;

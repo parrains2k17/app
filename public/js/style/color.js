@@ -30,7 +30,7 @@ export const LISTE_UMP      = 0x2552A5;
 export const LISTE_FN       = 0x49008e;
 export const LISTE_EXD      = 0x39006f; // TODO
 export const LISTE_DIV      = 0xDDDDDD;
-export const LISTE_SE       = 0x666666;
+export const LISTE_SE       = 0x888888;
 
 export const listColor = (list) => {
     switch (list) {
