@@ -3,7 +3,7 @@ import { Text, Graphics, Container } from 'pixi.js';
 
 import { zip } from 'underscore';
 
-import { WHITE, GREY } from '../style/color';
+import { WHITE, LISTE_SE as GREY } from '../style/color';
 
 import { pointsPositionInRect } from '../utils/points';
 import {
