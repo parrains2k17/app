@@ -141,7 +141,6 @@ const buildRawData = (labels, groups) => Object.keys(labels)
         points: groups[cat],
         value:  groups[cat] ? groups[cat].length : 0,
         label:  cat,
-        color:  labels[cat],
     }));
 
 const maxValueInGroups = (groups) => Object.values(groups).reduce(

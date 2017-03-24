@@ -3,7 +3,7 @@ import { Text, Graphics, Container } from 'pixi.js';
 
 import { zip } from 'underscore';
 
-import { WHITE } from '../style/color';
+import { WHITE, GREY } from '../style/color';
 
 import { pointsPositionInRect } from '../utils/points';
 import {
@@ -132,7 +132,6 @@ export const showBarChart = (
                     + (-position.y + bar.y)
                 );
                 point.alpha = 1;
-                point.changeColor(bar.color);
             });
 
         if (total < NEED_RECT) {
@@ -141,7 +140,7 @@ export const showBarChart = (
                 ((height / 2) - legendHeight) - bar.height,
                 bar.width * 1.2,
                 bar.height,
-                bar.color,
+                GREY,
             ));
         }
     });
@@ -209,7 +208,6 @@ export const showHorizontalBarChart = (
                     + (-position.y + bar.y)
                 );
                 point.alpha = 1;
-                point.changeColor(bar.color);
             });
 
         if (total < NEED_RECT && data[i].value) {
@@ -218,7 +216,7 @@ export const showHorizontalBarChart = (
                 -(height / 2) + (-bar.height * 1.2) + bar.y,
                 bar.width * 1.2,
                 bar.height * 1.2,
-                bar.color,
+                GREY
             ));
         }
     });
@@ -299,7 +297,6 @@ export const showDotMatrix = (
         point.moveX((-width / 2) + x);
         point.moveY(-(maxHeight / 2) + pointYOffset + y);
         point.alpha = 1;
-        point.changeColor(colors[i]);
     });
 
     legendWrapperLeft.position.x = (-width / 2);
