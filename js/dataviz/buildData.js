@@ -165,22 +165,14 @@ export const buildGenderData = (supporters) => {
 };
 
 export const buildCSPData = (supporters) => {
-    // group then flatten to sort points
     const groups = groupBy(
         supporters,
         (supporter) => supporter.data.csp_name
     );
 
-    const points = flatten(Object.values(groups));
-
     return {
-        data: {
-            points,
-            labels: CSP_LABELS,
-            colors: points.map((s) => (
-                CSP_LABELS[s.data.csp_name]
-            )),
-        },
+        data: buildRawData(CSP_LABELS, groups),
+        max:  maxValueInGroups(groups),
     };
 };
 
