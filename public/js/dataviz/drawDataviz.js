@@ -5,7 +5,10 @@ import { zip } from 'underscore';
 
 import { WHITE, LISTE_SE as GREY } from '../style/color';
 
-import { pointsPositionInRect } from '../utils/points';
+import {
+    pointsPositionInRectVertical,
+    pointsPositionInRectHorizontal,
+} from '../utils/points';
 import {
     barChart,
     horizontalBarChart,
@@ -109,7 +112,7 @@ export const showBarChart = (
     legendContainer.removeChildren();
 
     bars.forEach((bar, i) => {
-        const positions = pointsPositionInRect(
+        const positions = pointsPositionInRectVertical(
             bar.value,
             bar.width,
             bar.height
@@ -185,7 +188,7 @@ export const showHorizontalBarChart = (
     legendContainer.removeChildren();
 
     bars.forEach((bar, i) => {
-        const positions = pointsPositionInRect(
+        const positions = pointsPositionInRectHorizontal(
             bar.value,
             bar.width,
             bar.height
