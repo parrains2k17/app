@@ -47,7 +47,7 @@ export const randomize = (t, interval, min, max) => {
  * @return {Array}          Array of n positions { x, randomX, y, randomY }
  *                          randomX, randomY are value [0, 1] used to randomize
  */
-export const pointsPositionInRect = (n, width, height) => {
+const pointsPositionInRectPure = (getXY) => (n, width, height) => {
     const points = range(n);
 
     const
@@ -62,9 +62,7 @@ export const pointsPositionInRect = (n, width, height) => {
         h = (w * r) / HEIGHT_WIDTH_RATIO; // height
 
     return points.map((_, i) => {
-        let
-            x = (i * w) % width,
-            y = Math.floor((i * w) / width) * h;
+        let [x, y] = getXY(i, w, h, width, height);
 
         // broders left and top
         x = (x < w) ? 0 : x; // TODO remove ?
@@ -83,3 +81,26 @@ export const pointsPositionInRect = (n, width, height) => {
     });
 };
 
+const getXYVertical = (i, w, h, width) => {
+    const
+        x = (i * w) % width,
+        y = Math.floor((i * w) / width) * h;
+
+    return [x, y];
+};
+
+const getXYHorizontal = (i, w, h, width, height) => {
+    const
+        y = (i * h) % height,
+        x = Math.floor((i * h) / height) * w;
+
+    return [x, y];
+};
+
+export const pointsPositionInRectVertical = pointsPositionInRectPure(
+    getXYVertical
+);
+
+export const pointsPositionInRectHorizontal = pointsPositionInRectPure(
+    getXYHorizontal
+);
