@@ -4,7 +4,7 @@ $breakpoint: 737px;
 
 @import 'colors';
 @import 'modal';
-@import 'credits';
+@import 'infos';
 @import 'candidate';
 @import 'action-bar';
 @import 'switch';
@@ -60,6 +60,10 @@ button:focus {
 .btn-transparent {
     background: 0;
     border: 0;
+
+    &:hover {
+        cursor: pointer;
+    }
 }
 
     .btn-transparent > * {
