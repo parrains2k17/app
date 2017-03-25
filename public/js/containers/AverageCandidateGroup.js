@@ -1,61 +1,35 @@
 
-import { Container, Circle } from 'pixi.js';
+import { Container } from 'pixi.js';
 import { TweenMax, Power0 } from 'gsap';
 
-import Supporters from './SupportersGroup';
-import Candidate from '../components/Candidate';
-
-const { random } = Math;
+import AverageSupporters from './AverageSupportersGroup';
 
 const
-    HIT_AREA_RADIUS         = 100,
-    HIDE_DURATION           = 0.1,
-    ACTIVATE_DURATION       = 1.5,
-    MOVEMENT_DURATION       = 60;
+    HIDE_DURATION     = 0.1,
+    ACTIVATE_DURATION = 1.5;
 
-class CandidateGroup extends Container {
+class AverageCandidateGroup extends Container {
     constructor(
-        {
-            position = { x: 0, y: 0 },
-        },
         infos,
-        supporters,
-        texture,
+        stats,
         controller
     ) {
         super();
 
-        this.position = position;
-        this.initialPosition = { ...position }; // copy
+        this.initialPosition = { ...this.position }; // copy
         this.infos = infos;
         this.id = infos.id;
-        this.maire = infos.maire;
 
-        this.candidate = new Candidate(texture);
+        this.supporters = new AverageSupporters(stats);
 
-        this.supporters = new Supporters(supporters);
-        this.supporters.rotate();
-
-        this.interactive = true;
-        this.hitArea = new Circle(0, 0, HIT_AREA_RADIUS);
-
-        this.addChild(this.candidate);
         this.addChild(this.supporters);
 
         this.controller = controller;
 
-        this.moveAround();
-
-        this.on('pointerdown', this.handleClick.bind(this));
-    }
-
-    handleClick() {
-        this.controller.candidateOpen(this);
+        this.visible = false;
     }
 
     activate(x, y, scale) {
-        this.killMovement();
-
         this.visible = true;
 
         TweenMax.to(
@@ -99,8 +73,6 @@ class CandidateGroup extends Container {
     }
 
     hide() {
-        this.killMovement();
-
         TweenMax.to(
             this,
             HIDE_DURATION,
@@ -116,13 +88,11 @@ class CandidateGroup extends Container {
     }
 
     resetCircle() {
-        this.candidate.show();
         this.supporters.resetPosition();
-        this.supporters.rotate();
     }
 
     reset() {
-        this.visible = true;
+        this.visible = false;
         TweenMax.to(
             this,
             ACTIVATE_DURATION,
@@ -147,42 +117,7 @@ class CandidateGroup extends Container {
             }
         );
 
-        this.candidate.resetPosition({ ACTIVATE_DURATION });
         this.resetCircle();
-    }
-
-    moveAround() { // TODO better waiting state
-        const { x, y } = this.position;
-
-        const
-            pos1 = { x: x + (100 * random()), y: y + (100 * random()) },
-            pos2 = { x: x - (100 * random()), y: y + (100 * random()) };
-
-        const [p1, p2] = (random() > 0.5) ? [pos1, pos2] : [pos2, pos1];
-
-        this.movement = TweenMax.to(
-            this,
-            MOVEMENT_DURATION,
-            {
-                repeat: -1,
-                ease:   Power0.easeNone,
-                bezier: {
-                    type:      'thru',
-                    curviness: 10,
-                    values:    [
-                        { x, y },
-                        p1,
-                        { x, y: y + (200 * random()) },
-                        p2,
-                        { x, y },
-                    ],
-                },
-            }
-        );
-    }
-
-    killMovement() {
-        this.movement.kill();
     }
 
     buildDatavizData(selector) {
@@ -190,13 +125,8 @@ class CandidateGroup extends Container {
     }
 
     showDataviz(selector, totalDataviz, data, max) {
-        this.candidate.hide();
         this.supporters.showDataviz(selector, totalDataviz, data, max);
-    }
-
-    showMaires(show) {
-        this.supporters.showMaires(show);
     }
 }
 
-export default CandidateGroup;
+export default AverageCandidateGroup;
