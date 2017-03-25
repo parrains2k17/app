@@ -9,8 +9,11 @@ import ActionBar from './components/ActionBar';
 import CandidatesBar from './components/CandidatesBar';
 
 import CandidateGroup from './containers/CandidateGroup';
+import AverageCandidateGroup from './containers/AverageCandidateGroup';
 
 import { SELECTOR_TITLES } from './dataviz/index';
+
+const AVERAGE_CANDIDATE = 'AVERAGE_CANDIDATE';
 
 const
     width  = window.innerWidth,
@@ -82,6 +85,17 @@ class AppController {
                 this.candidates[key] = group;
                 this.stage.add(group);
             });
+
+        this.candidates[AVERAGE_CANDIDATE] = new AverageCandidateGroup(
+            {
+                id:   AVERAGE_CANDIDATE,
+                name: 'Moyenne des candidats',
+            },
+            data.stats,
+            this
+        );
+
+        this.stage.add(this.candidates[AVERAGE_CANDIDATE]);
     }
 
     start() {
