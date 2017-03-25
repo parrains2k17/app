@@ -1,7 +1,7 @@
 
 import { without, find } from 'underscore';
 
-import candidates from './services/candidates';
+import data from './services/candidates';
 
 import Stage from './components/Stage';
 import CandidatePanel from './components/CandidatePanel';
@@ -22,7 +22,7 @@ class AppController {
         this.stage = new Stage(canvas, width, height);
 
         this.candidates = {};
-        this.buildCandidates(candidates);
+        this.buildCandidates(data.candidats);
 
         this.candidatePanel = new CandidatePanel(
             {
@@ -170,12 +170,12 @@ class AppController {
     selectDataviz(selector) {
         this.openTitle(selector);
         // retrieve data for each candidates (one or two)
-        const data = this.selectedCandidates.map(
+        const dataviz = this.selectedCandidates.map(
             (candidate) => candidate.buildDatavizData(selector)
         );
 
         // compute max if needed
-        const max = data.reduce((reduced, current) => (
+        const max = dataviz.reduce((reduced, current) => (
             current.max ? Math.max(current.max, reduced) : reduced
         ), 0);
 
@@ -184,7 +184,7 @@ class AppController {
             (candidate, i) => candidate.showDataviz(
                 selector,
                 this.selectedCandidates.length,
-                data[i].data,
+                dataviz[i].data,
                 max
             )
         );
