@@ -97,13 +97,10 @@ class AverageCandidateGroup extends Container {
             this,
             ACTIVATE_DURATION,
             {
-                alpha:      1,
-                x:          this.initialPosition.x || 0,
-                y:          this.initialPosition.y || 0,
-                ease:       Power0.easeNone,
-                onComplete: () => {
-                    this.moveAround();
-                },
+                alpha: 1,
+                x:     this.initialPosition.x || 0,
+                y:     this.initialPosition.y || 0,
+                ease:  Power0.easeNone,
             }
         );
 
