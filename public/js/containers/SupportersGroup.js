@@ -172,12 +172,12 @@ class Supporters extends Container {
     }
 
     showDataviz(selector, maxWidthRatio, data, maxValue) {
-        console.log(data);
         const
             width = (getWidth() / maxWidthRatio) * getXArea(),
             height = getHeight() * getYArea();
 
         this.scale.set(SCALE_ACTIVE, SCALE_ACTIVE);
+        this.legend.removeChildren();
 
         this.stopRotation();
         this.center();

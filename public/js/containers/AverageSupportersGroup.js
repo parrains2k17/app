@@ -128,6 +128,7 @@ class AverageSupporters extends Container {
             height = getHeight() * getYArea();
 
         this.scale.set(SCALE_ACTIVE, SCALE_ACTIVE);
+        this.legend.removeChildren();
 
         switch (selector) {
         case SELECTOR_GENDER:

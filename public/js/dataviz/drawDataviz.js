@@ -121,8 +121,6 @@ export const showBarChart = (
         max:    maxValue,
     });
 
-    legendContainer.removeChildren();
-
     bars.forEach((bar, i) => {
         labels.children[i].position.x
             += (-width / 2) + bar.x + ((bar.width * 1.2) / 2);
@@ -200,8 +198,6 @@ export const showHorizontalBarChart = (
         max:   maxValue,
     });
 
-    legendContainer.removeChildren();
-
     bars.forEach((bar, i) => {
         labels.children[i].position.x
             += ((-width / 2) + legendWidth) + (bar.x - 20);
@@ -260,8 +256,6 @@ export const showDotMatrix = (
     const
         r = floor(width / w), // number of points per line
         maxHeight = (points.length / r) * h;
-
-    legendContainer.removeChildren();
 
     const
         legendWrapperLeft = new Container(),
