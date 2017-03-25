@@ -88,8 +88,10 @@ class AppController {
 
         this.candidates[AVERAGE_CANDIDATE] = new AverageCandidateGroup(
             {
-                id:   AVERAGE_CANDIDATE,
-                name: 'Moyenne des candidats',
+                id:          AVERAGE_CANDIDATE,
+                name:        'Moyenne des candidats',
+                pannelClass: 'mod-average',
+                image:       'images/4_candidats.png',
             },
             data.stats,
             this

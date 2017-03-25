@@ -1,5 +1,5 @@
 .candidate {
-    align-items: center;
+    align-items: stretch;
     bottom: -40%;
     display: flex;
     justify-content: flex-start;
@@ -91,6 +91,11 @@
             color: $white3;
             font-size: 1.3em;
             margin-top: .2em;
+        }
+
+
+        .candidate-container.mod-average .candidate-parti {
+            display: none;
         }
 
 .add-candidate {
