@@ -189,9 +189,9 @@ class CandidateGroup extends Container {
         return this.supporters.buildDatavizData(selector);
     }
 
-    showDataviz(selector, totalDataviz, data, max) {
+    showDataviz(selector, totalDataviz, data, max, stats) {
         this.candidate.hide();
-        this.supporters.showDataviz(selector, totalDataviz, data, max);
+        this.supporters.showDataviz(selector, totalDataviz, data, max, stats);
     }
 
     showMaires(show) {

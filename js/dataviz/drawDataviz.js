@@ -78,6 +78,7 @@ export const showBarChart = (
     data,
     { width, height, rotateLegend = false },
     maxValue,
+    stats,
     legendContainer
 ) => {
     const total = data.reduce((sum, d) => sum + d.value, 0);
@@ -155,6 +156,7 @@ export const showHorizontalBarChart = (
     data,
     { width, height },
     maxValue,
+    stats,
     legendContainer
 ) => {
     const total = data.reduce((sum, d) => sum + d.value, 0);
