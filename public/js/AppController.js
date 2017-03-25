@@ -185,9 +185,11 @@ class AppController {
                 selector,
                 this.selectedCandidates.length,
                 dataviz[i].data,
-                max
+                max,
+                data.stats[selector]
             )
         );
+
 
         this.currentSelector = selector;
     }

@@ -171,9 +171,9 @@ class Supporters extends Container {
         }
     }
 
-    showDataviz(selector, totalDataviz, data, maxValue) { // eslint-disable-line
+    showDataviz(selector, maxWidthRatio, data, maxValue, stats) {
         const
-            width = (getWidth() / totalDataviz) * getXArea(),
+            width = (getWidth() / maxWidthRatio) * getXArea(),
             height = getHeight() * getYArea();
 
         this.scale.set(SCALE_ACTIVE, SCALE_ACTIVE);
@@ -193,6 +193,7 @@ class Supporters extends Container {
                 data,
                 { width, height },
                 maxValue,
+                stats,
                 this.legend
             );
             break;
@@ -202,6 +203,7 @@ class Supporters extends Container {
                 data,
                 { width, height },
                 maxValue,
+                stats,
                 this.legend
             );
             break;
@@ -211,6 +213,7 @@ class Supporters extends Container {
                 data,
                 { width, height },
                 maxValue,
+                stats,
                 this.legend
             );
             break;
@@ -220,6 +223,7 @@ class Supporters extends Container {
                 data,
                 { width, height },
                 maxValue,
+                stats,
                 this.legend
             );
             break;
@@ -229,6 +233,7 @@ class Supporters extends Container {
                 data,
                 { width, height },
                 maxValue,
+                stats,
                 this.legend
             );
             break;
@@ -238,6 +243,7 @@ class Supporters extends Container {
                 data,
                 { width, height, rotateLegend: true },
                 maxValue,
+                stats,
                 this.legend
             );
             break;
@@ -258,6 +264,7 @@ class Supporters extends Container {
                 data,
                 { width, height },
                 maxValue,
+                stats,
                 this.legend
             );
             break;
@@ -267,6 +274,7 @@ class Supporters extends Container {
                 data,
                 { width, height },
                 maxValue,
+                stats,
                 this.legend
             );
             break;
