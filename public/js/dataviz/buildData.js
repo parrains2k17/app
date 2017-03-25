@@ -138,7 +138,7 @@ export const TYPE_LABELS = {
 
 const buildRawData = (labels, groups) => Object.keys(labels)
     .map((cat) => ({
-        points: groups[cat],
+        points: groups[cat] || [],
         value:  groups[cat] ? groups[cat].length : 0,
         label:  cat,
     }));

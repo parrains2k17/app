@@ -1,7 +1,7 @@
 
 import { without, find } from 'underscore';
 
-import candidates from './services/candidates';
+import data from './services/candidates';
 
 import Stage from './components/Stage';
 import CandidatePanel from './components/CandidatePanel';
@@ -9,8 +9,11 @@ import ActionBar from './components/ActionBar';
 import CandidatesBar from './components/CandidatesBar';
 
 import CandidateGroup from './containers/CandidateGroup';
+import AverageCandidateGroup from './containers/AverageCandidateGroup';
 
 import { SELECTOR_TITLES } from './dataviz/index';
+
+const AVERAGE_CANDIDATE = 'AVERAGE_CANDIDATE';
 
 const
     width  = window.innerWidth,
@@ -22,7 +25,7 @@ class AppController {
         this.stage = new Stage(canvas, width, height);
 
         this.candidates = {};
-        this.buildCandidates(candidates);
+        this.buildCandidates(data.candidats);
 
         this.candidatePanel = new CandidatePanel(
             {
@@ -82,6 +85,19 @@ class AppController {
                 this.candidates[key] = group;
                 this.stage.add(group);
             });
+
+        this.candidates[AVERAGE_CANDIDATE] = new AverageCandidateGroup(
+            {
+                id:          AVERAGE_CANDIDATE,
+                name:        'Moyenne des candidats',
+                pannelClass: 'mod-average',
+                image:       'images/4_candidats.png',
+            },
+            data.stats,
+            this
+        );
+
+        this.stage.add(this.candidates[AVERAGE_CANDIDATE]);
     }
 
     start() {
@@ -170,12 +186,12 @@ class AppController {
     selectDataviz(selector) {
         this.openTitle(selector);
         // retrieve data for each candidates (one or two)
-        const data = this.selectedCandidates.map(
+        const dataviz = this.selectedCandidates.map(
             (candidate) => candidate.buildDatavizData(selector)
         );
 
         // compute max if needed
-        const max = data.reduce((reduced, current) => (
+        const max = dataviz.reduce((reduced, current) => (
             current.max ? Math.max(current.max, reduced) : reduced
         ), 0);
 
@@ -184,10 +200,12 @@ class AppController {
             (candidate, i) => candidate.showDataviz(
                 selector,
                 this.selectedCandidates.length,
-                data[i].data,
-                max
+                dataviz[i].data,
+                max,
+                data.stats[selector]
             )
         );
+
 
         this.currentSelector = selector;
     }

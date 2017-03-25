@@ -50,7 +50,7 @@ const
     CENTER_DURATION   = 0.3,
     NUMBER_GROUPS     = 3;
 
-const getXArea = () => {
+export const getXArea = () => {
     if (isMobile()) {
         return 0.9;
     }
@@ -58,7 +58,7 @@ const getXArea = () => {
     return 0.6;
 };
 
-const getYArea = () => {
+export const getYArea = () => {
     if (isMobile()) {
         return 0.7;
     }
@@ -72,6 +72,9 @@ class Supporters extends Container {
 
         const direction = (random() > 0.5) ? 1 : -1;
 
+        this.legend = new Container();
+        this.addChild(this.legend);
+
         this.movingGroups = range(NUMBER_GROUPS)
             .map(() => {
                 const duration = (15 * random()) + 20;
@@ -80,9 +83,6 @@ class Supporters extends Container {
         this.movingGroups.forEach((g) => this.addChild(g));
 
         this.addSupporters(supporters);
-
-        this.legend = new Container();
-        this.addChild(this.legend);
     }
 
     addSupporters(supporters) {
@@ -171,12 +171,13 @@ class Supporters extends Container {
         }
     }
 
-    showDataviz(selector, totalDataviz, data, maxValue) { // eslint-disable-line
+    showDataviz(selector, maxWidthRatio, data, maxValue) {
         const
-            width = (getWidth() / totalDataviz) * getXArea(),
+            width = (getWidth() / maxWidthRatio) * getXArea(),
             height = getHeight() * getYArea();
 
         this.scale.set(SCALE_ACTIVE, SCALE_ACTIVE);
+        this.legend.removeChildren();
 
         this.stopRotation();
         this.center();

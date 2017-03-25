@@ -1,5 +1,5 @@
 
-import candidates from '../../data/parrainages.json';
+import data from '../../data/parrainages.json';
 
 import {
     PARTI_LR,
@@ -216,10 +216,10 @@ const candidatesPositions = {
 };
 
 Object
-    .keys(candidates)
+    .keys(data.candidats)
     .forEach((key) => {
-        Object.assign(candidates[key], candidatesPositions[key]);
+        Object.assign(data.candidats[key], candidatesPositions[key]);
     });
 
-export default candidates;
+export default data;
 

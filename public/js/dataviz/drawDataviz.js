@@ -18,7 +18,7 @@ import { RADIUS } from '../components/Supporter';
 
 import { isMobile } from '../utils/window';
 
-const { floor, PI, max } = Math;
+const { floor, PI, max, round } = Math;
 
 const NEED_RECT = 150;
 
@@ -30,13 +30,25 @@ const LABEL_STYLE = {
     align:      'center',
 };
 
-const createRect = (x, y, width, height, color) => {
+const createLineRect = (x, y, width, height) => {
     const rect = new Graphics();
-    rect.lineStyle(4, color);
+    rect.lineStyle(4, GREY);
     rect.drawRoundedRect(x, y, width, height, 4);
 
     return rect;
 };
+
+const createFillRect = (x, y, width, height) => {
+    const rect = new Graphics();
+    rect.beginFill(WHITE);
+    rect.drawRect(x, y, width, height);
+    rect.endFill();
+    rect.alpha = 0.3;
+
+    return rect;
+};
+
+const createRect = (fill) => (fill ? createFillRect : createLineRect);
 
 const createLabelCentered = (text, rotate, style) => {
     const l = new Text(
@@ -91,7 +103,7 @@ export const showBarChart = (
                 percentage = floor((d.value / total) * 100);
 
             return createLabelCentered(
-                `${d.label}\n${number} (${percentage}%)`,
+                `${d.label}\n${round(number)} (${percentage}%)`,
                 rotateLegend,
                 LABEL_STYLE
             );
@@ -109,42 +121,42 @@ export const showBarChart = (
         max:    maxValue,
     });
 
-    legendContainer.removeChildren();
-
     bars.forEach((bar, i) => {
-        const positions = pointsPositionInRectVertical(
-            bar.value,
-            bar.width,
-            bar.height
-        );
-
         labels.children[i].position.x
             += (-width / 2) + bar.x + ((bar.width * 1.2) / 2);
         labels.children[i].position.y
             += ((height / 2) - legendHeight) + (bar.y + 20);
 
-        zip(bar.points, positions)
-            .forEach(([point, position]) => {
-                point.moveX(
-                    (-width / 2)
-                    + position.x
-                    + bar.x
-                );
-                point.moveY(
-                    ((height / 2) - legendHeight)
-                    + (-position.y + bar.y)
-                );
-                point.alpha = 1;
-            });
-
-        if (total < NEED_RECT) {
-            legendContainer.addChild(createRect(
+        if ((total < NEED_RECT && data[i].value) || !bar.points.length) {
+            const fillRect = !bar.points.length;
+            legendContainer.addChild(createRect(fillRect)(
                 (-width / 2) + bar.x,
                 ((height / 2) - legendHeight) - bar.height,
                 bar.width * 1.2,
-                bar.height,
-                GREY,
+                bar.height
             ));
+        }
+
+        if (bar.points.length) {
+            const positions = pointsPositionInRectVertical(
+                bar.value,
+                bar.width,
+                bar.height
+            );
+
+            zip(bar.points, positions)
+                .forEach(([point, position]) => {
+                    point.moveX(
+                        (-width / 2)
+                        + position.x
+                        + bar.x
+                    );
+                    point.moveY(
+                        ((height / 2) - legendHeight)
+                        + (-position.y + bar.y)
+                    );
+                    point.alpha = 1;
+                });
         }
     });
 
@@ -159,8 +171,8 @@ export const showHorizontalBarChart = (
 ) => {
     const total = data.reduce((sum, d) => sum + d.value, 0);
 
-    const
-        labels = new Container();
+    const labels = new Container();
+
     data
         .map((d) => {
             const
@@ -168,7 +180,7 @@ export const showHorizontalBarChart = (
                 percentage = floor((d.value / total) * 100);
 
             return createLabelRight(
-                `${d.label}\n${number} (${percentage}%)`,
+                `${d.label}\n${round(number)} (${percentage}%)`,
                 { ...LABEL_STYLE, align: 'right' }
             );
         })
@@ -185,42 +197,43 @@ export const showHorizontalBarChart = (
         max:   maxValue,
     });
 
-    legendContainer.removeChildren();
-
     bars.forEach((bar, i) => {
-        const positions = pointsPositionInRectHorizontal(
-            bar.value,
-            bar.width,
-            bar.height
-        );
-
         labels.children[i].position.x
             += ((-width / 2) + legendWidth) + (bar.x - 20);
         labels.children[i].position.y
             += (-height / 2) + (bar.y - (bar.height / 2));
 
-        zip(bar.points, positions)
-            .forEach(([point, position]) => {
-                point.moveX(
-                    ((-width / 2) + legendWidth)
-                    + position.x
-                    + bar.x
-                );
-                point.moveY(
-                    -(height / 2)
-                    + (-position.y + bar.y)
-                );
-                point.alpha = 1;
-            });
-
-        if (total < NEED_RECT && data[i].value) {
-            legendContainer.addChild(createRect(
+        if ((total < NEED_RECT && data[i].value) || !bar.points.length) {
+            const fillRect = !bar.points.length;
+            legendContainer.addChild(createRect(fillRect)(
                 ((-width / 2) + legendWidth) + bar.x,
                 -(height / 2) + (-bar.height * 1.2) + bar.y,
                 bar.width * 1.2,
                 bar.height * 1.2,
                 GREY
             ));
+        }
+
+        if (bar.points.length) {
+            const positions = pointsPositionInRectHorizontal(
+                bar.value,
+                bar.width,
+                bar.height
+            );
+
+            zip(bar.points, positions)
+                .forEach(([point, position]) => {
+                    point.moveX(
+                        ((-width / 2) + legendWidth)
+                        + position.x
+                        + bar.x
+                    );
+                    point.moveY(
+                        -(height / 2)
+                        + (-position.y + bar.y)
+                    );
+                    point.alpha = 1;
+                });
         }
     });
 
@@ -242,8 +255,6 @@ export const showDotMatrix = (
     const
         r = floor(width / w), // number of points per line
         maxHeight = (points.length / r) * h;
-
-    legendContainer.removeChildren();
 
     const
         legendWrapperLeft = new Container(),
