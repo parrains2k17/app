@@ -31,9 +31,16 @@ const LABEL_STYLE = {
 };
 
 const createLineRect = (x, y, width, height) => {
+    const lineWidth = 4;
     const rect = new Graphics();
-    rect.lineStyle(4, GREY);
-    rect.drawRoundedRect(x, y, width, height, 4);
+    rect.lineStyle(lineWidth, GREY);
+    rect.drawRoundedRect(
+        x - lineWidth,
+        y - lineWidth,
+        width + (2 * lineWidth),
+        height + (2 * lineWidth),
+        4
+    );
 
     return rect;
 };
@@ -123,7 +130,7 @@ export const showBarChart = (
 
     bars.forEach((bar, i) => {
         labels.children[i].position.x
-            += (-width / 2) + bar.x + ((bar.width * 1.2) / 2);
+            += (-width / 2) + bar.x + (bar.width / 2);
         labels.children[i].position.y
             += ((height / 2) - legendHeight) + (bar.y + 20);
 
@@ -132,7 +139,7 @@ export const showBarChart = (
             legendContainer.addChild(createRect(fillRect)(
                 (-width / 2) + bar.x,
                 ((height / 2) - legendHeight) - bar.height,
-                bar.width * 1.2,
+                bar.width,
                 bar.height
             ));
         }
@@ -207,9 +214,9 @@ export const showHorizontalBarChart = (
             const fillRect = !bar.points.length;
             legendContainer.addChild(createRect(fillRect)(
                 ((-width / 2) + legendWidth) + bar.x,
-                -(height / 2) + (-bar.height * 1.2) + bar.y,
-                bar.width * 1.2,
-                bar.height * 1.2,
+                bar.y - (height / 2) - bar.height,
+                bar.width,
+                bar.height,
                 GREY
             ));
         }
