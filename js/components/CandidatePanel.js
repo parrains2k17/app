@@ -21,7 +21,9 @@ class Panel {
         age,
         image,
         total,
+        pannelClass,
     }) {
+        this.pannelClass = pannelClass;
         this.name.innerText = name;
         this.parti.innerText = parti;
         this.age.innerText = age;
@@ -31,10 +33,12 @@ class Panel {
 
     open() {
         this.panel.classList.add('mod-open');
+        this.panel.classList.add(this.pannelClass);
     }
 
     close() {
         this.panel.classList.remove('mod-open');
+        this.panel.classList.remove(this.pannelClass);
     }
 }
 
