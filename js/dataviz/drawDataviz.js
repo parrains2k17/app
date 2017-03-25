@@ -30,20 +30,20 @@ const LABEL_STYLE = {
     align:      'center',
 };
 
-const createLineRect = (x, y, width, height, color) => {
+const createLineRect = (x, y, width, height) => {
     const rect = new Graphics();
-    rect.lineStyle(4, color);
+    rect.lineStyle(4, GREY);
     rect.drawRoundedRect(x, y, width, height, 4);
 
     return rect;
 };
 
-const createFillRect = (x, y, width, height, color) => {
+const createFillRect = (x, y, width, height) => {
     const rect = new Graphics();
-    rect.beginFill(color);
+    rect.beginFill(WHITE);
     rect.drawRect(x, y, width, height);
     rect.endFill();
-    rect.alpha = 0.2;
+    rect.alpha = 0.3;
 
     return rect;
 };
@@ -133,8 +133,7 @@ export const showBarChart = (
                 (-width / 2) + bar.x,
                 ((height / 2) - legendHeight) - bar.height,
                 bar.width * 1.2,
-                bar.height,
-                GREY,
+                bar.height
             ));
         }
 
