@@ -1,3 +1,4 @@
+// sass-lint:disable force-attribute-nesting
 
 $modal-background: rgba(0, 0, 0, .3);
 
@@ -132,16 +133,43 @@ $modal-background: rgba(0, 0, 0, .3);
     }
 }
 
+    .go-button-icon {
+        animation: rotate 2s ease-in-out infinite;
+        font-size: 1.1em;
+    }
+
+    .go-button-content > span {
+        vertical-align: middle;
+    }
+
+.go-button > *:first-child,
+.go-button > *:first-child {
+    display: none;
+}
+
+.go-button:disabled,
+.go-button[disabled] {
+    background: $grey;
+    cursor: wait;
+
+    &:hover {
+        box-shadow: none;
+    }
+}
+
+    .go-button:disabled > *:last-child,
+    .go-button[disabled] > *:last-child {
+        display: none;
+    }
+
+    .go-button:disabled > *:first-child,
+    .go-button[disabled] > *:first-child {
+        display: inline-block;
+    }
+
 .go-button.mode-open {
 	display: inline-block;
 }
-
-// .btn-close .material-icons{
-//     position: absolute;
-//     top: 20px;
-//     right: 20px;
-//     font-size: 3em;
-// }
 
 .titre-container {
 	display: inline;
@@ -158,5 +186,15 @@ $modal-background: rgba(0, 0, 0, .3);
 
     to {
         opacity: .9;
+    }
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
     }
 }

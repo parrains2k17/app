@@ -20,8 +20,8 @@ class Modal {
                 .querySelector('.js-modal-background');
             this.closeButton
                 .addEventListener('click', this.close.bind(this));
-            // this.closeButton[1]
-            //     .addEventListener('click', this.close.bind(this));
+            this.closeButton.disabled = false;
+
             this.modal_background
                 .addEventListener('click', this.close.bind(this));
         } else if (type === WEBGL_MODAL) {
