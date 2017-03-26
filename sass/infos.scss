@@ -173,8 +173,13 @@
     width: 60%;
 }
 
+.photo-element {
+    margin-bottom: .6em;
+    max-width: 14.2%; // 100/7
+}
+
 .photo-element.mod-title {
-    font-weight: 600;
+    font-weight: 700;
 }
 
     .photo-element-img,
@@ -186,7 +191,7 @@
 
     .photo-element-img {
         margin: 0 auto;
-        width: 70%;
+        width: 8em;
     }
 
 .code-list {
