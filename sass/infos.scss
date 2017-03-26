@@ -67,6 +67,10 @@
             max-width: 1024px;
         }
 
+            .infos-row {
+                margin-bottom: 3em;
+            }
+
 .logo-hyblab,
 .logo-polytech,
 .logo-design,
@@ -93,3 +97,19 @@
         margin: 0 auto;
         width: 70%;
     }
+
+.code-list {
+    list-style: none;
+}
+
+    .code-img,
+    .code-text {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    .code-img {
+        margin-bottom: .2em;
+        width: 3em;
+    }
+

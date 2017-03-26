@@ -82,10 +82,6 @@ button:focus {
 	align-items: center;
 }
 
-.row.mod-stretch {
-	align-items: stretch;
-}
-
 .row.mod-nowrap {
 	flex-wrap: nowrap;
 }
@@ -107,9 +103,17 @@ button:focus {
         flex-basis: 66%;
     }
 
+    .col3.mod-max {
+        max-width: 66%;
+    }
+
     .col2 {
         flex: 2;
         flex-basis: 50%;
+    }
+
+    .col2.mod-max {
+        max-width: 50%;
     }
 
     .col-m-2 {
@@ -124,7 +128,11 @@ button:focus {
         flex-basis: 25%;
     }
 
-.mb-2 {
-    margin-bottom: 2em;
+    .col1.mod-max {
+        max-width: 22%;
+    }
+
+.text-center {
+    text-align: center;
 }
 
