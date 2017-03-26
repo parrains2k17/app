@@ -3,6 +3,8 @@ import { range } from 'underscore';
 
 const HEIGHT_WIDTH_RATIO = 4;
 
+const { random, max, min, floor, sqrt } = Math;
+
 /**
  * randomize
  *
@@ -17,16 +19,14 @@ const HEIGHT_WIDTH_RATIO = 4;
  * @return {Number}  value      t randomized
  * @return {Number}  random     the random value used [0, 1[
  */
-export const randomize = (t, interval, min, max) => {
-    const
-        minInterval = interval / 3, // don't randomize too much on the borders
-        r = Math.random();
+export const randomize = (t, interval, minValue, maxValue) => {
+    const r = random();
 
-    const value = Math.max(
-        min - minInterval,
-        Math.min(
-            t + (r * interval),
-            max + minInterval,
+    const value = max(
+        minValue,
+        min(
+            t + (r * interval) + (-interval / 2),
+            maxValue,
         )
     );
 
@@ -56,21 +56,17 @@ const pointsPositionInRectPure = (getXY) => (n, width, height) => {
 
         // let's use a rect for each point
         a = A / n, // area of the tiny rect
-        w = Math.sqrt( // width
+        w = sqrt( // width
             HEIGHT_WIDTH_RATIO * (a / r)
         ),
         h = (w * r) / HEIGHT_WIDTH_RATIO; // height
 
     return points.map((_, i) => {
-        let [x, y] = getXY(i, w, h, width, height);
-
-        // broders left and top
-        x = (x < w) ? 0 : x; // TODO remove ?
-        y = (y < h) ? 0 : y;
+        const [x, y] = getXY(i, w, h, width, height);
 
         const
             randomX = randomize(x, w, 0, width),
-            randomY = randomize(y, h, 0, height);
+            randomY = randomize(y, h, 0, height - h);
 
         return {
             x:       randomX.value,
@@ -84,7 +80,7 @@ const pointsPositionInRectPure = (getXY) => (n, width, height) => {
 const getXYVertical = (i, w, h, width) => {
     const
         x = (i * w) % width,
-        y = Math.floor((i * w) / width) * h;
+        y = floor((i * w) / width) * h;
 
     return [x, y];
 };
@@ -92,7 +88,7 @@ const getXYVertical = (i, w, h, width) => {
 const getXYHorizontal = (i, w, h, width, height) => {
     const
         y = (i * h) % height,
-        x = Math.floor((i * h) / height) * w;
+        x = floor((i * h) / height) * w;
 
     return [x, y];
 };
