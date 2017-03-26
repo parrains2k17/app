@@ -7,6 +7,7 @@
     position: fixed;
     transition: bottom .3s ease;
     width: 100vw;
+    z-index: 200;
 
     @media only screen and (max-width: $breakpoint) {
         font-size: .7em;

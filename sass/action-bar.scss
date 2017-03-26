@@ -9,7 +9,7 @@ $sidebar-margin: 0;
     position: absolute;
     top: 0;
     transition: opacity 1s ease, right 1s ease, left 1s ease;
-    // width: $width-bar;
+    z-index: 100;
 }
 
 .action-bar-arrow {
