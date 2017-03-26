@@ -67,3 +67,29 @@
             max-width: 1024px;
         }
 
+.logo-hyblab,
+.logo-polytech,
+.logo-design,
+.logo-of,
+.logo-oml,
+.logo-nantesmetropole,
+.logo-pdl,
+.logo-univ {
+    width: 60%;
+}
+
+.photo-element.mod-title {
+    font-weight: 600;
+}
+
+    .photo-element-img,
+    .photo-element-title {
+        display: block;
+        margin: 0;
+        text-align: center;
+    }
+
+    .photo-element-img {
+        margin: 0 auto;
+        width: 70%;
+    }

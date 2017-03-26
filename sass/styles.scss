@@ -71,3 +71,60 @@ button:focus {
         vertical-align: middle;
     }
 
+// Grid
+
+.row {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.row.mod-center {
+	align-items: center;
+}
+
+.row.mod-stretch {
+	align-items: stretch;
+}
+
+.row.mod-nowrap {
+	flex-wrap: nowrap;
+}
+
+    .col4 {
+        flex: 4;
+        flex-basis: 100%;
+    }
+
+    .col-m-4 {
+        @media only screen and (max-width: $breakpoint) {
+            flex: 4;
+            flex-basis: 100%;
+        }
+    }
+
+    .col3 {
+        flex: 3;
+        flex-basis: 66%;
+    }
+
+    .col2 {
+        flex: 2;
+        flex-basis: 50%;
+    }
+
+    .col-m-2 {
+        @media only screen and (max-width: $breakpoint) {
+            flex: 4;
+            flex-basis: 100%;
+        }
+    }
+
+    .col1 {
+        flex: 1;
+        flex-basis: 25%;
+    }
+
+.mb-2 {
+    margin-bottom: 2em;
+}
+
