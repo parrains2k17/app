@@ -24,11 +24,18 @@ $modal-background: rgba(0, 0, 0, .3);
 	display: none;
 	height: 90%;
 	left: 25%;
-	padding: 20px 30px 10px;
+	padding: 2em;
 	position: absolute;
 	text-align: center;
 	top: 5%;
 	width: 50%;
+
+    @media only screen and (max-width: $breakpoint) {
+        left: 5%;
+        overflow-y: auto;
+        padding: 1em;
+        width: 90%;
+    }
 }
 
 .modal-container.mode-animate {
@@ -76,6 +83,11 @@ $modal-background: rgba(0, 0, 0, .3);
 	display: flex;
 	flex-wrap: wrap;
 	height: 100%;
+
+    @media only screen and (max-width: $breakpoint) {
+	    align-content: flex-start;
+	    height: auto;
+    }
 }
 
 .text-part-container {
@@ -86,6 +98,7 @@ $modal-background: rgba(0, 0, 0, .3);
 .logo-col4 {
 	flex: 4;
 	flex-basis: 100%;
+
 }
 
 .logo-col2 {
@@ -96,6 +109,11 @@ $modal-background: rgba(0, 0, 0, .3);
 .logo-col1 {
 	flex: 1;
 	flex-basis: 25%;
+
+    @media only screen and (max-width: $breakpoint) {
+	    flex: 2;
+	    flex-basis: 50%;
+    }
 }
 
 .logo-parrains {

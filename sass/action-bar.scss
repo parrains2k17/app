@@ -101,6 +101,7 @@ $sidebar-margin: 0;
         @media only screen and (max-width: $breakpoint) {
             border-radius: 4px;
             margin-left: 1em;
+            min-width: 4em;
         }
     }
 
@@ -155,6 +156,10 @@ $sidebar-margin: 0;
         margin-bottom: .5em;
         max-width: 15em;
         padding: .6em;
+
+        @media only screen and (max-width: $breakpoint) {
+            display: none;
+        }
     }
 
     .action-bar-title.mod-maires {
