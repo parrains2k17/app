@@ -25,7 +25,7 @@
                     <span class="material-icons">close</span>
                 </button>
                 <div class="infos-content">
-                    <div class="row mod-center infos-row">
+                    <div class="row mod-center-vertical infos-row">
                         <div class="col1 text-center">
                             <img src="images/logo_parrains.png"
                                 class="logo-parrains" />
@@ -37,19 +37,42 @@
                         </div>
                     </div>
 
-                    <div class="row infos-row">
+                    <div class="row infos-row mod-center-horizontal">
                         <div class="col3 mod-max">
                             <p>
                                 Ils sont 14 296 élus à avoir accepté de parrainer un
-                                candidat à l'élection présidentielle.  Parmi eux,
+                                candidat à l'élection présidentielle. Parmi eux,
                                 9 756 maires ont apporté leurs signatures à
                                 l'un des 61 candidats en route pour l'Elysée.
                             </p>
                             <p>
+                                11 candidatures ont été validées par le Conseil
+                                Constitutionnel. Pour être validée, une
+                                candidature doit obtenir 500 parrainages et
+                                vérifier que :
+                                <ul>
+                                    <li>
+                                        pas plus d’un dixième des 500 parrainages
+                                        nécessaires, c’est-à-dire 50 au maximum,
+                                        émanent d’un même département ou
+                                        collectivité d’outre-mer
+                                    </li>
+                                    <li>
+                                        ces parrainages sont signés par des élus
+                                        d’au moins 30 départements ou
+                                        collectivités d’outre-mer.
+                                    </li>
+                                </ul>
+
+                                Le site du Conseil Constitutionnel présente <a
+                                    href="https://presidentielle2017.conseil-constitutionnel.fr/les-parrainages/parrainages-par-candidat/">plus
+                                    de détails</a>.
+                            </p>
+                            <hr />
+                            <p>
                                 Pour la première fois, la liste des parrainages
-                                est rendue publique par le conseil
-                                constitutionnel. Pour la première fois, il est
-                                possible d'explorer ces données.
+                                est rendue publique. Pour la première fois, il
+                                est possible d'explorer ces données.
                             </p>
                             <p>
                                 Quel candidat reçoit le plus de parrainages ?
@@ -91,10 +114,71 @@
 
                     <div class="row infos-row">
                         <div class="col4">
+                            <h2>Légende - Couleurs des étiquettes politiques</p>
+                        </div>
+                        <div class="col4">
+                            <p>
+                                <span class="list-item list-item-exg">
+                                    Extrème Gauche
+                                </span>
+                                <span class="list-item list-item-fg">
+                                    Front de Gauche
+                                </span>
+                                <span class="list-item list-item-pg">
+                                    Parti de Gauche
+                                </span>
+                                <span class="list-item list-item-pc">
+                                    Parti Communiste
+                                </span>
+                                <span class="list-item list-item-ps">
+                                    Parti Socialiste
+                                </span>
+                                <span class="list-item list-item-ug">
+                                    Union de la Gauche
+                                </span>
+                                <span class="list-item list-item-dvg">
+                                    Divers Gauche
+                                </span>
+                                <span class="list-item list-item-eelv">
+                                    Europe-Ecologie-Les Verts
+                                </span>
+                                <span class="list-item list-item-div">
+                                    Divers
+                                </span>
+                                <span class="list-item list-item-modem">
+                                    Modem
+                                </span>
+                                <span class="list-item list-item-uc">
+                                    Union du Centre
+                                </span>
+                                <span class="list-item list-item-udi">
+                                    Union Démocrates et Indépendants
+                                </span>
+                                <span class="list-item list-item-dvd">
+                                    Divers Droite
+                                </span>
+                                <span class="list-item list-item-ud">
+                                    Union de la droite
+                                </span>
+                                <span class="list-item list-item-fn">
+                                    Front National
+                                </span>
+                                <span class="list-item list-item-exd">
+                                    Extrème Droite
+                                </span>
+                                <span class="list-item list-item-se">
+                                    Sans étiquette
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="row infos-row">
+                        <div class="col4">
                             <h2>L'équipe</p>
                         </div>
                         <div class="col2">
-                            <div class="row mod-nowrap mod-center">
+                            <div class="row mod-nowrap mod-center-vertical">
                                 <div class="photo-element mod-title col1">
                                     <p>Ouest France</p>
                                 </div>
@@ -115,7 +199,7 @@
                             </div>
                         </div>
                         <div class="col2">
-                            <div class="row mod-nowrap mod-center">
+                            <div class="row mod-nowrap mod-center-vertical">
                                 <div class="photo-element mod-title col1">
                                     <p>Designers - EDNA</p>
                                 </div>
@@ -143,7 +227,7 @@
                             </div>
                         </div>
                         <div class="col4">
-                            <div class="row mod-nowrap mod-center">
+                            <div class="row mod-nowrap mod-center-vertical">
                                 <div class="photo-element mod-title col1">
                                     <p>Ingénieurs - Polytech</p>
                                 </div>
@@ -179,7 +263,7 @@
                         </div>
                     </div>
 
-                    <div class="row mod-center infos-row">
+                    <div class="row mod-center-vertical infos-row">
                         <div class="col4">
                             <h2>Partenaires</h2>
                         </div>
@@ -190,7 +274,7 @@
                                 Ouest France.</p>
                         </div>
                         <div class="col4">
-                            <div class="row mod-center">
+                            <div class="row mod-center-vertical">
                                 <div class="col1">
                                     <a href="http://www.ouestmedialab.fr/">
                                         <img src="images/logo_hyblab.png"
@@ -246,7 +330,7 @@
                         </div>
                     </div>
 
-                    <div class="row mod-center infos-row">
+                    <div class="row mod-center-vertical infos-row">
                         <div class="col4">
                             <h2>Code et Licence</h2>
                         </div>
@@ -358,7 +442,7 @@
         <div class="modal-background js-modal-background js-close-modal" ></div>
         <div class="modal-container js-modal-container-intro">
 
-            <div class="row mod-center flex-container">
+            <div class="row mod-center-vertical flex-container">
                 <div class="logo-parrains-container col2">
                     <img src="images/logo_parrains.png" class="logo-parrains">
                 </div>

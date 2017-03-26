@@ -78,8 +78,12 @@ button:focus {
 	flex-wrap: wrap;
 }
 
-.row.mod-center {
+.row.mod-center-vertical {
 	align-items: center;
+}
+
+.row.mod-center-horizontal {
+	justify-content: center;
 }
 
 .row.mod-nowrap {
@@ -136,3 +140,6 @@ button:focus {
     text-align: center;
 }
 
+hr {
+    opacity: .6;
+}
