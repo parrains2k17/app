@@ -71,6 +71,97 @@
                 margin-bottom: 3em;
             }
 
+.list-item {
+    display: inline-block;
+    margin-bottom: .6em;
+    margin-right: 1em;
+    padding-left: 1.6em;
+    position: relative;
+    white-space: nowrap;
+
+    &:before {
+        border-radius: 9999px;
+        content: '';
+        height: 1em;
+        left: 0;
+        position: absolute;
+        top: .2em;
+        width: 1em;
+    }
+}
+
+    .list-item-exg:before {
+        background: $listeexg;
+    }
+
+    .list-item-pc:before {
+        background: $listepc;
+    }
+
+    .list-item-fg:before {
+        background: $listefg;
+    }
+
+    .list-item-pg:before {
+        background: $listepg;
+    }
+
+    .list-item-ps:before {
+        background: $listeps;
+    }
+
+    .list-item-ug:before {
+        background: $listeug;
+    }
+
+    .list-item-dvg:before {
+        background: $listedvg;
+    }
+
+    .list-item-eelv:before {
+        background: $listeeelv;
+    }
+
+    .list-item-modem:before {
+        background: $listemodem;
+    }
+
+    .list-item-uc:before {
+        background: $listeuc;
+    }
+
+    .list-item-udi:before {
+        background: $listeudi;
+    }
+
+    .list-item-dvd:before {
+        background: $listedvd;
+    }
+
+    .list-item-ud:before {
+        background: $listeud;
+    }
+
+    .list-item-ump:before {
+        background: $listeump;
+    }
+
+    .list-item-fn:before {
+        background: $listefn;
+    }
+
+    .list-item-exd:before {
+        background: $listeexd;
+    }
+
+    .list-item-div:before {
+        background: $listediv;
+    }
+
+    .list-item-se:before {
+        background: $listese;
+    }
+
 .logo-hyblab,
 .logo-polytech,
 .logo-design,
