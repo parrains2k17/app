@@ -24,7 +24,7 @@ const NEED_RECT = 150;
 
 const LABEL_STYLE = {
     fontFamily: 'Roboto Mono',
-    fontSize:   12,
+    fontSize:   14,
     lineHeight: 17,
     fill:       WHITE,
     align:      'center',
