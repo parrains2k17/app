@@ -9,7 +9,7 @@ import randomNumber from '../utils/randomNumber';
 
 import MovingSupporters from './MovingSupporters';
 
-import { listColor } from '../style/color';
+import { LISTE_SE as GREY, listColor } from '../style/color';
 
 import {
     SELECTOR_GENDER,
@@ -77,7 +77,7 @@ class Supporters extends Container {
 
         this.movingGroups = range(NUMBER_GROUPS)
             .map(() => {
-                const duration = (15 * random()) + 20;
+                const duration = (20 * random()) + 30;
                 return new MovingSupporters(duration, direction);
             });
         this.movingGroups.forEach((g) => this.addChild(g));
@@ -114,14 +114,10 @@ class Supporters extends Container {
         this.movingGroups.forEach((c) => c.stopRotate());
     }
 
-    center() {
-        this.supporters.forEach((c) => c.center({
-            duration: CENTER_DURATION,
-        }));
-    }
-
     resetPosition() {
         this.scale.set(1, 1);
+
+        this.showAll();
 
         this.supporters.forEach((c) => {
             c.resetPosition({
@@ -180,7 +176,6 @@ class Supporters extends Container {
         this.legend.removeChildren();
 
         this.stopRotation();
-        this.center();
 
         if (mairesOnly(selector)) {
             this.showMaires(); // hide other supporters
@@ -283,11 +278,14 @@ class Supporters extends Container {
             .forEach((s) => {
                 s.fade();
             });
+
+        this.supporters.forEach((s) => s.resetColor());
     }
 
     showAll() {
         this.supporters.forEach((s) => {
             s.show();
+            s.changeColor(GREY);
         });
     }
 }

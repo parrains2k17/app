@@ -4,7 +4,7 @@ $breakpoint: 737px;
 
 @import 'colors';
 @import 'modal';
-@import 'credits';
+@import 'infos';
 @import 'candidate';
 @import 'action-bar';
 @import 'switch';
@@ -60,6 +60,10 @@ button:focus {
 .btn-transparent {
     background: 0;
     border: 0;
+
+    &:hover {
+        cursor: pointer;
+    }
 }
 
     .btn-transparent > * {
@@ -67,3 +71,75 @@ button:focus {
         vertical-align: middle;
     }
 
+// Grid
+
+.row {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.row.mod-center-vertical {
+	align-items: center;
+}
+
+.row.mod-center-horizontal {
+	justify-content: center;
+}
+
+.row.mod-nowrap {
+	flex-wrap: nowrap;
+}
+
+    .col4 {
+        flex: 4;
+        flex-basis: 100%;
+    }
+
+    .col-m-4 {
+        @media only screen and (max-width: $breakpoint) {
+            flex: 4;
+            flex-basis: 100%;
+        }
+    }
+
+    .col3 {
+        flex: 3;
+        flex-basis: 66%;
+    }
+
+    .col3.mod-max {
+        max-width: 66%;
+    }
+
+    .col2 {
+        flex: 2;
+        flex-basis: 50%;
+    }
+
+    .col2.mod-max {
+        max-width: 50%;
+    }
+
+    .col-m-2 {
+        @media only screen and (max-width: $breakpoint) {
+            flex: 4;
+            flex-basis: 100%;
+        }
+    }
+
+    .col1 {
+        flex: 1;
+        flex-basis: 25%;
+    }
+
+    .col1.mod-max {
+        max-width: 25%;
+    }
+
+.text-center {
+    text-align: center;
+}
+
+hr {
+    opacity: .6;
+}

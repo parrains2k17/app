@@ -1,9 +1,11 @@
 
 import { Container, Circle } from 'pixi.js';
-import { TweenMax, Power0 } from 'gsap';
+import { TweenMax, Power0, Power1 } from 'gsap';
 
 import Supporters from './SupportersGroup';
 import Candidate from '../components/Candidate';
+
+import { RED, GREEN } from '../style/color';
 
 const { random } = Math;
 
@@ -11,7 +13,8 @@ const
     HIT_AREA_RADIUS         = 100,
     HIDE_DURATION           = 0.1,
     ACTIVATE_DURATION       = 1.5,
-    MOVEMENT_DURATION       = 60;
+    MOVEMENT_DURATION       = 60,
+    MIN_VALID_SUPPORTERS    = 500;
 
 class CandidateGroup extends Container {
     constructor(
@@ -31,7 +34,11 @@ class CandidateGroup extends Container {
         this.id = infos.id;
         this.maire = infos.maire;
 
-        this.candidate = new Candidate(texture);
+        this.candidate = new Candidate(texture, {
+            borderColor: (
+                supporters.length >= MIN_VALID_SUPPORTERS ? GREEN : RED
+            ),
+        });
 
         this.supporters = new Supporters(supporters);
         this.supporters.rotate();
@@ -47,6 +54,8 @@ class CandidateGroup extends Container {
         this.moveAround();
 
         this.on('pointerdown', this.handleClick.bind(this));
+        this.on('mouseover', () => this.candidate.showBorder());
+        this.on('mouseout', () => this.candidate.hideBorder());
     }
 
     handleClick() {
@@ -64,7 +73,7 @@ class CandidateGroup extends Container {
             {
                 x,
                 y,
-                ease: Power0.easeNone,
+                ease: Power1.easeNone,
             }
         );
 
@@ -74,7 +83,7 @@ class CandidateGroup extends Container {
             {
                 x:    0,
                 y:    0,
-                ease: Power0.easeNone,
+                ease: Power1.easeNone,
             }
         );
 
@@ -83,7 +92,7 @@ class CandidateGroup extends Container {
             ACTIVATE_DURATION,
             {
                 alpha: 1,
-                ease:  Power0.easeNone,
+                ease:  Power1.easeNone,
             }
         );
 
@@ -93,7 +102,7 @@ class CandidateGroup extends Container {
             {
                 x:    scale,
                 y:    scale,
-                ease: Power0.easeNone,
+                ease: Power1.easeNone,
             }
         );
     }
@@ -130,7 +139,7 @@ class CandidateGroup extends Container {
                 alpha:      1,
                 x:          this.initialPosition.x || 0,
                 y:          this.initialPosition.y || 0,
-                ease:       Power0.easeNone,
+                ease:       Power1.easeNone,
                 onComplete: () => {
                     this.moveAround();
                 },
@@ -143,7 +152,7 @@ class CandidateGroup extends Container {
             {
                 x:    1,
                 y:    1,
-                ease: Power0.easeNone,
+                ease: Power1.easeNone,
             }
         );
 

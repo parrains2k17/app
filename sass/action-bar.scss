@@ -4,17 +4,18 @@ $width-bar: 6em;
 $sidebar-margin: 0;
 
 .action-bar {
-    height: 80%;
+    height: 100%;
     opacity: 0;
     position: absolute;
-    top: 10%;
+    top: 0;
     transition: opacity 1s ease, right 1s ease, left 1s ease;
-    // width: $width-bar;
+    z-index: 100;
 }
 
 .action-bar-arrow {
     color: $white2;
     cursor: pointer;
+    height: 10%;
     opacity: .6;
     padding: 0 .5em;
     width: 6em;
@@ -54,53 +55,62 @@ $sidebar-margin: 0;
 }
 
 .action-bar.mod-planets {
-    height: 50%;
     left: -$sidebar-margin - 100em;
-    top: 15%;
 }
 
 .action-bar.mod-planets.mod-open {
     left: $sidebar-margin;
 }
 
-.action-bar-container {
-    align-items: flex-end;
-    color: $white2;
-    display: flex;
-    flex-direction: column;
+.action-bar-h100 {
+    display: inline-block;
     height: 100%;
+    vertical-align: middle;
+}
+
+.action-bar-container {
+    color: $white2;
+    display: inline-block;
     list-style: none;
     margin: 0;
     padding: 0;
-
-    @media only screen and (max-width: $breakpoint) {
-        flex-direction: row;
-        padding: 1em 1em 0 0;
-    }
+    text-align: right;
+    vertical-align: middle;
 }
 
 .action-bar-container.mod-planets {
-    align-items: flex-start;
-    overflow-x: visible;
-    overflow-y: hidden;
+    height: 60%;
+    text-align: left;
     width: 30em;
 }
+
+    .action-bar-planets-list {
+        height: 80%;
+        list-style: none;
+        margin: 0;
+        overflow-x: visible;
+        overflow-y: hidden;
+        padding: 0;
+    }
 
     .action-bar-element {
         background: $background-block;
         border-radius: 9999px;
         cursor: pointer;
-        height: 4em;
+        height: 3em;
+        height: 6vh; // sass-lint:disable-line no-duplicate-properties
         margin-bottom: .5em;
-        margin-right: .5em;
+        margin-left: 15em;
         padding: .3em .5em;
         position: relative;
         text-align: right;
-        width: 4em;
+        width: 3em;
+        width: 6vh; // sass-lint:disable-line no-duplicate-properties
 
         @media only screen and (max-width: $breakpoint) {
             border-radius: 4px;
             margin-left: 1em;
+            min-width: 4em;
         }
     }
 
@@ -124,8 +134,11 @@ $sidebar-margin: 0;
 
     .action-bar-element.mod-planets {
         background: none;
-        height: 6em;
-        width: 6em;
+        height: 5em;
+        height: 8vh; // sass-lint:disable-line no-duplicate-properties
+        margin-left: 0;
+        width: 5em;
+        width: 8vh; // sass-lint:disable-line no-duplicate-properties
     }
 
     .action-bar-element.mod-planets::before {
@@ -133,7 +146,7 @@ $sidebar-margin: 0;
         color: $white;
         content: attr(data-planet-name);
         left: 110%;
-        text-align: right;
+        top: 1em;
         width: 270%;
     }
 
@@ -151,10 +164,16 @@ $sidebar-margin: 0;
         background: $background-block;
         border-bottom-left-radius: 6px;
         border-top-left-radius: 6px;
+        display: inline-block;
         font-size: 1.3em;
         margin-bottom: .5em;
         max-width: 15em;
         padding: .6em;
+        text-align: left;
+
+        @media only screen and (max-width: $breakpoint) {
+            display: none;
+        }
     }
 
     .action-bar-title.mod-maires {

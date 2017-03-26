@@ -3,7 +3,7 @@
 import { utils } from 'pixi.js';
 import AppController from './AppController';
 import Modal, { INTRO_MODAL, WEBGL_MODAL } from './components/Modal';
-import Credits from './components/Credits';
+import Infos from './components/Infos';
 
 require('../sass/styles.scss');
 
@@ -14,7 +14,7 @@ console.log('hello');
 if (utils.isWebGLSupported()) {
     const app = new AppController();
     new Modal(INTRO_MODAL); // show intro message
-    new Credits();          // listen for credit
+    new Infos();            // listen for credit
 
     app.start(); // start 🚀
 } else {
