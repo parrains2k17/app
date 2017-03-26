@@ -96,7 +96,6 @@ class Candidate extends Container {
     }
 
     showBorder() {
-        console.log('hover');
         this.border.visible = true;
     }
 
