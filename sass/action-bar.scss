@@ -125,8 +125,8 @@ $sidebar-margin: 0;
 
     .action-bar-element.mod-planets {
         background: none;
-        height: 6em;
-        width: 6em;
+        min-height: 6em;
+        min-width: 6em;
     }
 
     .action-bar-element.mod-planets::before {
