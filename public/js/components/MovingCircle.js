@@ -1,9 +1,9 @@
 
-import { TweenMax, Power0 } from 'gsap';
+import { TweenMax, Power0, Power1 } from 'gsap';
 
 import Circle from './Circle';
 
-const MOVE_DURATION = 1;
+const MOVE_DURATION = 2;
 const FADE_DURATION = 0.3;
 
 class MovingCircle extends Circle {
@@ -33,7 +33,7 @@ class MovingCircle extends Circle {
             {
                 x:    0,
                 y:    0,
-                ease: Power0.easeNone,
+                ease: Power1.easeNone,
             }
         );
     }
@@ -47,7 +47,7 @@ class MovingCircle extends Circle {
             {
                 x:    this.initialPivot._x,
                 y:    this.initialPivot._y,
-                ease: Power0.easeNone,
+                ease: Power1.easeNone,
             }
         );
 
@@ -57,7 +57,7 @@ class MovingCircle extends Circle {
             {
                 x:    this.initialPosition._x,
                 y:    this.initialPosition._y,
-                ease: Power0.easeNone,
+                ease: Power1.easeNone,
             }
         );
     }
@@ -93,7 +93,7 @@ class MovingCircle extends Circle {
             MOVE_DURATION,
             {
                 x,
-                ease: Power0.easeNone,
+                ease: Power1.easeOut,
             }
         );
     }
@@ -104,7 +104,7 @@ class MovingCircle extends Circle {
             MOVE_DURATION,
             {
                 y,
-                ease: Power0.easeNone,
+                ease: Power1.easeOut,
             }
         );
     }

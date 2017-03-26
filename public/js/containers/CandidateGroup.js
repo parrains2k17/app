@@ -1,6 +1,6 @@
 
 import { Container, Circle } from 'pixi.js';
-import { TweenMax, Power0 } from 'gsap';
+import { TweenMax, Power0, Power1 } from 'gsap';
 
 import Supporters from './SupportersGroup';
 import Candidate from '../components/Candidate';
@@ -73,7 +73,7 @@ class CandidateGroup extends Container {
             {
                 x,
                 y,
-                ease: Power0.easeNone,
+                ease: Power1.easeNone,
             }
         );
 
@@ -83,7 +83,7 @@ class CandidateGroup extends Container {
             {
                 x:    0,
                 y:    0,
-                ease: Power0.easeNone,
+                ease: Power1.easeNone,
             }
         );
 
@@ -92,7 +92,7 @@ class CandidateGroup extends Container {
             ACTIVATE_DURATION,
             {
                 alpha: 1,
-                ease:  Power0.easeNone,
+                ease:  Power1.easeNone,
             }
         );
 
@@ -102,7 +102,7 @@ class CandidateGroup extends Container {
             {
                 x:    scale,
                 y:    scale,
-                ease: Power0.easeNone,
+                ease: Power1.easeNone,
             }
         );
     }
@@ -139,7 +139,7 @@ class CandidateGroup extends Container {
                 alpha:      1,
                 x:          this.initialPosition.x || 0,
                 y:          this.initialPosition.y || 0,
-                ease:       Power0.easeNone,
+                ease:       Power1.easeNone,
                 onComplete: () => {
                     this.moveAround();
                 },
@@ -152,7 +152,7 @@ class CandidateGroup extends Container {
             {
                 x:    1,
                 y:    1,
-                ease: Power0.easeNone,
+                ease: Power1.easeNone,
             }
         );
 
