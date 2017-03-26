@@ -78,10 +78,6 @@ $modal-background: rgba(0, 0, 0, .3);
 }
 
 .flex-container {
-	align-content: stretch;
-	align-items: center;
-	display: flex;
-	flex-wrap: wrap;
 	height: 100%;
 
     @media only screen and (max-width: $breakpoint) {
@@ -95,48 +91,7 @@ $modal-background: rgba(0, 0, 0, .3);
 	text-align: left;
 }
 
-.logo-col4 {
-	flex: 4;
-	flex-basis: 100%;
-
-}
-
-.logo-col2 {
-	flex: 2;
-	flex-basis: 50%;
-}
-
-.logo-col1 {
-	flex: 1;
-	flex-basis: 25%;
-
-    @media only screen and (max-width: $breakpoint) {
-	    flex: 2;
-	    flex-basis: 50%;
-    }
-}
-
 .logo-parrains {
-	width: 60%;
-}
-
-.logo-hyblab {
-	width: 60%;
-}
-
-.logo-polytech {
-	width: 60%;
-}
-
-.logo-design {
-	width: 60%;
-}
-
-.logo-of {
-	width: 60%;
-}
-
-.logo-oml {
 	width: 60%;
 }
 
