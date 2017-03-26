@@ -24,12 +24,12 @@ class MovingCircle extends Circle {
         }
     }
 
-    center({ duration }) {
+    resetPivot() {
         this.killAnimation();
 
         TweenMax.to(
             this.pivot,
-            duration,
+            MOVE_DURATION,
             {
                 x:    0,
                 y:    0,
@@ -88,6 +88,10 @@ class MovingCircle extends Circle {
     }
 
     moveX(x) {
+        if (this.pivot.x !== 0 || this.pivot.y !== 0) {
+            this.resetPivot();
+        }
+
         TweenMax.to(
             this.position,
             MOVE_DURATION,
@@ -99,6 +103,10 @@ class MovingCircle extends Circle {
     }
 
     moveY(y) {
+        if (this.pivot.x !== 0 || this.pivot.y !== 0) {
+            this.resetPivot();
+        }
+
         TweenMax.to(
             this.position,
             MOVE_DURATION,
