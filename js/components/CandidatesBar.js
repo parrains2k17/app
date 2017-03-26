@@ -25,7 +25,7 @@ class CandidatesBar extends ActionBar {
             .querySelector('.action-bar-arrow-down');
 
         this.actionBar = document
-            .querySelector('.action-bar-container.mod-planets');
+            .querySelector('.action-bar-planets-list');
 
         this.upButton.addEventListener('click', this.up.bind(this));
         this.downButton.addEventListener('click', this.down.bind(this));
