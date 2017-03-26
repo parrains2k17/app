@@ -24,16 +24,23 @@ const NEED_RECT = 150;
 
 const LABEL_STYLE = {
     fontFamily: 'Roboto Mono',
-    fontSize:   12,
+    fontSize:   14,
     lineHeight: 17,
     fill:       WHITE,
     align:      'center',
 };
 
 const createLineRect = (x, y, width, height) => {
+    const lineWidth = 4;
     const rect = new Graphics();
-    rect.lineStyle(4, GREY);
-    rect.drawRoundedRect(x, y, width, height, 4);
+    rect.lineStyle(lineWidth, GREY);
+    rect.drawRoundedRect(
+        x - lineWidth,
+        y - lineWidth,
+        width + (2 * lineWidth),
+        height + (2 * lineWidth),
+        4
+    );
 
     return rect;
 };
@@ -123,7 +130,7 @@ export const showBarChart = (
 
     bars.forEach((bar, i) => {
         labels.children[i].position.x
-            += (-width / 2) + bar.x + ((bar.width * 1.2) / 2);
+            += (-width / 2) + bar.x + (bar.width / 2);
         labels.children[i].position.y
             += ((height / 2) - legendHeight) + (bar.y + 20);
 
@@ -132,7 +139,7 @@ export const showBarChart = (
             legendContainer.addChild(createRect(fillRect)(
                 (-width / 2) + bar.x,
                 ((height / 2) - legendHeight) - bar.height,
-                bar.width * 1.2,
+                bar.width,
                 bar.height
             ));
         }
@@ -207,9 +214,9 @@ export const showHorizontalBarChart = (
             const fillRect = !bar.points.length;
             legendContainer.addChild(createRect(fillRect)(
                 ((-width / 2) + legendWidth) + bar.x,
-                -(height / 2) + (-bar.height * 1.2) + bar.y,
-                bar.width * 1.2,
-                bar.height * 1.2,
+                bar.y - (height / 2) - bar.height,
+                bar.width,
+                bar.height,
                 GREY
             ));
         }
@@ -286,22 +293,22 @@ export const showDotMatrix = (
         container.addChild(circle);
     };
 
-    Object.keys(realLabels).slice(0, floor(l / 2)).forEach(
-        drawLabel(legendWrapperLeft)
-    );
+    if (!isMobile()) { // don't draw legend on mobile
+        Object.keys(realLabels).slice(0, floor(l / 2)).forEach(
+            drawLabel(legendWrapperLeft)
+        );
 
-    Object.keys(realLabels).slice(floor(l / 2) + 1).forEach(
-        drawLabel(legendWrapperRight)
-    );
+        Object.keys(realLabels).slice(floor(l / 2) + 1).forEach(
+            drawLabel(legendWrapperRight)
+        );
+    }
 
     const legendHeight = max(
         legendWrapperLeft.getLocalBounds().height,
         legendWrapperRight.getLocalBounds().height
     );
 
-    const pointYOffset = isMobile()
-        ? -legendHeight
-        : (-legendHeight / 2);
+    const pointYOffset = -legendHeight / 2;
 
     points.forEach((point, i) => {
         const
@@ -316,16 +323,12 @@ export const showDotMatrix = (
     legendWrapperLeft.position.x = (-width / 2);
     legendWrapperLeft.position.y = (maxHeight / 2) + pointYOffset;
 
-    if (!isMobile()) {
-        legendWrapperRight.position.x = 0;
-        legendWrapperRight.position.y = (maxHeight / 2) + pointYOffset;
-    } else {
-        legendWrapperRight.position.x = (-width / 2);
-        legendWrapperRight.position.y = legendWrapperLeft.position.y
-            + legendWrapperLeft.getLocalBounds().height;
-    }
+    legendWrapperRight.position.x = 0;
+    legendWrapperRight.position.y = (maxHeight / 2) + pointYOffset;
 
-    legendContainer.addChild(legendWrapperLeft);
-    legendContainer.addChild(legendWrapperRight);
+    if (!isMobile()) {
+        legendContainer.addChild(legendWrapperLeft);
+        legendContainer.addChild(legendWrapperRight);
+    }
 };
 

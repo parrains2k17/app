@@ -123,6 +123,8 @@ class Supporters extends Container {
     resetPosition() {
         this.scale.set(1, 1);
 
+        this.showAll();
+
         this.supporters.forEach((c) => {
             c.resetPosition({
                 duration: CENTER_DURATION,
