@@ -7,6 +7,7 @@ import Stage from './components/Stage';
 import CandidatePanel from './components/CandidatePanel';
 import ActionBar from './components/ActionBar';
 import CandidatesBar from './components/CandidatesBar';
+import Soucoupe from './components/Soucoupe';
 
 import CandidateGroup from './containers/CandidateGroup';
 import AverageCandidateGroup from './containers/AverageCandidateGroup';
@@ -49,6 +50,9 @@ class AppController {
             '.js-add-candidate-close',
             (candidate) => this.addCandidate(candidate)
         );
+
+        this.soucoupe = new Soucoupe();
+        // this.soucoupe.moveAround();
 
         this.titleData = document.querySelector('.js-title-dataviz');
         this.titleDataContent = this.titleData
