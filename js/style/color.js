@@ -3,6 +3,9 @@ export const BLACK  = 0x000000;
 export const WHITE  = 0xFFFFFF;
 export const GREY   = 0xC4B7D4;
 
+export const GREEN  = 0x00FF00;
+export const RED    = 0xFF0000;
+
 export const COLOR1 = 0x34A6B3; // couleur homme
 export const COLOR2 = 0xF7D650;
 export const COLOR3 = 0xFA9D26;
@@ -11,7 +14,6 @@ export const COLOR5 = 0x8066D9; // couleur urbain
 export const COLOR6 = 0x60D896; // couelur rural
 export const COLOR7 = 0xE45D82; // couleur femme
 export const COLOR8 = 0x81CFE2;
-
 
 export const LISTE_EXG      = 0x430201;
 export const LISTE_PC       = 0xE90F00;
