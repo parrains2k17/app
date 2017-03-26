@@ -5,13 +5,16 @@ import { TweenMax, Power0 } from 'gsap';
 import Supporters from './SupportersGroup';
 import Candidate from '../components/Candidate';
 
+import { RED, GREEN } from '../style/color';
+
 const { random } = Math;
 
 const
     HIT_AREA_RADIUS         = 100,
     HIDE_DURATION           = 0.1,
     ACTIVATE_DURATION       = 1.5,
-    MOVEMENT_DURATION       = 60;
+    MOVEMENT_DURATION       = 60,
+    MIN_VALID_SUPPORTERS    = 500;
 
 class CandidateGroup extends Container {
     constructor(
@@ -31,7 +34,11 @@ class CandidateGroup extends Container {
         this.id = infos.id;
         this.maire = infos.maire;
 
-        this.candidate = new Candidate(texture);
+        this.candidate = new Candidate(texture, {
+            borderColor: (
+                supporters.length >= MIN_VALID_SUPPORTERS ? GREEN : RED
+            ),
+        });
 
         this.supporters = new Supporters(supporters);
         this.supporters.rotate();
@@ -47,6 +54,8 @@ class CandidateGroup extends Container {
         this.moveAround();
 
         this.on('pointerdown', this.handleClick.bind(this));
+        this.on('mouseover', () => this.candidate.showBorder());
+        this.on('mouseout', () => this.candidate.hideBorder());
     }
 
     handleClick() {
