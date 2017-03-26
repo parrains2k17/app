@@ -9,7 +9,7 @@ import randomNumber from '../utils/randomNumber';
 
 import MovingSupporters from './MovingSupporters';
 
-import { listColor } from '../style/color';
+import { LISTE_SE as GREY, listColor } from '../style/color';
 
 import {
     SELECTOR_GENDER,
@@ -285,11 +285,14 @@ class Supporters extends Container {
             .forEach((s) => {
                 s.fade();
             });
+
+        this.supporters.forEach((s) => s.resetColor());
     }
 
     showAll() {
         this.supporters.forEach((s) => {
             s.show();
+            s.changeColor(GREY);
         });
     }
 }
