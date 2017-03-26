@@ -55,6 +55,15 @@ class AppController {
             .querySelector('.js-title-dataviz-content');
 
         this.currentSelector = null;
+
+        document.onkeyup = (e) => {
+            if (e.keyCode === 27) { // ESC key
+                const l = this.selectedCandidates.length;
+                if (l > 0) {
+                    this.candidateClose(l - 1);
+                }
+            }
+        };
     }
 
     buildCandidates(results) {
