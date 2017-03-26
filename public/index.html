@@ -4,7 +4,6 @@
         <meta charset="utf-8">
         <title>Parrains 2017 - Hyblab</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script async defer type="text/javascript" src="dist/bundle.js"></script>
         <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,600,700|Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="dist/styles.css">
     </head>
@@ -112,7 +111,7 @@
 
                     <div class="row infos-row">
                         <div class="col4">
-                            <h2>Légende - Couleurs des étiquettes politiques</p>
+                            <h2>Légende - Couleurs des étiquettes politiques</h2>
                         </div>
                         <div class="col4">
                             <p>
@@ -173,7 +172,7 @@
 
                     <div class="row infos-row">
                         <div class="col4">
-                            <h2>L'équipe</p>
+                            <h2>L'équipe</h2>
                         </div>
                         <div class="col4">
                             <div class="row mod-center-vertical">
@@ -431,8 +430,8 @@
             </div>
         </div>
 
-        <div class="modal-background js-modal-background js-close-modal" ></div>
-        <div class="modal-container js-modal-container-intro">
+        <div class="modal-background js-modal-background js-close-modal mode-open"></div>
+        <div class="modal-container js-modal-container-intro mode-open">
 
             <div class="row mod-center-vertical flex-container">
                 <div class="logo-parrains-container col2">
@@ -473,7 +472,7 @@
                 </div>
 
                 <div class="button-container col4">
-                    <button class="go-button js-close-modal">
+                    <button class="go-button js-close-modal mode-open">
                         Explorez l'univers des parrainages
                     </button>
                 </div>
@@ -782,6 +781,8 @@
                 </button>
             </div>
         </div>
+        <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
+        <script type="text/javascript" src="dist/bundle.js"></script>
         <script>
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
             (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
