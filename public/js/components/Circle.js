@@ -2,7 +2,6 @@
 import { Graphics, Sprite } from 'pixi.js';
 
 import renderer from '../services/renderer';
-import { WHITE } from '../style/color';
 
 const cache = (() => {
     const store = {};
@@ -17,12 +16,25 @@ const cache = (() => {
 
 const buildTexture = ({
     radius = 1,
-    color = WHITE,
+    color,
+    lineColor,
+    lineWidth = 0,
 }) => {
     const circle = new Graphics();
-    circle.beginFill(color);
+
+    if (lineWidth) {
+        circle.lineStyle(lineWidth, lineColor);
+    }
+
+    if (color) {
+        circle.beginFill(color);
+    }
+
     circle.drawCircle(0, 0, radius);
-    circle.endFill();
+
+    if (color) {
+        circle.endFill();
+    }
 
     return renderer.get().generateTexture(
         circle,
@@ -33,16 +45,20 @@ const buildTexture = ({
 
 const getTexture = ({
     radius = 1,
-    color = WHITE,
+    color,
+    lineColor,
+    lineWidth,
 }) => {
     const
-        name = `circle-${radius}-${color}`,
+        name = `circle-${radius}-${color}-${lineWidth}-${lineColor}`,
         cached = cache.find(name);
 
     if (!cached) {
         const texture = buildTexture({
             radius,
             color,
+            lineColor,
+            lineWidth,
         });
         cache.add(name, texture);
         return texture;
@@ -57,7 +73,9 @@ class Circle extends Sprite {
         rotation = 0,
         alpha = 1,
         radius = 1,
-        color = WHITE,
+        color,
+        lineColor,
+        lineWidth,
         pivot = { x: 0, y: 0 },
     }) {
         super();
@@ -71,6 +89,8 @@ class Circle extends Sprite {
         this.initialAlpha = alpha;
         this.initialRadius = radius;
         this.initialColor = color;
+        this.initialLineColor = lineColor;
+        this.initialLineWidth = lineWidth;
         this.initialPivot = pivot;
 
         this.reset();
@@ -79,18 +99,22 @@ class Circle extends Sprite {
     reset() {
         this.removeChildren();
         this.texture = getTexture({
-            alpha:  this.initialAlpha,
-            radius: this.initialRadius,
-            color:  this.initialColor,
+            alpha:     this.initialAlpha,
+            radius:    this.initialRadius,
+            color:     this.initialColor,
+            lineColor: this.initialLineColor,
+            lineWidth: this.initialLineWidth,
         });
     }
 
     changeColor(color) {
         this.removeChildren();
         this.texture = getTexture({
-            alpha:  this.initialAlpha,
-            radius: this.initialRadius,
             color,
+            alpha:     this.initialAlpha,
+            radius:    this.initialRadius,
+            lineColor: this.initialLineColor,
+            lineWidth: this.initialLineWidth,
         });
     }
 

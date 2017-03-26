@@ -1,9 +1,10 @@
 
-import { TweenMax, Power0 } from 'gsap';
+import { TweenMax, Power0, Power1 } from 'gsap';
 
 import Circle from './Circle';
 
-const MOVE_DURATION = 0.3;
+const MOVE_DURATION = 2;
+const FADE_DURATION = 0.3;
 
 class MovingCircle extends Circle {
     constructor(config = {}, Thing, options) {
@@ -23,16 +24,16 @@ class MovingCircle extends Circle {
         }
     }
 
-    center({ duration }) {
+    resetPivot() {
         this.killAnimation();
 
         TweenMax.to(
             this.pivot,
-            duration,
+            MOVE_DURATION,
             {
                 x:    0,
                 y:    0,
-                ease: Power0.easeNone,
+                ease: Power1.easeNone,
             }
         );
     }
@@ -46,7 +47,7 @@ class MovingCircle extends Circle {
             {
                 x:    this.initialPivot._x,
                 y:    this.initialPivot._y,
-                ease: Power0.easeNone,
+                ease: Power1.easeNone,
             }
         );
 
@@ -56,7 +57,7 @@ class MovingCircle extends Circle {
             {
                 x:    this.initialPosition._x,
                 y:    this.initialPosition._y,
-                ease: Power0.easeNone,
+                ease: Power1.easeNone,
             }
         );
     }
@@ -87,23 +88,31 @@ class MovingCircle extends Circle {
     }
 
     moveX(x) {
+        if (this.pivot.x !== 0 || this.pivot.y !== 0) {
+            this.resetPivot();
+        }
+
         TweenMax.to(
             this.position,
             MOVE_DURATION,
             {
                 x,
-                ease: Power0.easeNone,
+                ease: Power1.easeOut,
             }
         );
     }
 
     moveY(y) {
+        if (this.pivot.x !== 0 || this.pivot.y !== 0) {
+            this.resetPivot();
+        }
+
         TweenMax.to(
             this.position,
             MOVE_DURATION,
             {
                 y,
-                ease: Power0.easeNone,
+                ease: Power1.easeOut,
             }
         );
     }
@@ -115,7 +124,7 @@ class MovingCircle extends Circle {
 
         TweenMax.to(
             this,
-            MOVE_DURATION,
+            FADE_DURATION,
             {
                 alpha: 0,
                 ease:  Power0.easeNone,
@@ -130,7 +139,7 @@ class MovingCircle extends Circle {
 
         TweenMax.to(
             this,
-            MOVE_DURATION,
+            FADE_DURATION,
             {
                 alpha: 1,
                 ease:  Power0.easeNone,

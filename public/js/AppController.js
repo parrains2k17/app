@@ -51,8 +51,19 @@ class AppController {
         );
 
         this.titleData = document.querySelector('.js-title-dataviz');
+        this.titleDataContent = this.titleData
+            .querySelector('.js-title-dataviz-content');
 
         this.currentSelector = null;
+
+        document.onkeyup = (e) => {
+            if (e.keyCode === 27) { // ESC key
+                const l = this.selectedCandidates.length;
+                if (l > 0) {
+                    this.candidateClose(l - 1);
+                }
+            }
+        };
     }
 
     buildCandidates(results) {
@@ -127,7 +138,7 @@ class AppController {
     }
 
     openTitle(title) {
-        this.titleData.innerText = SELECTOR_TITLES[title];
+        this.titleDataContent.innerText = SELECTOR_TITLES[title];
         this.titleData.classList.add('mod-open');
     }
 

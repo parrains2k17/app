@@ -7,6 +7,7 @@
     position: fixed;
     transition: bottom .3s ease;
     width: 100vw;
+    z-index: 200;
 
     @media only screen and (max-width: $breakpoint) {
         font-size: .7em;
@@ -103,12 +104,15 @@
     left: -100%;
     position: absolute;
     transition: left .4s ease;
+    z-index: 300;
+
+    @media only screen and (max-width: $breakpoint) {
+        display: none;
+    }
 }
 
 .add-candidate.mod-open {
-    @media only screen and (min-width: $breakpoint + 1px) {
-        left: 1em;
-    }
+    left: 1em;
 }
 
     .add-candidate-button {
@@ -135,4 +139,14 @@
 .title-dataviz.mod-open {
     left: 0;
 }
+
+    .title-dataviz-content {
+        display: inline-block;
+        margin: 0 auto;
+        max-width: calc(100% - 2 * 15em);
+
+        @media only screen and (max-width: $breakpoint) {
+            max-width: 100%;
+        }
+    }
 

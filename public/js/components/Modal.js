@@ -16,8 +16,6 @@ class Modal {
             .querySelector('.js-close-modal');
 
         if (type === INTRO_MODAL) {
-            this.creditsButton = document
-                .querySelector('.js-credits-link');
             this.modal_background = document
                 .querySelector('.js-modal-background');
             this.closeButton
@@ -38,7 +36,6 @@ class Modal {
         if (this.type === INTRO_MODAL) {
             this.modal_background.classList.add('mode-open');
             this.closeButton.classList.add('mode-open');
-            this.creditsButton.classList.add('mode-open');
         } else if (this.type === WEBGL_MODAL) {
             this.text_container.classList.remove('mode-open');
             this.closeButton.classList.remove('mode-open');

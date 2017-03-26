@@ -4,75 +4,359 @@
         <meta charset="utf-8">
         <title>Parrains 2017 - Hyblab</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,600|Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Material+Icons"
-            rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,600,700|Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="dist/styles.css">
-
     </head>
     <body class="gradient-background">
-        <div class="div-credits-link js-credits-link">
-            <span class="btn-credits js-open-credits">
-                Qui sommes nous ?
-            </span>
-        </div>
+        <button
+            class="btn-transparent infos-link js-open-infos"
+            title="Aide et informations"
+        >
+            <span class="material-icons infos-link-icon">info_outline</span>
+            <span class="material-icons infos-link-icon">info</span>
+        </button>
 
-        <div class="credits-background js-credits-background js-close-credits">
-        </div>
+        <div class="infos-container js-infos">
+            <div class="infos-wrapper">
+                <button class="btn-transparent infos-close js-close-infos">
+                    <span class="material-icons">close</span>
+                </button>
+                <div class="infos-content">
+                    <div class="row mod-center-vertical infos-row">
+                        <div class="col1 text-center">
+                            <img src="images/logo_parrains.png"
+                                class="logo-parrains" />
+                        </div>
+                        <div class="col3 col-m-4">
+                            <h1>Parrains 2017</h1>
+                            <h2>Ce que nous disent les parrainages à l'élection
+                                présidentielle.</h2>
+                        </div>
+                    </div>
 
-        <div class="titles js-credits">
-            <div class="titlecontent">
-                <h1>Les Parrains</h1>
-                <p>Projet en partenatiat avec Ouest France dans le cadre du Hyblab organisé par OuestMediaLab</p>
-                <h2>L'équipe : </p>
-                <p>Ouest France : </p>
+                    <div class="row infos-row mod-center-horizontal">
+                        <div class="col3 mod-max">
+                            <p>
+                                Ils sont 14 296 élus à avoir accepté de parrainer un
+                                candidat à l'élection présidentielle. Parmi eux,
+                                9 756 maires ont apporté leurs signatures à
+                                l'un des 61 candidats en route pour l'Elysée.
+                            </p>
+                            <p>
+                                11 candidatures ont été validées par le Conseil
+                                Constitutionnel. Pour être validée, une
+                                candidature doit obtenir 500 parrainages et
+                                vérifier que :
+                                <ul>
+                                    <li>
+                                        pas plus d’un dixième des 500 parrainages
+                                        nécessaires, c’est-à-dire 50 au maximum,
+                                        émanent d’un même département ou
+                                        collectivité d’outre-mer
+                                    </li>
+                                    <li>
+                                        ces parrainages sont signés par des élus
+                                        d’au moins 30 départements ou
+                                        collectivités d’outre-mer.
+                                    </li>
+                                </ul>
 
-                <div class="photo-container">
-                    <div class="photo-element">
-                        <img src="images/francois.png">
-                        <span>François Grégoire</span>
+                                Le site du Conseil Constitutionnel présente <a
+                                    href="https://presidentielle2017.conseil-constitutionnel.fr/les-parrainages/parrainages-par-candidat/">plus
+                                    de détails</a>.
+                            </p>
+                            <hr />
+                            <p>
+                                Pour la première fois, la liste des parrainages
+                                est rendue publique. Pour la première fois, il
+                                est possible d'explorer ces données.
+                            </p>
+                            <p>
+                                Quel candidat reçoit le plus de parrainages ?
+                                Quels types d'élus parrainent qui ? Qui est le
+                                candidat des villes ? Qui est le candidat des
+                                campagnes ? Qui est le candidat des femmes ?
+                            </p>
+                            <p>
+                                Vous pouvez par exemple regarder :
+                                <ul>
+                                    <li>
+                                        Quel sont les candidats qui obtiennent
+                                        le plus de soutients ?
+                                    </li>
+                                    <li>
+                                        Quel est le poids des parrainages des
+                                        maires ?
+                                    </li>
+                                    <li>
+                                        Entre François Fillon et Benoit Hamon,
+                                        qui est le candidat des femmes ?
+                                    </li>
+                                    <li>
+                                        Entre Benoit Hamon et Marine LePen, qui
+                                        est le candidat des zones urbaines ?
+                                    </li>
+                                    <li>
+                                        Entre Emmanuel Macron et Jean-Luc
+                                        Mélenchon, qui est le candidat des zones
+                                        de plus fort chômage ?
+                                    </li>
+                                    <li>Qui est le candidat des maires
+                                        agriculteurs ? Des maires enseigants ?
+                                    </li>
+                                </ul>
+                            </p>
+                        </div>
                     </div>
-                    <div class="photo-element">
-                        <img src="images/corine.png">
-                        <span>Corine Monnerie</span>
-                    </div>
-                </div>
 
-                <p>Designers : </p>
+                    <div class="row infos-row">
+                        <div class="col4">
+                            <h2>Légende - Couleurs des étiquettes politiques</p>
+                        </div>
+                        <div class="col4">
+                            <p>
+                                <span class="list-item list-item-exg">
+                                    Extrème Gauche
+                                </span>
+                                <span class="list-item list-item-fg">
+                                    Front de Gauche
+                                </span>
+                                <span class="list-item list-item-pg">
+                                    Parti de Gauche
+                                </span>
+                                <span class="list-item list-item-pc">
+                                    Parti Communiste
+                                </span>
+                                <span class="list-item list-item-ps">
+                                    Parti Socialiste
+                                </span>
+                                <span class="list-item list-item-ug">
+                                    Union de la Gauche
+                                </span>
+                                <span class="list-item list-item-dvg">
+                                    Divers Gauche
+                                </span>
+                                <span class="list-item list-item-eelv">
+                                    Europe-Ecologie-Les Verts
+                                </span>
+                                <span class="list-item list-item-div">
+                                    Divers
+                                </span>
+                                <span class="list-item list-item-modem">
+                                    Modem
+                                </span>
+                                <span class="list-item list-item-uc">
+                                    Union du Centre
+                                </span>
+                                <span class="list-item list-item-udi">
+                                    Union Démocrates et Indépendants
+                                </span>
+                                <span class="list-item list-item-dvd">
+                                    Divers Droite
+                                </span>
+                                <span class="list-item list-item-ud">
+                                    Union de la droite
+                                </span>
+                                <span class="list-item list-item-fn">
+                                    Front National
+                                </span>
+                                <span class="list-item list-item-exd">
+                                    Extrème Droite
+                                </span>
+                                <span class="list-item list-item-se">
+                                    Sans étiquette
+                                </span>
+                            </p>
+                        </div>
+                    </div>
 
-                <div class="photo-container">
-                    <div class="photo-element">
-                        <img src="images/antoine.png">
-                        <span>Antoine Floch</span>
-                    </div>
-                    <div class="photo-element">
-                        <img src="images/benoit.png">
-                        <span>Benoit Carduner</span>
-                    </div>
-                    <div class="photo-element">
-                        <img src="images/nolwen.png">
-                        <span>Nolwen Le Ternuec</span>
-                    </div>
-                </div>
+                    <div class="row infos-row">
+                        <div class="col4">
+                            <h2>L'équipe</p>
+                        </div>
+                        <div class="col4">
+                            <div class="row mod-center-vertical">
+                                <div class="photo-element mod-title col1">
+                                    <p>Ouest France</p>
+                                </div>
+                                <div class="photo-element col1">
+                                    <img class="photo-element-img"
+                                        src="images/francois.png">
+                                        <span class="photo-element-title">
+                                            François Grégoire
+                                        </span>
+                                </div>
+                                <div class="photo-element col1">
+                                    <img class="photo-element-img"
+                                        src="images/corine.png">
+                                        <span class="photo-element-title">
+                                            Corine Monnerie
+                                        </span>
+                                </div>
 
+                                <div class="photo-element mod-title col1">
+                                    <p>Designers<br />EDNA</p>
+                                </div>
+                                <div class="photo-element col1">
+                                    <img class="photo-element-img"
+                                        src="images/antoine.png">
+                                        <p class="photo-element-title">
+                                            Antoine Floch
+                                        </p>
+                                </div>
+                                <div class="photo-element col1">
+                                    <img class="photo-element-img"
+                                        src="images/benoit.png">
+                                        <p class="photo-element-title">
+                                            Benoit Carduner
+                                        </p>
+                                </div>
+                                <div class="photo-element col1">
+                                    <img class="photo-element-img"
+                                        src="images/nolwen.png">
+                                        <p class="photo-element-title">
+                                            Nolwen Le Ternuec
+                                        </p>
+                                </div>
 
-                <p>Ingénieurs : </p>
+                                <div class="photo-element mod-title col1">
+                                    <p>Ingénieurs<br />Polytech</p>
+                                </div>
+                                <div class="photo-element col1">
+                                    <img class="photo-element-img"
+                                        src="images/guillaume.png">
+                                        <p class="photo-element-title">
+                                            Guillaume Clochard
+                                        </p>
+                                </div>
+                                <div class="photo-element col1">
+                                    <img class="photo-element-img"
+                                        src="images/jimmy.png">
+                                        <p class="photo-element-title">
+                                            Jimmy Leblanc
+                                        </p>
+                                </div>
+                                <div class="photo-element col1">
+                                    <img class="photo-element-img"
+                                        src="images/arnaud.png">
+                                        <p class="photo-element-title">
+                                            Arnaud Langelier
+                                        </p>
+                                </div>
+                                <div class="photo-element col1">
+                                    <img class="photo-element-img"
+                                        src="images/thomas.png">
+                                        <p class="photo-element-title">
+                                            Thomas Coquereau
+                                        </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                <div class="photo-container">
-                    <div class="photo-element">
-                        <img src="images/guillaume.png">
-                        <span>Guillaume Clochard</span>
+                    <div class="row mod-center-vertical infos-row">
+                        <div class="col4">
+                            <h2>Partenaires</h2>
+                        </div>
+                        <div class="col4">
+                            <p>Concours organisé par Ouest Medialab, réalisé par
+                                des étudiants de Polytech et de l'école de
+                                Design Nantes Atlantique en partenariat avec
+                                Ouest France.</p>
+                        </div>
+                        <div class="col4">
+                            <div class="row mod-center-vertical">
+                                <div class="col1">
+                                    <a href="http://www.ouestmedialab.fr/">
+                                        <img src="images/logo_hyblab.png"
+                                        class="logo-hyblab">
+                                    </a>
+                                </div>
+
+                                <div class="col1">
+                                    <a href="http://www.ouest-france.fr/">
+                                        <img src="images/logo_of.png" class="logo-of">
+                                    </a>
+                                </div>
+
+                                <div class="col1">
+                                    <a href="http://www.ouestmedialab.fr/">
+                                        <img src="images/logo_oml.png" class="logo-oml">
+                                    </a>
+                                </div>
+
+                                <div class="col1">
+                                    <a href="http://www.polytech.univ-nantes.fr/">
+                                        <img src="images/polytech.png"
+                                        class="logo-polytech">
+                                    </a>
+                                </div>
+
+                                <div class="col1">
+                                    <a href="http://www.lecolededesign.com">
+                                        <img src="images/edna.png" class="logo-design">
+                                    </a>
+                                </div>
+
+                                <div class="col1">
+                                    <a href="http://www.univ-nantes.fr/">
+                                        <img src="images/logo_universitenantes.jpg"
+                                        class="logo-univ">
+                                    </a>
+                                </div>
+
+                                <div class="col1">
+                                    <a href="http://www.paysdelaloire.fr/">
+                                        <img src="images/logo_pdl.png" class="logo-pdl">
+                                    </a>
+                                </div>
+
+                                <div class="col1">
+                                    <a href="http://www.nantesmetropole.fr/">
+                                        <img src="images/logo_nantesmetropole.png"
+                                        class="logo-nantesmetropole">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="photo-element">
-                        <img src="images/jimmy.png">
-                        <span>Jimmy Leblanc</span>
-                    </div>
-                    <div class="photo-element">
-                        <img src="images/arnaud.png">
-                        <span>Arnaud Langelier</span>
-                    </div>
-                    <div class="photo-element">
-                        <img src="images/thomas.png">
-                        <span>Thomas Coquereau</span>
+
+                    <div class="row mod-center-vertical infos-row">
+                        <div class="col4">
+                            <h2>Code et Licence</h2>
+                        </div>
+                        <div class="col4">
+                            <p>
+                            Le code du projet est disponible en open-source <a
+                                href="http://github.com/parrains2k17">sur
+                                Github</a>.
+                            </p>
+
+                            <p>Deux licences s'appliquent :</p>
+                            <ul class="code-list">
+                                <li>
+                                    <img src="images/logo_opensource.png"
+                                        class="logo-opensource code-img" />
+                                    <span class="code-text">
+                                        <a href="https://opensource.org/licenses/MIT">
+                                            Licence MIT</a>
+                                        pour le code source informatique.
+                                    </span>
+                                </li>
+                                <li>
+                                    <img src="images/logo_cc.png"
+                                        class="logo-cc code-img" />
+                                    <span class="code-text">
+                                        Licence <a
+                                            href="https://creativecommons.org/licenses/by/3.0/fr/">
+                                            Creative Commons</a>
+                                        pour tous les contenus créés pendant
+                                        l’atelier.
+                                    </span>
+                                </li>
+                            </ul>
+
+                        </div>
                     </div>
                 </div>
             </div>
@@ -80,7 +364,7 @@
 
         <div class="canvas-container js-canvas-container"></div>
         <h2 class="title-dataviz js-title-dataviz">
-            dataviz random lol
+            <span class="title-dataviz-content js-title-dataviz-content"></span>
         </h2>
         <div class="add-candidate js-add-candidate-open">
             <button class="btn-transparent add-candidate-button">
@@ -149,17 +433,17 @@
         <div class="modal-background js-modal-background js-close-modal mode-open"></div>
         <div class="modal-container js-modal-container-intro mode-open">
 
-            <div class="flex-container">
-                <div class="logo-parrains-container logo-col2">
+            <div class="row mod-center-vertical flex-container">
+                <div class="logo-parrains-container col2">
                     <img src="images/logo_parrains.png" class="logo-parrains">
                 </div>
 
-                <div class="titre-container logo-col2">
+                <div class="titre-container col2">
                     <h1 class="titre1">Parrains</h1>
                     <h1 class="titre2017">2017</h1>
                 </div>
 
-                <div class="text-container logo-col4 mode-open js-text-container">
+                <div class="text-container col4 mode-open js-text-container">
                     <p>
                         Ils sont 14 296 élus à avoir accepté de parrainer un
                         candidat à l'élection présidentielle.
@@ -168,12 +452,15 @@
                         Parmi eux, 9 756 maires ont apporté leurs signatures à
                         l'un des 61 candidats en route pour l'Elysée.
                     </p>
+                    <p>Qui parraine qui ? Qui est le candidat des villes ? Qui
+                        est le candidat des femmes ? Qui est le candidat des
+                        zones de chômage ?</p>
                     <p>
                         Naviguez dans la galaxie pour en savoir plus.
                     </p>
                 </div>
 
-                <div class="text-container-webgl logo-col4
+                <div class="text-container-webgl col4
                     js-text-container-webgl">
                     <p class="mod-alert">
                         Votre navigateur ne prend pas en charge la
@@ -184,10 +471,9 @@
                             href="https://www.google.com/chrome/">Chrome</a>.</p>
                 </div>
 
-
-                <div class="button-container logo-col4">
+                <div class="button-container col4">
                     <button class="go-button js-close-modal mode-open">
-                        Explorez la Galaxie
+                        Explorez l'univers des parrainages
                     </button>
                 </div>
 
@@ -195,6 +481,7 @@
         </div>
 
         <div class="action-bar mod-criteres js-actions-criteres">
+            <div class="action-bar-h100"></div>
             <ul class="action-bar-container mod-criteres">
                 <li class="action-bar-title">
                     L'ensemble des parrains du candidat
@@ -284,212 +571,215 @@
         </div>
 
         <div class="action-bar mod-planets js-actions-choix">
-            <button class="btn-transparent action-bar-arrow action-bar-arrow-up">
-                <span class="material-icons">keyboard_arrow_up</span>
-            </button>
-            <ul class="action-bar-container mod-planets">
-                <li
-                    class="action-bar-element mod-planets js-action"
-                    data-id="AVERAGE_CANDIDATE"
-                    data-planet-name="Moyenne des candidats"
-                >
-                    <div class="planets-image"
-                        style="background-image:url('images/4_candidats.png')">
-                    </div>
-                </li>
-                <li
-                    class="action-bar-element mod-planets js-action"
-                    data-id="ALLIOT-MARIE Michèle"
-                    data-planet-name="Michèle Alliot-Marie"
-                >
-                    <div class="planets-image"
-                        style="background-image:url('images/Alliot-Marie.png')">
-                    </div>
-                </li>
-                <li
-                    class="action-bar-element mod-planets js-action"
-                    data-id="ARTHAUD Nathalie"
-                    data-planet-name="Nathalie Arthaud"
-                >
-                    <div class="planets-image"
-                        style="background-image:url('images/Arthaud.png')">
-                    </div>
-                </li>
-                <li
-                    class="action-bar-element mod-planets js-action"
-                    data-id="ASSELINEAU François"
-                    data-planet-name="François Asselineau"
-                >
-                    <div class="planets-image"
-                        style="background-image:url('images/Asselineau.png')">
-                    </div>
-                </li>
-                <li
-                    class="action-bar-element mod-planets js-action"
-                    data-id="CHEMINADE Jacques"
-                    data-planet-name="Jacques Cheminade"
-                >
-                    <div class="planets-image"
-                        style="background-image:url('images/Cheminade.png')">
-                    </div>
-                </li>
-                <li
-                    class="action-bar-element mod-planets js-action"
-                    data-id="DUPONT-AIGNAN Nicolas"
-                    data-planet-name="Nicolas Dupont-Aignan"
-                >
-                    <div class="planets-image"
-                        style="background-image:url('images/Dupont-Aignan.png')">
-                    </div>
-                </li>
-                <li
-                    class="action-bar-element mod-planets js-action"
-                    data-id="FAUDOT Bastien"
-                    data-planet-name="Bastien Faudot"
-                >
-                    <div class="planets-image"
-                        style="background-image:url('images/Faudot.png')">
-                    </div>
-                </li>
-                <li
-                    class="action-bar-element mod-planets js-action"
-                    data-id="FILLON François"
-                    data-planet-name="François Fillon"
-                >
-                    <div class="planets-image"
-                        style="background-image:url('images/Fillon.png')">
-                    </div>
-                </li>
-                <li
-                    class="action-bar-element mod-planets js-action"
-                    data-id="GORGES Jean-Pierre"
-                    data-planet-name="Jean-Pierre Gorges"
-                >
-                    <div class="planets-image"
-                        style="background-image:url('images/Gorges.png')">
-                    </div>
-                </li>
-                <li
-                    class="action-bar-element mod-planets js-action"
-                    data-id="GUAINO Henri"
-                    data-planet-name="Henri Guaino"
-                >
-                    <div class="planets-image"
-                        style="background-image:url('images/Guaino.png')">
-                    </div>
-                </li>
-                <li
-                    class="action-bar-element mod-planets js-action"
-                    data-id="HAMON Benoit"
-                    data-planet-name="Benoit Hamon"
-                >
-                    <div class="planets-image"
-                        style="background-image:url('images/Hamon.png')">
-                    </div>
-                </li>
-                <li
-                    class="action-bar-element mod-planets js-action"
-                    data-id="JARDIN Alexandre"
-                    data-planet-name="Alexandre Jardin"
-                >
-                    <div class="planets-image"
-                        style="background-image:url('images/Jardin.png')">
-                    </div>
-                </li>
-                <li
-                    class="action-bar-element mod-planets js-action"
-                    data-id="LARROUTUROU Pierre"
-                    data-planet-name="Pierre Larrouturou"
-                >
-                    <div class="planets-image"
-                        style="background-image:url('images/Larrouturou.png')">
-                    </div>
-                </li>
-                <li
-                    class="action-bar-element mod-planets js-action"
-                    data-id="LASSALLE Jean"
-                    data-planet-name="Jean Lassalle"
-                >
-                    <div class="planets-image"
-                        style="background-image:url('images/Lassalle.png')">
-                    </div>
-                </li>
-                <li
-                    class="action-bar-element mod-planets js-action"
-                    data-id="LE PEN Marine"
-                    data-planet-name="Marine Le Pen"
-                >
-                    <div class="planets-image"
-                        style="background-image:url('images/LePen.png')">
-                    </div>
-                </li>
-                <li
-                    class="action-bar-element mod-planets js-action"
-                    data-id="MACRON Emmanuel"
-                    data-planet-name="Emmanuel Macron"
-                >
-                    <div class="planets-image"
-                        style="background-image:url('images/Macron.png')">
-                    </div>
-                </li>
-                <li
-                    class="action-bar-element mod-planets js-action"
-                    data-id="MARCHANDISE Charlotte"
-                    data-planet-name="Charlotte Marchandise"
-                >
-                    <div class="planets-image"
-                        style="background-image:url('images/Marchandise.png')">
-                    </div>
-                </li>
-                <li
-                    class="action-bar-element mod-planets js-action"
-                    data-id="MELENCHON Jean-Luc"
-                    data-planet-name="Jean-Luc Mélenchon"
-                >
-                    <div class="planets-image"
-                        style="background-image:url('images/Melenchon.png')">
-                    </div>
-                </li>
-                <li
-                    class="action-bar-element mod-planets js-action"
-                    data-id="POUTOU Philippe"
-                    data-planet-name="Philippe Poutou"
-                >
-                    <div class="planets-image"
-                        style="background-image:url('images/Poutou.png')">
-                    </div>
-                </li>
-                <li
-                    class="action-bar-element mod-planets js-action"
-                    data-id="TAUZIN Didier"
-                    data-planet-name="Didier Tauzin"
-                >
-                    <div class="planets-image"
-                        style="background-image:url('images/Tauzin.png')">
-                    </div>
-                </li>
-                <li
-                    class="action-bar-element mod-planets js-action"
-                    data-id="TEMARU Oscar"
-                    data-planet-name="Oscar Temaru"
-                >
-                    <div class="planets-image"
-                        style="background-image:url('images/Temaru.png')">
-                    </div>
-                </li>
-                <li
-                    class="action-bar-element mod-planets js-action"
-                    data-id="YADE Rama"
-                    data-planet-name="Rama Yade"
-                >
-                    <div class="planets-image"
-                        style="background-image:url('images/Yade.png')">
-                    </div>
-                </li>
-            </ul>
-            <button class="btn-transparent action-bar-arrow action-bar-arrow-down">
-                <span class="material-icons">keyboard_arrow_down</span>
-            </button>
+            <div class="action-bar-h100"></div>
+            <div class="action-bar-container mod-planets">
+                <button class="btn-transparent action-bar-arrow action-bar-arrow-up">
+                    <span class="material-icons">keyboard_arrow_up</span>
+                </button>
+                <ul class="action-bar-planets-list">
+                    <li
+                        class="action-bar-element mod-planets js-action"
+                        data-id="AVERAGE_CANDIDATE"
+                        data-planet-name="Moyenne des candidats"
+                    >
+                        <div class="planets-image"
+                            style="background-image:url('images/4_candidats.png')">
+                        </div>
+                    </li>
+                    <li
+                        class="action-bar-element mod-planets js-action"
+                        data-id="ALLIOT-MARIE Michèle"
+                        data-planet-name="Michèle Alliot-Marie"
+                    >
+                        <div class="planets-image"
+                            style="background-image:url('images/Alliot-Marie.png')">
+                        </div>
+                    </li>
+                    <li
+                        class="action-bar-element mod-planets js-action"
+                        data-id="ARTHAUD Nathalie"
+                        data-planet-name="Nathalie Arthaud"
+                    >
+                        <div class="planets-image"
+                            style="background-image:url('images/Arthaud.png')">
+                        </div>
+                    </li>
+                    <li
+                        class="action-bar-element mod-planets js-action"
+                        data-id="ASSELINEAU François"
+                        data-planet-name="François Asselineau"
+                    >
+                        <div class="planets-image"
+                            style="background-image:url('images/Asselineau.png')">
+                        </div>
+                    </li>
+                    <li
+                        class="action-bar-element mod-planets js-action"
+                        data-id="CHEMINADE Jacques"
+                        data-planet-name="Jacques Cheminade"
+                    >
+                        <div class="planets-image"
+                            style="background-image:url('images/Cheminade.png')">
+                        </div>
+                    </li>
+                    <li
+                        class="action-bar-element mod-planets js-action"
+                        data-id="DUPONT-AIGNAN Nicolas"
+                        data-planet-name="Nicolas Dupont-Aignan"
+                    >
+                        <div class="planets-image"
+                            style="background-image:url('images/Dupont-Aignan.png')">
+                        </div>
+                    </li>
+                    <li
+                        class="action-bar-element mod-planets js-action"
+                        data-id="FAUDOT Bastien"
+                        data-planet-name="Bastien Faudot"
+                    >
+                        <div class="planets-image"
+                            style="background-image:url('images/Faudot.png')">
+                        </div>
+                    </li>
+                    <li
+                        class="action-bar-element mod-planets js-action"
+                        data-id="FILLON François"
+                        data-planet-name="François Fillon"
+                    >
+                        <div class="planets-image"
+                            style="background-image:url('images/Fillon.png')">
+                        </div>
+                    </li>
+                    <li
+                        class="action-bar-element mod-planets js-action"
+                        data-id="GORGES Jean-Pierre"
+                        data-planet-name="Jean-Pierre Gorges"
+                    >
+                        <div class="planets-image"
+                            style="background-image:url('images/Gorges.png')">
+                        </div>
+                    </li>
+                    <li
+                        class="action-bar-element mod-planets js-action"
+                        data-id="GUAINO Henri"
+                        data-planet-name="Henri Guaino"
+                    >
+                        <div class="planets-image"
+                            style="background-image:url('images/Guaino.png')">
+                        </div>
+                    </li>
+                    <li
+                        class="action-bar-element mod-planets js-action"
+                        data-id="HAMON Benoit"
+                        data-planet-name="Benoit Hamon"
+                    >
+                        <div class="planets-image"
+                            style="background-image:url('images/Hamon.png')">
+                        </div>
+                    </li>
+                    <li
+                        class="action-bar-element mod-planets js-action"
+                        data-id="JARDIN Alexandre"
+                        data-planet-name="Alexandre Jardin"
+                    >
+                        <div class="planets-image"
+                            style="background-image:url('images/Jardin.png')">
+                        </div>
+                    </li>
+                    <li
+                        class="action-bar-element mod-planets js-action"
+                        data-id="LARROUTUROU Pierre"
+                        data-planet-name="Pierre Larrouturou"
+                    >
+                        <div class="planets-image"
+                            style="background-image:url('images/Larrouturou.png')">
+                        </div>
+                    </li>
+                    <li
+                        class="action-bar-element mod-planets js-action"
+                        data-id="LASSALLE Jean"
+                        data-planet-name="Jean Lassalle"
+                    >
+                        <div class="planets-image"
+                            style="background-image:url('images/Lassalle.png')">
+                        </div>
+                    </li>
+                    <li
+                        class="action-bar-element mod-planets js-action"
+                        data-id="LE PEN Marine"
+                        data-planet-name="Marine Le Pen"
+                    >
+                        <div class="planets-image"
+                            style="background-image:url('images/LePen.png')">
+                        </div>
+                    </li>
+                    <li
+                        class="action-bar-element mod-planets js-action"
+                        data-id="MACRON Emmanuel"
+                        data-planet-name="Emmanuel Macron"
+                    >
+                        <div class="planets-image"
+                            style="background-image:url('images/Macron.png')">
+                        </div>
+                    </li>
+                    <li
+                        class="action-bar-element mod-planets js-action"
+                        data-id="MARCHANDISE Charlotte"
+                        data-planet-name="Charlotte Marchandise"
+                    >
+                        <div class="planets-image"
+                            style="background-image:url('images/Marchandise.png')">
+                        </div>
+                    </li>
+                    <li
+                        class="action-bar-element mod-planets js-action"
+                        data-id="MELENCHON Jean-Luc"
+                        data-planet-name="Jean-Luc Mélenchon"
+                    >
+                        <div class="planets-image"
+                            style="background-image:url('images/Melenchon.png')">
+                        </div>
+                    </li>
+                    <li
+                        class="action-bar-element mod-planets js-action"
+                        data-id="POUTOU Philippe"
+                        data-planet-name="Philippe Poutou"
+                    >
+                        <div class="planets-image"
+                            style="background-image:url('images/Poutou.png')">
+                        </div>
+                    </li>
+                    <li
+                        class="action-bar-element mod-planets js-action"
+                        data-id="TAUZIN Didier"
+                        data-planet-name="Didier Tauzin"
+                    >
+                        <div class="planets-image"
+                            style="background-image:url('images/Tauzin.png')">
+                        </div>
+                    </li>
+                    <li
+                        class="action-bar-element mod-planets js-action"
+                        data-id="TEMARU Oscar"
+                        data-planet-name="Oscar Temaru"
+                    >
+                        <div class="planets-image"
+                            style="background-image:url('images/Temaru.png')">
+                        </div>
+                    </li>
+                    <li
+                        class="action-bar-element mod-planets js-action"
+                        data-id="YADE Rama"
+                        data-planet-name="Rama Yade"
+                    >
+                        <div class="planets-image"
+                            style="background-image:url('images/Yade.png')">
+                        </div>
+                    </li>
+                </ul>
+                <button class="btn-transparent action-bar-arrow action-bar-arrow-down">
+                    <span class="material-icons">keyboard_arrow_down</span>
+                </button>
+            </div>
         </div>
         <script async defer type="text/javascript" src="dist/bundle.js"></script>
         <script>
