@@ -9,6 +9,8 @@ require('../sass/styles.scss');
 
 console.log(`🤖 Parrains2017 v${VERSION}`);// eslint-disable-line no-undef
 
+console.log('hello');
+
 if (utils.isWebGLSupported()) {
     const app = new AppController();
     new Modal(INTRO_MODAL); // show intro message

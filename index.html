@@ -4,7 +4,6 @@
         <meta charset="utf-8">
         <title>Parrains 2017 - Hyblab</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script async defer type="text/javascript" src="dist/bundle.js"></script>
         <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,600|Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Material+Icons"
             rel="stylesheet">
         <link rel="stylesheet" href="dist/styles.css">
@@ -147,8 +146,8 @@
             </div>
         </div>
 
-        <div class="modal-background js-modal-background js-close-modal" ></div>
-        <div class="modal-container js-modal-container-intro">
+        <div class="modal-background js-modal-background js-close-modal mode-open"></div>
+        <div class="modal-container js-modal-container-intro mode-open">
 
             <div class="flex-container">
                 <div class="logo-parrains-container logo-col2">
@@ -187,44 +186,12 @@
 
 
                 <div class="button-container logo-col4">
-                    <button class="go-button js-close-modal">
+                    <button class="go-button js-close-modal mode-open">
                         Explorez la Galaxie
                     </button>
                 </div>
 
-                <div class="logo-hyblab-container logo-col2">
-                    <img src="images/logo_hyblab.png" class="logo-hyblab">
-                </div>
-
-
-                <div class="text-part-container logo-col2">
-                    <p>
-                        Concours organisé par Ouest Medialab, réalisé par des étudiants de Polytech et de l'école de Design Nantes Atlantique en partenariat avec Ouest France.
-                    </p>
-                </div>
-
-
-                <div class="logo-polytech-container logo-col1">
-                    <img src="images/polytech.png" class="logo-polytech">
-                </div>
-
-                <div class="logo-design-container logo-col1">
-                    <img src="images/edna.png" class="logo-design">
-                </div>
-
-                <div class="logo-of-container logo-col1">
-                    <img src="images/logo_of.png" class="logo-of">
-                </div>
-
-                <div class="logo-oml-container logo-col1">
-                    <img src="images/logo_oml.png" class="logo-oml">
-                </div>
             </div>
-
-            <p>
-                Concours organisé par Ouest Medialab,</br> réalisé par des étudiants de Polytech et de l'école de Design Nantes </br>Atlantique en partenariat avec Ouest France.
-            </p>
-
         </div>
 
         <div class="action-bar mod-criteres js-actions-criteres">
@@ -524,6 +491,7 @@
                 <span class="material-icons">keyboard_arrow_down</span>
             </button>
         </div>
+        <script async defer type="text/javascript" src="dist/bundle.js"></script>
         <script>
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
             (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
