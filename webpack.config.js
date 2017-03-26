@@ -10,7 +10,7 @@ dotenv.config();
 const DEBUG = process.env.DEBUG;
 
 module.exports = {
-    entry:  './public/js/app.js',
+    entry:  ['babel-polyfill', './public/js/app.js'],
     output: {
         path:     path.resolve(__dirname, 'public/dist'),
         filename: 'bundle.js',

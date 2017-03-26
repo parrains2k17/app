@@ -41,6 +41,7 @@ class Modal {
             this.creditsButton.classList.add('mode-open');
         } else if (this.type === WEBGL_MODAL) {
             this.text_container.classList.remove('mode-open');
+            this.closeButton.classList.remove('mode-open');
             this.text_container_webGL.classList.add('mode-open');
         }
 
