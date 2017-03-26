@@ -51,6 +51,8 @@ class AppController {
         );
 
         this.titleData = document.querySelector('.js-title-dataviz');
+        this.titleDataContent = this.titleData
+            .querySelector('.js-title-dataviz-content');
 
         this.currentSelector = null;
     }
@@ -127,7 +129,7 @@ class AppController {
     }
 
     openTitle(title) {
-        this.titleData.innerText = SELECTOR_TITLES[title];
+        this.titleDataContent.innerText = SELECTOR_TITLES[title];
         this.titleData.classList.add('mod-open');
     }
 
