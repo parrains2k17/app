@@ -74,11 +74,13 @@ $sidebar-margin: 0;
     list-style: none;
     margin: 0;
     padding: 0;
+    text-align: right;
     vertical-align: middle;
 }
 
 .action-bar-container.mod-planets {
     height: 60%;
+    text-align: left;
     width: 30em;
 }
 
@@ -95,13 +97,15 @@ $sidebar-margin: 0;
         background: $background-block;
         border-radius: 9999px;
         cursor: pointer;
-        height: 4em;
+        height: 3em;
+        height: 6vh; // sass-lint:disable-line no-duplicate-properties
         margin-bottom: .5em;
         margin-left: 15em;
         padding: .3em .5em;
         position: relative;
         text-align: right;
-        width: 4em;
+        width: 3em;
+        width: 6vh; // sass-lint:disable-line no-duplicate-properties
 
         @media only screen and (max-width: $breakpoint) {
             border-radius: 4px;
@@ -130,9 +134,11 @@ $sidebar-margin: 0;
 
     .action-bar-element.mod-planets {
         background: none;
+        height: 5em;
+        height: 8vh; // sass-lint:disable-line no-duplicate-properties
         margin-left: 0;
-        min-height: 6em;
-        min-width: 6em;
+        width: 5em;
+        width: 8vh; // sass-lint:disable-line no-duplicate-properties
     }
 
     .action-bar-element.mod-planets::before {
@@ -158,10 +164,12 @@ $sidebar-margin: 0;
         background: $background-block;
         border-bottom-left-radius: 6px;
         border-top-left-radius: 6px;
+        display: inline-block;
         font-size: 1.3em;
         margin-bottom: .5em;
+        max-width: 15em;
         padding: .6em;
-        width: 15em;
+        text-align: left;
 
         @media only screen and (max-width: $breakpoint) {
             display: none;
