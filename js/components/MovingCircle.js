@@ -3,7 +3,8 @@ import { TweenMax, Power0 } from 'gsap';
 
 import Circle from './Circle';
 
-const MOVE_DURATION = 0.3;
+const MOVE_DURATION = 1;
+const FADE_DURATION = 0.3;
 
 class MovingCircle extends Circle {
     constructor(config = {}, Thing, options) {
@@ -115,7 +116,7 @@ class MovingCircle extends Circle {
 
         TweenMax.to(
             this,
-            MOVE_DURATION,
+            FADE_DURATION,
             {
                 alpha: 0,
                 ease:  Power0.easeNone,
@@ -130,7 +131,7 @@ class MovingCircle extends Circle {
 
         TweenMax.to(
             this,
-            MOVE_DURATION,
+            FADE_DURATION,
             {
                 alpha: 1,
                 ease:  Power0.easeNone,
