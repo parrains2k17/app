@@ -20,17 +20,15 @@ const { random, max, min, floor, sqrt } = Math;
  * @return {Number}  random     the random value used [0, 1[
  */
 export const randomize = (t, interval, minValue, maxValue) => {
-    const
-        minInterval = interval / 3, // don't randomize too much on the borders
-        r = random();
+    const r = random();
 
     const value = max(
-        minValue - minInterval,
+        minValue,
         min(
-            t + (r * interval),
-            maxValue + minInterval,
+            t + (r * interval) + (-interval / 2),
+            maxValue,
         )
-    ) - minInterval;
+    );
 
     return { value, random: r };
 };
@@ -67,8 +65,8 @@ const pointsPositionInRectPure = (getXY) => (n, width, height) => {
         const [x, y] = getXY(i, w, h, width, height);
 
         const
-            randomX = randomize(x, min(w, width / 10), 0, width),
-            randomY = randomize(y, min(h, height / 10), 0, height);
+            randomX = randomize(x, w, 0, width),
+            randomY = randomize(y, h, 0, height - h);
 
         return {
             x:       randomX.value,
