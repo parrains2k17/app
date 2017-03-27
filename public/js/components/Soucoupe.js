@@ -1,13 +1,11 @@
 
-import { Texture, Sprite, Circle } from 'pixi.js';
+import { Texture, Sprite } from 'pixi.js';
 import { TweenMax, Power0 } from 'gsap';
 import { Howl } from 'howler';
 
 import { getWidth, getHeight } from '../utils/window';
 
 const { random, PI } = Math;
-
-const HIT_AREA_RADIUS = 80;
 
 const
     DEFAULT_SCALE      = 0.3,
@@ -17,16 +15,13 @@ const
     CRAZY_FREQUENCY    = 1;
 
 class Soucoupe extends Sprite {
-    constructor(onClick) {
+    constructor() {
         super();
 
         this.position = { x: -getWidth(), y: -getHeight() };
         this.pivot = { x: 0, y: 0 };
         this.rotation = 0;
         this.texture = Texture.fromImage('images/soucoupe.png');
-
-        this.interactive = true;
-        this.hitArea = new Circle(0, 0, HIT_AREA_RADIUS);
 
         this.scale.set(DEFAULT_SCALE, DEFAULT_SCALE);
 
@@ -39,8 +34,6 @@ class Soucoupe extends Sprite {
         });
 
         this.container = document.querySelector('.js-soucoupe-slideshow');
-
-        this.on('pointerdown', onClick);
     }
 
     moveScale() {
