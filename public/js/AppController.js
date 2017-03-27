@@ -63,8 +63,14 @@ class AppController {
         this.currentSelector = null;
 
         cheet('↑ ↑ ↓ ↓ ← → ← → b a', () => {
-            console.log('Hello you 👽');
-            this.soucoupe.crazySoucoupe();
+            if (this.selectedCandidates.length === 0) {
+                console.log('Hello you 👽');
+                this.soucoupe.crazySoucoupe();
+
+                Object.values(this.candidates).forEach((candidate) => {
+                    candidate.hide();
+                });
+            }
         });
 
         document.onkeyup = (e) => {
@@ -73,7 +79,14 @@ class AppController {
                 if (l > 0) {
                     this.candidateClose(l - 1);
                 }
-                this.soucoupe.stopCrazy();
+
+                if (this.soucoupe.crazy) {
+                    this.soucoupe.stopCrazy();
+
+                    Object.values(this.candidates).forEach((candidate) => {
+                        candidate.reset();
+                    });
+                }
             }
         };
     }
