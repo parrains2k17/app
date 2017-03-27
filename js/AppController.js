@@ -52,7 +52,7 @@ class AppController {
             (candidate) => this.addCandidate(candidate)
         );
 
-        this.soucoupe = new Soucoupe({});
+        this.soucoupe = new Soucoupe(this.toggleSoucoupe.bind(this));
         this.soucoupe.moveAround();
         this.stage.add(this.soucoupe);
 
@@ -62,17 +62,6 @@ class AppController {
 
         this.currentSelector = null;
 
-        cheet('↑ ↑ ↓ ↓ ← → ← → b a', () => {
-            if (this.selectedCandidates.length === 0) {
-                console.log('Hello you 👽');
-                this.soucoupe.crazySoucoupe();
-
-                Object.values(this.candidates).forEach((candidate) => {
-                    candidate.hide();
-                });
-            }
-        });
-
         document.onkeyup = (e) => {
             if (e.keyCode === 27) { // ESC key
                 const l = this.selectedCandidates.length;
@@ -81,16 +70,13 @@ class AppController {
                 }
 
                 if (this.soucoupe.crazy) {
-                    this.soucoupe.stopCrazy();
-
-                    Object.values(this.candidates).forEach((candidate) => {
-                        candidate.reset();
-                    });
+                    this.toggleSoucoupe();
                 }
             }
         };
-    }
 
+        cheet('↑ ↑ ↓ ↓ ← → ← → b a', this.toggleSoucoupe.bind(this));
+    }
     buildCandidates(results) {
         Object
             .keys(results)
@@ -261,6 +247,24 @@ class AppController {
         this.selectedCandidates.push(candidate);
         this.activateSelectedCandidates();
     }
+
+    toggleSoucoupe() {
+        if (this.soucoupe.crazy) {
+            this.soucoupe.stopCrazy();
+
+            Object.values(this.candidates).forEach((candidate) => {
+                candidate.reset();
+            });
+        } else if (this.selectedCandidates.length === 0) {
+            console.log('Hello you 👽');
+            this.soucoupe.crazySoucoupe();
+
+            Object.values(this.candidates).forEach((candidate) => {
+                candidate.hide();
+            });
+        }
+    }
+
 }
 
 export default AppController;
