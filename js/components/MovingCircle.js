@@ -64,31 +64,6 @@ class MovingCircle extends Circle {
         );
     }
 
-    wait({ delay = 0, duration = 1 }) { // TODO better waiting state
-        const { x, y } = this.startPosition;
-        this.killAnimation();
-        this.animation = TweenMax.to(
-            this,
-            duration,
-            {
-                delay,
-                repeat: -1,
-                ease:   Power0.easeNone,
-                bezier: {
-                    type:      'thru',
-                    curviness: 5,
-                    values:    [
-                        { x, y },
-                        { x: x + 100, y: y + 100 },
-                        { x: x + 0, y: y + 200 },
-                        { x: x - 100, y: y + 100 },
-                        { x, y },
-                    ],
-                },
-            }
-        );
-    }
-
     moveX(x) {
         if (this.pivot.x !== 0 || this.pivot.y !== 0) {
             this.resetPivot();
