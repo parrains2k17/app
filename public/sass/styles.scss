@@ -188,7 +188,7 @@ $interval: 1 / length($gifs);
         }
 
     @each $gif in $gifs {
-        $i: index($gifs, $gif);
+        $i: index($gifs, $gif) - 1;
 
         .soucoupe-slideshow-element:nth-child(#{$i}) {
             animation-delay: $i * 6s;
