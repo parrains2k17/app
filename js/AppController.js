@@ -253,12 +253,14 @@ class AppController {
     toggleSoucoupe() {
         if (this.soucoupe.crazy) {
             this.soucoupe.stopCrazy();
+            this.stage.active();
 
             Object.values(this.candidates).forEach((candidate) => {
                 candidate.reset();
             });
         } else if (this.selectedCandidates.length === 0) {
             console.log('Hello you 👽');
+            this.stage.fullscreen();
             this.soucoupe.crazySoucoupe();
 
             Object.values(this.candidates).forEach((candidate) => {
