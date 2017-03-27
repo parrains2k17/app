@@ -20,8 +20,8 @@ class Modal {
                 .querySelector('.js-modal-background');
             this.closeButton
                 .addEventListener('click', this.close.bind(this));
-            // this.closeButton[1]
-            //     .addEventListener('click', this.close.bind(this));
+            this.closeButton.disabled = false;
+
             this.modal_background
                 .addEventListener('click', this.close.bind(this));
         } else if (type === WEBGL_MODAL) {
@@ -38,6 +38,7 @@ class Modal {
             this.closeButton.classList.add('mode-open');
         } else if (this.type === WEBGL_MODAL) {
             this.text_container.classList.remove('mode-open');
+            this.closeButton.classList.remove('mode-open');
             this.text_container_webGL.classList.add('mode-open');
         }
 

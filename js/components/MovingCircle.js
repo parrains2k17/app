@@ -3,7 +3,7 @@ import { TweenMax, Power0, Power1 } from 'gsap';
 
 import Circle from './Circle';
 
-const MOVE_DURATION = 2;
+const MOVE_DURATION = 1.8;
 const FADE_DURATION = 0.3;
 
 class MovingCircle extends Circle {
@@ -16,6 +16,8 @@ class MovingCircle extends Circle {
         this.initialRotation = { ...this.rotation };
         this.initialPivot = { ...this.pivot };
         this.initialPosition = { ...this.position };
+
+        this.randomMove = Math.random();
     }
 
     killAnimation() {
@@ -24,12 +26,12 @@ class MovingCircle extends Circle {
         }
     }
 
-    center({ duration }) {
+    resetPivot() {
         this.killAnimation();
 
         TweenMax.to(
             this.pivot,
-            duration,
+            MOVE_DURATION,
             {
                 x:    0,
                 y:    0,
@@ -62,49 +64,34 @@ class MovingCircle extends Circle {
         );
     }
 
-    wait({ delay = 0, duration = 1 }) { // TODO better waiting state
-        const { x, y } = this.startPosition;
-        this.killAnimation();
-        this.animation = TweenMax.to(
-            this,
-            duration,
-            {
-                delay,
-                repeat: -1,
-                ease:   Power0.easeNone,
-                bezier: {
-                    type:      'thru',
-                    curviness: 5,
-                    values:    [
-                        { x, y },
-                        { x: x + 100, y: y + 100 },
-                        { x: x + 0, y: y + 200 },
-                        { x: x - 100, y: y + 100 },
-                        { x, y },
-                    ],
-                },
-            }
-        );
-    }
-
     moveX(x) {
+        if (this.pivot.x !== 0 || this.pivot.y !== 0) {
+            this.resetPivot();
+        }
+
         TweenMax.to(
             this.position,
             MOVE_DURATION,
             {
                 x,
-                ease: Power1.easeOut,
+                ease:  Power1.easeOut,
+                delay: this.randomMove,
             }
         );
     }
 
     moveY(y) {
+        if (this.pivot.x !== 0 || this.pivot.y !== 0) {
+            this.resetPivot();
+        }
+
         TweenMax.to(
             this.position,
             MOVE_DURATION,
             {
                 y,
-                ease: Power1.easeOut,
+                ease:  Power1.easeOut,
+                delay: this.randomMove,
             }
         );
     }

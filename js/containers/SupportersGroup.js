@@ -114,12 +114,6 @@ class Supporters extends Container {
         this.movingGroups.forEach((c) => c.stopRotate());
     }
 
-    center() {
-        this.supporters.forEach((c) => c.center({
-            duration: CENTER_DURATION,
-        }));
-    }
-
     resetPosition() {
         this.scale.set(1, 1);
 
@@ -182,7 +176,6 @@ class Supporters extends Container {
         this.legend.removeChildren();
 
         this.stopRotation();
-        this.center();
 
         if (mairesOnly(selector)) {
             this.showMaires(); // hide other supporters

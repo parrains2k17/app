@@ -160,12 +160,12 @@ class CandidateGroup extends Container {
         this.resetCircle();
     }
 
-    moveAround() { // TODO better waiting state
+    moveAround() {
         const { x, y } = this.position;
 
         const
-            pos1 = { x: x + (100 * random()), y: y + (100 * random()) },
-            pos2 = { x: x - (100 * random()), y: y + (100 * random()) };
+            pos1 = { x: x + (60 * random()), y: y + (60 * random()) },
+            pos2 = { x: x - (60 * random()), y: y + (60 * random()) };
 
         const [p1, p2] = (random() > 0.5) ? [pos1, pos2] : [pos2, pos1];
 
@@ -177,7 +177,7 @@ class CandidateGroup extends Container {
                 ease:   Power0.easeNone,
                 bezier: {
                     type:      'thru',
-                    curviness: 10,
+                    curviness: 3,
                     values:    [
                         { x, y },
                         p1,
