@@ -4,7 +4,6 @@
         <meta charset="utf-8">
         <title>Parrains 2017 - Hyblab</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script async defer type="text/javascript" src="dist/bundle.js"></script>
         <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,600,700|Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="dist/styles.css">
     </head>
@@ -112,7 +111,7 @@
 
                     <div class="row infos-row">
                         <div class="col4">
-                            <h2>Légende - Couleurs des étiquettes politiques</p>
+                            <h2>Légende - Couleurs des étiquettes politiques</h2>
                         </div>
                         <div class="col4">
                             <p>
@@ -173,7 +172,7 @@
 
                     <div class="row infos-row">
                         <div class="col4">
-                            <h2>L'équipe</p>
+                            <h2>L'équipe</h2>
                         </div>
                         <div class="col4">
                             <div class="row mod-center-vertical">
@@ -181,15 +180,19 @@
                                     <p>Ouest France</p>
                                 </div>
                                 <div class="photo-element col1">
-                                    <img class="photo-element-img"
-                                        src="images/francois.png">
+                                    <a href="http://www.twitter.com/f_gregoire">
+                                        <img class="photo-element-img"
+                                            src="images/francois.png">
+                                    </a>
                                         <span class="photo-element-title">
                                             François Grégoire
                                         </span>
                                 </div>
                                 <div class="photo-element col1">
-                                    <img class="photo-element-img"
-                                        src="images/corine.png">
+                                    <a href="http://www.twitter.com/cmonnerie">
+                                        <img class="photo-element-img"
+                                            src="images/corine.png">
+                                    </a>
                                         <span class="photo-element-title">
                                             Corine Monnerie
                                         </span>
@@ -199,6 +202,7 @@
                                     <p>Designers<br />EDNA</p>
                                 </div>
                                 <div class="photo-element col1">
+                                    <a href="http://www.twitter.com/"></a>
                                     <img class="photo-element-img"
                                         src="images/antoine.png">
                                         <p class="photo-element-title">
@@ -206,15 +210,19 @@
                                         </p>
                                 </div>
                                 <div class="photo-element col1">
-                                    <img class="photo-element-img"
-                                        src="images/benoit.png">
+                                    <a href="http://www.twitter.com/B3UBZ">
+                                        <img class="photo-element-img"
+                                            src="images/benoit.png">
+                                    </a>
                                         <p class="photo-element-title">
                                             Benoit Carduner
                                         </p>
                                 </div>
                                 <div class="photo-element col1">
-                                    <img class="photo-element-img"
-                                        src="images/nolwen.png">
+                                    <a href="http://www.twitter.com/LeTernuecNolwen">
+                                        <img class="photo-element-img"
+                                            src="images/nolwen.png">
+                                    </a>
                                         <p class="photo-element-title">
                                             Nolwen Le Ternuec
                                         </p>
@@ -224,29 +232,37 @@
                                     <p>Ingénieurs<br />Polytech</p>
                                 </div>
                                 <div class="photo-element col1">
-                                    <img class="photo-element-img"
-                                        src="images/guillaume.png">
+                                    <a href="http://www.twitter.com/GuillaumeWuip">
+                                        <img class="photo-element-img"
+                                            src="images/guillaume.png">
+                                    </a>
                                         <p class="photo-element-title">
                                             Guillaume Clochard
                                         </p>
                                 </div>
                                 <div class="photo-element col1">
-                                    <img class="photo-element-img"
-                                        src="images/jimmy.png">
+                                    <a href="http://www.twitter.com/jimmyleblanc_">
+                                        <img class="photo-element-img"
+                                            src="images/jimmy.png">
+                                    </a>
                                         <p class="photo-element-title">
                                             Jimmy Leblanc
                                         </p>
                                 </div>
                                 <div class="photo-element col1">
-                                    <img class="photo-element-img"
+                                    <a href="http://www.twitter.com/Arnaud_Lange">
+                                        <img class="photo-element-img"
                                         src="images/arnaud.png">
+                                    </a>
                                         <p class="photo-element-title">
                                             Arnaud Langelier
                                         </p>
                                 </div>
                                 <div class="photo-element col1">
-                                    <img class="photo-element-img"
-                                        src="images/thomas.png">
+                                    <a href="http://twitter.com/TCoquereau">
+                                        <img class="photo-element-img"
+                                            src="images/thomas.png">
+                                    </a>
                                         <p class="photo-element-title">
                                             Thomas Coquereau
                                         </p>
@@ -431,8 +447,8 @@
             </div>
         </div>
 
-        <div class="modal-background js-modal-background js-close-modal" ></div>
-        <div class="modal-container js-modal-container-intro">
+        <div class="modal-background js-modal-background js-close-modal mode-open"></div>
+        <div class="modal-container js-modal-container-intro mode-open">
 
             <div class="row mod-center-vertical flex-container">
                 <div class="logo-parrains-container col2">
@@ -473,8 +489,14 @@
                 </div>
 
                 <div class="button-container col4">
-                    <button class="go-button js-close-modal">
-                        Explorez l'univers des parrainages
+                    <button class="go-button js-close-modal mode-open" disabled>
+                        <span class="go-button-content">
+                            <span class="material-icons go-button-icon">refresh</span>
+                            <span>Chargement</span>
+                        </span>
+                        <span class="go-button-content">
+                            Explorez l'univers des parrainages
+                        </span>
                     </button>
                 </div>
 
@@ -782,6 +804,8 @@
                 </button>
             </div>
         </div>
+        <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
+        <script type="text/javascript" src="dist/bundle.js"></script>
         <script>
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
             (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
