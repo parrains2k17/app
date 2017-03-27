@@ -1,5 +1,6 @@
 
 import { without, find } from 'underscore';
+import cheet from 'cheet.js';
 
 import data from './services/candidates';
 
@@ -7,6 +8,7 @@ import Stage from './components/Stage';
 import CandidatePanel from './components/CandidatePanel';
 import ActionBar from './components/ActionBar';
 import CandidatesBar from './components/CandidatesBar';
+import Soucoupe from './components/Soucoupe';
 
 import CandidateGroup from './containers/CandidateGroup';
 import AverageCandidateGroup from './containers/AverageCandidateGroup';
@@ -50,6 +52,10 @@ class AppController {
             (candidate) => this.addCandidate(candidate)
         );
 
+        this.soucoupe = new Soucoupe();
+        this.soucoupe.moveAround();
+        this.stage.add(this.soucoupe);
+
         this.titleData = document.querySelector('.js-title-dataviz');
         this.titleDataContent = this.titleData
             .querySelector('.js-title-dataviz-content');
@@ -62,10 +68,15 @@ class AppController {
                 if (l > 0) {
                     this.candidateClose(l - 1);
                 }
+
+                if (this.soucoupe.crazy) {
+                    this.toggleSoucoupe();
+                }
             }
         };
-    }
 
+        cheet('↑ ↑ ↓ ↓ ← → ← → b a', this.toggleSoucoupe.bind(this));
+    }
     buildCandidates(results) {
         Object
             .keys(results)
@@ -156,6 +167,7 @@ class AppController {
         this.stage.center();
         this.criteresBar.open();
         this.planetsChoiceBar.start();
+        this.soucoupe.hide();
 
         this.addCandidate(selectedCandidate.id);
     }
@@ -175,6 +187,7 @@ class AppController {
             this.criteresBar.close();
             this.planetsChoiceBar.stop();
             this.stage.active();
+            this.soucoupe.show();
 
             this.currentSelector = null;
         } else {
@@ -236,6 +249,26 @@ class AppController {
         this.selectedCandidates.push(candidate);
         this.activateSelectedCandidates();
     }
+
+    toggleSoucoupe() {
+        if (this.soucoupe.crazy) {
+            this.soucoupe.stopCrazy();
+            this.stage.active();
+
+            Object.values(this.candidates).forEach((candidate) => {
+                candidate.reset();
+            });
+        } else if (this.selectedCandidates.length === 0) {
+            console.log('Hello you 👽');
+            this.stage.fullscreen();
+            this.soucoupe.crazySoucoupe();
+
+            Object.values(this.candidates).forEach((candidate) => {
+                candidate.hide();
+            });
+        }
+    }
+
 }
 
 export default AppController;

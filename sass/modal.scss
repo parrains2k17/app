@@ -12,6 +12,7 @@ $modal-background: rgba(0, 0, 0, .3);
 	top: 0;
 	transition: opacity .3s ease;
 	width: 100%;
+    z-index: 1000;
 }
 
 .modal-background.mode-open {
@@ -30,6 +31,7 @@ $modal-background: rgba(0, 0, 0, .3);
 	text-align: center;
 	top: 5%;
 	width: 50%;
+    z-index: 1100;
 
     @media only screen and (max-width: $breakpoint) {
         left: 5%;

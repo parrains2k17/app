@@ -28,7 +28,11 @@ body {
 
 .canvas-container {
     height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
     width: 100%;
+    z-index: 10;
 }
 
 .canvas-container:hover {
@@ -143,3 +147,64 @@ button:focus {
 hr {
     opacity: .6;
 }
+
+$gifs: [
+    'http://media.giphy.com/media/TZf4ZyXb0lXXi/giphy.gif',
+    'http://media.giphy.com/media/KDrjub26iceZ2/giphy.gif',
+    'http://24.media.tumblr.com/49f7caffa896829a55a261b6d0858246/tumblr_mnh375KPGH1rk1qp5o1_500.gif',
+    'https://media.giphy.com/media/vcB9QRaLUHYw8/giphy.gif',
+    'https://media.giphy.com/media/yQ7JbMwf6PqI8/giphy.gif',
+    'https://media.giphy.com/media/l41lTflsv8I1hVB16/giphy.gif',
+    'https://media.giphy.com/media/HhTXt43pk1I1W/giphy.gif',
+    'https://media.giphy.com/media/Ay6HrZVsDYuvS/giphy.gif',
+];
+
+$interval: 1 / length($gifs);
+
+.soucoupe-slideshow {
+    display: none;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+    .soucoupe-slideshow.mod-crazy {
+        display: block;
+    }
+
+        .soucoupe-slideshow-element {
+            animation: gifs 36s linear infinite;
+            background-position: center;
+            background-size: cover;
+            height: 100%;
+            left: 0;
+            opacity: 0;
+            position: absolute;
+            top: 0;
+            transition: opacity 2s linear;
+            width: 100%;
+        }
+
+    @each $gif in $gifs {
+        $i: index($gifs, $gif) - 1;
+
+        .soucoupe-slideshow-element:nth-child(#{$i}) {
+            animation-delay: $i * 6s;
+            background-image: url($gif);
+        }
+    }
+
+@keyframes gifs {
+    0%,
+    14.999% {
+        opacity: 1;
+    }
+
+    15%,
+    100% {
+        opacity: 0;
+    }
+}
+
