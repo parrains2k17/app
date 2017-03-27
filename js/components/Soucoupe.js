@@ -1,7 +1,7 @@
 
 import { Texture, Sprite } from 'pixi.js';
-
 import { TweenMax, Power0 } from 'gsap';
+import { Howl } from 'howler';
 
 import { getWidth, getHeight } from '../utils/window';
 
@@ -30,10 +30,16 @@ class Soucoupe extends Sprite {
         this.scale.set(DEFAULT_SCALE, DEFAULT_SCALE);
 
         this.crazy = false;
+
+        this.sound = new Howl({
+            src:    ['shooting-stars.mp3'],
+            loop:   true,
+            volume: 0.5,
+        });
     }
 
     moveScale() {
-        const scale = (random() * 0.2) + 0.1;
+        const scale = (random() * 0.2) + 0.3;
 
         TweenMax.to(
             this.scale,
@@ -73,7 +79,6 @@ class Soucoupe extends Sprite {
     }
 
     moveAround() {
-        console.log('move1');
         const
             width = getWidth() * SCREEN_MULTI,
             height = getHeight() * SCREEN_MULTI;
@@ -81,8 +86,6 @@ class Soucoupe extends Sprite {
         const
             x = (this.x < 0) ? width : -width,
             y = (random() - 0.5) * height;
-
-        console.log(x, y);
 
         TweenMax.to(
             this.position,
@@ -92,9 +95,7 @@ class Soucoupe extends Sprite {
                 y:          y + (0.5 * height),
                 ease:       Power0.easeNone,
                 onComplete: () => {
-                    console.log('done');
                     setTimeout(() => {
-                        console.log('move');
                         this.moveAround();
 
                         if (this.crazy) {
@@ -108,12 +109,16 @@ class Soucoupe extends Sprite {
     }
 
     toggleCrazy() {
-        this.crazy = this.crazy;
+        this.crazy = !this.crazy;
 
         if (!this.crazy) {
             this.pivot.set(0, 0);
             this.scale.set(DEFAULT_SCALE, DEFAULT_SCALE);
             this.rotation = 0;
+
+            this.sound.stop();
+        } else {
+            this.sound.play();
         }
     }
 }
