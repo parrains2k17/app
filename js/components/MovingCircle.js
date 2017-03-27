@@ -3,7 +3,7 @@ import { TweenMax, Power0, Power1 } from 'gsap';
 
 import Circle from './Circle';
 
-const MOVE_DURATION = 2;
+const MOVE_DURATION = 1.8;
 const FADE_DURATION = 0.3;
 
 class MovingCircle extends Circle {
@@ -16,6 +16,8 @@ class MovingCircle extends Circle {
         this.initialRotation = { ...this.rotation };
         this.initialPivot = { ...this.pivot };
         this.initialPosition = { ...this.position };
+
+        this.randomMove = Math.random();
     }
 
     killAnimation() {
@@ -97,7 +99,8 @@ class MovingCircle extends Circle {
             MOVE_DURATION,
             {
                 x,
-                ease: Power1.easeOut,
+                ease:  Power1.easeOut,
+                delay: this.randomMove,
             }
         );
     }
@@ -112,7 +115,8 @@ class MovingCircle extends Circle {
             MOVE_DURATION,
             {
                 y,
-                ease: Power1.easeOut,
+                ease:  Power1.easeOut,
+                delay: this.randomMove,
             }
         );
     }
