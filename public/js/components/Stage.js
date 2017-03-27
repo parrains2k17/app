@@ -129,6 +129,34 @@ class Stage extends Application {
             }
         );
     }
+
+    fullscreen() {
+        this.zoomable = false;
+
+        // copy
+        this.oldContainerPosition = { ...this.container.position };
+        this.oldContainerScale = { ...this.container.scale };
+
+        TweenMax.to(
+            this.container.position,
+            RESET_DURATION,
+            {
+                x:    0,
+                y:    0,
+                ease: Power0.easeNone,
+            }
+        );
+
+        TweenMax.to(
+            this.container.scale,
+            RESET_DURATION,
+            {
+                x:    SCALE_MIN_VALUE,
+                y:    SCALE_MIN_VALUE,
+                ease: Power0.easeNone,
+            }
+        );
+    }
 }
 
 export default Stage;
