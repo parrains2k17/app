@@ -36,6 +36,8 @@ class Soucoupe extends Sprite {
             loop:   true,
             volume: 0.5,
         });
+
+        this.container = document.querySelector('.js-soucoupe-slideshow');
     }
 
     moveScale() {
@@ -111,10 +113,14 @@ class Soucoupe extends Sprite {
     crazySoucoupe() {
         this.crazy = true;
         this.sound.play();
+
+        this.container.classList.add('mod-crazy');
     }
 
     stopCrazy() {
         this.crazy = false;
+        this.container.classList.remove('mod-crazy');
+
         this.pivot.set(0, 0);
         this.scale.set(DEFAULT_SCALE, DEFAULT_SCALE);
         this.rotation = 0;
