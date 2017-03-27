@@ -51,8 +51,9 @@ class AppController {
             (candidate) => this.addCandidate(candidate)
         );
 
-        this.soucoupe = new Soucoupe();
-        // this.soucoupe.moveAround();
+        this.soucoupe = new Soucoupe({});
+        this.soucoupe.moveAround();
+        this.stage.add(this.soucoupe);
 
         this.titleData = document.querySelector('.js-title-dataviz');
         this.titleDataContent = this.titleData
