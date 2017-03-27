@@ -167,6 +167,7 @@ class AppController {
         this.stage.center();
         this.criteresBar.open();
         this.planetsChoiceBar.start();
+        this.soucoupe.hide();
 
         this.addCandidate(selectedCandidate.id);
     }
@@ -186,6 +187,7 @@ class AppController {
             this.criteresBar.close();
             this.planetsChoiceBar.stop();
             this.stage.active();
+            this.soucoupe.show();
 
             this.currentSelector = null;
         } else {

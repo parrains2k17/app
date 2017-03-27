@@ -12,7 +12,8 @@ const
     SCREEN_MULTI       = 1.4,
     CROSSING_DURATION  = 8,
     NORMAL_FREQUENCY   = 30,
-    CRAZY_FREQUENCY    = 1;
+    CRAZY_FREQUENCY    = 1,
+    HIDE_DURATION      = 0.6;
 
 class Soucoupe extends Sprite {
     constructor() {
@@ -122,6 +123,32 @@ class Soucoupe extends Sprite {
         this.rotation = 0;
 
         this.sound.stop();
+    }
+
+    hide() {
+        TweenMax.to(
+            this,
+            HIDE_DURATION,
+            {
+                alpha:      0,
+                ease:       Power0.easeNone,
+                onComplete: () => {
+                    this.visible = false;
+                },
+            }
+        );
+    }
+
+    show() {
+        this.visible = true;
+        TweenMax.to(
+            this,
+            HIDE_DURATION,
+            {
+                alpha: 1,
+                ease:  Power0.easeNone,
+            }
+        );
     }
 }
 
