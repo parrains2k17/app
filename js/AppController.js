@@ -1,5 +1,6 @@
 
 import { without, find } from 'underscore';
+import cheet from 'cheet.js';
 
 import data from './services/candidates';
 
@@ -60,6 +61,11 @@ class AppController {
             .querySelector('.js-title-dataviz-content');
 
         this.currentSelector = null;
+
+        cheet('↑ ↑ ↓ ↓ ← → ← → b a', () => {
+            console.log('Hello you 👽');
+            this.soucoupe.crazySoucoupe();
+        });
     }
 
     buildCandidates(results) {

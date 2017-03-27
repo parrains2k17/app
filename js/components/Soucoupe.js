@@ -11,7 +11,7 @@ const
     DEFAULT_SCALE      = 0.3,
     SCREEN_MULTI       = 1.4,
     CROSSING_DURATION  = 8,
-    NORMAL_FREQUENCY   = 1,
+    NORMAL_FREQUENCY   = 30,
     CRAZY_FREQUENCY    = 1;
 
 class Soucoupe extends Sprite {
@@ -108,18 +108,17 @@ class Soucoupe extends Sprite {
         );
     }
 
-    toggleCrazy() {
-        this.crazy = !this.crazy;
+    crazySoucoupe() {
+        this.crazy = true;
+        this.sound.play();
+    }
 
-        if (!this.crazy) {
-            this.pivot.set(0, 0);
-            this.scale.set(DEFAULT_SCALE, DEFAULT_SCALE);
-            this.rotation = 0;
+    stopCrazy() {
+        this.pivot.set(0, 0);
+        this.scale.set(DEFAULT_SCALE, DEFAULT_SCALE);
+        this.rotation = 0;
 
-            this.sound.stop();
-        } else {
-            this.sound.play();
-        }
+        this.sound.stop();
     }
 }
 
