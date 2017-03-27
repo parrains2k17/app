@@ -76,6 +76,11 @@ $sidebar-margin: 0;
     padding: 0;
     text-align: right;
     vertical-align: middle;
+
+    @media only screen and (max-width: $breakpoint) {
+        text-align: left;
+        width: 1000%;
+    }
 }
 
 .action-bar-container.mod-planets {
@@ -109,6 +114,7 @@ $sidebar-margin: 0;
 
         @media only screen and (max-width: $breakpoint) {
             border-radius: 4px;
+            display: inline-block;
             margin-left: 1em;
             min-width: 4em;
         }
