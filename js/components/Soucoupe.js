@@ -114,6 +114,7 @@ class Soucoupe extends Sprite {
     }
 
     stopCrazy() {
+        this.crazy = false;
         this.pivot.set(0, 0);
         this.scale.set(DEFAULT_SCALE, DEFAULT_SCALE);
         this.rotation = 0;

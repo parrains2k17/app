@@ -73,6 +73,7 @@ class AppController {
                 if (l > 0) {
                     this.candidateClose(l - 1);
                 }
+                this.soucoupe.stopCrazy();
             }
         };
     }
