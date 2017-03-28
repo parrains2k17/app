@@ -15,15 +15,18 @@ import AverageCandidateGroup from './containers/AverageCandidateGroup';
 
 import { SELECTOR_TITLES } from './dataviz/index';
 
+import { getWidth, getHeight } from './utils/window';
+
 const AVERAGE_CANDIDATE = 'AVERAGE_CANDIDATE';
 
 const
-    width  = window.innerWidth,
-    height = window.innerHeight,
+    width  = getWidth(),
+    height = getHeight(),
     canvas = document.querySelector('.js-canvas-container');
 
 class AppController {
     constructor() {
+        // The WebGL root object
         this.stage = new Stage(canvas, width, height);
 
         this.candidates = {};
@@ -38,8 +41,6 @@ class AppController {
             (index) => this.candidateClose(index)
         );
 
-        this.selectedCandidates = [];
-
         this.criteresBar = new ActionBar(
             '.js-actions-criteres',
             (critere) => this.selectDataviz(critere)
@@ -52,15 +53,17 @@ class AppController {
             (candidate) => this.addCandidate(candidate)
         );
 
-        this.soucoupe = new Soucoupe();
-        this.soucoupe.moveAround();
-        this.stage.add(this.soucoupe);
+        this.selectedCandidates = [];
+        this.currentSelector = null;
 
         this.titleData = document.querySelector('.js-title-dataviz');
         this.titleDataContent = this.titleData
             .querySelector('.js-title-dataviz-content');
 
-        this.currentSelector = null;
+        this.soucoupe = new Soucoupe();
+        this.soucoupe.moveAround();
+        this.stage.add(this.soucoupe);
+        cheet('↑ ↑ ↓ ↓ ← → ← → b a', this.toggleSoucoupe.bind(this));
 
         document.onkeyup = (e) => {
             if (e.keyCode === 27) { // ESC key
@@ -74,9 +77,8 @@ class AppController {
                 }
             }
         };
-
-        cheet('↑ ↑ ↓ ↓ ← → ← → b a', this.toggleSoucoupe.bind(this));
     }
+
     buildCandidates(results) {
         Object
             .keys(results)
@@ -108,6 +110,7 @@ class AppController {
                 this.stage.add(group);
             });
 
+        // add the "average" candidat
         this.candidates[AVERAGE_CANDIDATE] = new AverageCandidateGroup(
             {
                 id:          AVERAGE_CANDIDATE,
@@ -118,7 +121,6 @@ class AppController {
             data.stats,
             this
         );
-
         this.stage.add(this.candidates[AVERAGE_CANDIDATE]);
     }
 
@@ -126,6 +128,7 @@ class AppController {
         this.stage.start();
     }
 
+    // show selectec candidates and update panel
     activateSelectedCandidates() {
         this.candidatePanel.reset();
 
@@ -157,6 +160,7 @@ class AppController {
         this.titleData.classList.remove('mod-open');
     }
 
+    // select a candidate
     candidateOpen(selectedCandidate) {
         Object.values(this.candidates).forEach((candidate) => {
             if (candidate !== selectedCandidate) {
@@ -173,6 +177,8 @@ class AppController {
     }
 
     /**
+     * Close a candidate. If it's the last, reset the screen to show the full
+     * universe
      * @param  {Number} index       0 or 1
      */
     candidateClose(index) {
@@ -207,6 +213,7 @@ class AppController {
         this.closeTitle();
     }
 
+    // on click on a criteria
     selectDataviz(selector) {
         this.openTitle(selector);
         // retrieve data for each candidates (one or two)
@@ -230,10 +237,10 @@ class AppController {
             )
         );
 
-
         this.currentSelector = selector;
     }
 
+    // add a selected candidate to compare
     addCandidate(id) {
         const candidate = this.candidates[id];
         if (this.selectedCandidates.indexOf(candidate) > -1) {
@@ -250,6 +257,7 @@ class AppController {
         this.activateSelectedCandidates();
     }
 
+    // ¯\_(ツ)_/¯
     toggleSoucoupe() {
         if (this.soucoupe.crazy) {
             this.soucoupe.stopCrazy();

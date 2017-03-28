@@ -1,4 +1,5 @@
 
+// not loaded from HTTP request but included in the webpack build
 import data from '../../data/parrainages.json';
 
 import {

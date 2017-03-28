@@ -9,6 +9,7 @@ import {
     pointsPositionInRectVertical,
     pointsPositionInRectHorizontal,
 } from '../utils/points';
+
 import {
     barChart,
     horizontalBarChart,
