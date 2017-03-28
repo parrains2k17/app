@@ -36,6 +36,10 @@ npm start
 
 # Informations complémentaires
 
+## Generate the JSON data source
+
+See [here](https://github.com/parrains2k17/database).
+
 ## Variables d'environnement 🌍
 (`cp .env.default .env` si besoin)
 
