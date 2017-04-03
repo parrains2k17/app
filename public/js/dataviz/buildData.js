@@ -1,3 +1,4 @@
+/* eslint-disable quote-props */
 
 import { groupBy, flatten } from 'underscore';
 
@@ -33,53 +34,53 @@ import {
 } from '../style/color';
 
 export const GENDER_LABELS = {
-    Hommes: COLOR1,
-    Femmes: COLOR7,
+    Men:   COLOR1,
+    Women: COLOR7,
 };
 
 export const CSP_LABELS = {
-    'Professions agricoles':                     COLOR6,
-    'Salariés du privé':                         COLOR3,
-    'Professions libérales':                     COLOR8,
-    'Professions de l\'enseignement':            COLOR5,
-    'Personnels des entreprises publiques':      COLOR1,
-    'Professions industrielles et commerciales': COLOR2,
-    Divers:                                      COLOR7,
-    Retraités:                                   COLOR4,
-    Inconnue:                                    GREY,
+    'Agricultural':              COLOR6,
+    'Private sector employees':  COLOR3,
+    'Liberal profession':        COLOR8,
+    'Education':                 COLOR5,
+    'Public sector employees':   COLOR1,
+    'Industrial and commercial': COLOR2,
+    'Various':                   COLOR7,
+    'Retired':                   COLOR4,
+    'Unknown':                   GREY,
 };
 
 export const AGES_LABELS = {
-    'Moins de 29 ans': COLOR1,
-    '30 à 44 ans':     COLOR2,
-    '45 à 59 ans':     COLOR3,
-    '60 à 74 ans':     COLOR4,
-    '75 ans et plus':  COLOR5,
-    Inconnu:           GREY,
+    'Less than 29': COLOR1,
+    '30 to 44':     COLOR2,
+    '45 to 59':     COLOR3,
+    '60 to 74':     COLOR4,
+    '75 and more':  COLOR5,
+    Unknown:        GREY,
 };
 
 export const POPULATION_LABELS = {
-    Inconnue:                   GREY,
-    '0 à 199 habitants':        COLOR1,
-    '200 à 399 habitants':      COLOR2,
-    '400 à 999 habitants':      COLOR3,
-    '1 000 à 2 000 habitants':  COLOR4,
-    '2 000 à 10 000 habitants': COLOR5,
-    'Plus de 10 000 habitants': COLOR6,
+    Unknown:            GREY,
+    '0 to 199':         COLOR1,
+    '200 to 399':       COLOR2,
+    '400 to 999':       COLOR3,
+    '1 000 to 2 000':   COLOR4,
+    '2 000 to 10 000':  COLOR5,
+    'More than 10 000': COLOR6,
 };
 
 export const URBANITE_LABELS = {
-    Inconnu: GREY,
-    Urbaine: COLOR6,
-    Rurale:  COLOR7,
+    Unknown: GREY,
+    Urban:   COLOR6,
+    Rural:   COLOR7,
 };
 
 export const CHOMAGE_LABELS = {
-    Inconnu:           GREY,
-    'Moins de 5%':     COLOR1,
-    'Entre 5 et 10%':  COLOR2,
-    'Entre 10 et 15%': COLOR5,
-    'Plus de 15%':     COLOR6,
+    Unknown:              GREY,
+    'Less than 5%':       COLOR1,
+    'Between 5 and 10%':  COLOR2,
+    'Between 10 and 15%': COLOR5,
+    'More than 15%':      COLOR6,
 };
 
 export const LISTE_LABELS = {
@@ -123,17 +124,17 @@ export const LISTE_LABELS_FULL = { // TODO Full names
     FN:    'FN',
     EXD:   'EXD',
     DIV:   'DIV',
-    SE:    'Sans étiquette',
+    SE:    'No party',
 };
 
 export const TYPE_LABELS = {
-    Autre:                            GREY,
-    Maire:                            COLOR1,
-    'Conseiller/ère départemental-e': COLOR2,
-    'Conseiller/ère régional-e':      COLOR3,
-    'Maire délégué-e':                COLOR4,
-    'Député-e':                       COLOR5,
-    'Sénateur/trice':                 COLOR6,
+    Other:                     GREY,
+    Mayor:                     COLOR1,
+    'Departmental councillor': COLOR2,
+    'Regional councillor':     COLOR3,
+    'Deputy Mayor':            COLOR4,
+    'Deputy':                  COLOR5,
+    'Senator':                 COLOR6,
 };
 
 const buildRawData = (labels, groups) => Object.keys(labels)
