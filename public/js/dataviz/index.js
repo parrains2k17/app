@@ -16,13 +16,13 @@ export const mairesOnly = (selector) => (
 );
 
 export const SELECTOR_TITLES   = {
-    [SELECTOR_GENDER]:     'Répartition par sexe des parrains',
-    [SELECTOR_AGE]:        'Répartition des parrains par tranche d’âge',
-    [SELECTOR_CSP]:        'Répartition des parrains par catégorie socio-professionnelle (CSP)',
-    [SELECTOR_POP]:        'Population totale des communes dirigées par les parrains',
-    [SELECTOR_URBANITE]:   'Répartition des communes des parrains selon leur degré d’urbanité/ruralité',
-    [SELECTOR_CHOMAGE]:    'Répartition des communes des parrains selon le taux de chômage de leur bassin d’emploi',
-    [SELECTOR_LISTE]:      'Répartition des couleurs politiques des parrains',
-    [SELECTOR_GENDER_ALL]: 'Répartition par sexe des parrains',
-    [SELECTOR_TYPE]:       'Répartition des parrains par type de mandat',
+    [SELECTOR_GENDER]:     'Distribution of supporters by gender',
+    [SELECTOR_AGE]:        'Distribution of supporters by age',
+    [SELECTOR_CSP]:        'Distribution of supporters by socio-professional category',
+    [SELECTOR_POP]:        'Population in cities of the supporters',
+    [SELECTOR_URBANITE]:   'Distribution of supporters cities between urban and rural one',
+    [SELECTOR_CHOMAGE]:    'Distribution of supporters cities according to the unemployment rate of their area',
+    [SELECTOR_LISTE]:      'Distribution of supporters political colors',
+    [SELECTOR_GENDER_ALL]: 'Distribution of supporters by gender',
+    [SELECTOR_TYPE]:       'Distribution of supporters by their type of mandate',
 };
